@@ -1,0 +1,39 @@
+<div class="card">
+    <div data-th-include="system/user/userAdd"></div>
+    <div class="card-block">
+        <div class="table-responsive">
+            <div id="data-table_wrapper" class="datasearch_wrapper">
+                <div class="dataTables_buttons hidden-sm-down actions">
+                    <span class="actions__item zmdi zmdi-search" onclick="search()" title="搜索" />
+                </div>
+                <div id="data-table_filter" class="dataTables_filter">
+                    <form class="sheet-table-form">
+                        <div class="row no-gutters">
+                            <div class="col-sm-5">
+                                <h4>申领记录列表</h4>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="btn-group btn-group-justified float-right" role="group" aria-label="Small button group">
+                                    <button type="button" class="btn btn-outline-info active" data-name="">全部</button>
+                                    <button type="button" class="btn btn-outline-info" data-name="1">流动相</button>
+                                    <button type="button" class="btn btn-outline-info" data-name="2">标准溶液</button>
+                                    <button type="button" class="btn btn-outline-info" data-name="3">记录本</button>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="input-group">
+                                    <div class="form-group">
+                                        <input type="text" name="rName" class="form-control" placeholder="输入姓名/溶液名称/记录本分类/申请批号">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <table id="recordApplyTable" data-mobile-responsive="true" class="mb-bootstrap-table text-nowrap"></table>
+            </div>
+        </div>
+    </div>
+</div>
+<script data-th-src="@{js/app/bsds/record/apply.js}"></script>
+<script data-th-src="@{js/app/bsds/record/sheetEdit.js}"></script>

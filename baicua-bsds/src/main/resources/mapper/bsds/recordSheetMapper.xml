@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baicua.bsds.dao.RecordSheetMapper">
+  <resultMap id="BaseResultMap" type="com.baicua.bsds.domain.RecordSheet">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="R_ID" jdbcType="DECIMAL" property="rId" />
+    <result column="R_CODE" jdbcType="VARCHAR" property="rCode" />
+    <result column="R_TYPE" jdbcType="VARCHAR" property="rType" />
+    <result column="R_SOL_NAME" jdbcType="VARCHAR" property="rSolName" />
+    <result column="R_POTENCY" jdbcType="VARCHAR" property="rPotency" />
+    <result column="R_REF_METHOD" jdbcType="VARCHAR" property="rRefMethod" />
+    <result column="R_CRT_DATE" jdbcType="TIMESTAMP" property="rCrtDate" />
+    <result column="R_UPD_DATE" jdbcType="TIMESTAMP" property="rUpdDate" />
+    <result column="R_UPD_PER" jdbcType="VARCHAR" property="rUpdPer" />
+    <result column="R_YEAR" jdbcType="VARCHAR" property="rYear" />
+    <result column="R_SERIAL_NUM" jdbcType="DECIMAL" property="rSerialNum" />
+    <result column="R_VESION" jdbcType="DECIMAL" property="rVesion" />
+  </resultMap>
+</mapper>

@@ -1,0 +1,68 @@
+<div class="modal fade" id="book-add" data-keyboard="false" data-backdrop="static" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title pull-left" id="book-add-modal-title">新增记录本</h3>
+            </div>
+            <div class="modal-body">
+                <form id="book-add-form">
+                    <div class="row">
+                        <div class="col-sm-11">
+                            <div class="input-group">
+                                <span class="input-group-addon col-sm-2">
+					               	 分类:
+					            </span>
+                                <div class="form-group">
+                                    <input type="text" name="rName" class="form-control">
+                                    <input type="text" hidden name="rId" class="form-control">
+                                    <input type="text" hidden name="rVesion" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-11">
+                            <div class="input-group">
+                                <span class="input-group-addon col-sm-2">
+					               	 部门:
+					            </span>
+                                <div class="form-group">
+                                    <select class="form-control"  name="rDeptId">
+                                        <option value="">--请选择部门--</option>
+                                        <option value="1">QC实验室	</option>
+                                        <option value="2">市场部</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-11">
+                            <div class="input-group">
+                                <span class="input-group-addon col-sm-2">卷号:</span>
+                                <div class="form-group">
+                                    <input type="text" readonly name="rSerialNum" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-11">
+                            <div class="input-group">
+                                <span class="input-group-addon col-sm-2">模板附件:</span>
+                                <div class="form-group">
+                                    <input type="text" name="" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-save" id="book-add-button" name="save">保存</button>
+                <button type="button" class="btn btn-secondary btn-close">关闭</button>
+                <button class="btn-hide"></button>
+            </div>
+        </div>
+    </div>
+</div>

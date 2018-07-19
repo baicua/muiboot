@@ -1,0 +1,56 @@
+<div class="modal fade j-dialog" id="apply-print" data-keyboard="false" data-backdrop="static" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title pull-left">申请打印</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="j-content">
+                    <canvas id="pdf-content">该浏览器不支持预览，请升级浏览器。</canvas>
+                </div>
+                <form id="apply-print-form">
+                    <div class="row">
+                        <div class="col-sm-11">
+                            <div class="input-group">
+                                <span class="input-group-addon col-sm-4">
+					               	 申领类型:
+					            </span>
+                                <div class="form-group">
+                                    <select class="form-control" readonly  name="rDeptId">
+                                        <option value="1">记录单</option>
+                                        <option value="2">记录本</option>
+                                    </select>
+                                </div>
+                                <span class="input-group-addon col-sm-4">
+					               	 申领份数:
+					            </span>
+                                <div class="form-group">
+                                    <input type="text" name="" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-11">
+                            <div class="input-group">
+                                <span class="input-group-addon col-sm-4">溶液名称/记录本分类:</span>
+                                <div class="form-group">
+                                    <input type="text" name="apName" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-save" id="app-print-btn" name="save">保存</button>
+                <button type="button" class="btn btn-secondary btn-close">关闭</button>
+                <button class="btn-hide"></button>
+            </div>
+        </div>
+    </div>
+</div>
+<script data-th-src="@{js/pdf/pdf.js}"></script>
+<script data-th-src="@{js/pdf/pdf.worker.js}"></script>
+<script data-th-src="@{js/app/bsds/record/applyPrint.js}"></script>
