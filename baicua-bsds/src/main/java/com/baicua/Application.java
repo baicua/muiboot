@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
 @EnableTransactionManagement
-@MapperScan("com.baicua.**.dao")
+@MapperScan({"com.baicua.*.dao","com.baicua.shiro.*.dao"})
 public class Application {
 	protected static  Logger logger = LoggerFactory.getLogger(Application.class);
 	public static void main(String[] args) {

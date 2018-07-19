@@ -1,6 +1,5 @@
-package com.baicua.bsds;
+package com.baicua;
 
-import com.baicua.Application;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 
