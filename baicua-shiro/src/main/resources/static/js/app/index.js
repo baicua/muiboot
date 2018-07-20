@@ -120,7 +120,15 @@
 	        }
 	    })
 
-	});
+	}),$(document).ready(function(){//加载主页
+        $.get(ctx + "business/mainPage", {}, function(r) {
+            if (r.indexOf('账户登录') != -1) {
+                location = location;
+                return;
+            }
+            $main_content.html("").append(r);
+        });
+    });
 
 	function loadMain(obj) {
 	    var $this = $(obj);

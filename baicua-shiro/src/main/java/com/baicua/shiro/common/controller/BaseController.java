@@ -16,6 +16,8 @@ import org.slf4j.LoggerFactory;
 
 public class BaseController {
 
+	protected   final String ADMIN_ROLE="ADMIN_BU";
+	protected   final String BUSINESS_ROLE="BUSINESS";
 	protected  final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	protected Map<String, Object> getDataTable(PageInfo<?> pageInfo) {

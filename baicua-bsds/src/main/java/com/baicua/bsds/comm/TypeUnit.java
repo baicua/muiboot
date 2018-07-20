@@ -9,6 +9,7 @@ package com.baicua.bsds.comm;
  */
 public enum TypeUnit {
     SHEET{
+        public int applyType(){return 1;}
         public SheetType flow(){return SheetType.FLOW;}
         public SheetType standard(){return SheetType.STANDARD;}
     },

@@ -13559,7 +13559,7 @@ select {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 4px 20px 0;
+  padding: 2px 8px 0px 20px;
   background: #eee;
 }
 .j-dialog >.modal-dialog>.modal-content>.modal-footer {
@@ -13579,5 +13579,16 @@ select {
   min-height: 250px;
   max-height: 300px;
   overflow-y: scroll;
+  border-style: ridge;
+}
+.j-dialog >.modal-dialog>.modal-content>.modal-body .row {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.j-dialog >.modal-dialog>.modal-content>.modal-body .row .input-group-addon {
+  text-align: right;
+}
+.j-dialog >.modal-dialog{
+  border: 5px solid #7063638c;
 }
 ::-webkit-scrollbar{width:8px;background:#f5f5f5;border-radius:4px}::-webkit-scrollbar-track,::-webkit-scrollbar-thumb{border-radius:4px}::-webkit-scrollbar-thumb{min-height:20px;background-clip:content-box;box-shadow:0 0 0 5px #e0e0e0 inset}::-webkit-scrollbar-corner{background:transparent}.hotelInfoBox::-webkit-scrollbar{width:8px;background:#eee;border-radius:5px}::-webkit-scrollbar-track,::-webkit-scrollbar-thumb{border-radius:5px}::-webkit-scrollbar-thumb{min-height:20px;background-clip:content-box;box-shadow:0 0 0 5px rgba(0, 0, 0, .1) inset}::-webkit-scrollbar-corner{background:transparent}.city_mdd_depa,.city_mdd_dest,.city_mdd_hotel{display:none}.scenic_list::-webkit-scrollbar{width:8px;background-color:rgba(155,155,155,0.1);border-radius:5px}.scenic_list::-webkit-scrollbar-track,::-webkit-scrollbar-thumb{border-radius:5px}.scenic_list::-webkit-scrollbar-thumb{min-height:20px;background-clip:content-box;box-shadow:0 0 0 5px rgba(0,0,0,.1) inset}.scenic_list::-webkit-scrollbar-corner{background:transparent}

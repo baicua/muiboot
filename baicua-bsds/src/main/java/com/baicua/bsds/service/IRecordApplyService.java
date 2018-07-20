@@ -36,4 +36,11 @@ public interface IRecordApplyService  extends IService<RecordApply> {
     * @author jin
     */
     void applyRecordBook(RecordBook book, int quantity, User user);
+
+    /**
+     * <p>Description: 申请记录本/记录单</p>
+     * @version 1.0 2018/7/16
+     * @author jin
+     */
+    void applyRecordApply(RecordApply apply, User currentUser);
 }

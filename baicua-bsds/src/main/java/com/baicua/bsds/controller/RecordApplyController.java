@@ -87,9 +87,9 @@ public class RecordApplyController extends BaseController {
     */
     @RequestMapping("record/applySheet")
     @ResponseBody
-    public ResponseBo applySheet(RecordSheet sheet, int quantity) {
+    public ResponseBo applySheet(RecordApply apply) {
         try {
-            this.applyService.applyRecordSheet(sheet,quantity,this.getCurrentUser());
+            this.applyService.applyRecordApply(apply,this.getCurrentUser());
             return ResponseBo.ok();
         } catch (Exception e) {
             logger.error("记录单申领失败:"+e.getMessage());

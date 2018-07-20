@@ -13,6 +13,7 @@ $(function() {
                 rType: $(".btn-group-justified").children(" .btn-outline-info.active").attr("data-name")
             };
         },
+        uniqueId:'rId',
         buttonsToolbar: '#toolbar',//工具按钮用哪个容器
         buttonsAlign:'right',
         columns: [{
@@ -44,7 +45,7 @@ $(function() {
             valign: 'middle',
             align: 'center',
             formatter: function(value, row, index) {
-                return '<a class="btn-sm btn-outline-info sheet-print" data-toggle="modal" data-target="#apply-print" index="'+index+'"><i class="zmdi zmdi-print"/>&nbsp;打印</a>';
+                return '<a class="btn-sm btn-outline-info sheet-print"  id="'+row.rId+'"><i class="zmdi zmdi-print"/>&nbsp;打印</a>';
             }
         }
 
@@ -58,8 +59,32 @@ $(function() {
         _this.addClass("active");
         search();
     });
+    $("table").on("click", ".sheet-print", function (r) {
+        var _this=$(this);
+        var data=$MB.getRowData('dataTable', _this.attr("id"));
+        var $form = $('#apply-print');
+        $form.modal();
+        $form.find("input[name='rId']").val(data.rId);
+        $form.find("input[name='rName']").val(data.rSolName);
+        $form.find("select[name='apType']").val("1");//记录单
+        $form.find("input[name='apType']").val("1");//记录单
+    });
     $("#apply-print .btn-close").click(function() {
         closeModal();
+    });
+
+    $("#apply-print .btn-save").click(function() {
+        var name = $(this).attr("name");
+        var validator = $applyPrintForm.validate();
+        var flag = validator.form();
+        if (flag) {
+            $MB.ajaxPost($(this),{url:ctx + "record/applySheet",data:$applyPrintForm.serialize()},function (r) {
+                if (r.code == 0) {
+                    closeModal();
+                    $MB.n_success(r.msg);
+                } else $MB.n_danger(r.msg);
+            });
+        }
     });
 });
 

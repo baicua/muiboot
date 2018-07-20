@@ -343,6 +343,9 @@ var $MB = (function() {
             var pageNumber = $('#' + id).bootstrapTable('getOptions').pageNumber;
             return pageSize * (pageNumber - 1) + index + 1;
         },
+        getRowData: function(id, uniqueId) {
+            return $('#' + id).bootstrapTable('getRowByUniqueId', uniqueId);
+        },
         refreshTable: function(id) {
             $('#' + id).bootstrapTable('refresh');
         },

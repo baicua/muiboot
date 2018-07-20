@@ -2,7 +2,10 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title pull-left">申请打印</h2>
+                <h2 class="modal-title pull-left">
+                    申请打印
+                    <small id="applyRecordName">克拉仙含量测定流动相</small>
+                </h2>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
@@ -13,20 +16,22 @@
                     <div class="row">
                         <div class="col-sm-11">
                             <div class="input-group">
-                                <span class="input-group-addon col-sm-4">
+                                <span class="input-group-addon col-sm-3">
 					               	 申领类型:
 					            </span>
                                 <div class="form-group">
-                                    <select class="form-control" readonly  name="rDeptId">
+                                    <input type="text" hidden name="rId" />
+                                    <input type="text" hidden name="apType" />
+                                    <select class="form-control" disabled readonly  name="apType">
                                         <option value="1">记录单</option>
                                         <option value="2">记录本</option>
                                     </select>
                                 </div>
-                                <span class="input-group-addon col-sm-4">
+                                <span class="input-group-addon col-sm-3">
 					               	 申领份数:
 					            </span>
                                 <div class="form-group">
-                                    <input type="text" name="" class="form-control">
+                                    <input type="number" name="apQuantity" value="1" class="form-control" maxlength="2">
                                 </div>
                             </div>
                         </div>
@@ -34,9 +39,9 @@
                     <div class="row">
                         <div class="col-sm-11">
                             <div class="input-group">
-                                <span class="input-group-addon col-sm-4">溶液名称/记录本分类:</span>
+                                <span class="input-group-addon col-sm-3">溶液名称/记录本分类:</span>
                                 <div class="form-group">
-                                    <input type="text" name="apName" class="form-control">
+                                    <input type="text" disabled name="rName" class="form-control">
                                 </div>
                             </div>
                         </div>

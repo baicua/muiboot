@@ -26,8 +26,12 @@ public class RecordApply implements Serializable {
     @Column(name = "R_ID")
     private Long rId;
 
+    /*申领类别：记录本，记录单*/
     @Column(name = "AP_TYPE")
     private Integer apType;
+
+    @Column(name = "SHEET_TYPE")
+    private Integer sheetType;
 
     @Column(name = "R_NAME")
     private String rName;
@@ -176,5 +180,13 @@ public class RecordApply implements Serializable {
      */
     public void setApQuantity(Integer apQuantity) {
         this.apQuantity = apQuantity;
+    }
+
+    public Integer getSheetType() {
+        return sheetType;
+    }
+
+    public void setSheetType(Integer sheetType) {
+        this.sheetType = sheetType;
     }
 }
