@@ -1,5 +1,6 @@
 package com.baicua.bsds.domain;
 
+import org.apache.commons.lang.StringUtils;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -19,6 +20,9 @@ public class RecordApply implements Serializable {
 
     @Column(name = "AP_NAME")
     private String apName;
+
+    @Column(name = "USER_ID")
+    private Long userId;
 
     @Column(name = "AP_DATE")
     private Date apDate;
@@ -41,6 +45,12 @@ public class RecordApply implements Serializable {
 
     @Column(name = "AP_QUANTITY")
     private Integer apQuantity;
+
+    @Transient
+    private Object record;
+
+    @Transient
+    private String content;
 
     /**
      * @return AP_ID
@@ -188,5 +198,40 @@ public class RecordApply implements Serializable {
 
     public void setSheetType(Integer sheetType) {
         this.sheetType = sheetType;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public void setRecord(Object record) {
+        this.record = record;
+    }
+
+    public String getContent() {
+        if (record==null|| StringUtils.isNotBlank(content)){
+            return content;
+        }
+        StringBuffer buffer = new StringBuffer("");
+        if (record instanceof RecordBook){
+            buffer.append("分类：").append(((RecordBook) record).getrName()).append(",");
+            buffer.append("份数：").append(this.apQuantity).append("。");
+        }else if (record instanceof RecordSheet)
+        {
+            buffer.append("模板编号：").append(((RecordSheet) record).getrCode()).append(",");
+            buffer.append("参考方法：").append(((RecordSheet) record).getrRefMethod()).append(",");
+            buffer.append("浓度：").append(((RecordSheet) record).getrPotency()).append(",");
+            buffer.append("份数：").append(this.apQuantity).append("。");
+        }
+        content=buffer.toString();
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 }

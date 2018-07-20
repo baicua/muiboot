@@ -1,0 +1,115 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html  xmlns:th="http://www.thymeleaf.org">
+<div class="ant-layout-content">
+    <div>
+        <div class="pageHeader___Pze-l">
+            <div class="detail___1rfGA">
+                <div class="main___3Slzs">
+                    <div class="row___3eawN"></div>
+                    <div class="row___3eawN">
+                        <div class="content___BnbuS">
+                            <div class="pageHeaderContent___1WBMY">
+                                <div class="avatar___3yyKI"><span
+                                        class="ant-avatar ant-avatar-lg ant-avatar-circle ant-avatar-image"><img
+                                        src="https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png"></span>
+                                </div>
+                                <div class="content___3h7ql">
+                                    <div class="contentTitle___4Mmy4">早安，[[${user.username}]]，祝你开心每一天！</div>
+                                    <div>[[${user.roleName}]] | [[${user.deptName}]]</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="extraContent___3mck4">
+                            <div class="extraContent___1Im9T">
+                                <div class="statItem___axqF9">
+                                    <p>记录单/记录本</p>
+                                    <p>[[${frontVo.sheetApCount}]] / [[${frontVo.bookApCount}]]</p>
+                                </div>
+                                <div class="statItem___axqF9">
+                                    <p>部门总量</p>
+                                    <p>[[${frontVo.deptApCount}]]</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content___13wW7">
+            <div class="ant-row">
+                <div class="ant-col-xs-24 ant-col-sm-24 ant-col-md-24 ant-col-lg-24 ant-col-xl-16">
+                    <div class="ant-card projectList___3oQ1f ant-card-contain-grid" style="margin-bottom: 24px;">
+                        <div class="ant-card-head">
+                            <div class="ant-card-head-wrapper">
+                                <div class="ant-card-head-title">申领记录</div>
+                                <div class="ant-card-extra"><a href="#/">全部记录>></a></div>
+                            </div>
+                        </div>
+                        <div class="ant-card-body" style="padding: 0px;">
+                            <div class="ant-card-grid projectGrid___udXto" th:each="apply,applySts : ${frontVo.appliesSelf}">
+                                <div class="ant-card">
+                                    <div class="ant-card-body" style="padding: 0px;">
+                                        <div class="ant-card-meta">
+                                            <div class="ant-card-meta-detail">
+                                                <div class="ant-card-meta-title">
+                                                    <div class="cardTitle___dc4KN">
+                                                        <span class="ant-avatar ant-avatar-sm ant-avatar-circle" style="background-color: #0e92db;">
+                                                        <span class="zmdi zmdi-collection-text"></span>
+                                                        </span>
+                                                        <a href="#/"th:text="${apply.rName}"></a>
+                                                    </div>
+                                                </div>
+                                                <div class="ant-card-meta-description" th:text="${apply.content}"></div>
+                                            </div>
+                                        </div>
+                                        <div class="projectItemContent___2M3Iz">
+                                            <a href="#/" th:text="${apply.apBatchNum}"></a>
+                                            <span class="datetime___35Apf" th:text="${#calendars.format(apply.apDate,'yyyy/MM/dd')}"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ant-card activeCard___1sEm8">
+                        <div class="ant-card-head">
+                            <div class="ant-card-head-wrapper">
+                                <div class="ant-card-head-title">动态</div>
+                            </div>
+                        </div>
+                        <div class="ant-card-body" style="padding: 0px;">
+                            <div class="ant-list ant-list-lg ant-list-split">
+                                <div class="ant-spin-nested-loading">
+                                    <div class="ant-spin-container">
+                                        <div class="activitiesList___1iu8_">
+
+                                            <div class="ant-list-item" th:each="apply,applySts : ${frontVo.appliesLast}">
+                                                <div class="ant-list-item-meta">
+                                                    <div class="ant-list-item-meta-avatar"><span
+                                                            class="ant-avatar ant-avatar-circle ant-avatar-image"><img
+                                                            src="https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png"></span>
+                                                    </div>
+                                                    <div class="ant-list-item-meta-content">
+                                                        <h4 class="ant-list-item-meta-title">
+                                                            <span>
+                                                                <a class="username___3QGFo" th:text="${apply.apName}">曲丽丽</a>&nbsp;
+                                                                <span class="event___17TiG">申请了 <span th:text="${apply.apQuantity}">1</span>份<a href="http://github.com/" th:text="${apply.rName}">克拉仙含量测定流动相</a> 批号：<span th:text="${apply.apBatchNum}"></span></span></span></span>
+                                                        </h4>
+                                                        <div class="ant-list-item-meta-description">
+                                                            <span class="datetime___35Apf" th:text="${#calendars.format(apply.apDate,'yyyy/MM/dd hh:mm:ss')}"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

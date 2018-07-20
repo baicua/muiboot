@@ -121,7 +121,7 @@
 	    })
 
 	}),$(document).ready(function(){//加载主页
-        $.get(ctx + "business/mainPage", {}, function(r) {
+        $.get(ctx + "home", {}, function(r) {
             if (r.indexOf('账户登录') != -1) {
                 location = location;
                 return;

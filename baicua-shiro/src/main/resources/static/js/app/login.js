@@ -109,7 +109,7 @@ function regist() {
         type: "post",
         url: ctx + "user/regist",
         data: {
-            "username": username,
+            "loginName": username,
             "password": password,
         },
         dataType: "json",

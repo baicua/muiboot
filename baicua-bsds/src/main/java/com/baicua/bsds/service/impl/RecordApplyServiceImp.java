@@ -7,12 +7,15 @@ import com.baicua.bsds.domain.RecordSheet;
 import com.baicua.bsds.service.IRecordApplyService;
 import com.baicua.bsds.service.IRecordBookService;
 import com.baicua.bsds.service.IRecordSheetService;
+import com.baicua.bsds.vo.HomeFrontVo;
 import com.baicua.shiro.common.annotation.Log;
 import com.baicua.shiro.common.service.impl.BaseService;
 import com.baicua.shiro.system.dao.DeptMapper;
 import com.baicua.shiro.system.domain.Dept;
 import com.baicua.shiro.system.domain.User;
 import com.baicua.shiro.system.service.DeptService;
+import com.github.pagehelper.PageHelper;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +25,7 @@ import tk.mybatis.mapper.entity.Example;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -100,6 +104,7 @@ public class RecordApplyServiceImp extends BaseService<RecordApply> implements I
         recordApply.setrId(sheetU.getrId());
         recordApply.setApDeptId(user.getDeptId());
         recordApply.setApDeptName(dept.getDeptName());
+        recordApply.setUserId(user.getUserId());
         recordApply.setApName(user.getUsername());
         recordApply.setrName(sheetU.getrSolName());
         recordApply.setApDate(new Date());
@@ -122,6 +127,7 @@ public class RecordApplyServiceImp extends BaseService<RecordApply> implements I
         recordApply.setApDeptId(user.getDeptId());
         recordApply.setApDeptName(dept.getDeptName());
         recordApply.setApName(user.getUsername());
+        recordApply.setUserId(user.getUserId());
         recordApply.setrName(booktU.getrName());
         recordApply.setApDate(new Date());
         recordApply.setApQuantity(quantity);
@@ -143,6 +149,64 @@ public class RecordApplyServiceImp extends BaseService<RecordApply> implements I
             RecordBook book = new RecordBook();
             book.setrId(apply.getrId());
             applyRecordBook(book,apply.getApQuantity(),currentUser);
+        }
+    }
+
+    @Override
+    public HomeFrontVo queryHomeFrontVo(User user) {
+        HomeFrontVo frontVo=new HomeFrontVo();
+        //查询记录单申请记录
+        //查询记录本申请记录
+        //查询部门申请记录
+        //查询6条当前用户的申请记录
+        //查询6条所有用户的申请记录
+        RecordApply apply = new RecordApply();
+        apply.setUserId(user.getUserId());
+        apply.setApType(TypeUnit.SHEET.applyType());
+        int sheetCount=mapper.selectCount(apply);
+
+        apply.setApType(TypeUnit.BOOK.applyType());
+        int bookCount=mapper.selectCount(apply);
+
+        apply.setUserId(null);
+        apply.setApType(null);
+        apply.setApDeptId(user.getDeptId());
+        int deptCount = mapper.selectCount(apply);
+
+        Example example = new Example(RecordApply.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("userId",user.getUserId());
+        example.setOrderByClause("AP_ID desc");
+        PageHelper.startPage(1, 6);
+        List<RecordApply> appliesSelf=mapper.selectByExample(example);
+        this.preProcess(appliesSelf);
+
+        example.clear();
+        PageHelper.startPage(1, 6);
+        example.setOrderByClause("AP_ID desc");
+        List<RecordApply> appliesLast=mapper.selectByExample(example);
+        frontVo.setSheetApCount(sheetCount);
+        frontVo.setBookApCount(bookCount);
+        frontVo.setDeptApCount(deptCount);
+        frontVo.setAppliesSelf(appliesSelf);
+        frontVo.setAppliesLast(appliesLast);
+        return frontVo;
+    }
+
+    private void preProcess(List<RecordApply> appliesSelf) {
+        if (CollectionUtils.isNotEmpty(appliesSelf)){
+            for (int i=0,l=appliesSelf.size();i<l;i++){
+                RecordApply r = appliesSelf.get(i);
+                Object o = null;
+                if (TypeUnit.BOOK.applyType()==r.getApType().intValue()){
+                    o=bookService.selectByKey(r.getrId());
+                }else if (TypeUnit.SHEET.applyType()==r.getApType().intValue()){
+                    o=sheetService.selectByKey(r.getrId());
+                }else {
+                    throw new IllegalArgumentException("申领记录表数据错误。");
+                }
+                r.setRecord(o);
+            }
         }
     }
 }

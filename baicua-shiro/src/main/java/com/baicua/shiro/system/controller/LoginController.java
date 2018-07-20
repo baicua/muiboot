@@ -11,6 +11,7 @@ import com.baicua.shiro.system.service.UserService;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.session.Session;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -95,5 +96,16 @@ public class LoginController extends BaseController {
         User user = super.getCurrentUser();
         model.addAttribute("user", user);
         return "index";
+    }
+
+    @GetMapping("home")
+    public String home(Model model) {
+        User user = super.getCurrentUser();
+        Subject subject = getSubject();
+        if (subject.hasRole(BUSINESS_ROLE)){
+            return "redirect:/home/"+BUSINESS_ROLE.toLowerCase();
+        }else {
+            return "redirect:/home/"+ADMIN_ROLE.toLowerCase();
+        }
     }
 }

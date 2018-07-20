@@ -8,6 +8,7 @@
     <result column="AP_ID" jdbcType="DECIMAL" property="apId" />
     <result column="AP_DEPT_ID" jdbcType="DECIMAL" property="apDeptId" />
     <result column="AP_DEPT_NAME" jdbcType="VARCHAR" property="apDeptName" />
+    <result column="USER_ID" jdbcType="DECIMAL" property="userId" />
     <result column="AP_NAME" jdbcType="VARCHAR" property="apName" />
     <result column="AP_DATE" jdbcType="TIMESTAMP" property="apDate" />
     <result column="R_ID" jdbcType="DECIMAL" property="rId" />
