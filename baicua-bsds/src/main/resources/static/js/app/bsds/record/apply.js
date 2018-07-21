@@ -3,18 +3,35 @@ $(function() {
         url: ctx + "recordApply/list",
         pageSize: 10,
         queryParams: function(params) {
+            var appType = $(".btn-group-justified").children(" .btn-outline-info.active").attr("data-name");
+            var sheetType='1';
+            if ('1'==appType){
+                sheetType = '1';
+                appType='1';
+            }else  if ('2'==appType){
+                sheetType = '2';
+                appType='1';
+            }else  if ('3'==appType){
+                sheetType = '';
+                appType='2';
+            }else {
+                sheetType = '';
+                appType='';
+            }
             return {
                 pageSize: params.limit,
                 pageNum: params.offset / params.limit + 1,
                 rName: $(".apply-table-form").find("input[name='rName']").val(),
-                apType: $(".btn-group-justified").children(" .btn-outline-info.active").attr("data-name")
+                apType:appType,
+                sheetType :sheetType
             };
         },
         columns: [{
-                checkbox: true
-            }, {
                 field: 'apId',
                 visible: false
+            }, {
+            field: 'sheetType',
+            visible: false
             }, {
                 field: 'apDeptName',
                 title: '申请部门'
@@ -25,9 +42,9 @@ $(function() {
                 field: 'apType',
                 title: '分类',
                 formatter: function(value, row, index) {
-                    if (value == '1') return '流动相(记录单)';
-                    else if (value == '2') return '标准溶液(记录单)';
-                    else if (value == '3') return '记录本';
+                    if (value == '1'&&row.sheetType=='1') return '流动相(记录单)';
+                    else if (value == '1'&&row.sheetType=='2') return '标准溶液(记录单)';
+                    else if (value == '2') return '记录本';
                     else return '-';
                 }
             }, {

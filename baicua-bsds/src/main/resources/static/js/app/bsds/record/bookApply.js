@@ -1,7 +1,11 @@
+var validator;
+var $applyPrintForm = $("#apply-print-form");
 $(function() {
+    validateRule();
     var settings = {
         url: ctx + "recordBook/list",
         pageSize: 10,
+        uniqueId:'rId',
         queryParams: function(params) {
             return {
                 pageSize: params.limit,
@@ -9,9 +13,7 @@ $(function() {
                 rName: $(".book-table-form").find("input[name='rName']").val(),
             };
         },
-        columns: [{
-                checkbox: true
-            }, {
+        columns: [ {
                 field: 'rId',
                 visible: false
             }, {
@@ -20,9 +22,6 @@ $(function() {
             }, {
                 field: 'rDept',
                 title: '部门'
-            }, {
-                field: 'rPro',
-                title: '前缀'
             }, {
                 field: 'rCrtDate',
                 title: '创建时间'
@@ -35,52 +34,74 @@ $(function() {
             }, {
                 field: 'rVesion',
                 title: '版本号',
+            },{
+            title: '操作',
+            field: 'operate',
+            valign: 'middle',
+            align: 'center',
+            formatter: function(value, row, index) {
+                return '<a class="btn-sm btn-outline-info sheet-print"  id="'+row.rId+'"><i class="zmdi zmdi-print"/>&nbsp;打印</a>';
             }
+        }
 
         ]
-    }
-    $MB.initTable('recordBookTable', settings);
+    };
+    $MB.initTable('dataTable', settings);
+
+    $("table").on("click", ".sheet-print", function (r) {
+        var _this=$(this);
+        var data=$MB.getRowData('dataTable', _this.attr("id"));
+        var $form = $('#apply-print');
+        $form.modal();
+
+        $form.find("input[name='rId']").val(data.rId);
+        $form.find("input[name='rName']").val(data.rName);
+        $("#applyRecordName").val(data.rName);
+        $form.find("select[name='apType']").val("2");//记录本
+        $form.find("input[name='apType']").val("2");//记录本
+    });
+    $("#apply-print .btn-close").click(function() {
+        closeModal();
+    });
+
+    $("#apply-print .btn-save").click(function() {
+        var name = $(this).attr("name");
+        var validator = $applyPrintForm.validate();
+        var flag = validator.form();
+        if (flag) {
+            $MB.ajaxPost($(this),{url:ctx + "record/applyBook",data:$applyPrintForm.serialize()},function (r) {
+                if (r.code == 0) {
+                    closeModal();
+                    $MB.n_success(r.msg);
+                } else $MB.n_danger(r.msg);
+            });
+        }
+    });
 });
 
 function search() {
-    $MB.refreshTable('recordBookTable');
+    $MB.refreshTable('dataTable');
 }
 
 function refresh() {
     $(".book-table-form")[0].reset();
-    $MB.refreshTable('recordBookTable');
+    $MB.refreshTable('dataTable');
 }
-
-function deleteUsers() {
-    var selected = $("#recordBookTable").bootstrapTable('getSelections');
-    var selected_length = selected.length;
-    var contain = false;
-    if (!selected_length) {
-        $MB.n_warning('请勾选需要删除的记录本！');
-        return;
-    }
-    var ids = "";
-    for (var i = 0; i < selected_length; i++) {
-        ids += selected[i].userId;
-        if (i != (selected_length - 1)) ids += ",";
-        if (userName == selected[i].username) contain = true;
-    }
-    if (contain) {
-        $MB.n_warning('勾选用户中包含当前登录用户，无法删除！');
-        return;
-    }
-
-    $MB.confirm({
-        text: "确定删除选中用户？",
-        confirmButtonText: "确定删除"
-    }, function() {
-        $.post(ctx + 'user/delete', { "ids": ids }, function(r) {
-            if (r.code == 0) {
-                $MB.n_success(r.msg);
-                refresh();
+function closeModal() {
+    validator.resetForm();
+    $MB.closeAndRestModal("apply-print");
+}
+function validateRule() {
+    validator = $applyPrintForm.validate({
+        rules: {
+        },
+        errorPlacement: function(error, element) {
+            if (element.is(":checkbox") || element.is(":radio")) {
+                error.appendTo(element.parent().parent());
             } else {
-                $MB.n_danger(r.msg);
+                error.insertAfter(element);
             }
-        });
+        },
+        messages: {}
     });
 }

@@ -48,9 +48,8 @@ $(function() {
                 return '<a class="btn-sm btn-outline-info sheet-print"  id="'+row.rId+'"><i class="zmdi zmdi-print"/>&nbsp;打印</a>';
             }
         }
-
         ]
-    }
+    };
     $MB.initTable('dataTable', settings);
     /*按钮组点击事件*/
     $(".btn-group-justified .btn-outline-info").on("click",function () {
@@ -64,6 +63,7 @@ $(function() {
         var data=$MB.getRowData('dataTable', _this.attr("id"));
         var $form = $('#apply-print');
         $form.modal();
+        $("#applyRecordName").val(data.rType);
         $form.find("input[name='rId']").val(data.rId);
         $form.find("input[name='rName']").val(data.rSolName);
         $form.find("select[name='apType']").val("1");//记录单

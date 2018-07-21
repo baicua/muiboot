@@ -60,8 +60,6 @@ public class UserController extends BaseController {
 			return ResponseBo.error("获取用户信息失败，请联系网站管理员！");
 		}
 	}
-
-	@Log("获取用户信息")
 	@RequestMapping("user/list")
 	@ResponseBody
 	public Map<String, Object> userList(QueryRequest request, User user) {
@@ -111,7 +109,6 @@ public class UserController extends BaseController {
 		}
 	}
 
-	@Log("更换主题")
 	@RequestMapping("user/theme")
 	@ResponseBody
 	public ResponseBo updateTheme(User user) {

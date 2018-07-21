@@ -14,7 +14,7 @@ public enum TypeUnit {
         public SheetType standard(){return SheetType.STANDARD;}
     },
     BOOK{
-        public int applyType(){return 3;}
+        public int applyType(){return 2;}
     };
     enum SheetType{
         FLOW{

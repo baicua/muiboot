@@ -22,7 +22,6 @@ public class DeptController {
 	@Autowired
 	private DeptService deptService;
 
-	@Log("获取部门信息")
 	@RequestMapping("dept")
 	@RequiresPermissions("dept:list")
 	public String index() {

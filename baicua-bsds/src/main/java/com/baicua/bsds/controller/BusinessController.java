@@ -43,6 +43,10 @@ public class BusinessController extends BaseController {
         model.addAttribute("frontVo", frontVo);
         return "home/business";
     }
+    @GetMapping("home/admin_bu")
+    public String admin_bu(Model model) {
+        return "bsds/record/recordApply";
+    }
     /**
     * <p>Description: 获取当前登录用户申领记录数据</p>
     * @version 1.0 2018/7/17

@@ -50,6 +50,9 @@ public class RecordApplyServiceImp extends BaseService<RecordApply> implements I
             if (null!=recordApply.getApType()){
                 criteria.andEqualTo("apType",recordApply.getApType());
             }
+            if (null!=recordApply.getSheetType()){
+                criteria.andEqualTo("sheetType",recordApply.getSheetType());
+            }
             if (StringUtils.isNotBlank(recordApply.getrName())){
                 criteria.andCondition("concat(AP_NAME,R_NAME,AP_BATCH_NUM) like ","%"+recordApply.getrName()+"%");
             }
