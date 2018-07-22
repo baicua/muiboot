@@ -5,6 +5,7 @@
 	<parent>
 		<groupId>com.baicua</groupId>
 		<artifactId>baicua-pom</artifactId>
+		<relativePath>../baicua-pom/pom.xml</relativePath>
 		<version>1.0</version>
 	</parent>
 	<groupId>com.baicua.bsds</groupId>
