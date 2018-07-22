@@ -1,5 +1,6 @@
 package com.baicua.bsds.domain;
 
+import com.baicua.shiro.common.annotation.ExportConfig;
 import org.apache.commons.lang.StringUtils;
 import javax.persistence.*;
 import java.io.Serializable;
@@ -16,15 +17,18 @@ public class RecordApply implements Serializable {
     private Long apDeptId;
 
     @Column(name = "AP_DEPT_NAME")
+    @ExportConfig(value = "申领部门")
     private String apDeptName;
 
     @Column(name = "AP_NAME")
+    @ExportConfig(value = "申领人")
     private String apName;
 
     @Column(name = "USER_ID")
     private Long userId;
 
     @Column(name = "AP_DATE")
+    @ExportConfig(value = "申领时间",convert = "c:com.baicua.shiro.common.util.poi.convert.TimeConvert")
     private Date apDate;
 
     @Column(name = "R_ID")
@@ -32,18 +36,22 @@ public class RecordApply implements Serializable {
 
     /*申领类别：记录本，记录单*/
     @Column(name = "AP_TYPE")
+    @ExportConfig(value = "申领类别", convert = "s:1=记录单,2=记录本")
     private Integer apType;
 
     @Column(name = "SHEET_TYPE")
     private Integer sheetType;
 
     @Column(name = "R_NAME")
+    @ExportConfig(value = "溶液名称/记录本分类")
     private String rName;
 
     @Column(name = "AP_BATCH_NUM")
+    @ExportConfig(value = "申领批号")
     private String apBatchNum;
 
     @Column(name = "AP_QUANTITY")
+    @ExportConfig(value = "申领份数")
     private Integer apQuantity;
 
     @Transient
