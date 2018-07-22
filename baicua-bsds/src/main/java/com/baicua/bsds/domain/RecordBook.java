@@ -38,6 +38,9 @@ public class RecordBook implements Serializable {
     @Column(name = "R_VESION")
     private Long rVesion;
 
+    @Column(name = "ATT_ID")
+    private Long attId;
+
     /**
      * @return R_ID
      */
@@ -170,5 +173,13 @@ public class RecordBook implements Serializable {
 
     public void setrDeptId(Long rDeptId) {
         this.rDeptId = rDeptId;
+    }
+
+    public Long getAttId() {
+        return attId;
+    }
+
+    public void setAttId(Long attId) {
+        this.attId = attId;
     }
 }

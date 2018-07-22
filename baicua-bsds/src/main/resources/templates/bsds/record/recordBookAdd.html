@@ -5,7 +5,7 @@
                 <h3 class="modal-title pull-left" id="book-add-modal-title">新增记录本</h3>
             </div>
             <div class="modal-body">
-                <form id="book-add-form">
+                <form id="book-add-form" enctype="multipart/form-data">
                     <div class="row">
                         <div class="col-sm-11">
                             <div class="input-group">
@@ -13,7 +13,7 @@
 					               	 分类:
 					            </span>
                                 <div class="form-group">
-                                    <input type="text" name="rName" class="form-control">
+                                    <input type="text" name="rName" class="form-control" required>
                                     <input type="text" hidden name="rId" class="form-control">
                                     <input type="text" hidden name="rVesion" class="form-control">
                                 </div>
@@ -27,7 +27,7 @@
 					               	 部门:
 					            </span>
                                 <div class="form-group">
-                                    <select class="form-control"  name="rDeptId">
+                                    <select class="form-control"  name="rDeptId" required>
                                         <option value="">--请选择部门--</option>
                                         <option value="1">QC实验室	</option>
                                         <option value="2">市场部</option>
@@ -51,7 +51,8 @@
                             <div class="input-group">
                                 <span class="input-group-addon col-sm-2">模板附件:</span>
                                 <div class="form-group">
-                                    <input type="text" name="" class="form-control">
+                                    <input type="text"hidden name="attId" class="form-control">
+                                    <input type="file" required name="files" id="txt_file" class="file-loading" data-show-preview="false" data-show-upload="false" data-show-caption="true">
                                 </div>
                             </div>
                         </div>
@@ -66,3 +67,6 @@
         </div>
     </div>
 </div>
+<script data-th-src="@{js/bootstrap-fileinput/fileinput.min.js}"></script>
+<script data-th-src="@{js/bootstrap-fileinput/locales/zh.js}"></script>
+<script data-th-src="@{js/app/fileinput/fileinput.js}"></script>

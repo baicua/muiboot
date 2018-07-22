@@ -15,11 +15,12 @@
     <result column="R_UPD_DATE" jdbcType="TIMESTAMP" property="rUpdDate" />
     <result column="R_UPD_PER" jdbcType="VARCHAR" property="rUpdPer" />
     <result column="R_VESION" jdbcType="DECIMAL" property="rVesion" />
+    <result column="ATT_ID" jdbcType="DECIMAL" property="attId" />
   </resultMap>
 
   <select id="findRecordBook" resultType="com.baicua.bsds.domain.RecordBook" parameterType="com.baicua.bsds.domain.RecordBook">
     select u.R_ID rId,u.R_DEPT rDept,u.R_DEPT_ID rDeptId,u.R_NAME rName,u.R_PRO rPro,u.R_SERIAL_NUM rSerialNum,u.R_CRT_DATE rCrtDate,
-    u.R_UPD_DATE rUpdDate ,u.R_UPD_PER rUpdPer ,u.R_VESION rVesion from RECORD_BOOK u
+    u.R_UPD_DATE rUpdDate ,u.R_UPD_PER rUpdPer ,u.R_VESION rVesion,u.ATT_ID attId from RECORD_BOOK u
     where 1=1
     <if test="rId != null and rId != ''">
       AND u.R_ID = #{rId}
