@@ -34,11 +34,11 @@ $(function() {
             visible: false
             }, {
                 field: 'apDeptName',
-                title: '申请部门'
+                title: '申领部门'
             }, {
                 field: 'apName',
-                title: '申请人'
-            },{
+                title: '申领人'
+            }, {
                 field: 'apType',
                 title: '分类',
                 formatter: function(value, row, index) {
@@ -50,9 +50,12 @@ $(function() {
             }, {
                 field: 'rName',
                 title: '溶液名称/记录本分类'
-            },{
+            }, {
+                field: 'apBatchNum',
+                title: '记录单批号/记录本号'
+            }, {
                 field: 'apDate',
-                title: '申请时间'
+                title: '申领时间'
             }
 
         ]

@@ -23,15 +23,6 @@ $(function() {
                 field: 'rDept',
                 title: '部门'
             }, {
-                field: 'rCrtDate',
-                title: '创建时间'
-            }, {
-                field: 'rUpdDate',
-                title: '修改时间'
-            }, {
-                field: 'rUpdPer',
-                title: '修改用户'
-            }, {
                 field: 'rVesion',
                 title: '版本号',
             },{
