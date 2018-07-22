@@ -17,6 +17,9 @@ $(function() {
                 field: 'rId',
                 visible: false
             }, {
+            field: 'attId',
+            visible: false
+            }, {
                 field: 'rName',
                 title: '分类'
             }, {
@@ -43,13 +46,14 @@ $(function() {
         var _this=$(this);
         var data=$MB.getRowData('dataTable', _this.attr("id"));
         var $form = $('#apply-print');
-        $form.modal();
-
         $form.find("input[name='rId']").val(data.rId);
         $form.find("input[name='rName']").val(data.rName);
-        $("#applyRecordName").val(data.rName);
+        $form.find("input[name='attId']").val(data.attId);
+        $("#applyRecordName").html(data.rName);
         $form.find("select[name='apType']").val("2");//记录本
         $form.find("input[name='apType']").val("2");//记录本
+        $form.modal();
+
     });
     $("#apply-print .btn-close").click(function() {
         closeModal();
