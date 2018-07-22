@@ -27,17 +27,17 @@ function showPdf(data) {
         var $pop = $('#pdf-content');
         var shownPageCount = pdf.numPages < 50 ? pdf.numPages : 50;//设置显示的编码
         var getPageAndRender = function (pageNumber) {
-            var extractTextCapability = (0, PDFJS.createPromiseCapability)();
-            _this2.extractTextPromises[pageNumber] = extractTextCapability.promise;
+/*            var extractTextCapability = (0, PDFJS.createPromiseCapability)();
+            _this2.extractTextPromises[pageNumber] = extractTextCapability.promise;*/
             pdf.getPage(pageNumber).then(function (page) {
-                var content=page.getTextContent({ normalizeWhitespace: true });
+/*                var content=page.getTextContent({ normalizeWhitespace: true });
                 var textItems = content.items;
                 var strBuf = [];
                 for (var j = 0, jj = textItems.length; j < jj; j++) {
                     strBuf.push(textItems[j].str);
                 }
                 _this2.pageContents[pageNumber] = strBuf.join('');
-                extractTextCapability.resolve(pageNumber);
+                extractTextCapability.resolve(pageNumber);*/
                 var scale = 1;
                 var viewport = page.getViewport(scale);
                 var $canvas = $('<canvas>该浏览器不支持预览，请升级浏览器。</canvas>').attr({
