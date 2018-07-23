@@ -40,6 +40,7 @@ public class RecordApply implements Serializable {
     private Integer apType;
 
     @Column(name = "SHEET_TYPE")
+    @ExportConfig(value = "记录单类别",convert = "s:1=流动相（记录单）,2=标准溶液（记录单）")
     private Integer sheetType;
 
     @Column(name = "R_NAME")
