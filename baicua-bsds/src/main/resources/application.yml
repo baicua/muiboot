@@ -69,6 +69,10 @@ spring:
 
   aop:
     proxy-target-class: true
+  http:
+    multipart:
+      maxFileSize: 100Mb
+      maxRequestSize: 1000Mb
 
 mybatis:
   config-location: classpath:config/mybatis-config.xml
@@ -96,3 +100,6 @@ logging:
   level:
     com:
       baicua: debug
+#文件上传路径
+file:
+  directory: home/template

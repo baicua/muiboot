@@ -5,9 +5,18 @@
             <div id="data-table_wrapper" class="datasearch_wrapper">
                 <div class="dataTables_buttons hidden-sm-down actions">
                     <span class="actions__item zmdi zmdi-search" onclick="search()" title="搜索" />
+                    <div class="dropdown actions__item">
+                        <i data-toggle="dropdown" class="zmdi zmdi-download"> </i>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                            <a href="javascript:void(0)" class="dropdown-item" data-table-action="excel" onclick="exportRecordExcel()">
+                                Excel (.xlsx) </a>
+                            <a href="javascript:void(0)" class="dropdown-item" data-table-action="csv" onclick="exportRecordCsv()"> CSV
+                                (.csv) </a>
+                        </ul>
+                    </div>
                 </div>
                 <div id="data-table_filter" class="dataTables_filter">
-                    <form class="sheet-table-form">
+                    <form class="apply-table-form">
                         <div class="row no-gutters">
                             <div class="col-sm-5">
                                 <h4>申领记录列表</h4>
@@ -36,4 +45,3 @@
     </div>
 </div>
 <script data-th-src="@{js/app/bsds/record/apply.js}"></script>
-<script data-th-src="@{js/app/bsds/record/sheetEdit.js}"></script>

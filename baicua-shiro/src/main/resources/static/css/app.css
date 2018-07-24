@@ -11888,6 +11888,9 @@ textarea {
 label.error{
 	color: #ff6b68;
 }
+.form-control.error{
+  border: 1px solid #d50803;
+}
 .error__inner {
   max-width: 600px;
   width: 100%;

@@ -22,7 +22,6 @@ public class MenuController extends BaseController {
 	@Autowired
 	private MenuService menuService;
 
-	@Log("获取菜单信息")
 	@RequestMapping("menu")
 	@RequiresPermissions("menu:list")
 	public String index() {

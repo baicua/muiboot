@@ -27,7 +27,6 @@ public class RoleController extends BaseController {
 	@Autowired
 	private RoleService roleService;
 
-	@Log("获取角色信息")
 	@RequestMapping("role")
 	@RequiresPermissions("role:list")
 	public String index() {

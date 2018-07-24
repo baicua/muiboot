@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baicua.shiro.system.dao.AttNexusMapper">
+  <resultMap id="BaseResultMap" type="com.baicua.shiro.system.domain.AttNexus">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="ATT_ID" jdbcType="BIGINT" property="attId" />
+    <result column="ATT_REAL_NAME" jdbcType="VARCHAR" property="attRealName" />
+    <result column="ATT_DIT" jdbcType="VARCHAR" property="attDit" />
+    <result column="ATT_TYPE" jdbcType="VARCHAR" property="attType" />
+    <result column="ATT_ORI_NAME" jdbcType="VARCHAR" property="attOriName" />
+    <result column="ATT_URL" jdbcType="VARCHAR" property="attUrl" />
+  </resultMap>
+</mapper>

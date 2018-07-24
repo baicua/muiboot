@@ -18,10 +18,10 @@
         </commentGenerator>
         <!-- 数据库链接地址账号密码 -->
         <jdbcConnection 
-            driverClass="oracle.jdbc.driver.OracleDriver"
-            connectionURL="jdbc:oracle:thin:@localhost:1521:ORCL"
+            driverClass="com.mysql.jdbc.Driver"
+            connectionURL="jdbc:mysql://182.61.49.93:3306/bsds_schema?characterEncoding=utf8"
             userId="bsds"
-            password="xdrcft56">
+            password="xdrcft5^">
         </jdbcConnection>
         <javaTypeResolver>
             <property name="forceBigDecimals" value="false"/>
@@ -43,11 +43,8 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
         <!-- 配置需要生成的表 -->
-        <table tableName="RECORD_BOOK" domainObjectName="recordBook" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
-            <generatedKey column="R_ID" sqlStatement="oralce" identity="true"/>
-        </table>
-        <table tableName="RECORD_APPLY" domainObjectName="recordApply" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
-            <generatedKey column="R_ID" sqlStatement="oralce" identity="true"/>
+        <table tableName="ATT_NEXUS" domainObjectName="AttNexus" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="ATT_ID" sqlStatement="oralce" identity="true"/>
         </table>
     </context>
 </generatorConfiguration>

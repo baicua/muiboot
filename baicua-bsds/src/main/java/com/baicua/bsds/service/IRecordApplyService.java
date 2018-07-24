@@ -3,6 +3,7 @@ package com.baicua.bsds.service;
 import com.baicua.bsds.domain.RecordApply;
 import com.baicua.bsds.domain.RecordBook;
 import com.baicua.bsds.domain.RecordSheet;
+import com.baicua.bsds.vo.HomeFrontVo;
 import com.baicua.shiro.common.service.IService;
 import com.baicua.shiro.system.domain.User;
 
@@ -43,4 +44,9 @@ public interface IRecordApplyService  extends IService<RecordApply> {
      * @author jin
      */
     void applyRecordApply(RecordApply apply, User currentUser);
+
+    /*
+    查询首页数据
+     */
+    HomeFrontVo queryHomeFrontVo(User user);
 }

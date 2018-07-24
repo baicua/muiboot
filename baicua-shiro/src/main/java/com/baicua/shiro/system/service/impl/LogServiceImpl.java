@@ -35,7 +35,7 @@ public class LogServiceImpl extends BaseService<SysLog> implements LogService {
 				criteria.andCondition("date_format(CREATE_TIME,'%Y-%m-%d') >=", timeArr[0]);
 				criteria.andCondition("date_format(CREATE_TIME,'%Y-%m-%d') <=", timeArr[1]);
 			}
-			example.setOrderByClause("create_time");
+			example.setOrderByClause("create_time desc");
 			return this.selectByExample(example);
 		} catch (Exception e) {
 			e.printStackTrace();

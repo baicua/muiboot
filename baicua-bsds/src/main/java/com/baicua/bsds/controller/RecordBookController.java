@@ -2,11 +2,13 @@ package com.baicua.bsds.controller;
 
 import com.baicua.bsds.domain.RecordBook;
 import com.baicua.bsds.service.IRecordBookService;
+import com.baicua.bsds.vo.RecordBookParam;
 import com.baicua.shiro.common.annotation.Log;
 import com.baicua.shiro.common.controller.BaseController;
 import com.baicua.shiro.common.domain.QueryRequest;
 import com.baicua.shiro.common.domain.ResponseBo;
 import com.baicua.shiro.system.domain.User;
+import com.baicua.shiro.system.service.IAttNexusService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -14,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
@@ -23,7 +26,8 @@ import java.util.Map;
 public class RecordBookController extends BaseController {
     @Autowired
     private IRecordBookService bookService;
-
+    @Autowired
+    private IAttNexusService attNexusService;
     @RequestMapping("recordBook")
     @RequiresPermissions("recordBook:list")
     public String recordBook(Model model) {
@@ -62,8 +66,16 @@ public class RecordBookController extends BaseController {
     @RequiresPermissions("recordBook:update")
     @RequestMapping("record/book/update")
     @ResponseBody
-    public ResponseBo update(RecordBook book) {
+    public ResponseBo update(RecordBookParam book) {
         try {
+            Long attId=null;
+            if (book.getFiles()!=null){
+                attId=attNexusService.saveFiles(book.getFiles(),dir);
+                logger.info("上传附件成功：attId-"+attId);
+            }else {
+                logger.error("没有上传附件");
+            }
+            book.setAttId(attId);
             int r=bookService.saveOrUpdate(book);
             if (r==0){
                 return ResponseBo.error("新增/修改记录本模板失败！");

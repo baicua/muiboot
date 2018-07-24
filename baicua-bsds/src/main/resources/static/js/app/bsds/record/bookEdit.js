@@ -1,19 +1,34 @@
 var validator;
 var $bookAddForm = $("#book-add-form");
 $(function() {
+    //0.初始化fileinput
+    fileInput("txt_file");
     validateRule();
     $("#book-add .btn-save").click(function() {
         var name = $(this).attr("name");
         var validator = $bookAddForm.validate();
         var flag = validator.form();
         if (flag) {
-            $MB.ajaxPost($(this),{url:ctx + "record/book/update",data:$bookAddForm.serialize()},function (r) {
+            $bookAddForm.ajaxSubmit({
+                type : "POST",
+                url : ctx + "record/book/update",
+                dataType : "json",
+                success : function(r) {
+                    if (r.code == 0) {
+                        closeModal();
+                        $MB.n_success(r.msg);
+                        $MB.refreshTable("recordBookTable");
+                    } else $MB.n_danger(r.msg);
+                }
+            });
+/*            var formdata = new FormData($bookAddForm[0]);
+            $MB.ajaxPost($(this),{url:ctx + "record/book/update",data:formdata},function (r) {
                 if (r.code == 0) {
                     closeModal();
                     $MB.n_success(r.msg);
                     $MB.refreshTable("recordBookTable");
                 } else $MB.n_danger(r.msg);
-            });
+            });*/
         }
     });
 

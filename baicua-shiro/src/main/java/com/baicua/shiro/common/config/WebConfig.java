@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.baicua.shiro.common.xss.XssFilter;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -35,6 +36,7 @@ public class WebConfig {
 	public ObjectMapper getObjectMapper() {
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
+		mapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
 		return mapper;
 	}
 

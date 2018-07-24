@@ -9,10 +9,13 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
-                <div class="j-content">
-                    <canvas id="pdf-content">该浏览器不支持预览，请升级浏览器。</canvas>
+                <div class="j-content" id="pdf-content">
                 </div>
+<!--                <div id="viewerContainer" tabindex="0">
+                    <div id="viewer" class="pdfViewer"></div>
+                </div>-->
                 <form id="apply-print-form">
+                    <input type="text" hidden name="attId" class="form-control" >
                     <div class="row">
                         <div class="col-sm-11">
                             <div class="input-group">
