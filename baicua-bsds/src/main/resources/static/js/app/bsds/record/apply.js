@@ -52,7 +52,7 @@ $(function() {
                 title: '溶液名称/记录本分类'
             }, {
                 field: 'apBatchNum',
-                title: '记录单批号/记录本号'
+                title: '记录单编号/记录本号'
             }, {
                 field: 'apDate',
                 title: '申领时间'
