@@ -4,9 +4,11 @@ import com.baicua.bsds.comm.TypeUnit;
 import com.baicua.bsds.domain.RecordApply;
 import com.baicua.bsds.domain.RecordBook;
 import com.baicua.bsds.domain.RecordSheet;
+import com.baicua.bsds.domain.Sequence;
 import com.baicua.bsds.service.IRecordApplyService;
 import com.baicua.bsds.service.IRecordBookService;
 import com.baicua.bsds.service.IRecordSheetService;
+import com.baicua.bsds.service.ISeqService;
 import com.baicua.bsds.vo.HomeFrontVo;
 import com.baicua.shiro.common.annotation.Log;
 import com.baicua.shiro.common.service.impl.BaseService;
@@ -41,6 +43,8 @@ public class RecordApplyServiceImp extends BaseService<RecordApply> implements I
     private IRecordBookService bookService;
     @Autowired
     private DeptService deptService;
+    @Autowired
+    private ISeqService seqService;
 
     @Override
     public List<RecordApply> findRecordApply(RecordApply recordApply) {
@@ -102,7 +106,9 @@ public class RecordApplyServiceImp extends BaseService<RecordApply> implements I
     public void applyRecordSheet(RecordSheet sheet, int quantity, User user) {
         sheet =sheetService.selectByKey(sheet.getrId());
         Dept dept = deptService.findById(user.getDeptId());
-        RecordSheet sheetU=sheetService.compareSerialAndSet(sheet);
+        RecordSheet sheetU=sheetService.selectByKey(sheet.getrId());
+        Sequence sequence = new Sequence("SHEET"+sheetU.getrType());
+        sequence = seqService.compareAndSet(sequence);
         RecordApply recordApply = new RecordApply();
         recordApply.setrId(sheetU.getrId());
         recordApply.setApDeptId(user.getDeptId());
@@ -114,7 +120,7 @@ public class RecordApplyServiceImp extends BaseService<RecordApply> implements I
         recordApply.setApQuantity(quantity);
         recordApply.setApType(TypeUnit.SHEET.applyType());
         recordApply.setSheetType(sheetU.getrType());
-        recordApply.setApBatchNum(String.format("%2s%03d",sheetU.getrYear().substring(2), sheetU.getrSerialNum()));
+        recordApply.setApBatchNum(sequence.getSerialNum());
         this.save(recordApply);
     }
 
@@ -124,7 +130,9 @@ public class RecordApplyServiceImp extends BaseService<RecordApply> implements I
     public void applyRecordBook(RecordBook book, int quantity, User user) {
         book =bookService.selectByKey(book.getrId());
         Dept dept = deptService.findById(user.getDeptId());
-        RecordBook booktU=bookService.compareSerialAndSet(book);
+        RecordBook booktU=bookService.selectByKey(book.getrId());
+        Sequence sequence = new Sequence("BOOK");
+        sequence = seqService.compareAndSet(sequence);
         RecordApply recordApply = new RecordApply();
         recordApply.setrId(booktU.getrId());
         recordApply.setApDeptId(user.getDeptId());
@@ -135,7 +143,7 @@ public class RecordApplyServiceImp extends BaseService<RecordApply> implements I
         recordApply.setApDate(new Date());
         recordApply.setApQuantity(quantity);
         recordApply.setApType(TypeUnit.BOOK.applyType());
-        recordApply.setApBatchNum(String.format("%s%03d",booktU.getrPro(), booktU.getrSerialNum()));
+        recordApply.setApBatchNum(sequence.getSerialNum());
         this.save(recordApply);
     }
 

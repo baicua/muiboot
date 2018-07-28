@@ -34,10 +34,12 @@ public class RecordSheet implements Serializable {
 
     @Column(name = "R_UPD_PER")
     private String rUpdPer;
-
+    /**批号规则修改，该字段废弃*/
+    @Deprecated
     @Column(name = "R_YEAR")
     private String rYear;
-
+    /**批号规则修改，该字段废弃*/
+    @Deprecated
     @Column(name = "R_SERIAL_NUM")
     private Long rSerialNum;
 

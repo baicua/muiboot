@@ -1,6 +1,6 @@
 $(function() {
     $("#apply-print").on("shown.bs.modal",function () {
-        var attId = $("#apply-print").find("input[name='attId']").val();
+/*        var attId = $("#apply-print").find("input[name='attId']").val();
         $('#pdf-content').empty();
         var ajaxUrl = ctx+"getAtt/"+attId;
         $.ajax({type: "get",url: ajaxUrl,dataType: "json",
@@ -11,19 +11,26 @@ $(function() {
                     $MB.n_warning(r.msg);
                 }
             }
-        });
+        });*/
     });
 });
 function showPdf(data) {
     // If absolute URL from the remote server is provided, configure the CORS
 // header on that server.
 // The workerSrc property shall be specified.
-    PDFJS.workerSrc = ctx+'js/pdf/pdf.worker.js';
+/*    PDFJS.workerSrc = ctx+'js/pdf/pdf.worker.min.js';
     PDFJS.cMapUrl = ctx+'js/pdf/cmaps/';
-    PDFJS.cMapPacked = true;
+    PDFJS.cMapPacked = true;*/
 // Asynchronous download of PDF
     var pdfdata = converData(data);
-    PDFJS.getDocument(pdfdata).then(function(pdf) {
+    //pdfjsLib.PDFWorker=ctx+'js/pdf/pdf.min.js';
+    PDFJS.cMapUrl = ctx+'js/pdf/cmaps/';
+    pdfjsLib.GlobalWorkerOptions.workerSrc = ctx+'js/pdf/pdf.worker.min.js';
+    //pdfjsLib.GlobalWorkerOptions.cMapUrl = ctx+'js/pdf/cmaps/';
+    //pdfjsLib.GlobalWorkerOptions.cMapPacked =  true;
+    //pdfjsLib.PDFWorker.cMapUrl = ctx+'js/pdf/cmaps/';
+    //pdfjsLib.cMapPacked = true;
+    pdfjsLib.getDocument(pdfdata).then(function(pdf) {
         var $pop = $('#pdf-content');
         var shownPageCount = pdf.numPages < 50 ? pdf.numPages : 50;//设置显示的编码
         var getPageAndRender = function (pageNumber) {

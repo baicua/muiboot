@@ -63,7 +63,7 @@ $(function() {
         var data=$MB.getRowData('dataTable', _this.attr("id"));
         var $form = $('#apply-print');
         $form.modal();
-        $("#applyRecordName").val(data.rType);
+        $("#applyRecordName").html(data.rSolName);
         $form.find("input[name='rId']").val(data.rId);
         $form.find("input[name='rName']").val(data.rSolName);
         $form.find("select[name='apType']").val("1");//记录单
