@@ -108,7 +108,8 @@ public class RecordApplyServiceImp extends BaseService<RecordApply> implements I
         Dept dept = deptService.findById(user.getDeptId());
         RecordSheet sheetU=sheetService.selectByKey(sheet.getrId());
         Sequence sequence = new Sequence("SHEET"+sheetU.getrType());
-        sequence = seqService.compareAndSet(sequence);
+        String[] serialNum = seqService.compareAndSet(sequence,quantity);
+        //sequence = seqService.compareAndSet(sequence);
         RecordApply recordApply = new RecordApply();
         recordApply.setrId(sheetU.getrId());
         recordApply.setApDeptId(user.getDeptId());
@@ -120,7 +121,7 @@ public class RecordApplyServiceImp extends BaseService<RecordApply> implements I
         recordApply.setApQuantity(quantity);
         recordApply.setApType(TypeUnit.SHEET.applyType());
         recordApply.setSheetType(sheetU.getrType());
-        recordApply.setApBatchNum(sequence.getSerialNum());
+        recordApply.setApBatchNum(StringUtils.join(serialNum,","));
         this.save(recordApply);
     }
 
@@ -132,7 +133,8 @@ public class RecordApplyServiceImp extends BaseService<RecordApply> implements I
         Dept dept = deptService.findById(user.getDeptId());
         RecordBook booktU=bookService.selectByKey(book.getrId());
         Sequence sequence = new Sequence("BOOK");
-        sequence = seqService.compareAndSet(sequence);
+        String[] serialNum = seqService.compareAndSet(sequence,quantity);
+        //sequence = seqService.compareAndSet(sequence);
         RecordApply recordApply = new RecordApply();
         recordApply.setrId(booktU.getrId());
         recordApply.setApDeptId(user.getDeptId());
@@ -143,7 +145,7 @@ public class RecordApplyServiceImp extends BaseService<RecordApply> implements I
         recordApply.setApDate(new Date());
         recordApply.setApQuantity(quantity);
         recordApply.setApType(TypeUnit.BOOK.applyType());
-        recordApply.setApBatchNum(sequence.getSerialNum());
+        recordApply.setApBatchNum(StringUtils.join(serialNum,","));
         this.save(recordApply);
     }
 
