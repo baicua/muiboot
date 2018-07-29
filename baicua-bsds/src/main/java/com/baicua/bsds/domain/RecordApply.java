@@ -48,7 +48,7 @@ public class RecordApply implements Serializable {
     private String rName;
 
     @Column(name = "AP_BATCH_NUM")
-    @ExportConfig(value = "记录单号/记录本号")
+    @ExportConfig(value = "记录单编号/记录本号")
     private String apBatchNum;
 
     @Column(name = "AP_QUANTITY")
