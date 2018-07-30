@@ -18,9 +18,8 @@ import javax.swing.text.Document;
 import java.awt.*;
 import java.io.*;
 import java.nio.file.NoSuchFileException;
-import java.util.Base64;
+import java.util.*;
 import java.util.List;
-import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
@@ -191,8 +190,10 @@ public class FileUtils {
 
     public static PDDocument mergePdf(String[] files,String[] attribute) throws IOException {
         PDFMergerUtility pdfmerger = new PDFMergerUtility();
-        if (null==files||files.length==0)
+        if (null==files||null==attribute)
             throw new NoSuchFileException("文件为空");
+        if (files.length==0||files.length!=attribute.length)
+            throw new IllegalArgumentException("数据参数错误,files.length="+files.length+",attribute.length="+attribute.length);
         File file =null;
         PDDocument doc =null;
         PDDocument docRes =new PDDocument();
@@ -257,7 +258,7 @@ public class FileUtils {
 
     public static void main (String[] args) throws IOException {
         String[] files=new String[]{"E:\\PDF测试.pdf","E:\\PDF测试.pdf","E:\\PDF测试.pdf"};
-        String[] att=new String[]{"SSSSSSS","SSSSSSS","SSSSSSS"};
+        String[] att=new String[]{"SSSSSSS","SSSSSSS","SSSSSSS",""};
         PDDocument document = null;
         try {
             document = FileUtils.mergePdf(files,att);
