@@ -1,9 +1,23 @@
 package com.baicua.shiro.common.util;
 
 import com.baicua.shiro.common.domain.ResponseBo;
+import org.apache.pdfbox.multipdf.PDFMergerUtility;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.PDResources;
+import org.apache.pdfbox.pdmodel.common.PDRectangle;
+import org.apache.pdfbox.pdmodel.font.PDFont;
+import org.apache.pdfbox.pdmodel.font.PDType0Font;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
+import org.apache.pdfbox.pdmodel.graphics.state.PDExtendedGraphicsState;
+import org.apache.pdfbox.util.Matrix;
 import sun.misc.BASE64Encoder;
 
+import javax.swing.text.Document;
+import java.awt.*;
 import java.io.*;
+import java.nio.file.NoSuchFileException;
 import java.util.Base64;
 import java.util.List;
 import java.util.UUID;
@@ -11,8 +25,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
-public class FileUtils {
+import static org.apache.poi.xwpf.usermodel.XWPFRun.FontCharRange.cs;
 
+public class FileUtils {
+    final static PDFont font = PDType1Font.HELVETICA_OBLIQUE;
     /**
      * 文件名加UUID
      *
@@ -171,5 +187,85 @@ public class FileUtils {
             }
         }
         return null;
+    }
+
+    public static PDDocument mergePdf(String[] files,String[] attribute) throws IOException {
+        PDFMergerUtility pdfmerger = new PDFMergerUtility();
+        if (null==files||files.length==0)
+            throw new NoSuchFileException("文件为空");
+        File file =null;
+        PDDocument doc =null;
+        PDDocument docRes =new PDDocument();
+        for (int i=0;i<files.length;i++){
+            try {
+                file = new File(files[i]);
+                doc =PDDocument.load(file);
+                doc = FileUtils.addHeadText(doc,attribute[i]);
+                pdfmerger.appendDocument(docRes,doc);
+            } catch (IOException e) {
+                throw new IOException("文件加载失败");
+            }finally {
+                if (null!=doc)
+                    doc.close();
+            }
+        }
+        return docRes;
+    }
+
+    private static PDDocument addHeadText(PDDocument doc, String s) throws IOException {
+        // Creating a PDF Document
+        PDPage page = doc.getPage(0);
+        PDPageContentStream cs = null;
+        try {
+            cs = new PDPageContentStream(doc, page, PDPageContentStream.AppendMode.APPEND, true, true);
+            // Begin the Content stream
+            //cs.beginText();
+            // Setting the font to the Content stream
+            //Font times = new Font(, 12f);
+            //String fontPath=Thread.currentThread().getContextClassLoader().getResource("static/fonts/timesbd.ttf").getPath();
+            //PDFont font = PDType0Font.load(doc, new File(fontPath));
+            //PDFont font = PDType1Font.TIMES_ROMAN;
+            float h=page.getMediaBox().getHeight();
+            float w=page.getMediaBox().getWidth();
+            float fontSize = 20.0f;
+            PDResources resources = page.getResources();
+            PDExtendedGraphicsState r0 = new PDExtendedGraphicsState();
+            // 透明度
+            r0.setNonStrokingAlphaConstant(0.2f);
+            r0.setAlphaSourceFlag(true);
+            cs.setGraphicsStateParameters(r0);
+            cs.setNonStrokingColor(200,0,0);//Red
+            cs.beginText();
+            cs.setFont(font, fontSize);
+            // 获取旋转实例
+            cs.setTextMatrix(Matrix.getRotateInstance(0,w-100,h-50));
+            cs.showText(s);
+
+
+            //contentStream.drawString(s);
+            cs.endText();
+        } catch (IOException e) {
+            throw new IOException("向PDF添加文本失败:"+e.getMessage());
+        }finally {
+            if (null!=cs)
+                // Closing the content stream
+                cs.close();
+        }
+
+        return doc;
+    }
+
+    public static void main (String[] args) throws IOException {
+        String[] files=new String[]{"E:\\PDF测试.pdf","E:\\PDF测试.pdf","E:\\PDF测试.pdf"};
+        String[] att=new String[]{"SSSSSSS","SSSSSSS","SSSSSSS"};
+        PDDocument document = null;
+        try {
+            document = FileUtils.mergePdf(files,att);
+            document.save("E:\\PDF合并.pdf");
+        } catch (IOException e) {
+            if (null!=document)
+                document.close();
+            e.printStackTrace();
+        }
     }
 }
