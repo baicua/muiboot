@@ -135,6 +135,9 @@ public class RecordApplyServiceImp extends BaseService<RecordApply> implements I
     @Transactional
     @Log("申请记录本")
     public void applyRecordBook(RecordBook book, int quantity, String printerName, User user) throws IOException, PrinterException {
+        if (StringUtils.isBlank(printerName)){
+            throw new NullPointerException("请先选择打印机");
+        }
         Dept dept = deptService.findById(user.getDeptId());
         RecordBook booktU=bookService.selectByKey(book.getrId());
         Sequence sequence = new Sequence("BOOK");
