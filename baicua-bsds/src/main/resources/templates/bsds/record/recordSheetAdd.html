@@ -74,6 +74,7 @@
                                 <span class="input-group-addon col-sm-2">模板附件:</span>
                                 <div class="form-group">
                                     <input type="text" name="" class="form-control">
+                                    <input type="file" required name="files" id="txt_file" class="file-loading" data-show-preview="false" data-show-upload="false" data-show-caption="true">
                                 </div>
                             </div>
                         </div>
@@ -81,10 +82,13 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-save" id="sheet-add-button" name="save">保存</button>
+                <button type="button" class="btn btn-save" id="sheet-add-button" name="save">确认</button>
                 <button type="button" class="btn btn-secondary btn-close">关闭</button>
                 <button class="btn-hide"></button>
             </div>
         </div>
     </div>
 </div>
+<script data-th-src="@{js/bootstrap-fileinput/fileinput.min.js}"></script>
+<script data-th-src="@{js/bootstrap-fileinput/locales/zh.js}"></script>
+<script data-th-src="@{js/app/fileinput/fileinput.js}"></script>

@@ -46,6 +46,9 @@ public class RecordSheet implements Serializable {
     @Column(name = "R_VESION")
     private Long rVesion;
 
+    @Column(name = "ATT_ID")
+    private Long attId;
+
     /**
      * @return R_ID
      */
@@ -210,7 +213,13 @@ public class RecordSheet implements Serializable {
     /**
      * @param rVesion
      */
-    public void setrVesion(Long rVesion) {
-        this.rVesion = rVesion;
+    public void setrVesion(Long rVesion) { this.rVesion = rVesion; }
+
+
+    public Long getAttId() {
+        return attId;
+    }
+
+    public void setAttId(Long attId) { this.attId = attId;
     }
 }

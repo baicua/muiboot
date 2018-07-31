@@ -1,11 +1,14 @@
 package com.baicua.bsds.controller;
+
 import com.baicua.bsds.domain.RecordSheet;
 import com.baicua.bsds.service.IRecordSheetService;
+import com.baicua.bsds.vo.RecordSheetParam;
 import com.baicua.shiro.common.annotation.Log;
 import com.baicua.shiro.common.controller.BaseController;
 import com.baicua.shiro.common.domain.QueryRequest;
 import com.baicua.shiro.common.domain.ResponseBo;
 import com.baicua.shiro.system.domain.User;
+import com.baicua.shiro.system.service.IAttNexusService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -13,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
@@ -23,6 +27,8 @@ import java.util.Map;
 public class RecordSheetController  extends BaseController {
     @Autowired
     private IRecordSheetService sheetService;
+    @Autowired
+    private IAttNexusService attNexusService;
     @RequestMapping("recordSheet")
     @RequiresPermissions("recordSheet:list")
     public String recordSheet(Model model) {
@@ -59,8 +65,16 @@ public class RecordSheetController  extends BaseController {
     @RequiresPermissions("recordSheet:update")
     @RequestMapping("record/sheet/update")
     @ResponseBody
-    public ResponseBo update(RecordSheet sheet) {
+    public ResponseBo update(RecordSheetParam sheet) {
         try {
+            Long attId=null;
+            if (sheet.getFiles()!=null){
+                attId=attNexusService.saveFiles(sheet.getFiles(),dir);
+                logger.info("上传附件成功：attId-"+attId);
+            }else {
+                logger.error("没有上传附件");
+            }
+            sheet.setAttId(attId);
             int r=sheetService.saveOrUpdate(sheet);
             if (r==0){
                 return ResponseBo.error("新增/修改记录单模板失败！");
