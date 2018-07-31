@@ -1,5 +1,33 @@
 $(function() {
     $("#apply-print").on("shown.bs.modal",function () {
+        //加载打印机
+        var $alert=$(this).find(".alert");
+        $alert.empty().append("<h5>正在加载打印机...</h5>");
+        $('input[name="printerName"]').remove();
+        $MB.ajaxPost($(this),{url:ctx + "print/getPrinters",data:{}},function (r) {
+            var listborder=$('<div class="list-border"></div>');
+            $alert.empty().append(listborder);
+            if (r.code == 0) {
+                for(var i in r.msg){
+                    var span=$('<span><i class="zmdi zmdi-print"></i></span>');
+                    span.attr("print-name",r.msg[i].name);
+                    if(r.msg[i].default){
+                        var printer=$('<input type="text" hidden name="printerName" />');
+                        printer.val(r.msg[i].name);
+                        span.addClass("active");
+                        $("#apply-print-form").append(printer);
+                    }
+                    span.append(r.msg[i].name);
+                    listborder.append(span);
+                }
+                //$MB.n_success(r.msg);
+            } else $MB.n_danger(r.msg);
+        });
+        $(".alert").on("click",".list-border>span",function () {
+            $(".list-border").children("span").removeClass("active");
+            $('input[name="printerName"]').val($(this).attr("print-name"));
+            $(this).addClass("active");
+        });
 /*        var attId = $("#apply-print").find("input[name='attId']").val();
         $('#pdf-content').empty();
         var ajaxUrl = ctx+"getAtt/"+attId;

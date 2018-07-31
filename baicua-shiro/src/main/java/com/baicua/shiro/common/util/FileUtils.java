@@ -27,7 +27,7 @@ import java.util.regex.PatternSyntaxException;
 import static org.apache.poi.xwpf.usermodel.XWPFRun.FontCharRange.cs;
 
 public class FileUtils {
-    final static PDFont font = PDType1Font.HELVETICA_OBLIQUE;
+    final static PDFont font = PDType1Font.TIMES_ROMAN;
     /**
      * 文件名加UUID
      *

@@ -59,6 +59,9 @@ public class RecordApply implements Serializable {
     private Object record;
 
     @Transient
+    private String printerName;
+
+    @Transient
     private String content;
 
     /**
@@ -219,6 +222,14 @@ public class RecordApply implements Serializable {
 
     public void setRecord(Object record) {
         this.record = record;
+    }
+
+    public String getPrinterName() {
+        return printerName;
+    }
+
+    public void setPrinterName(String printerName) {
+        this.printerName = printerName;
     }
 
     public String getContent() {

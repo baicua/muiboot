@@ -88,7 +88,7 @@ public class SeqServiceImpl extends BaseService<Sequence> implements ISeqService
                 sequenceNew.setFormat(year);
             }
             for (int i=1;i<=quantity;i++){
-                sequenceNew.setCurrentVal(sequenceNew.getCurrentVal()+(i*sequenceNew.getIncrementVal()));
+                sequenceNew.setCurrentVal(sequenceNew.getCurrentVal()+sequenceNew.getIncrementVal());
                 res[i-1]=sequenceNew.getSerialNum();
             }
             //sequenceNew.setCurrentVal(sequenceNew.getCurrentVal()+(sequenceNew.getIncrementVal()*quantity));

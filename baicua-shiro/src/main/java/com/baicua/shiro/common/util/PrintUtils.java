@@ -68,22 +68,21 @@ public class PrintUtils {
     * @version 1.0 2018/7/30
     * @author jin
     */
-    public static void printFile(File file,String printer) throws IOException, PrinterException {
-        // 读取pdf文件
+    public static void printFile(PDDocument document,String printer) throws IOException, PrinterException {
+/*        // 读取pdf文件
         PDDocument document = null;
         try {
             document = PDDocument.load(file);
         } catch (IOException e) {
             logger.error("文件加载失败");
             throw new IOException("文件加载失败");
-        }
+        }*/
         // 创建打印任务
         PrinterJob job = PrinterJob.getPrinterJob();
         // 遍历所有打印机的名称
         for (PrintService ps : PrinterJob.lookupPrintServices()) {
-            String psName = ps.toString();
             // 选用指定打印机
-            if (psName.equals(printer)) {
+            if (printer.equals(ps.getName())) {
                 job.setPrintService(ps);
                 break;
             }
@@ -100,7 +99,7 @@ public class PrintUtils {
         // override the page format
         Book book = new Book();
         // append all pages 设置一些属性 是否缩放 打印张数等
-        book.append(new PDFPrintable(document, Scaling.ACTUAL_SIZE), pageFormat, 1);
+        book.append(new PDFPrintable(document, Scaling.ACTUAL_SIZE), pageFormat,document.getNumberOfPages());
         job.setPageable(book);
         // 开始打印
         job.print();
