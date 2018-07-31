@@ -32,7 +32,7 @@ public interface IRecordApplyService  extends IService<RecordApply> {
     * @version 1.0 2018/7/16
     * @author jin
     */
-    void applyRecordSheet(RecordSheet sheet, int quantity, String printerName, User user);
+    void applyRecordSheet(RecordSheet sheet, int quantity, String printerName, User user) throws IOException, PrinterException;
     /**
     * <p>Description: 申请记录本</p>
     * @version 1.0 2018/7/16

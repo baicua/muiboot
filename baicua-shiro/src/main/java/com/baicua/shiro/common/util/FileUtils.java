@@ -232,7 +232,7 @@ public class FileUtils {
             PDResources resources = page.getResources();
             PDExtendedGraphicsState r0 = new PDExtendedGraphicsState();
             // 透明度
-            r0.setNonStrokingAlphaConstant(0.2f);
+            r0.setNonStrokingAlphaConstant(0.8f);
             r0.setAlphaSourceFlag(true);
             cs.setGraphicsStateParameters(r0);
             cs.setNonStrokingColor(200,0,0);//Red

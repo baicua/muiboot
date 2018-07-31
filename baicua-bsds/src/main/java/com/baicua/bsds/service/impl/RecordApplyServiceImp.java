@@ -109,13 +109,36 @@ public class RecordApplyServiceImp extends BaseService<RecordApply> implements I
     @Override
     @Transactional
     @Log("申请记录单")
-    public void applyRecordSheet(RecordSheet sheet, int quantity, String printerName, User user) {
+    public void applyRecordSheet(RecordSheet sheet, int quantity, String printerName, User user) throws IOException, PrinterException {
+        if (StringUtils.isBlank(printerName)){
+            throw new NullPointerException("请先选择打印机");
+        }
         sheet =sheetService.selectByKey(sheet.getrId());
         Dept dept = deptService.findById(user.getDeptId());
         RecordSheet sheetU=sheetService.selectByKey(sheet.getrId());
         Sequence sequence = new Sequence("SHEET"+sheetU.getrType());
         String[] serialNum = seqService.compareAndSet(sequence,quantity);
         //sequence = seqService.compareAndSet(sequence);
+        AttNexus attNexus =attNexusService.selectByKey(sheetU.getAttId());
+        String files[]=new String[quantity];
+        for (int i=0;i<quantity;i++){
+            files[i]=attNexus.getAttDir()+"/"+attNexus.getAttOriName();
+        }
+        PDDocument document =null;
+        try {
+            document=FileUtils.mergePdf(files,serialNum);
+            PrintUtils.printFile(document,printerName);
+        } catch (IOException e) {
+            logger.error("附件合并失败："+e.getMessage());
+            throw new IOException("附件合并失败，"+e.getMessage());
+        } catch (PrinterException e) {
+            logger.error("打印失败："+e.getMessage());
+            throw new PrinterException("打印失败，"+e.getMessage());
+        }finally {
+            if (null!=document)
+                document.close();
+        }
+
         RecordApply recordApply = new RecordApply();
         recordApply.setrId(sheetU.getrId());
         recordApply.setApDeptId(user.getDeptId());
