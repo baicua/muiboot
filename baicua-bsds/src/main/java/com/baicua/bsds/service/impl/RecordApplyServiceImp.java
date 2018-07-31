@@ -181,6 +181,9 @@ public class RecordApplyServiceImp extends BaseService<RecordApply> implements I
     public void applyRecordApply(RecordApply apply, User currentUser) throws IOException, PrinterException {
         if (null==apply||null==currentUser||null==apply.getApType())
             throw new NullPointerException("当前登录用户不能识别，或者申请信息为空");
+        if (StringUtils.isBlank(apply.getPrinterName())){
+            throw new NullPointerException("请先选择打印机");
+        }
         if (1==apply.getApType().intValue()){
             RecordSheet sheet = new RecordSheet();
             sheet.setrId(apply.getrId());
