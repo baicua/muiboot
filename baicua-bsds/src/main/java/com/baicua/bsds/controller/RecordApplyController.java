@@ -103,7 +103,7 @@ public class RecordApplyController extends BaseController {
         } catch (Exception e) {
             logger.error("记录本申领失败:"+e.getMessage());
             e.printStackTrace();
-            return ResponseBo.error("记录本申请失败，请联系管理员！");
+            return ResponseBo.error("记录本申请失败："+e.getMessage());
         }
     }
 

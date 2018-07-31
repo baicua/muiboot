@@ -153,10 +153,10 @@ public class RecordApplyServiceImp extends BaseService<RecordApply> implements I
             PrintUtils.printFile(document,printerName);
         } catch (IOException e) {
             logger.error("附件合并失败："+e.getMessage());
-            throw new IOException("附件合并失败："+e.getMessage());
+            throw new IOException("附件合并失败，"+e.getMessage());
         } catch (PrinterException e) {
             logger.error("打印失败："+e.getMessage());
-            throw new PrinterException("打印失败："+e.getMessage());
+            throw new PrinterException("打印失败，"+e.getMessage());
         }finally {
             if (null!=document)
              document.close();
