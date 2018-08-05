@@ -9,11 +9,11 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
 @EnableTransactionManagement
-@MapperScan({"com.baicua.*.dao","com.baicua.shiro.*.dao"})
-public class Application {
-	protected static  Logger logger = LoggerFactory.getLogger(Application.class);
+@MapperScan({"com.baicua.shiro.*.dao"})
+public class ShiroApplication {
+	protected static  Logger logger = LoggerFactory.getLogger(ShiroApplication.class);
 	public static void main(String[] args) {
-		SpringApplication.run(Application.class, args);
-		logger.info("BAICUA-BSDS启动完毕#########################");
+		SpringApplication.run(ShiroApplication.class, args);
+		logger.info("BAICUA-SHIRO启动完毕#########################");
 	}
 }
