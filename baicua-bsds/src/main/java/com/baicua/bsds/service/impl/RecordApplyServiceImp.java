@@ -4,28 +4,34 @@ import com.baicua.bsds.comm.TypeUnit;
 import com.baicua.bsds.domain.RecordApply;
 import com.baicua.bsds.domain.RecordBook;
 import com.baicua.bsds.domain.RecordSheet;
+import com.baicua.bsds.domain.Sequence;
 import com.baicua.bsds.service.IRecordApplyService;
 import com.baicua.bsds.service.IRecordBookService;
 import com.baicua.bsds.service.IRecordSheetService;
+import com.baicua.bsds.service.ISeqService;
 import com.baicua.bsds.vo.HomeFrontVo;
 import com.baicua.shiro.common.annotation.Log;
 import com.baicua.shiro.common.service.impl.BaseService;
-import com.baicua.shiro.system.dao.DeptMapper;
+import com.baicua.shiro.common.util.FileUtils;
+import com.baicua.shiro.common.util.PrintUtils;
+import com.baicua.shiro.system.domain.AttNexus;
 import com.baicua.shiro.system.domain.Dept;
 import com.baicua.shiro.system.domain.User;
 import com.baicua.shiro.system.service.DeptService;
+import com.baicua.shiro.system.service.IAttNexusService;
 import com.github.pagehelper.PageHelper;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
+import org.apache.pdfbox.pdmodel.PDDocument;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Example;
 
-import javax.annotation.Resource;
+import java.awt.print.PrinterException;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -41,6 +47,10 @@ public class RecordApplyServiceImp extends BaseService<RecordApply> implements I
     private IRecordBookService bookService;
     @Autowired
     private DeptService deptService;
+    @Autowired
+    private ISeqService seqService;
+    @Autowired
+    private IAttNexusService attNexusService;
 
     @Override
     public List<RecordApply> findRecordApply(RecordApply recordApply) {
@@ -99,10 +109,36 @@ public class RecordApplyServiceImp extends BaseService<RecordApply> implements I
     @Override
     @Transactional
     @Log("申请记录单")
-    public void applyRecordSheet(RecordSheet sheet, int quantity, User user) {
+    public void applyRecordSheet(RecordSheet sheet, int quantity, String printerName, User user) throws IOException, PrinterException {
+        if (StringUtils.isBlank(printerName)){
+            throw new NullPointerException("请先选择打印机");
+        }
         sheet =sheetService.selectByKey(sheet.getrId());
         Dept dept = deptService.findById(user.getDeptId());
-        RecordSheet sheetU=sheetService.compareSerialAndSet(sheet);
+        RecordSheet sheetU=sheetService.selectByKey(sheet.getrId());
+        Sequence sequence = new Sequence("SHEET"+sheetU.getrType());
+        String[] serialNum = seqService.compareAndSet(sequence,quantity);
+        //sequence = seqService.compareAndSet(sequence);
+        AttNexus attNexus =attNexusService.selectByKey(sheetU.getAttId());
+        String files[]=new String[quantity];
+        for (int i=0;i<quantity;i++){
+            files[i]=attNexus.getAttDir()+"/"+attNexus.getAttOriName();
+        }
+        PDDocument document =null;
+        try {
+            document=FileUtils.mergePdf(files,serialNum);
+            PrintUtils.printFile(document,printerName);
+        } catch (IOException e) {
+            logger.error("附件合并失败："+e.getMessage());
+            throw new IOException("附件合并失败，"+e.getMessage());
+        } catch (PrinterException e) {
+            logger.error("打印失败："+e.getMessage());
+            throw new PrinterException("打印失败，"+e.getMessage());
+        }finally {
+            if (null!=document)
+                document.close();
+        }
+
         RecordApply recordApply = new RecordApply();
         recordApply.setrId(sheetU.getrId());
         recordApply.setApDeptId(user.getDeptId());
@@ -114,17 +150,41 @@ public class RecordApplyServiceImp extends BaseService<RecordApply> implements I
         recordApply.setApQuantity(quantity);
         recordApply.setApType(TypeUnit.SHEET.applyType());
         recordApply.setSheetType(sheetU.getrType());
-        recordApply.setApBatchNum(String.format("%2s%03d",sheetU.getrYear().substring(2), sheetU.getrSerialNum()));
+        recordApply.setApBatchNum(StringUtils.join(serialNum,","));
         this.save(recordApply);
     }
 
     @Override
     @Transactional
     @Log("申请记录本")
-    public void applyRecordBook(RecordBook book, int quantity, User user) {
-        book =bookService.selectByKey(book.getrId());
+    public void applyRecordBook(RecordBook book, int quantity, String printerName, User user) throws IOException, PrinterException {
+        if (StringUtils.isBlank(printerName)){
+            throw new NullPointerException("请先选择打印机");
+        }
         Dept dept = deptService.findById(user.getDeptId());
-        RecordBook booktU=bookService.compareSerialAndSet(book);
+        RecordBook booktU=bookService.selectByKey(book.getrId());
+        Sequence sequence = new Sequence("BOOK");
+        String[] serialNum = seqService.compareAndSet(sequence,quantity);
+        AttNexus attNexus =attNexusService.selectByKey(booktU.getAttId());
+        String files[]=new String[quantity];
+        for (int i=0;i<quantity;i++){
+            files[i]=attNexus.getAttDir()+"/"+attNexus.getAttOriName();
+        }
+        PDDocument document =null;
+        try {
+            document=FileUtils.mergePdf(files,serialNum);
+            PrintUtils.printFile(document,printerName);
+        } catch (IOException e) {
+            logger.error("附件合并失败："+e.getMessage());
+            throw new IOException("附件合并失败，"+e.getMessage());
+        } catch (PrinterException e) {
+            logger.error("打印失败："+e.getMessage());
+            throw new PrinterException("打印失败，"+e.getMessage());
+        }finally {
+            if (null!=document)
+             document.close();
+        }
+        //sequence = seqService.compareAndSet(sequence);
         RecordApply recordApply = new RecordApply();
         recordApply.setrId(booktU.getrId());
         recordApply.setApDeptId(user.getDeptId());
@@ -135,23 +195,26 @@ public class RecordApplyServiceImp extends BaseService<RecordApply> implements I
         recordApply.setApDate(new Date());
         recordApply.setApQuantity(quantity);
         recordApply.setApType(TypeUnit.BOOK.applyType());
-        recordApply.setApBatchNum(String.format("%s%03d",booktU.getrPro(), booktU.getrSerialNum()));
+        recordApply.setApBatchNum(StringUtils.join(serialNum,","));
         this.save(recordApply);
     }
 
     @Override
     @Transactional
-    public void applyRecordApply(RecordApply apply, User currentUser) {
+    public void applyRecordApply(RecordApply apply, User currentUser) throws IOException, PrinterException {
         if (null==apply||null==currentUser||null==apply.getApType())
             throw new NullPointerException("当前登录用户不能识别，或者申请信息为空");
+        if (StringUtils.isBlank(apply.getPrinterName())){
+            throw new NullPointerException("请先选择打印机");
+        }
         if (1==apply.getApType().intValue()){
             RecordSheet sheet = new RecordSheet();
             sheet.setrId(apply.getrId());
-            applyRecordSheet(sheet,apply.getApQuantity(),currentUser);
+            applyRecordSheet(sheet,apply.getApQuantity(),apply.getPrinterName(),currentUser);
         }else {
             RecordBook book = new RecordBook();
             book.setrId(apply.getrId());
-            applyRecordBook(book,apply.getApQuantity(),currentUser);
+            applyRecordBook(book,apply.getApQuantity(),apply.getPrinterName(),currentUser);
         }
     }
 

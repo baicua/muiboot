@@ -3,6 +3,7 @@ import com.baicua.bsds.domain.RecordApply;
 import com.baicua.bsds.domain.RecordBook;
 import com.baicua.bsds.domain.RecordSheet;
 import com.baicua.bsds.service.IRecordApplyService;
+import com.baicua.shiro.common.annotation.Log;
 import com.baicua.shiro.common.controller.BaseController;
 import com.baicua.shiro.common.domain.QueryRequest;
 import com.baicua.shiro.common.domain.ResponseBo;
@@ -92,16 +93,17 @@ public class RecordApplyController extends BaseController {
      * @version 1.0 2018/7/17
      * @author jin
      */
+    @Log("申领记录本")
     @RequestMapping("record/applyBook")
     @ResponseBody
-    public ResponseBo applyBook(RecordBook book, int quantity) {
+    public ResponseBo applyBook(RecordApply apply) {
         try {
-            this.applyService.applyRecordBook(book,quantity,this.getCurrentUser());
+            this.applyService.applyRecordApply(apply,this.getCurrentUser());
             return ResponseBo.ok();
         } catch (Exception e) {
             logger.error("记录本申领失败:"+e.getMessage());
             e.printStackTrace();
-            return ResponseBo.error("记录本申请失败，请联系管理员！");
+            return ResponseBo.error("记录本申请失败："+e.getMessage());
         }
     }
 
@@ -119,7 +121,7 @@ public class RecordApplyController extends BaseController {
         } catch (Exception e) {
             logger.error("记录单申领失败:"+e.getMessage());
             e.printStackTrace();
-            return ResponseBo.error("记录单申领失败，请联系管理员！");
+            return ResponseBo.error("记录单申领失败："+e.getMessage());
         }
     }
     /**

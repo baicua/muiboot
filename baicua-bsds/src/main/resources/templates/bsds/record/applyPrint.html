@@ -9,14 +9,17 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
-                <div class="j-content" id="pdf-content">
+                <div class="alert alert-dismissible" role="alert">
+                    <!--<h5>正在加载打印机...</h5>-->
                 </div>
+<!--                <div class="j-content" id="pdf-content">
+                </div>-->
 <!--                <div id="viewerContainer" tabindex="0">
                     <div id="viewer" class="pdfViewer"></div>
                 </div>-->
                 <form id="apply-print-form">
                     <input type="text" hidden name="attId" class="form-control" >
-                    <div class="row">
+                        <div class="row">
                         <div class="col-sm-11">
                             <div class="input-group">
                                 <span class="input-group-addon col-sm-3">
@@ -31,8 +34,8 @@
                                     </select>
                                 </div>
                                 <span class="input-group-addon col-sm-3">
-					               	 申领份数:
-					            </span>
+                                        申领份数:
+                                </span>
                                 <div class="form-group">
                                     <input type="number" name="apQuantity" value="1" class="form-control" maxlength="2">
                                 </div>
@@ -52,13 +55,11 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-save" id="app-print-btn" name="save">保存</button>
+                <button type="button" class="btn btn-save" id="app-print-btn" name="save">确认</button>
                 <button type="button" class="btn btn-secondary btn-close">关闭</button>
                 <button class="btn-hide"></button>
             </div>
         </div>
     </div>
 </div>
-<script data-th-src="@{js/pdf/pdf.js}"></script>
-<script data-th-src="@{js/pdf/pdf.worker.js}"></script>
 <script data-th-src="@{js/app/bsds/record/applyPrint.js}"></script>

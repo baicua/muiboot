@@ -13541,6 +13541,25 @@ select {
 .form-control {
 	color: #464a4c;
 }
+.list-border {
+  flex: 1 100%;
+  margin-top: 0.5rem;
+}
+.list-border > span{
+  padding: 0.45rem 0.7rem 0.5rem;
+  border: 1px solid #ebebeb;
+  line-height: 100%;
+  font-size: 1rem;
+  margin: 0.2rem 0.05rem 0 0;
+  background-color: #FFFFFF;
+  display: block;
+}
+.list-border > span:hover{
+  background-color: #0cc07e29;
+}
+.list-border > span.active{
+  border: 1px solid #c89e03;
+}
 /*# sourceMappingURL=app.css.map */
 /*扩展*/
 .datasearch_wrapper .btn-group > .btn:last-child:not(:first-child), .btn-group > .dropdown-toggle:not(:first-child),.form-control {

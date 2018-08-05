@@ -17,5 +17,21 @@
     <result column="R_YEAR" jdbcType="VARCHAR" property="rYear" />
     <result column="R_SERIAL_NUM" jdbcType="DECIMAL" property="rSerialNum" />
     <result column="R_VESION" jdbcType="DECIMAL" property="rVesion" />
+    <result column="ATT_ID" jdbcType="DECIMAL" property="attId" />
   </resultMap>
+  <select id="findRecordBook" resultType="com.baicua.bsds.domain.RecordBook" parameterType="com.baicua.bsds.domain.RecordBook">
+    select u.R_ID rId,u.R_CODE rCode,u.R_TYPE rType,u.R_SOL_NAME rSolName,u.R_POTENCY rPotency,u.R_REF_METHOD rRefMethod,u.R_CRT_DATE rCrtDate,
+    u.R_UPD_DATE rUpdDate ,u.R_UPD_PER rUpdPer ,u.R_YEAR rYear,u.R_SERIAL_NUM rSerialNum,u.R_VESION rVesion,u.ATT_ID attId from RECORD_SHEET u
+    where 1=1
+    <if test="rId != null and rId != ''">
+      AND u.R_ID = #{rId}
+    </if>
+    <if test="rType != null and rType != ''">
+      AND u.R_TYPE = #{rType}
+    </if>
+    <if test="rName != null and rName != ''">
+      AND u.R_NAME like concat('%',#{rName},'%')
+    </if>
+    order by u.R_UPD_DATE DESC
+  </select>
 </mapper>

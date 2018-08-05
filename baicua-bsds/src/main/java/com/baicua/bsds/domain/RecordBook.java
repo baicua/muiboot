@@ -19,10 +19,12 @@ public class RecordBook implements Serializable {
 
     @Column(name = "R_NAME")
     private String rName;
-
+    /**批号规则修改，该字段废弃*/
+    @Deprecated
     @Column(name = "R_PRO")
     private String rPro;
-
+    /**批号规则修改，该字段废弃*/
+    @Deprecated
     @Column(name = "R_SERIAL_NUM")
     private Long rSerialNum;
 

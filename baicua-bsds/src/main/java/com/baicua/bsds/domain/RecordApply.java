@@ -48,7 +48,7 @@ public class RecordApply implements Serializable {
     private String rName;
 
     @Column(name = "AP_BATCH_NUM")
-    @ExportConfig(value = "申领批号")
+    @ExportConfig(value = "记录单编号/记录本号")
     private String apBatchNum;
 
     @Column(name = "AP_QUANTITY")
@@ -57,6 +57,9 @@ public class RecordApply implements Serializable {
 
     @Transient
     private Object record;
+
+    @Transient
+    private String printerName;
 
     @Transient
     private String content;
@@ -219,6 +222,14 @@ public class RecordApply implements Serializable {
 
     public void setRecord(Object record) {
         this.record = record;
+    }
+
+    public String getPrinterName() {
+        return printerName;
+    }
+
+    public void setPrinterName(String printerName) {
+        this.printerName = printerName;
     }
 
     public String getContent() {

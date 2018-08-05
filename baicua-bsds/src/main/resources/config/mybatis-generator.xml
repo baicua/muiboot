@@ -43,8 +43,8 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
         <!-- 配置需要生成的表 -->
-        <table tableName="ATT_NEXUS" domainObjectName="AttNexus" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
-            <generatedKey column="ATT_ID" sqlStatement="oralce" identity="true"/>
+        <table tableName="SEQUENCE" domainObjectName="Sequence" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="SEQ_NAME" sqlStatement="mysql" identity="false"/>
         </table>
     </context>
 </generatorConfiguration>

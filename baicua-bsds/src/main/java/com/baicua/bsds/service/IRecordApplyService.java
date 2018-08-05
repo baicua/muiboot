@@ -7,6 +7,8 @@ import com.baicua.bsds.vo.HomeFrontVo;
 import com.baicua.shiro.common.service.IService;
 import com.baicua.shiro.system.domain.User;
 
+import java.awt.print.PrinterException;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -30,20 +32,20 @@ public interface IRecordApplyService  extends IService<RecordApply> {
     * @version 1.0 2018/7/16
     * @author jin
     */
-    void applyRecordSheet(RecordSheet sheet, int quantity, User user);
+    void applyRecordSheet(RecordSheet sheet, int quantity, String printerName, User user) throws IOException, PrinterException;
     /**
     * <p>Description: 申请记录本</p>
     * @version 1.0 2018/7/16
     * @author jin
     */
-    void applyRecordBook(RecordBook book, int quantity, User user);
+    void applyRecordBook(RecordBook book, int quantity, String printerName, User user) throws IOException, PrinterException;
 
     /**
      * <p>Description: 申请记录本/记录单</p>
      * @version 1.0 2018/7/16
      * @author jin
      */
-    void applyRecordApply(RecordApply apply, User currentUser);
+    void applyRecordApply(RecordApply apply, User currentUser) throws IOException, PrinterException;
 
     /*
     查询首页数据

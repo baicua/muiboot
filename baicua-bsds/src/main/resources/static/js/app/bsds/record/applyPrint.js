@@ -1,6 +1,34 @@
 $(function() {
     $("#apply-print").on("shown.bs.modal",function () {
-        var attId = $("#apply-print").find("input[name='attId']").val();
+        //加载打印机
+        var $alert=$(this).find(".alert");
+        $alert.empty().append("<h5>正在加载打印机...</h5>");
+        $('input[name="printerName"]').remove();
+        $MB.ajaxPost($(this),{url:ctx + "print/getPrinters",data:{}},function (r) {
+            var listborder=$('<div class="list-border"></div>');
+            $alert.empty().append(listborder);
+            if (r.code == 0) {
+                for(var i in r.msg){
+                    var span=$('<span><i class="zmdi zmdi-print"></i></span>');
+                    span.attr("print-name",r.msg[i].name);
+                    if(r.msg[i].default){
+                        var printer=$('<input type="text" hidden name="printerName" />');
+                        printer.val(r.msg[i].name);
+                        span.addClass("active");
+                        $("#apply-print-form").append(printer);
+                    }
+                    span.append(r.msg[i].name);
+                    listborder.append(span);
+                }
+                //$MB.n_success(r.msg);
+            } else $MB.n_danger(r.msg);
+        });
+        $(".alert").on("click",".list-border>span",function () {
+            $(".list-border").children("span").removeClass("active");
+            $('input[name="printerName"]').val($(this).attr("print-name"));
+            $(this).addClass("active");
+        });
+/*        var attId = $("#apply-print").find("input[name='attId']").val();
         $('#pdf-content').empty();
         var ajaxUrl = ctx+"getAtt/"+attId;
         $.ajax({type: "get",url: ajaxUrl,dataType: "json",
@@ -11,19 +39,26 @@ $(function() {
                     $MB.n_warning(r.msg);
                 }
             }
-        });
+        });*/
     });
 });
 function showPdf(data) {
     // If absolute URL from the remote server is provided, configure the CORS
 // header on that server.
 // The workerSrc property shall be specified.
-    PDFJS.workerSrc = ctx+'js/pdf/pdf.worker.js';
+/*    PDFJS.workerSrc = ctx+'js/pdf/pdf.worker.min.js';
     PDFJS.cMapUrl = ctx+'js/pdf/cmaps/';
-    PDFJS.cMapPacked = true;
+    PDFJS.cMapPacked = true;*/
 // Asynchronous download of PDF
     var pdfdata = converData(data);
-    PDFJS.getDocument(pdfdata).then(function(pdf) {
+    //pdfjsLib.PDFWorker=ctx+'js/pdf/pdf.min.js';
+    PDFJS.cMapUrl = ctx+'js/pdf/cmaps/';
+    pdfjsLib.GlobalWorkerOptions.workerSrc = ctx+'js/pdf/pdf.worker.min.js';
+    //pdfjsLib.GlobalWorkerOptions.cMapUrl = ctx+'js/pdf/cmaps/';
+    //pdfjsLib.GlobalWorkerOptions.cMapPacked =  true;
+    //pdfjsLib.PDFWorker.cMapUrl = ctx+'js/pdf/cmaps/';
+    //pdfjsLib.cMapPacked = true;
+    pdfjsLib.getDocument(pdfdata).then(function(pdf) {
         var $pop = $('#pdf-content');
         var shownPageCount = pdf.numPages < 50 ? pdf.numPages : 50;//设置显示的编码
         var getPageAndRender = function (pageNumber) {

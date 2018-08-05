@@ -1,19 +1,34 @@
 var validator;
 var $sheetAddForm = $("#sheet-add-form");
 $(function() {
+    //0.初始化fileinput
+    fileInput("txt_file");
     validateRule();
     $("#sheet-add .btn-save").click(function() {
         var name = $(this).attr("name");
         var validator = $sheetAddForm.validate();
         var flag = validator.form();
         if (flag) {
+            $sheetAddForm.ajaxSubmit({
+                type : "POST",
+                url : ctx + "record/sheet/update",
+                dataType : "json",
+                success : function(r) {
+                    if (r.code == 0) {
+                        closeModal();
+                        $MB.n_success(r.msg);
+                        $MB.refreshTable("recordSheetTable");
+                    } else $MB.n_danger(r.msg);
+                }
+            });
+/*            var formdata = new FormData($sheetAddForm[0]);
             $MB.ajaxPost($(this),{url:ctx + "record/sheet/update",data:$sheetAddForm.serialize()},function (r) {
                 if (r.code == 0) {
                     closeModal();
                     $MB.n_success(r.msg);
                     $MB.refreshTable("recordSheetTable");
                 } else $MB.n_danger(r.msg);
-            });
+            });*/
         }
     });
 
