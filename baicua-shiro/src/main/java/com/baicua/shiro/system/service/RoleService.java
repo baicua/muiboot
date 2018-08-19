@@ -14,6 +14,8 @@ public interface RoleService extends IService<Role> {
 	
 	RoleWithMenu findRoleWithMenus(Long roleId);
 
+	List<RoleWithMenu> findByMenuId(Long menuId);
+
 	Role findByName(String roleName);
 
 	void addRole(Role role, Long[] menuIds);

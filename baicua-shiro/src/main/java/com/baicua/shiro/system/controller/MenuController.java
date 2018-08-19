@@ -1,10 +1,15 @@
 package com.baicua.shiro.system.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.baicua.shiro.common.domain.ResponseBo;
 import com.baicua.shiro.common.layer.LayerTree;
 import com.baicua.shiro.common.util.FileUtils;
+import com.baicua.shiro.system.domain.Role;
+import com.baicua.shiro.system.domain.RoleWithMenu;
+import com.baicua.shiro.system.service.RoleService;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +26,8 @@ import com.baicua.shiro.system.service.MenuService;
 public class MenuController extends BaseController {
 	@Autowired
 	private MenuService menuService;
+	@Autowired
+	private RoleService roleService;
 
 /*	@RequestMapping("menu/menu")
 	@ResponseBody
@@ -40,6 +47,24 @@ public class MenuController extends BaseController {
 		try {
 			Menu menu = this.menuService.findById(menuId);
 			return ResponseBo.ok(menu);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseBo.error("获取信息失败，请联系网站管理员！");
+		}
+	}
+
+	@RequestMapping("menu/getMenuDetail")
+	@ResponseBody
+	public ResponseBo getMenuDetail(Long menuId) {
+		try {
+			Menu menu = this.menuService.findById(menuId);
+			List<Menu> permissions=this.menuService.findAllPermissions(menu);
+			List<RoleWithMenu> roles=this.roleService.findByMenuId(menu.getMenuId());
+			Map res =new HashMap();
+			res.put("menu",menu);
+			res.put("roles",roles);
+			res.put("permissions",permissions);
+			return ResponseBo.ok(res);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return ResponseBo.error("获取信息失败，请联系网站管理员！");

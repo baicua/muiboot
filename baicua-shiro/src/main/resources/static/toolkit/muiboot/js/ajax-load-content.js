@@ -1,3 +1,11 @@
+jQuery(document).ready(function () {
+    window.addEventListener('popstate', function(event) {
+        alert(event);
+    });
+    //
+    //window.history.pushState('forward', null, '');  //在IE中必须得有这两行
+    //window.history.forward(1);
+});//禁用浏览器前进后退
 (function($) {
     "use strict";
     var ajax_loaded_page = {urls:{}};//ajax加载的页面

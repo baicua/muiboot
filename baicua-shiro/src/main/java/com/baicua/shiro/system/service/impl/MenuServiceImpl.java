@@ -9,6 +9,7 @@ import com.baicua.shiro.common.layer.LayerTree;
 import com.baicua.shiro.common.service.impl.BaseService;
 import com.baicua.shiro.system.dao.MenuMapper;
 import com.baicua.shiro.system.domain.Menu;
+import com.baicua.shiro.system.domain.Role;
 import com.baicua.shiro.system.service.RoleMenuServie;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,6 +59,20 @@ public class MenuServiceImpl extends BaseService<Menu> implements MenuService {
 			e.printStackTrace();
 			return new ArrayList<>();
 		}
+	}
+
+	@Override
+	public List<Menu> findAllPermissions(Menu menu) {
+		Example example = new Example(Menu.class);
+		example.createCriteria().andCondition("type =", 1).andEqualTo("parentId", menu.getMenuId());
+		example.setOrderByClause("create_time");
+		List<Menu> menus = this.selectByExample(example);
+		return menus;
+	}
+
+	@Override
+	public List<Role> findAllRoles(Menu menu) {
+		return null;
 	}
 
 	@Override

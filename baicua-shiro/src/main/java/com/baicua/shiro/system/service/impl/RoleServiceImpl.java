@@ -114,6 +114,11 @@ public class RoleServiceImpl extends BaseService<Role> implements RoleService {
 	}
 
 	@Override
+	public List<RoleWithMenu> findByMenuId(Long menuId) {
+		return this.roleMapper.findByMenuId(menuId);
+	}
+
+	@Override
 	@Transactional
 	public void updateRole(Role role, Long[] menuIds) {
 		role.setModifyTime(new Date());

@@ -24,16 +24,32 @@
             <div class="layui-col-md3 layui-col-xs12" style="min-height: 400px">
                 <ul id="menuTree" class="layui-box layui-tree"></ul>
             </div>
-            <div class="site-tips layui-col-md9 layui-col-xs12" style="min-height: 400px">
-                <table class="layui-table" lay-size="sm">
-                    <colgroup><col width="150"><col width="200"><col width="150"><col width="200"></colgroup>
-                    <tbody>
-                    <tr><th>菜单ID</th><td>{{ menu.menuId }}</td><th>菜单名称</th><td>{{ menu.menuName }}</td></tr>
-                    <tr><th>上级菜单</th><td>{{ menu.name }}</td><th>权限描述</th><td>{{ menu.perms }}</td></tr>
-                    <tr><th>菜单类型</th><td>{{ menu.type }}</td><th>菜单图标</th><td>{{ menu.icon }}</td></tr>
-                    <tr><th>菜单地址</th><td>{{ menu.url }}</td><th></th><td></td></tr>
-                    </tbody>
-                </table>
+            <div class="site-tips layui-col-md9 layui-col-xs12" style="min-height: 400px;padding: 10px;">
+                <div class="layui-row layui-col-space15">
+                    <div class="layui-row layui-col-xs12">
+                        <div class="layui-card">
+                            <div class="layui-card-header"><i class="layui-icon">&#xe60a;&nbsp;&nbsp;</i>基本信息</div>
+                            <div class="layui-card-body" id="menuInfoPanle" style="min-height: 130px">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-row layui-col-md12">
+                        <div class="layui-col-md6">
+                            <div class="layui-card">
+                                <div class="layui-card-header"><i class="layui-icon">&#xe672;&nbsp;&nbsp;</i>权限信息</div>
+                                <div class="layui-card-body" id="menuButtonPanle" style="min-height: 50px">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-col-md6">
+                            <div class="layui-card">
+                                <div class="layui-card-header"><i class="layui-icon">&#xe770;&nbsp;&nbsp;</i>角色信息</div>
+                                <div class="layui-card-body" id="menuAuthPanle"  style="min-height: 50px">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </fieldset>
     </div>

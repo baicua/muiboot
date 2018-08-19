@@ -5,6 +5,7 @@ import java.util.List;
 import com.baicua.shiro.common.layer.LayerTree;
 import com.baicua.shiro.common.service.IService;
 import com.baicua.shiro.system.domain.Menu;
+import com.baicua.shiro.system.domain.Role;
 
 public interface MenuService extends IService<Menu> {
 
@@ -13,6 +14,10 @@ public interface MenuService extends IService<Menu> {
 	List<Menu> findUserMenus(String userName);
 
 	List<Menu> findAllMenus(Menu menu);
+
+	List<Menu> findAllPermissions(Menu menu);
+
+	List<Role> findAllRoles(Menu menu);
 
 	LayerTree<Menu> getMenuButtonTree();
 	

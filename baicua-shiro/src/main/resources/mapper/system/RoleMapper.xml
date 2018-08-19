@@ -25,5 +25,12 @@
 	LEFT JOIN T_ROLE_MENU RM ON(R.ROLE_ID = RM.ROLE_ID)
 	WHERE R.ROLE_ID = #{roleId}
   </select>
+
+    <select id="findByMenuId" resultType="roleWithMenu">
+        SELECT R.ROLE_ID ROLEID,R.ROLE_NAME ROLENAME,R.REMARK,
+        RM.MENU_ID MENUID FROM T_ROLE R
+        LEFT JOIN T_ROLE_MENU RM ON(R.ROLE_ID = RM.ROLE_ID)
+        WHERE RM.MENU_ID = #{menuId}
+    </select>
   
 </mapper>
