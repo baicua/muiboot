@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.baicua.shiro.common.domain.Tree;
+import com.baicua.shiro.common.layer.LayerTree;
 import com.baicua.shiro.common.util.TreeUtils;
 import com.baicua.shiro.system.dao.DeptMapper;
 import com.baicua.shiro.system.domain.Dept;
@@ -27,14 +27,14 @@ public class DeptServiceImpl extends BaseService<Dept> implements DeptService {
 	private DeptMapper deptMapper;
 
 	@Override
-	public Tree<Dept> getDeptTree() {
-		List<Tree<Dept>> trees = new ArrayList<>();
+	public LayerTree<Dept> getDeptTree() {
+		List<LayerTree<Dept>> trees = new ArrayList<>();
 		List<Dept> depts = this.findAllDepts(new Dept());
 		for (Dept dept : depts) {
-			Tree<Dept> tree = new Tree<>();
+			LayerTree<Dept> tree = new LayerTree<>();
 			tree.setId(dept.getDeptId().toString());
 			tree.setParentId(dept.getParentId().toString());
-			tree.setText(dept.getDeptName());
+			tree.setName(dept.getDeptName());
 			trees.add(tree);
 		}
 		return TreeUtils.build(trees);

@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import com.baicua.shiro.common.layer.LayerTree;
 import com.baicua.shiro.common.service.impl.BaseService;
 import com.baicua.shiro.system.dao.MenuMapper;
 import com.baicua.shiro.system.domain.Menu;
@@ -15,7 +16,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.baicua.shiro.common.domain.Tree;
 import com.baicua.shiro.common.util.TreeUtils;
 import com.baicua.shiro.system.service.MenuService;
 import tk.mybatis.mapper.entity.Example;
@@ -61,16 +61,16 @@ public class MenuServiceImpl extends BaseService<Menu> implements MenuService {
 	}
 
 	@Override
-	public Tree<Menu> getMenuButtonTree() {
-		List<Tree<Menu>> trees = new ArrayList<>();
+	public LayerTree<Menu> getMenuButtonTree() {
+		List<LayerTree<Menu>> trees = new ArrayList<>();
 		List<Menu> menus = this.findAllMenus(new Menu());
 		buildTrees(trees, menus);
 		return TreeUtils.build(trees);
 	}
 
 	@Override
-	public Tree<Menu> getMenuTree() {
-		List<Tree<Menu>> trees = new ArrayList<>();
+	public LayerTree<Menu> getMenuTree() {
+		List<LayerTree<Menu>> trees = new ArrayList<>();
 		Example example = new Example(Menu.class);
 		example.createCriteria().andCondition("type =", 0);
 		example.setOrderByClause("create_time");
@@ -79,27 +79,29 @@ public class MenuServiceImpl extends BaseService<Menu> implements MenuService {
 		return TreeUtils.build(trees);
 	}
 
-	private void buildTrees(List<Tree<Menu>> trees, List<Menu> menus) {
+	private void buildTrees(List<LayerTree<Menu>> trees, List<Menu> menus) {
 		for (Menu menu : menus) {
-			Tree<Menu> tree = new Tree<>();
+			LayerTree<Menu> tree = new LayerTree<>();
 			tree.setId(menu.getMenuId().toString());
 			tree.setParentId(menu.getParentId().toString());
-			tree.setText(menu.getMenuName());
+			tree.setName(menu.getMenuName());
+			tree.setIcon(menu.getIcon());
+			//tree.setHref(menu.getUrl());
 			trees.add(tree);
 		}
 	}
 
 	@Override
-	public Tree<Menu> getUserMenu(String userName) {
-		List<Tree<Menu>> trees = new ArrayList<>();
+	public LayerTree<Menu> getUserMenu(String userName) {
+		List<LayerTree<Menu>> trees = new ArrayList<>();
 		List<Menu> menus = this.findUserMenus(userName);
 		for (Menu menu : menus) {
-			Tree<Menu> tree = new Tree<>();
+			LayerTree<Menu> tree = new LayerTree<>();
 			tree.setId(menu.getMenuId().toString());
 			tree.setParentId(menu.getParentId().toString());
-			tree.setText(menu.getMenuName());
+			tree.setName(menu.getMenuName());
 			tree.setIcon(menu.getIcon());
-			tree.setUrl(menu.getUrl());
+			tree.setHref(menu.getUrl());
 			trees.add(tree);
 		}
 		return TreeUtils.build(trees);

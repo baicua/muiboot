@@ -288,8 +288,8 @@
         columns : [],
         toolbar: null,//顶部工具条
         height: 0,
-        expanderExpandedClass : 'zmdi zmdi-chevron-down zmdi-hc-fw',// 展开的按钮的图标
-        expanderCollapsedClass : 'zmdi zmdi-chevron-right zmdi-hc-fw'// 缩起的按钮的图标
+        expanderExpandedClass : 'layui-icon layui-icon-down',// 展开的按钮的图标
+        expanderCollapsedClass : 'layui-icon layui-icon-up'// 缩起的按钮的图标
 
     };
 })(jQuery);

@@ -1,64 +1,34 @@
-<div class="page-loader">
-    <div class="page-loader__spinner">
-        <svg viewBox="25 25 50 50">
-            <circle cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
-        </svg>
-    </div>
-</div>
-<header class="header">
-    <div class="navigation-trigger hidden-xl-up" data-ma-action="aside-open" data-ma-target=".sidebar">
-        <div class="navigation-trigger__inner">
-            <i class="navigation-trigger__line"></i>
-            <i class="navigation-trigger__line"></i>
-            <i class="navigation-trigger__line"></i>
-        </div>
-    </div>
-    <div class="header__logo hidden-sm-down">
-        <h1><a href="index.html">BSDS 权限管理系统</a></h1>
-    </div>
-    <ul class="top-nav">
-        <li class="dropdown hidden-xs-down">
-            <a href="" data-toggle="dropdown"><i class="zmdi zmdi-more-vert"></i></a>
-            <div class="dropdown-menu dropdown-menu-right">
-                <div class="dropdown-item theme-switch">
-                    	主题切换
-                    <div class="btn-group btn-group--colors mt-2" data-toggle="buttons">
-                        <label class="btn bg-green active">
-                            <input type="radio" value="green" autocomplete="off" checked>
-                        </label>
-                        <label class="btn bg-blue">
-                            <input type="radio" value="blue" autocomplete="off">
-                        </label>
-                        <label class="btn bg-red">
-                            <input type="radio" value="red" autocomplete="off">
-                        </label>
-                        <label class="btn bg-orange">
-                            <input type="radio" value="orange" autocomplete="off">
-                        </label>
-                        <label class="btn bg-teal">
-                            <input type="radio" value="teal" autocomplete="off">
-                        </label>
-                        <br>
-                        <label class="btn bg-cyan">
-                            <input type="radio" value="cyan" autocomplete="off">
-                        </label>
-                        <label class="btn bg-blue-grey">
-                            <input type="radio" value="blue-grey" autocomplete="off">
-                        </label>
-                        <label class="btn bg-purple">
-                            <input type="radio" value="purple" autocomplete="off">
-                        </label>
-                        <label class="btn bg-indigo">
-                            <input type="radio" value="indigo" autocomplete="off">
-                        </label>
-                        <label class="btn bg-lime">
-                            <input type="radio" value="lime" autocomplete="off">
-                        </label>
-                    </div>
-                </div>
-                <a href="#" class="dropdown-item" onclick="fullScreen(this)">全屏</a>
-                <a class="dropdown-item" data-th-href="@{logout}">退出</a>
-            </div>
-        </li>
-    </ul>
-</header>
+<div class="layui-logo">MUIBOOT权限管理系统</div>
+<!-- 头部区域（可配合layui已有的水平导航） -->
+<ul class="layui-nav layui-layout-left">
+    <li class="layui-nav-item layadmin-flexible" lay-unselect="">
+        <a href="javascript:;"  layadmin-event="flexible" title="侧边伸缩">
+            <i class="layui-icon layui-icon-shrink-right"></i>
+            <i class="layui-icon layui-icon-spread-left"></i>
+        </a>
+    </li>
+    <li class="layui-nav-item"><a href="">权限管理</a></li>
+<!--    <li class="layui-nav-item"><a href="">商品管理</a></li>
+    <li class="layui-nav-item"><a href="">用户</a></li>-->
+    <li class="layui-nav-item">
+        <a href="javascript:;">其它系统</a>
+        <dl class="layui-nav-child">
+            <dd><a href="">邮件管理</a></dd>
+            <dd><a href="">消息管理</a></dd>
+            <dd><a href="">授权管理</a></dd>
+        </dl>
+    </li>
+</ul>
+<ul class="layui-nav layui-layout-right">
+    <li class="layui-nav-item">
+        <a href="javascript:;">
+            <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
+            贤心
+        </a>
+        <dl class="layui-nav-child">
+            <dd><a href="">基本资料</a></dd>
+            <dd><a href="">安全设置</a></dd>
+        </dl>
+    </li>
+    <li class="layui-nav-item"><a href="logout">退出</a></li>
+</ul>

@@ -115,7 +115,7 @@
         var node = this,
           id = node.id,
 
-          // Layer styles
+          // layer styles
           offset = -area + '%',
           size = 100 + (area * 2) + '%',
           layer = {
@@ -176,7 +176,7 @@
         // Wrap input
         parent = self.wrap(parent + '/>')[_callback]('ifCreated').parent().append(settings.insert);
 
-        // Layer addition
+        // layer addition
         helper = $('<ins class="' + _iCheckHelper + '"/>').css(layer).appendTo(parent);
 
         // Finalize customization

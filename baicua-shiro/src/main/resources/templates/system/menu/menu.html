@@ -1,64 +1,44 @@
-<div data-th-include="system/menu/menuAdd"></div>
-<div class="card">
-    <div class="card-block">
-        <div class="table-responsive">
-            <div id="data-table_wrapper" class="dataTables_wrapper">
-                <div class="dataTables_buttons hidden-sm-down actions">
-                    <span class="actions__item zmdi zmdi-search" onclick="search()" title="搜索" />
-                    <span class="actions__item zmdi zmdi-refresh-alt" onclick="refresh()" title="刷新" />
-                    <div class="dropdown actions__item">
-                        <i data-toggle="dropdown" class="zmdi zmdi-download">
-		            </i>
-                        <ul class="dropdown-menu dropdown-menu-right">
-                            <a href="javascript:void(0)" class="dropdown-item" data-table-action="excel" onclick="exportMenuExcel()">
-		                    Excel (.xlsx)
-		                </a>
-                            <a href="javascript:void(0)" class="dropdown-item" data-table-action="csv" onclick="exportMenuCsv()">
-		                    CSV (.csv)
-		                </a>
-                        </ul>
-                    </div>
-                    <div class="dropdown actions__item" shiro:hasAnyPermissions="menu:add,menu:delete,menu:update">
-                        <i data-toggle="dropdown" class="zmdi zmdi-more-vert"></i>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <a href="javascript:void(0)" class="dropdown-item" data-toggle="modal" data-target="#menu-add" shiro:hasPermission="menu:add">新增</a>
-                            <a href="javascript:void(0)" class="dropdown-item" onclick="updateMenu()" shiro:hasPermission="menu:update">修改</a>
-                            <a href="javascript:void(0)" class="dropdown-item" onclick="deleteMenus()" shiro:hasPermission="menu:delete">删除</a>
-                        </div>
-                    </div>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head data-th-include="common/head"></head>
+<body class="layui-layout-body">
+<div data-th-include="common/common"></div>
+<fieldset class="layui-elem-field layui-field-title"><legend>菜单管理</legend></fieldset>
+<div class="layui-container ajax-content" lay-filter="ajax-content">
+    <form class="layui-form menu-table-form" action="">
+        <div class="layui-form-item">
+            <div class="layui-inline" style="float: right;">
+                <div class="layui-btn-group">
+                    <button title="查询" type="button" class="layui-btn layui-btn-primary layui-btn-sm" onclick="search()"><i class="layui-icon layui-icon-search"></i></button>
+                    <button title="新增" type="button"  class="layui-btn layui-btn-primary layui-btn-sm" shiro:hasPermission="menu:add"><i class="layui-icon"></i></button>
+                    <button title="修改" type="button"  class="layui-btn layui-btn-primary layui-btn-sm" shiro:hasPermission="menu:update"><i class="layui-icon"></i></button>
+                    <button title="导出" type="button"  class="layui-btn layui-btn-primary layui-btn-sm" data-table-action="excel" onclick="exportMenuExcel()"><i class="layui-icon layui-icon-download-circle"></i></button>
+                    <button title="删除" type="button"  class="layui-btn layui-btn-primary layui-btn-sm" shiro:hasPermission="menu:delete"><i class="layui-icon"></i></button>
                 </div>
-                <div id="data-table_filter" class="dataTables_filter">
-                    <form class="menu-table-form">
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-					               	名称：
-					            </span>
-                                    <div class="form-group">
-                                        <input type="text" name="menuName" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-					               	类型：
-					            </span>
-                                    <select class="form-control" name="type">
-                                        <option value="" selected>所有</option>
-                                        <option value="0">菜单</option>
-                                        <option value="1">按钮</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <table id="menuTable" data-mobile-responsive="true" class="mb-bootstrap-table text-nowrap"></table>
             </div>
         </div>
+    </form>
+    <div class="layui-row">
+        <fieldset class="layui-elem-field" style="min-height: 400px">
+            <legend>菜单管理</legend>
+            <div class="layui-col-md3 layui-col-xs12" style="min-height: 400px">
+                <ul id="menuTree" class="layui-box layui-tree"></ul>
+            </div>
+            <div class="site-tips layui-col-md9 layui-col-xs12" style="min-height: 400px">
+                <table class="layui-table" lay-size="sm">
+                    <colgroup><col width="150"><col width="200"><col width="150"><col width="200"></colgroup>
+                    <tbody>
+                    <tr><th>菜单ID</th><td>{{ menu.menuId }}</td><th>菜单名称</th><td>{{ menu.menuName }}</td></tr>
+                    <tr><th>上级菜单</th><td>{{ menu.name }}</td><th>权限描述</th><td>{{ menu.perms }}</td></tr>
+                    <tr><th>菜单类型</th><td>{{ menu.type }}</td><th>菜单图标</th><td>{{ menu.icon }}</td></tr>
+                    <tr><th>菜单地址</th><td>{{ menu.url }}</td><th></th><td></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </fieldset>
     </div>
+    <script data-th-inline="javascript">var ctx = [[@{/}]];</script>
+    <script data-th-src="@{/js/app/system/menu/menu.js}"></script>
 </div>
-<script data-th-src="@{js/app/system/menu/menu.js}"></script>
-<script data-th-src="@{js/app/system/menu/menuEdit.js}"></script>
+</body>
+</html>

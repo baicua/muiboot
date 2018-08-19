@@ -3,6 +3,7 @@ package com.baicua.shiro.system.controller;
 import java.util.List;
 
 import com.baicua.shiro.common.domain.ResponseBo;
+import com.baicua.shiro.common.layer.LayerTree;
 import com.baicua.shiro.common.util.FileUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.baicua.shiro.common.annotation.Log;
 import com.baicua.shiro.common.controller.BaseController;
-import com.baicua.shiro.common.domain.Tree;
 import com.baicua.shiro.system.domain.Menu;
 import com.baicua.shiro.system.service.MenuService;
 
@@ -22,13 +22,7 @@ public class MenuController extends BaseController {
 	@Autowired
 	private MenuService menuService;
 
-	@RequestMapping("menu")
-	@RequiresPermissions("menu:list")
-	public String index() {
-		return "system/menu/menu";
-	}
-
-	@RequestMapping("menu/menu")
+/*	@RequestMapping("menu/menu")
 	@ResponseBody
 	public ResponseBo getMenu(String userName) {
 		try {
@@ -38,7 +32,7 @@ public class MenuController extends BaseController {
 			e.printStackTrace();
 			return ResponseBo.error("获取菜单失败！");
 		}
-	}
+	}*/
 
 	@RequestMapping("menu/getMenu")
 	@ResponseBody
@@ -52,23 +46,23 @@ public class MenuController extends BaseController {
 		}
 	}
 	
-	@RequestMapping("menu/menuButtonTree")
+/*	@RequestMapping("menu/menuButtonTree")
 	@ResponseBody
 	public ResponseBo getMenuButtonTree() {
 		try {
-			Tree<Menu> tree = this.menuService.getMenuButtonTree();
+			LayerTree<Menu> tree = this.menuService.getMenuButtonTree();
 			return ResponseBo.ok(tree);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return ResponseBo.error("获取菜单列表失败！");
 		}
-	}
+	}*/
 	
 	@RequestMapping("menu/tree")
 	@ResponseBody
 	public ResponseBo getMenuTree() {
 		try {
-			Tree<Menu> tree = this.menuService.getMenuTree();
+			LayerTree<Menu> tree = this.menuService.getMenuTree();
 			return ResponseBo.ok(tree);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -80,7 +74,7 @@ public class MenuController extends BaseController {
 	@ResponseBody
 	public ResponseBo getUserMenu(String userName) {
 		try {
-			Tree<Menu> tree = this.menuService.getUserMenu(userName);
+			LayerTree<Menu> tree = this.menuService.getUserMenu(userName);
 			return ResponseBo.ok(tree);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -88,7 +82,7 @@ public class MenuController extends BaseController {
 		}
 	}
 
-	@RequestMapping("menu/list")
+/*	@RequestMapping("menu/list")
 	@ResponseBody
 	public List<Menu> menuList(Menu menu) {
 		try {
@@ -97,7 +91,7 @@ public class MenuController extends BaseController {
 			e.printStackTrace();
 			return null;
 		}
-	}
+	}*/
 
 	@RequestMapping("menu/excel")
 	@ResponseBody

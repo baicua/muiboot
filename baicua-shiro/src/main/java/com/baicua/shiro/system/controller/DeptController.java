@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.baicua.shiro.common.annotation.Log;
 import com.baicua.shiro.common.domain.ResponseBo;
+import com.baicua.shiro.common.layer.LayerTree;
 import com.baicua.shiro.common.util.FileUtils;
 import com.baicua.shiro.system.service.DeptService;
 import org.apache.commons.lang.StringUtils;
@@ -13,7 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.baicua.shiro.common.domain.Tree;
 import com.baicua.shiro.system.domain.Dept;
 
 @Controller
@@ -32,7 +32,7 @@ public class DeptController {
 	@ResponseBody
 	public ResponseBo getDeptTree() {
 		try {
-			Tree<Dept> tree = this.deptService.getDeptTree();
+			LayerTree<Dept> tree = this.deptService.getDeptTree();
 			return ResponseBo.ok(tree);
 		} catch (Exception e) {
 			e.printStackTrace();

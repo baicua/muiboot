@@ -21,7 +21,7 @@ $(function() {
             field: 'createTime',
             title: '创建时间'
         }]
-    }
+    };
     $MB.initTable('roleTable', settings);
 });
 

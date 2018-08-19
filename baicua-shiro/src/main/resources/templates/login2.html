@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>muiboot权限管理系统</title>
+    <link rel="shortcut icon" type="image/png" th:href="@{/img/favicon.ico}" />
+    <link rel="stylesheet" th:href="@{css/materialize/materialize.min.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{css/muiboot-icon/muiboot.css}" type="text/css">
+    <script th:src="@{js/jquery.min.js}"></script>
+    <style type="text/css">
+        html,
+        body {
+            height: 100%;
+        }
+        html {
+            display: table;
+            margin: auto;
+        }
+        body {
+            display: table-cell;
+            vertical-align: middle;
+            min-width: 400px;
+        }
+        .margin {
+            margin: 0 !important;
+        }
+    </style>
+</head>
+<body>
+<div id="login-page" class="row margin">
+    <div class="col s12 z-depth-6 card-panel">
+        <form class="login-form col s12">
+            <div class="row">
+                <div class="input-field col s12 center">
+                    <img data-th-src="@{img/logo/logo.png}" alt="" class="responsive-img valign profile-image-login">
+                    <p class="center login-form-text">muiboot权限管理系统</p>
+                </div>
+            </div>
+            <div class="row margin">
+                <div class="input-field col s12">
+                    <i class="icon-login-user prefix"></i>
+                    <input class="validate"  id="username"  placeholder="请输入用户名"  name="username" type="text">
+                    <label for="username" data-error="请输入用户名" >用户名</label>
+                </div>
+            </div>
+            <div class="row margin">
+                <div class="input-field col s12">
+                    <i class="icon-password prefix"></i>
+                    <input class="validate" id="password" placeholder="请输入密码"  type="password" name="password">
+                    <label for="password" data-error="请输入密码" >密码</label>
+                </div>
+            </div>
+            <div class="row margin">
+                <div class="input-field col s12 m12 l12  login-text">
+                    <input class="validate" type="checkbox" id="remember-me" name="rememberme">
+                    <label for="remember-me">记住我</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <a href="javascript:;" id="loginButton" onclick="login()" class="btn waves-effect waves-light col s12">
+                        登     录
+                    </a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6 m6 l6">
+                    <p class="margin medium-small"><a href="#">现在注册!</a></p>
+                </div>
+                <div class="input-field col s6 m6 l6">
+                    <p class="margin right-align medium-small"><a href="#">忘记密码?</a></p>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div data-th-include="common/footer"></div>
+</body>
+
+<script th:inline="javascript">
+	var ctx = [[@{/}]];
+</script>
+<script data-th-src="@{js/materialize/materialize.min.js}"></script>
+<script data-th-src="@{js/app/login.js}"></script>
+</html>

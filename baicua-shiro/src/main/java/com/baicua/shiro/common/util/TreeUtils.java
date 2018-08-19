@@ -1,26 +1,24 @@
 package com.baicua.shiro.common.util;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import com.baicua.shiro.common.domain.Tree;
+import com.baicua.shiro.common.layer.LayerTree;
 
 public class TreeUtils {
 	
-	public static <T> Tree<T> build(List<Tree<T>> nodes) {
+	public static <T> LayerTree<T> build(List<LayerTree<T>> nodes) {
 		if (nodes == null) {
 			return null;
 		}
-		List<Tree<T>> topNodes = new ArrayList<>();
-		for (Tree<T> children : nodes) {
+		List<LayerTree<T>> topNodes = new ArrayList<>();
+		for (LayerTree<T> children : nodes) {
 			String pid = children.getParentId();
 			if (pid == null || "0".equals(pid)) {
 				topNodes.add(children);
 				continue;
 			}
-			for (Tree<T> parent : nodes) {
+			for (LayerTree<T> parent : nodes) {
 				String id = parent.getId();
 				if (id != null && id.equals(pid)) {
 					parent.getChildren().add(children);
@@ -32,32 +30,29 @@ public class TreeUtils {
 
 		}
 
-		Tree<T> root = new Tree<>();
+		LayerTree<T> root = new LayerTree<>();
 		root.setId("0");
 		root.setParentId("");
 		root.setHasParent(false);
 		root.setChildren(true);
 		root.setChecked(true);
 		root.setChildren(topNodes);
-		root.setText("根节点");
-		Map<String, Object> state = new HashMap<>(16);
-		state.put("opened", true);
-		root.setState(state);
+		root.setName("根节点");
 		return root;
 	}
 
-	public static <T> List<Tree<T>> buildList(List<Tree<T>> nodes, String idParam) {
+	public static <T> List<LayerTree<T>> buildList(List<LayerTree<T>> nodes, String idParam) {
 		if (nodes == null) {
 			return null;
 		}
-		List<Tree<T>> topNodes = new ArrayList<>();
-		for (Tree<T> children : nodes) {
+		List<LayerTree<T>> topNodes = new ArrayList<>();
+		for (LayerTree<T> children : nodes) {
 			String pid = children.getParentId();
 			if (pid == null || idParam.equals(pid)) {
 				topNodes.add(children);
 				continue;
 			}
-			for (Tree<T> parent : nodes) {
+			for (LayerTree<T> parent : nodes) {
 				String id = parent.getId();
 				if (id != null && id.equals(pid)) {
 					parent.getChildren().add(children);

@@ -231,6 +231,10 @@ var $MB = (function() {
         $('#' + id).data('jstree', false).empty();
         fn;
     }
+    // 重新加载数据，重绘TreeTable
+    function _refreshTreeTable(id) {
+        $('#' + id).bootstrapTreeTable("refresh");
+    }
     
     /**
      * 日历
@@ -316,7 +320,7 @@ var $MB = (function() {
             data: params.data,
             beforeSend: function () {
                 // 禁用按钮防止重复提交
-                obj.attr({ disabled: "disabled" });
+                obj.attr({disabled: "disabled"});
             },
             success: function (data) {
                 callback(data);
@@ -329,67 +333,235 @@ var $MB = (function() {
             }
         });
     }
-
+    function _layerPost(settings,callback) {
+        var params = $.extend({}, ajax_default, settings);
+        $.ajax({
+            type: 'POST',
+            url: params.url,
+            data: params.data,
+            async:params.async,
+            cache:params.cache,
+            beforeSend: function () {
+            },
+            success: function (data) {
+                callback(data);
+            },
+            complete: function () {
+            },
+            error: function (data) {
+                console.info("error: " + data.responseText);
+                layer.alert('请求失败！', {icon: 0});
+            }
+        });
+    }
+    function _layerGet(settings,callback) {
+        var params = $.extend({}, ajax_default, settings);
+        $.ajax({
+            type: 'GET',
+            url: params.url,
+            data: params.data,
+            async:params.async,
+            cache:params.cache,
+            beforeSend: function () {
+            },
+            success: function (data) {
+                callback(data);
+            },
+            complete: function () {
+            },
+            error: function (data) {
+                console.info("error: " + data.responseText);
+                layer.alert('请求失败！', {icon: 0});
+            }
+        });
+    }
 
     return {
         initTable: function(id, setting) {
-            _initTable(id, setting);
+            try {
+                _initTable(id, setting);
+            }catch (e) {
+                console.error("error:"+e.message);
+                return false;
+            }
         },
         initTreeTable: function(id, setting) {
-            _initTreeTable(id, setting);
+            try {
+                _initTreeTable(id, setting);
+            }catch (e) {
+                console.error("error:"+e.message);
+                return false;
+            }
         },
         getTableIndex: function(id, index) {
-            var pageSize = $('#' + id).bootstrapTable('getOptions').pageSize;
-            var pageNumber = $('#' + id).bootstrapTable('getOptions').pageNumber;
-            return pageSize * (pageNumber - 1) + index + 1;
+            try {
+                var pageSize = $('#' + id).bootstrapTable('getOptions').pageSize;
+                var pageNumber = $('#' + id).bootstrapTable('getOptions').pageNumber;
+                return pageSize * (pageNumber - 1) + index + 1;
+            }catch (e) {
+                console.error("error:"+e.message);
+                return false;
+            }
         },
         getRowData: function(id, uniqueId) {
-            return $('#' + id).bootstrapTable('getRowByUniqueId', uniqueId);
+            try {
+                return $('#' + id).bootstrapTable('getRowByUniqueId', uniqueId);
+            }catch (e) {
+                console.error("error:"+e.message);
+                return false;
+            }
         },
         refreshTable: function(id) {
-            $('#' + id).bootstrapTable('refresh');
+            try {
+                $('#' + id).bootstrapTable('refresh');
+            }catch (e) {
+                console.error("error:"+e.message);
+                return false;
+            }
         },
         n_default: function(message) {
-            _notify(message, "inverse");
+            try {
+                return _notify(message, "inverse");
+            }catch (e) {
+                console.error("error:"+e.message);
+                return false;
+            }
         },
         n_info: function(message) {
-            _notify(message, "info");
+            try {
+                return _notify(message, "info");
+            }catch (e) {
+                console.error("error:"+e.message);
+                return false;
+            }
         },
         n_success: function(message) {
-            _notify(message, "success");
+            try {
+                return _notify(message, "success");
+            }catch (e) {
+                console.error("error:"+e.message);
+                return false;
+            }
         },
         n_warning: function(message) {
-            _notify(message, "warning");
+            try {
+                return _notify(message, "warning");
+            }catch (e) {
+                console.error("error:"+e.message);
+                return false;
+            }
         },
         n_danger: function(message) {
-            _notify(message, "danger");
+            try {
+                return _notify(message, "danger");
+            }catch (e) {
+                console.error("error:"+e.message);
+                return false;
+            }
+        },
+        n_loading: function(message) {
+            try {
+                return _notify(message, "loading");
+            }catch (e) {
+                console.error("error:"+e.message);
+                return false;
+            }
         },
         closeModal: function(modalId) {
-            _closeModal(modalId);
+            try {
+                _closeModal(modalId);
+            }catch (e) {
+                console.error("error:"+e.message);
+                return false;
+            }
         },
         closeAndRestModal: function(modalId) {
-            _closeAndRestModal(modalId);
+            try {
+                _closeAndRestModal(modalId);
+            }catch (e) {
+                console.error("error:"+e.message);
+                return false;
+            }
         },
         getThemeColor: function(theme) {
-            return _getThemeColor(theme);
+            try {
+                return _getThemeColor(theme);
+            }catch (e) {
+                console.error("error:"+e.message);
+                return false;
+            }
         },
         getThemeRGBA: function(theme,opacity){
-        	return _getThemeRGBA(theme,opacity);
+            try {
+                return _getThemeRGBA(theme,opacity);
+            }catch (e) {
+                console.error("error:"+e.message);
+                return false;
+            }
         },
         confirm: function(settings, callback) {
-            _confirm(settings, callback);
+            try {
+                _confirm(settings, callback);
+            }catch (e) {
+                console.error("error:"+e.message);
+                return false;
+            }
         },
         resetJsTree: function(id) {
-            _resetJsTree(id);
+            try {
+                _resetJsTree(id);
+            }catch (e) {
+                console.error("error:"+e.message);
+                return false;
+            }
         },
         refreshJsTree: function(id, fn) {
-            _refreshJsTree(id, fn);
+            try {
+                _refreshJsTree(id, fn);
+            }catch (e) {
+                console.error("error:"+e.message);
+                return false;
+            }
+        },
+        refreshTreeTable: function(id) {
+            try {
+                _refreshTreeTable(id);
+            }catch (e) {
+                console.error("error:"+e.message);
+                return false;
+            }
         },
         calenders: function(eles,dobubble,secondNot){
-            _calenders(eles,dobubble,secondNot);
+            try {
+                _calenders(eles,dobubble,secondNot);
+            }catch (e) {
+                console.error("error:"+e.message);
+                return false;
+            }
         },
         ajaxPost: function(obj,settings,callback){
-            _ajaxPost(obj,settings,callback)
+            try {
+                _ajaxPost(obj,settings,callback)
+            }catch (e) {
+                console.error("error:"+e.message);
+                return false;
+            }
+        },
+        layerPost: function(settings,callback){
+            try {
+                _layerPost(settings,callback)
+            }catch (e) {
+                console.error("error:"+e.message);
+                return false;
+            }
+        },
+        layerGet: function(settings,callback){
+            try {
+                _layerGet(settings,callback)
+            }catch (e) {
+                console.error("error:"+e.message);
+                return false;
+            }
         }
     }
-})($);
+})(jQuery);

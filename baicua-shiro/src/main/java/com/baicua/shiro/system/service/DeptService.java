@@ -2,13 +2,13 @@ package com.baicua.shiro.system.service;
 
 import java.util.List;
 
-import com.baicua.shiro.common.domain.Tree;
+import com.baicua.shiro.common.layer.LayerTree;
 import com.baicua.shiro.common.service.IService;
 import com.baicua.shiro.system.domain.Dept;
 
 public interface DeptService extends IService<Dept> {
 
-	Tree<Dept> getDeptTree();
+	LayerTree<Dept> getDeptTree();
 
 	List<Dept> findAllDepts(Dept dept);
 

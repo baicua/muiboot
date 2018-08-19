@@ -2,7 +2,7 @@ package com.baicua.shiro.system.service;
 
 import java.util.List;
 
-import com.baicua.shiro.common.domain.Tree;
+import com.baicua.shiro.common.layer.LayerTree;
 import com.baicua.shiro.common.service.IService;
 import com.baicua.shiro.system.domain.Menu;
 
@@ -14,11 +14,11 @@ public interface MenuService extends IService<Menu> {
 
 	List<Menu> findAllMenus(Menu menu);
 
-	Tree<Menu> getMenuButtonTree();
+	LayerTree<Menu> getMenuButtonTree();
 	
-	Tree<Menu> getMenuTree();
+	LayerTree<Menu> getMenuTree();
 	
-	Tree<Menu> getUserMenu(String userName);
+	LayerTree<Menu> getUserMenu(String userName);
 	
 	Menu findById(Long menuId);
 
