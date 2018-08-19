@@ -130,24 +130,32 @@
         $("body").on("click","a[menu-id]",function () {
 			var $this = $(this);
 			var id =$this.attr("menu-id");
-			var url =$this.attr("menu-url");
             var $thisa=$("#navigation").find("a[menu-id='"+id+"']");
-			if(!!id){
-                var text_arr = new Array();
+            var url =$thisa.attr("menu-url");
+            if(!!id){
+                var breadcrumbMenu=new Object();
+                breadcrumbMenu.id=  new Array();
+                breadcrumbMenu.name=  new Array();
                 $thisa.parents("dl").prev().each(function() {
-                    text_arr.unshift($(this).text());
+                    breadcrumbMenu.id.unshift($(this).attr("menu-id"));
+                    breadcrumbMenu.name.unshift($(this).text());
                 });
                 var breadcrumnHtml = "";
                 breadcrumnHtml += '<a href=""><i class="layui-icon layui-icon-home" style="font-size: 14px;color: #000;"></i> 首页</a>';
-                for (var i = 0; i < text_arr.length; i++) {
+                for (var i = 0; i < breadcrumbMenu.name.length; i++) {
                     breadcrumnHtml += '<span lay-separator="">/</span>';
-                    breadcrumnHtml += '<a href="">'+text_arr[i]+'</a>';
+                    breadcrumnHtml += '<a href="javascript:;" menu-id="'+breadcrumbMenu.id[i]+'" >'+breadcrumbMenu.name[i]+'</a>';
                 }
                 breadcrumnHtml += '<span lay-separator="">/</span>';
-                breadcrumnHtml+= '<a href=""><cite>'+$thisa.text()+'</cite></a>';
+                breadcrumnHtml+= '<a href="javascript:;" menu-id="'+id+'" menu-url="'+(!url?"":url)+'"><cite>'+$thisa.text()+'</cite></a>';
                 $breadcrumb.html("").append(breadcrumnHtml);
 			}
 			if(!!url){
+                var $parent=$thisa.parents("li");
+			    if(!$parent.hasClass("layui-nav-itemed")){
+                    $parent.addClass("layui-nav-itemed");
+                    $thisa.parents("dd").addClass("layui-nav-itemed layui-this");
+                }
                 loadMain(url);
 			}
         });
