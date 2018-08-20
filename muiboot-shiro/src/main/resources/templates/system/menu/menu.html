@@ -9,11 +9,10 @@
         <div class="layui-form-item">
             <div class="layui-inline" style="float: right;margin-bottom: 0px;margin-right: 4px;">
                 <div class="layui-btn-group">
-                    <button title="查询" type="button" class="layui-btn layui-btn-primary layui-btn-sm" onclick="search()"><i class="layui-icon layui-icon-search"></i></button>
-                    <button title="新增" type="button"  class="layui-btn layui-btn-primary layui-btn-sm" shiro:hasPermission="menu:add"><i class="layui-icon"></i></button>
-                    <button title="修改" type="button"  class="layui-btn layui-btn-primary layui-btn-sm" shiro:hasPermission="menu:update"><i class="layui-icon"></i></button>
-                    <button title="导出" type="button"  class="layui-btn layui-btn-primary layui-btn-sm" data-table-action="excel" onclick="exportMenuExcel()"><i class="layui-icon layui-icon-download-circle"></i></button>
-                    <button title="删除" type="button"  class="layui-btn layui-btn-primary layui-btn-sm" shiro:hasPermission="menu:delete"><i class="layui-icon"></i></button>
+                    <button title="新增" type="button" id="addBtn"  class="layui-btn layui-btn-primary layui-btn-sm" shiro:hasPermission="menu:add"><i class="layui-icon"></i></button>
+                    <button title="修改" type="button" id="updBtn" class="layui-btn layui-btn-primary layui-btn-sm" shiro:hasPermission="menu:update"><i class="layui-icon"></i></button>
+                    <button title="导出" type="button" id="expBtn" class="layui-btn layui-btn-primary layui-btn-sm" data-table-action="excel" onclick="exportMenuExcel()"><i class="layui-icon layui-icon-download-circle"></i></button>
+                    <button title="删除" type="button" id="delBtn" class="layui-btn layui-btn-primary layui-btn-sm" shiro:hasPermission="menu:delete"><i class="layui-icon"></i></button>
                 </div>
             </div>
         </div>
