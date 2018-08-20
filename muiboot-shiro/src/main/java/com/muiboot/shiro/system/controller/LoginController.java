@@ -89,23 +89,11 @@ public class LoginController extends BaseController {
         return "403";
     }
 
-    @Log("访问系统")
     @RequestMapping("/index")
     public String index(Model model) {
         // 登录成后，即可通过 Subject 获取登录的用户信息
         User user = super.getCurrentUser();
         model.addAttribute("user", user);
         return "index";
-    }
-
-    @GetMapping("home")
-    public String home(Model model) {
-        User user = super.getCurrentUser();
-        Subject subject = getSubject();
-        if (subject.hasRole(BUSINESS_ROLE)){
-            return "redirect:/home/"+BUSINESS_ROLE.toLowerCase();
-        }else {
-            return "redirect:/home/"+ADMIN_ROLE.toLowerCase();
-        }
     }
 }
