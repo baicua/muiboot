@@ -1,5 +1,5 @@
 <div id="layui-table-menu">
-    <table class="layui-table" lay-size="sm">
+    <table class="layui-table layui-anim layui-anim-up" lay-size="sm" data-name-menu="{{ d.menuId }}">
         <colgroup><col width="150"><col width="200"><col width="150"><col width="200"></colgroup>
         <tbody>
         <tr><th>菜单ID</th><td>{{ d.menuId }}</td><th>菜单名称</th><td>{{ d.menuName }}</td></tr>
@@ -10,14 +10,14 @@
     </table>
 </div>
 <div id="layui-breadcrumb-permission">
-    <span class="layui-breadcrumb" lay-separator="|">
+    <span class="layui-breadcrumb layui-anim layui-anim-up" lay-separator="|">
         {{#  layui.each(d, function(index, item){ }}
         <a href="javascript:;" permissionId="{{ item.menuId }}">{{ item.menuName }}</a>
         {{#  }); }}
     </span>
 </div>
 <div id="layui-breadcrumb-role">
- <span class="layui-breadcrumb" lay-separator="|">
+ <span class="layui-breadcrumb layui-anim layui-anim-up" lay-separator="|">
     {{#  layui.each(d, function(index, item){ }}
     <a href="javascript:;" roleId="{{ item.roleId }}">{{ item.remark}}</a>
     {{#  }); }}

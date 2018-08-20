@@ -7,7 +7,7 @@
 <div class="layui-container ajax-content" lay-filter="ajax-content">
     <form class="layui-form menu-table-form" action="">
         <div class="layui-form-item">
-            <div class="layui-inline" style="float: right;">
+            <div class="layui-inline" style="float: right;margin-bottom: 0px;margin-right: 4px;">
                 <div class="layui-btn-group">
                     <button title="查询" type="button" class="layui-btn layui-btn-primary layui-btn-sm" onclick="search()"><i class="layui-icon layui-icon-search"></i></button>
                     <button title="新增" type="button"  class="layui-btn layui-btn-primary layui-btn-sm" shiro:hasPermission="menu:add"><i class="layui-icon"></i></button>
@@ -24,7 +24,7 @@
             <div class="layui-col-md3 layui-col-xs12" style="min-height: 400px">
                 <ul id="menuTree" class="layui-box layui-tree"></ul>
             </div>
-            <div class="site-tips layui-col-md9 layui-col-xs12" style="min-height: 400px;padding: 10px;">
+            <div class="site-tips layui-col-md9 layui-col-xs12 layui-anim layui-anim-up" style="min-height: 400px;padding: 10px;">
                 <div class="layui-row layui-col-space15">
                     <div class="layui-row layui-col-xs12">
                         <div class="layui-card">
