@@ -55,7 +55,7 @@ jQuery(document).ready(function () {
         $contentArea.ajaxload =function(url,isLoad){
             $.ajax({
                 url: root_url + url,
-                cache: false,
+                cache: true,
                 beforeSend:function (r) {
                     layer.load(2,{shade: [0.5,'#fff']});
                 },

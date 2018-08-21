@@ -12,7 +12,7 @@
     <result column="PERMS" jdbcType="VARCHAR" property="perms" />
     <result column="ICON" jdbcType="VARCHAR" property="icon" />
     <result column="TYPE" jdbcType="CHAR" property="type" />
-    <result column="ORDER_NUM" jdbcType="DECIMAL" property="orderNum" />
+    <result column="ORDER_NUM" jdbcType="VARCHAR" property="orderNum" />
     <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
     <result column="MODIFY_TIME" jdbcType="TIMESTAMP" property="modifyTime" />
   </resultMap>

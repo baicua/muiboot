@@ -49,7 +49,7 @@ public class Menu implements Serializable {
 	private String type;
 
 	@Column(name = "ORDER_NUM")
-	private Long orderNum;
+	private String orderNum;
 
 	@Column(name = "CREATE_TIME")
 	@ExportConfig(value = "创建时间", convert = "c:com.muiboot.shiro.common.util.poi.convert.TimeConvert")
@@ -159,14 +159,14 @@ public class Menu implements Serializable {
 	/**
 	 * @return ORDER_NUM
 	 */
-	public Long getOrderNum() {
+	public String getOrderNum() {
 		return orderNum;
 	}
 
 	/**
 	 * @param orderNum
 	 */
-	public void setOrderNum(Long orderNum) {
+	public void setOrderNum(String orderNum) {
 		this.orderNum = orderNum;
 	}
 
