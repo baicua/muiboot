@@ -33,7 +33,7 @@
 		left join T_ROLE r on(rm.ROLE_ID = r.ROLE_ID)
         left join T_USER_ROLE ur on(ur.ROLE_ID = r.ROLE_ID)
         left join T_USER u on (u.USER_ID = ur.USER_ID)
-        where u.USERNAME = #{userName}) order by m.CREATE_TIME
+        where u.USERNAME = #{userName}) order by m.ORDER_NUM
   </select>
   
    <update id="changeToTop" parameterType="java.util.List">

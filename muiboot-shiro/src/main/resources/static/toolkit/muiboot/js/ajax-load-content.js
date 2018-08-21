@@ -1,16 +1,33 @@
-jQuery(document).ready(function () {
-    window.addEventListener('popstate', function(event) {
-        alert(event);
-    });
-    //
-    //window.history.pushState('forward', null, '');  //在IE中必须得有这两行
-    //window.history.forward(1);
-});//禁用浏览器前进后退
 (function($) {
     "use strict";
     var ajax_loaded_page = {urls:{}};//ajax加载的页面
     var root_url = document.location.pathname.substring(0, document.location.pathname.substr(1).indexOf('/') + 1);
     var $contentArea;
+    var cache={
+        sessionCache:{},
+         useCache: function(url,millisecond){
+                if(this.sessionCache[url])return true;
+                this.sessionCache[url]=true;
+                if(!window.localStorage)return false;
+                var storage=window.localStorage;
+                var data=$.extend({},JSON.parse(storage.getItem("menuCache")));
+                var oldmillisecond=data[url];
+                if(!oldmillisecond){
+                    data[url]=millisecond;
+                    storage.setItem("menuCache",JSON.stringify(data));
+                    return false;
+                }
+                //计算出相差天数
+                var days=Math.floor((millisecond-oldmillisecond)/(24*3600*1000));
+                if(days<=7){
+                    return true;
+                }else {
+                    data[url]=millisecond;
+                    storage.setItem("menuCache",JSON.stringify(data));
+                    return false;
+                }
+            }
+    }
     $.fn.ajax_load = function(options, param) {
         // 如果是调用方法
         if (typeof options == 'string') {
@@ -53,9 +70,11 @@ jQuery(document).ready(function () {
             $contentArea.ajaxload(ajax_loaded_page.$thisUrl,false);
         },
         $contentArea.ajaxload =function(url,isLoad){
+            //判断是否使用缓存
+            var useCache=cache.useCache(url,new Date().getTime());
             $.ajax({
                 url: root_url + url,
-                cache: true,
+                cache: useCache,
                 beforeSend:function (r) {
                     layer.load(2,{shade: [0.5,'#fff']});
                 },

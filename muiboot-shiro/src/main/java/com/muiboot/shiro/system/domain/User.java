@@ -40,9 +40,15 @@ public class User implements Serializable {
 	@Column(name = "USER_ID")
 	private Long userId;
 
+	/*登录名*/
 	@Column(name = "USERNAME")
-	@ExportConfig(value = "用户名")
+	@ExportConfig(value = "登录名")
 	private String username;
+
+	/*真实姓名*/
+	@Column(name = "REAL_NAME")
+	@ExportConfig(value = "用户名")
+	private String realName;
 
 	@Column(name = "PASSWORD")
 	private String password;
@@ -118,6 +124,14 @@ public class User implements Serializable {
 	 */
 	public void setUsername(String username) {
 		this.username = username == null ? null : username.trim();
+	}
+
+	public String getRealName() {
+		return realName;
+	}
+
+	public void setRealName(String realName) {
+		this.realName = realName;
 	}
 
 	/**

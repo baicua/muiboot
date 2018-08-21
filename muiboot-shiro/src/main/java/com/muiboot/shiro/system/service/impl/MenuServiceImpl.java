@@ -88,7 +88,7 @@ public class MenuServiceImpl extends BaseService<Menu> implements MenuService {
 		List<LayerTree<Menu>> trees = new ArrayList<>();
 		Example example = new Example(Menu.class);
 		example.createCriteria().andCondition("type =", 0);
-		example.setOrderByClause("create_time");
+		example.orderBy("orderNum");
 		List<Menu> menus = this.selectByExample(example);
 		buildTrees(trees, menus);
 		return TreeUtils.build(trees);

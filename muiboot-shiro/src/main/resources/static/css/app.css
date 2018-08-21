@@ -65,3 +65,8 @@ html {
 .layui-form-item{
   margin-bottom: 0px;
 }
+.layui-form-label[lable-verify="required"]:after{
+  color: red;
+  content: "*";
+  margin-right: -5px;
+}

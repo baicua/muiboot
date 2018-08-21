@@ -7,6 +7,7 @@
     -->
     <id column="USER_ID" jdbcType="DECIMAL" property="userId" />
     <result column="USERNAME" jdbcType="VARCHAR" property="username" />
+	<result column="REAL_NAME" jdbcType="VARCHAR" property="realName" />
     <result column="PASSWORD" jdbcType="VARCHAR" property="password" />
     <result column="DEPT_ID" jdbcType="DECIMAL" property="deptId" />
     <result column="EMAIL" jdbcType="VARCHAR" property="email" />

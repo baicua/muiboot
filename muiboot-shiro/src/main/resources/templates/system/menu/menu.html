@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<html xmlns:th="http://www.thymeleaf.org">
 <head data-th-include="common/head"></head>
 <body class="layui-layout-body">
 <div data-th-include="common/common"></div>
@@ -52,7 +52,7 @@
             </div>
         </fieldset>
     </div>
-    <script data-th-inline="javascript">var ctx = [[@{/}]];</script>
+
     <script data-th-src="@{/js/app/system/menu/menu.js}"></script>
 </div>
 </body>

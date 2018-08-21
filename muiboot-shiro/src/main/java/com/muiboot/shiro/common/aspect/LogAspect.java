@@ -2,12 +2,15 @@ package com.muiboot.shiro.common.aspect;
 
 import java.lang.reflect.Method;
 import java.util.Date;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
 
 import javax.servlet.http.HttpServletRequest;
 
 import com.muiboot.shiro.common.annotation.Log;
 import com.muiboot.shiro.common.util.HttpContextUtils;
 import com.muiboot.shiro.common.util.IPUtils;
+import com.muiboot.shiro.common.util.exec.ExecutorsUtil;
 import com.muiboot.shiro.system.domain.SysLog;
 import com.muiboot.shiro.system.domain.User;
 import com.muiboot.shiro.system.service.LogService;
@@ -18,6 +21,8 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.LocalVariableTableParameterNameDiscoverer;
 import org.springframework.stereotype.Component;
@@ -41,6 +46,11 @@ public class LogAspect {
 	@Autowired
 	ObjectMapper mapper;
 
+	ExecutorService exeService= ExecutorsUtil.getInstance().getMultilThreadExecutor();
+
+	protected  final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+
 	@Pointcut("@annotation(com.muiboot.shiro.common.annotation.Log)")
 	public void pointcut() {
 	}
@@ -58,11 +68,23 @@ public class LogAspect {
 		// 执行时长(毫秒)
 		long time = System.currentTimeMillis() - beginTime;
 		// 保持日志
-		saveLog(point, time);
+		// 获取request
+		HttpServletRequest request = HttpContextUtils.getHttpServletRequest();
+		exeService.execute(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					saveLog(point, time,request);
+				} catch (JsonProcessingException e) {
+					logger.error("日志保存失败："+e.getMessage());
+					e.printStackTrace();
+				}
+			}
+		});
 		return result;
 	}
 
-	private void saveLog(ProceedingJoinPoint joinPoint, long time) throws JsonProcessingException {
+	private void saveLog(ProceedingJoinPoint joinPoint, long time,HttpServletRequest request) throws JsonProcessingException {
 		User user = (User) SecurityUtils.getSubject().getPrincipal();
 		MethodSignature signature = (MethodSignature) joinPoint.getSignature();
 		Method method = signature.getMethod();
@@ -90,8 +112,6 @@ public class LogAspect {
 			}
 			log.setParams(params.toString());
 		}
-		// 获取request
-		HttpServletRequest request = HttpContextUtils.getHttpServletRequest();
 		// 设置IP地址
 		log.setIp(IPUtils.getIpAddr(request));
 		log.setUsername(user.getUsername());

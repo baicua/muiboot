@@ -12,7 +12,7 @@ import java.util.concurrent.*;
  */
 public class ExecutorsUtil {
     private final static int MAX_MULTIL_POOL_SIZE = 5;
-    private final static int MAX_SCHEDULED_POOL_SIZE = 5;
+    private final static int MAX_SCHEDULED_POOL_SIZE = 10;
     private final static int QUEUE_SIZE=10;
     private   ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();//单线程
     private   ExecutorService multilThreadExecutor = Executors.newFixedThreadPool(MAX_MULTIL_POOL_SIZE);//多线程

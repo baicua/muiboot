@@ -34,7 +34,6 @@ public abstract class BaseService<T> implements IService<T> {
 	}
 
 	@Override
-	@Transactional
 	public int save(T entity) {
 		return mapper.insert(entity);
 	}
