@@ -2,7 +2,8 @@ server:
   port: 8080
   tomcat:
     uri-encoding: utf-8
-
+  session:
+    tracking-modes: cookie
 spring:
   datasource:
     druid:
