@@ -12,6 +12,7 @@
 <div id="layui-breadcrumb-permission">
     <span class="layui-breadcrumb layui-anim layui-anim-up" lay-separator="|">
         {{#  layui.each(d, function(index, item){ }}
+        <i class="layui-icon layui-icon-close-fill" style="cursor:pointer;" function="del"permissionId="{{ item.menuId }}" ></i>
         <a href="javascript:;" permissionId="{{ item.menuId }}">{{ item.menuName }}</a>
         {{#  }); }}
     </span>

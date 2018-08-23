@@ -21,7 +21,16 @@ $(document).ready(function() {
         menuMethod.export();
     });
     $("#delBtn").on("click",function (r) {
-        menuMethod.delete($("#menuInfoPanle table").attr("data-name-menu"));
+        menuMethod.delete($("#menuInfoPanle table").attr("data-name-menu"),"菜单");
+    });
+    $("#menuButtonPanle").on("click","i[function='del']",function (r) {
+        var menuid=$(this).attr("permissionid");
+        if(!menuid){
+            layer.msg('获取按钮信息失败');
+            return;
+        }
+        menuMethod.delete(menuid,"按钮");
+
     });
     $("#menuButtonPanle").on("click","a",function (r) {
         var menuid=$(this).attr("permissionid");
@@ -89,12 +98,12 @@ $(document).ready(function() {
                     layer.msg('请求数据异常：'+e.message);
                 }
             },
-            delete:function(menuId){
+            delete:function(menuId,name){
                 if(!menuId){
-                    layer.msg('请先选择你想删除的菜单！');
+                    layer.msg('请先选择你想删除的'+name+'！');
                     return false;
                 }
-                layer.msg('你确定要删除该菜单吗？', {
+                layer.msg('你确定要删除该'+name+'吗？', {
                     time: 0 //不自动关闭
                     ,btn: ['确定', '取消']
                     ,yes: function(index){
@@ -102,6 +111,7 @@ $(document).ready(function() {
                         $MB.layerPost({url:ctx + "menu/delete",data:{"ids": menuId},cache:false},function (data) {
                             layer.msg(data.msg);
                             menuMethod.resetTree();
+                            menuMethod.refresh($("#menuInfoPanle table").attr("data-name-menu"));
                         });
                     }
                 });
