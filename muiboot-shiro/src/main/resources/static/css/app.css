@@ -70,3 +70,9 @@ html {
   content: "*";
   margin-right: -5px;
 }
+input.layui-form-danger[type=radio] + div.layui-form-radio{
+  color: #FF5722!important
+}
+input.layui-form-danger[type=radio] + div.layui-form-radio>i{
+  color: #FF5722!important
+}
