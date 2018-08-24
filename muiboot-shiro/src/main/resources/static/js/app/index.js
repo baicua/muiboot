@@ -72,27 +72,9 @@
         var bindNav=function () {
             layui.use('element',function () {
                 var element = layui.element;
-//初始化动态元素，一些动态生成的元素如果不设置初始化，将不会有默认的动态效果
+                //初始化动态元素，一些动态生成的元素如果不设置初始化，将不会有默认的动态效果
                 element.init();
-//导航条点击监听
-                element.on('nav(bigData)',function (elem) {
-                    console.log(elem);
-                });
-//tab切换监听
-                element.on('tab(test)',function (data) {
-                    console.log(data);
-                });
-//手风琴折叠面板开启关闭监听
-                element.on('collapse(collapseFilter)',function (data) {
-                });
-//触发的事件
-                var active = {
-                    setPercent: function () {
-//设置50%进度
-                        element.progress('demo', '50%')
-                    }
-                };
-//点击事件的监听
+                //点击事件的监听
                 $('.site-demo-active').on('click', function(){
                     var othis = $(this);
                     var type = $(this).data('type');

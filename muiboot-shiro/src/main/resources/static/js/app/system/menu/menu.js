@@ -18,10 +18,10 @@ $(document).ready(function() {
         menuMethod.update($("#menuInfoPanle table").attr("data-name-menu"));
     });
     $("#expBtn").on("click",function (r) {
-        menuMethod.export();
+        menuMethod.expMenu();
     });
     $("#delBtn").on("click",function (r) {
-        menuMethod.delete($("#menuInfoPanle table").attr("data-name-menu"),"菜单");
+        menuMethod.delMenu($("#menuInfoPanle table").attr("data-name-menu"),"菜单");
     });
     $("#menuButtonPanle").on("click","i[function='del']",function (r) {
         var menuid=$(this).attr("permissionid");
@@ -29,7 +29,7 @@ $(document).ready(function() {
             layer.msg('获取按钮信息失败');
             return;
         }
-        menuMethod.delete(menuid,"按钮");
+        menuMethod.delMenu(menuid,"按钮");
 
     });
     $("#menuButtonPanle").on("click","a",function (r) {
@@ -98,7 +98,7 @@ $(document).ready(function() {
                     layer.msg('请求数据异常：'+e.message);
                 }
             },
-            delete:function(menuId,name){
+            delMenu:function(menuId,name){
                 if(!menuId){
                     layer.msg('请先选择你想删除的'+name+'！');
                     return false;
@@ -116,7 +116,7 @@ $(document).ready(function() {
                     }
                 });
             },
-            export:function(){
+            expMenu:function(){
                 $MB.layerPost({url: ctx+"menu/excel",data:{}}, function (r) {
                     if (r.code == 0) {
                         window.location.href = "common/download?fileName=" + r.msg + "&delete=" + true;
