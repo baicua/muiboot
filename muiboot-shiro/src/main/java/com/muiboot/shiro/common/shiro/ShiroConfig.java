@@ -50,9 +50,8 @@ public class ShiroConfig {
 		filterChainDefinitionMap.put("/fonts/**", "anon");
 		filterChainDefinitionMap.put("/img/**", "anon");
 		filterChainDefinitionMap.put("/druid/**", "anon");
-		filterChainDefinitionMap.put("/user/regist", "anon");
 		filterChainDefinitionMap.put("/gifCode", "anon");
-		filterChainDefinitionMap.put("/loginpage/**", "anon");
+		filterChainDefinitionMap.put("/cache/**", "anon");
 		filterChainDefinitionMap.put("/toolkit/**", "anon");
         filterChainDefinitionMap.put("/error/**", "anon");
 		filterChainDefinitionMap.put("/logout", "logout");
@@ -131,6 +130,9 @@ public class ShiroConfig {
 		listeners.add(new ShiroSessionListener());
 		sessionManager.setSessionListeners(listeners);
 		sessionManager.setSessionDAO(sessionDAO());
+		sessionManager.setSessionIdUrlRewritingEnabled(false);//url中是否显示session Id
+		sessionManager.setDeleteInvalidSessions(true);// 删除失效的session
+
 		return sessionManager;
 	}
 }

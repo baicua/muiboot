@@ -2,15 +2,20 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>MUIBOOT 权限管理系统</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>MUIBOOT 权限管理系统</title>
     <meta name="renderer" content="webkit">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="format-detection" content="telephone=no">
-
+    <meta http-equiv="Cache-control" content="public">
+    <!--[if IE]>
+    <script data-th-src="@{js/jquery1x.js}"></script>
+    <![endif]-->
+    <!--[if !IE]> -->
+    <script data-th-src="@{js/jquery.min.js}"></script>
+    <!-- <![endif]-->
     <link rel="shortcut icon" type="image/png" th:href="@{/img/favicon.ico}" />
     <!-- Vendor styles -->
     <link rel="stylesheet" data-th-href="@{/toolkit/layui/css/layui.css}"  media="all"/>
@@ -28,12 +33,6 @@
 <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
 <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
-<!--[if IE]>
-<script data-th-src="@{js/jquery1x.js}"></script>
-<![endif]-->
-<!--[if !IE]> -->
-<script data-th-src="@{js/jquery.min.js}"></script>
-<!-- <![endif]-->
 <div data-th-replace="common/common"></div>
 <script data-th-src="@{js/app/index.js}"></script>
 <script data-th-src="@{/toolkit/muiboot/js/ajax-load-content.js}"></script>
@@ -51,6 +50,8 @@
         time: 0 //不自动关闭
         ,shade: 0.8
     });
+    $(window).on('resize', function () {
+    }).resize();
 </script>
 <![endif]-->
 <!--<script data-th-src="@{js/app/index.js}"></script>-->

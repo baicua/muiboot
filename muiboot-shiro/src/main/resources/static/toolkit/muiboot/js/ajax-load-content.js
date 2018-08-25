@@ -5,16 +5,16 @@
     var $contentArea;
     var cache={
         sessionCache:{},
-         useCache: function(url,millisecond){
+         useCache: function(cacheName,url,millisecond){
                 if(this.sessionCache[url])return true;
                 this.sessionCache[url]=true;
                 if(!window.localStorage)return false;
                 var storage=window.localStorage;
-                var data=$.extend({},JSON.parse(storage.getItem("menuCache")));
+                var data=$.extend({},JSON.parse(storage.getItem(cacheName)));
                 var oldmillisecond=data[url];
                 if(!oldmillisecond){
                     data[url]=millisecond;
-                    storage.setItem("menuCache",JSON.stringify(data));
+                    storage.setItem(cacheName,JSON.stringify(data));
                     return false;
                 }
                 //计算出相差天数
@@ -23,7 +23,7 @@
                     return true;
                 }else {
                     data[url]=millisecond;
-                    storage.setItem("menuCache",JSON.stringify(data));
+                    storage.setItem(cacheName,JSON.stringify(data));
                     return false;
                 }
             }
@@ -71,7 +71,7 @@
         },
         $contentArea.ajaxload =function(url,isLoad){
             //判断是否使用缓存
-            var useCache=cache.useCache(url,new Date().getTime());
+            var useCache=cache.useCache("menuCache",url,new Date().getTime());
             $.ajax({
                 url: root_url + url,
                 cache: useCache,
@@ -94,8 +94,11 @@
                         }else {
                             $main_content.empty().html($r.html());
                         }
-                        if(!!scripts&&scripts.length>0)
-                            $main_content.append(scripts);
+                        if(!!scripts&&scripts.length>0){
+                            scripts.each(function(index,script){
+                                $MB.getScript(script.src,true);
+                            })
+                        }
                         ajax_loaded_page.push(url,isLoad);
                     }catch (e) {
                         console.error("error:"+e.message+";url:"+url);

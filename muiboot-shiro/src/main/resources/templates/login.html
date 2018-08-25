@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" manifest="/toolkit/muiboot/config/muiboot.appcache">
 <head>
     <title>muiboot权限管理系统</title>
     <!-- 页面基本设置禁止随意更改 -->
@@ -15,12 +15,12 @@
     <meta name="title" content="muiboot权限管理系统-用户登录" />
     <!-- 页面基本设置禁止随意更改 -->
     <!-- 基础CSS类库可随意更改 -->
-    <link rel="stylesheet" type="text/css" th:href="@{/loginpage/css/basic.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/cache/css/basic.css}">
     <!--[if IE 8]>
-    <link rel="stylesheet" type="text/css" th:href="@{/loginpage/css/ie8.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/cache/css/ie8.css}">
     <![endif]-->
     <!--[if gte IE 9]>
-    <link rel="stylesheet" type="text/css"  th:href="@{/loginpage/css/ie.css}">
+    <link rel="stylesheet" type="text/css"  th:href="@{/cache/css/ie.css}">
     <![endif]-->
     <!-- 基础CSS类库可随意更改 -->
     <!-- 基础js类库可随意更改 -->
@@ -32,7 +32,7 @@
     <div class="login-top">
         <div style="height: 60px;background-color: white;">
             <div style=";margin-left: 80px;">
-                <img data-th-src="@{loginpage/images/log_1.png}"/>
+                <img data-th-src="@{cache/images/log_1.png}"/>
             </div>
             <div style="float:right;margin-top: -34px;width: 360px;font-size: 12px;">
                 <span>返回首页</span>
@@ -75,7 +75,7 @@
                 <div class="loginCenter-moudleRight" style="  width: 1067px;">
                     <!--第一个-->
                     <a class="loginCenter-mStyle loginCenter-moudle1" id="moudleRemove" style=" display:block;width: 340px;">
-                        <span class="moudle-img"><img data-th-src="@{loginpage/images/login_bg_01.png}"></span>
+                        <span class="moudle-img"><img data-th-src="@{cache/images/login_bg_01.png}"></span>
                         <span class="moudle-text">
                             <span class="moudle-text1" style="font-family:'微软雅黑'">一体化战略预算</span>
                             <span class="moudle-text2" style="font-family:'微软雅黑'">Integrated strategic budget</span>
@@ -83,7 +83,7 @@
                     </a>
                     <!--第二个-->
                     <a class="loginCenter-mStyle loginCenter-moudle2" style=" display:block; width: 357px;" id="moudleRemove2" >
-                        <span class="moudle-img"><img  data-th-src="@{loginpage/images/login_bg_02.png}"></span>
+                        <span class="moudle-img"><img  data-th-src="@{cache/images/login_bg_02.png}"></span>
                         <span class="moudle-text">
                             <span class="moudle-text1" style="font-family:'微软雅黑'"> 精细化财务核算</span>
                             <span class="moudle-text2" style="font-family:'微软雅黑'">Refined financial accounting</span>
@@ -91,7 +91,7 @@
                     </a>
                     <!--第三个-->
                     <a class="loginCenter-mStyle loginCenter-moudle3" style=" display:block;" id="moudleRemove3" >
-                        <span class="moudle-img"><img data-th-src="@{loginpage/images/login_bg_03.png}"></span>
+                        <span class="moudle-img"><img data-th-src="@{cache/images/login_bg_03.png}"></span>
                         <span class="moudle-text">
                             <span class="moudle-text"> <span class="moudle-text1" style="font-family:'微软雅黑'">独立化自主经营</span>
                                 <span class="moudle-text2" style="font-family:'微软雅黑'">Independent operation</span></span>

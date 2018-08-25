@@ -3,8 +3,11 @@ server:
   tomcat:
     uri-encoding: utf-8
   session:
-    tracking-modes: cookie
+      tracking-modes: cookie
 spring:
+  resources:
+    chain:
+      html-application-cache: true
   datasource:
     druid:
       # 数据库访问配置, 使用druid数据源

@@ -67,6 +67,14 @@ var $MB = (function() {
                 return false;
             }
         },
+        getScript: function(url,useCache){
+            $.ajax({
+                type: 'GET',
+                url: url,
+                dataType: "script",
+                cache: useCache
+            });
+        },
         verify: function (form) {
             form.verify({
                 radio: function(value, item){ //value：表单的值、item：表单的DOM对象

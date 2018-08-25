@@ -7,7 +7,7 @@ $(function(){
 				for(var i=0;i<movie_list.length;i++){
 					movie_list_html += '<div class="col-xl-3 col-lg-3 col-sm-4 col-6">';
 					movie_list_html += '<div class="groups__item">';
-					movie_list_html += '<li class="movie-img aspectration" data-ratio="16:9" style="background-image:url('+movie_list[i].img+');"></li>';
+					movie_list_html += '<li class="movie-img aspectration" data-ratio="16:9" style="background-images:url('+movie_list[i].img+');"></li>';
 					movie_list_html += '<div class="groups__info">';
 					movie_list_html += '<strong>'+movie_list[i].tCn+'</strong>';
 					movie_list_html += '<small>'+movie_list[i].movieType+'</small>';
