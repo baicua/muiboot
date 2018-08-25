@@ -19,8 +19,8 @@ public class ShiroApplication {
 		logger.info("muiboot-SHIRO启动完毕#########################");
 	}
 
-	@Bean
+/*	@Bean
 	public ResourceUrlEncodingFilter resourceUrlEncodingFilter() {
 		return new ResourceUrlEncodingFilter();
-	}
+	}*/
 }

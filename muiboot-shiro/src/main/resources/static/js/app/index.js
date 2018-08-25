@@ -98,7 +98,8 @@
         $.post(ctx + "menu/getUserMenu", { "userName": userName }, function(r) {
             if (r.code == 0) {
                 var data = r.msg;
-                $("#navigation").html(forTree(data.children));
+                $("#navigation").remove("ul");
+                $("#navigation").append(forTree(data.children));
             } else {
                 layer.alert('获取菜单失败！', {icon: 0});
             }

@@ -9,7 +9,7 @@ spring:
     chain:
       html-application-cache: true
       gzipped: true
-      cache: true
+      cache: false
       strategy:
         content:
           enabled: true
