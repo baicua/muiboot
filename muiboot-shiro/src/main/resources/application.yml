@@ -8,6 +8,13 @@ spring:
   resources:
     chain:
       html-application-cache: true
+      gzipped: true
+      cache: true
+      strategy:
+        content:
+          enabled: true
+          paths: /**
+    cache-period: 604800
   datasource:
     druid:
       # 数据库访问配置, 使用druid数据源
@@ -70,6 +77,8 @@ spring:
 
   thymeleaf:
     cache: false
+    prefix: classpath:/templates/
+    suffix: .html
 
   aop:
     proxy-target-class: true
@@ -104,6 +113,3 @@ logging:
   level:
     com:
       muiboot: debug
-#文件上传路径
-file:
-  directory: home/template

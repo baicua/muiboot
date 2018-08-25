@@ -16,10 +16,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 
 public class BaseController {
-	@Value("${file.directory}")
-	protected String dir;
-	protected   final String ADMIN_ROLE="ADMIN_BU";
-	protected   final String BUSINESS_ROLE="BUSINESS";
 	protected  final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	protected Map<String, Object> getDataTable(PageInfo<?> pageInfo) {

@@ -29,18 +29,6 @@ public class MenuController extends BaseController {
 	@Autowired
 	private RoleService roleService;
 
-/*	@RequestMapping("menu/menu")
-	@ResponseBody
-	public ResponseBo getMenu(String userName) {
-		try {
-			List<Menu> menus = this.menuService.findUserMenus(userName);
-			return ResponseBo.ok(menus);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return ResponseBo.error("获取菜单失败！");
-		}
-	}*/
-
 	@RequestMapping("menu/getMenu")
 	@ResponseBody
 	public ResponseBo getMenu(Long menuId) {
