@@ -19,7 +19,6 @@ CACHE MANIFEST
 /cache/images/login_bg_white.png
 /cache/images/login_img.jpg
 
-/css/jquery.scrollbar/jquery.scrollbar.css
 /css/app.css
 /error/error.html
 /img/logo/logo.png
@@ -29,8 +28,6 @@ CACHE MANIFEST
 
 /js/app/index.js
 /js/app/login.js
-/js/jquery.scrollbar/jquery.scrollbar.min.js
-/js/jquery-scrollLock/jquery-scrollLock.min.js
 /js/jquery.min.js
 /js/jquery1x.js
 
