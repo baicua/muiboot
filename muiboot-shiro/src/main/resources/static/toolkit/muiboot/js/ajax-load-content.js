@@ -72,11 +72,12 @@
         $contentArea.ajaxload =function(url,isLoad){
             //判断是否使用缓存
             var useCache=cache.useCache("menuCache",url,new Date().getTime());
+            var layer_load_index=0;
             $.ajax({
                 url: root_url + url,
                 cache: useCache,
                 beforeSend:function (r) {
-                    layer.load(2,{shade: [0.5,'#fff']});
+                    layer_load_index=layer.load(2,{shade: [0.5,'#fff']});
                 },
                 success: function (r) {
                     if (r.indexOf('账户登录') != -1) {
@@ -106,20 +107,28 @@
                     }
                 },
                 error:function(XMLHttpRequest, textStatus, errorThrown){
-                    if(XMLHttpRequest.status==400){
+                    if(XMLHttpRequest.status===303){
+                        layer.msg('当前未登录或登录超时，是否返回重新登录？', {
+                            time: 0 //不自动关闭
+                            ,btn: ['确定', '取消']
+                            ,yes: function(index){
+                                location.reload();
+                            }
+                        });
+                    }else if(XMLHttpRequest.status===400){
                         $main_content.load("/error/error.html");
-                    }else if(XMLHttpRequest.status==404){
+                    }else if(XMLHttpRequest.status===404){
                         $main_content.load("/error/error.html");
-                    }else if(XMLHttpRequest.status==500){
+                    }else if(XMLHttpRequest.status===500){
                         $main_content.load("/error/error.html");
-                    }else if(XMLHttpRequest.status==503){
+                    }else if(XMLHttpRequest.status===503){
                         $main_content.load("/error/error.html");
                     }else {
                         $main_content.load("/error/error.html");
                     }
                 },
                 complete:function (r) {
-                    layer.closeAll();
+                    layer.close(layer_load_index);
                 }
             });
         },

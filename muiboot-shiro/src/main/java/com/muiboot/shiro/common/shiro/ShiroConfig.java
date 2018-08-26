@@ -1,8 +1,6 @@
 package com.muiboot.shiro.common.shiro;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.LinkedHashMap;
+import java.util.*;
 
 import com.muiboot.shiro.common.listener.ShiroSessionListener;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
@@ -26,6 +24,8 @@ import org.springframework.context.annotation.DependsOn;
 
 import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
 
+import javax.servlet.Filter;
+
 @Configuration
 public class ShiroConfig {
 	
@@ -44,7 +44,9 @@ public class ShiroConfig {
 		shiroFilterFactoryBean.setSuccessUrl("/index");
 		shiroFilterFactoryBean.setUnauthorizedUrl("/403");
 		LinkedHashMap<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
-		
+		Map<String, Filter> filters = shiroFilterFactoryBean.getFilters();
+		filters.put("user", new ShiroUserFilter());
+		shiroFilterFactoryBean.setFilters(filters);
 		filterChainDefinitionMap.put("/css/**", "anon");
 		filterChainDefinitionMap.put("/js/**", "anon");
 		filterChainDefinitionMap.put("/fonts/**", "anon");
@@ -57,9 +59,9 @@ public class ShiroConfig {
 		filterChainDefinitionMap.put("/logout", "logout");
 		filterChainDefinitionMap.put("/", "anon");
 		filterChainDefinitionMap.put("/**", "user");
-		
+
 		shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
-		
+
 		return shiroFilterFactoryBean;
 	}
  
