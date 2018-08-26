@@ -5,12 +5,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.resource.ResourceUrlEncodingFilter;
 
 @SpringBootApplication
 @EnableTransactionManagement
+@EnableCaching
 @MapperScan({"com.muiboot.shiro.*.dao"})
 public class ShiroApplication {
 	protected static  Logger logger = LoggerFactory.getLogger(ShiroApplication.class);

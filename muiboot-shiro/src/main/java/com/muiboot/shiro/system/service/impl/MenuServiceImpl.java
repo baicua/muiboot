@@ -1,18 +1,19 @@
 package com.muiboot.shiro.system.service.impl;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 import com.muiboot.shiro.common.layer.LayerTree;
 import com.muiboot.shiro.common.service.impl.BaseService;
 import com.muiboot.shiro.system.dao.MenuMapper;
+import com.muiboot.shiro.system.dao.RoleMapper;
 import com.muiboot.shiro.system.domain.Menu;
 import com.muiboot.shiro.system.domain.Role;
+import com.muiboot.shiro.system.domain.RoleWithMenu;
 import com.muiboot.shiro.system.service.RoleMenuServie;
+import com.muiboot.shiro.system.service.RoleService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,6 +32,9 @@ public class MenuServiceImpl extends BaseService<Menu> implements MenuService {
 
 	@Autowired
 	private RoleMenuServie roleMenuService;
+
+	@Autowired
+	private RoleService roleService;
 
 	@Override
 	public List<Menu> findUserPermissions(String userName) {
@@ -66,7 +70,7 @@ public class MenuServiceImpl extends BaseService<Menu> implements MenuService {
 		Example example = new Example(Menu.class);
 		example.createCriteria().andCondition("type =", 1).andEqualTo("parentId", menu.getMenuId());
 		example.setOrderByClause("create_time");
-		List<Menu> menus = this.selectByExample(example);
+		List<Menu> menus = this.mapper.selectByExample(example);
 		return menus;
 	}
 
@@ -154,6 +158,20 @@ public class MenuServiceImpl extends BaseService<Menu> implements MenuService {
 	}
 
 	@Override
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = true, rollbackFor = Exception.class)
+	public Map findMenuDetail(Long menuId) {
+		Menu menu = this.findById(menuId);
+		List<Menu> permissions=this.findAllPermissions(menu);
+		List<RoleWithMenu> roles=this.roleService.findByMenuId(menu.getMenuId());
+		Map res =new HashMap();
+		res.put("menu",menu);
+		res.put("roles",roles);
+		res.put("permissions",permissions);
+		return res;
+	}
+
+	@Override
+	@Cacheable(value="dic",key="'user_'+#menuId")
 	public Menu findById(Long menuId) {
 		return this.selectByKey(menuId);
 	}

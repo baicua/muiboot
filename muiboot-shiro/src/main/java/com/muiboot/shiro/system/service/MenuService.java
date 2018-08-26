@@ -1,6 +1,7 @@
 package com.muiboot.shiro.system.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.muiboot.shiro.common.layer.LayerTree;
 import com.muiboot.shiro.common.service.IService;
@@ -34,4 +35,6 @@ public interface MenuService extends IService<Menu> {
 	void updateMenu(Menu menu);
 	
 	void deleteMeuns(String menuIds);
+
+	Map findMenuDetail(Long menuId);
 }

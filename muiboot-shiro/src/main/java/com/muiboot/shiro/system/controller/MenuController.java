@@ -45,13 +45,7 @@ public class MenuController extends BaseController {
 	@ResponseBody
 	public ResponseBo getMenuDetail(Long menuId) {
 		try {
-			Menu menu = this.menuService.findById(menuId);
-			List<Menu> permissions=this.menuService.findAllPermissions(menu);
-			List<RoleWithMenu> roles=this.roleService.findByMenuId(menu.getMenuId());
-			Map res =new HashMap();
-			res.put("menu",menu);
-			res.put("roles",roles);
-			res.put("permissions",permissions);
+			Map res=this.menuService.findMenuDetail(menuId);
 			return ResponseBo.ok(res);
 		} catch (Exception e) {
 			e.printStackTrace();
