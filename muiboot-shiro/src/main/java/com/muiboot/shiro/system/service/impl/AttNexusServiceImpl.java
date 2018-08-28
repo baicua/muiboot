@@ -33,18 +33,6 @@ public class AttNexusServiceImpl extends BaseService<AttNexus> implements IAttNe
     public Long saveFiles(MultipartFile[] files,String dir) throws IOException {
         if (files==null)
             throw new NullPointerException("文件上传失败:没有待上传文件");
-        for (int i=0;i<files.length;i++){
-            MultipartFile file=files[i];
-            if (!file.isEmpty()) {
-                String contentType = file.getContentType();
-                String fileName = file.getOriginalFilename();
-                String prefix=fileName.substring(fileName.lastIndexOf("."));
-                String uuid = UUID.randomUUID().toString().replace("-", "").toLowerCase();
-                String path= FileUtils.uploadFile(file.getBytes(), dir+"/", uuid+prefix);
-                Long attId=this.saveEntity(path,uuid+prefix,fileName);
-                return attId;
-            }
-        }
         throw new IllegalAccessError("文件上传失败");
     }
 }
