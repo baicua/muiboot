@@ -3,9 +3,11 @@ package com.muiboot.shiro.common.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.muiboot.shiro.common.domain.ResponseBo;
 import com.muiboot.shiro.system.domain.User;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authz.AuthorizationException;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 
@@ -14,8 +16,10 @@ import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-public class BaseController {
+public  abstract class BaseController {
 	protected  final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	protected Map<String, Object> getDataTable(PageInfo<?> pageInfo) {

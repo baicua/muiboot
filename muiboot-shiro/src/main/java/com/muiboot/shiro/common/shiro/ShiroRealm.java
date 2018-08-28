@@ -24,6 +24,7 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.muiboot.shiro.system.service.MenuService;
+import org.springframework.context.annotation.Lazy;
 
 /**
  * 自定义实现 ShiroRealm，包含认证和授权两大模块
@@ -32,10 +33,13 @@ import com.muiboot.shiro.system.service.MenuService;
 public class ShiroRealm extends AuthorizingRealm {
 
 	@Autowired
+	@Lazy
 	private UserService userService;
 	@Autowired
+	@Lazy
 	private RoleService roleService;
 	@Autowired
+	@Lazy
 	private MenuService menuService;
 
 	/**

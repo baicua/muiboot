@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.muiboot.shiro.common.annotation.Log;
 import com.muiboot.shiro.common.domain.ResponseBo;
+import com.muiboot.shiro.system.service.MenuService;
 import com.muiboot.shiro.system.service.SessionService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,9 @@ public class SessionController {
 	
 	@Autowired
     SessionService sessionService;
+
+	@Autowired
+	private MenuService menuService;
 	
 	@Log("获取在线用户信息")
 	@RequestMapping("session")
@@ -37,6 +41,12 @@ public class SessionController {
 		rspData.put("rows", list);
 		rspData.put("total", list.size());
 		return rspData;
+	}
+
+	@RequestMapping("menu/getUserMenu")
+	@ResponseBody
+	public ResponseBo getUserMenu(String userName) {
+		return ResponseBo.ok(this.menuService.getUserMenu(userName));
 	}
 
 	@ResponseBody

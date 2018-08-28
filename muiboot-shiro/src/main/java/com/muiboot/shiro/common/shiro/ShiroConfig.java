@@ -8,6 +8,7 @@ import org.apache.shiro.codec.Base64;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.session.SessionListener;
 import org.apache.shiro.session.mgt.SessionManager;
+import org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO;
 import org.apache.shiro.session.mgt.eis.MemorySessionDAO;
 import org.apache.shiro.session.mgt.eis.SessionDAO;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
@@ -121,7 +122,9 @@ public class ShiroConfig {
     
 	@Bean
 	public SessionDAO sessionDAO() {
-		MemorySessionDAO sessionDAO = new MemorySessionDAO();
+		EnterpriseCacheSessionDAO sessionDAO = new EnterpriseCacheSessionDAO();
+		sessionDAO.setCacheManager(getEhCacheManager());
+		sessionDAO.setActiveSessionsCacheName("sessionCache");
 		return sessionDAO;
 	}
 
@@ -132,9 +135,9 @@ public class ShiroConfig {
 		listeners.add(new ShiroSessionListener());
 		sessionManager.setSessionListeners(listeners);
 		sessionManager.setSessionDAO(sessionDAO());
+		sessionManager.setSessionIdCookieEnabled(true);
 		sessionManager.setSessionIdUrlRewritingEnabled(false);//url中是否显示session Id
 		sessionManager.setDeleteInvalidSessions(true);// 删除失效的session
-
 		return sessionManager;
 	}
 }

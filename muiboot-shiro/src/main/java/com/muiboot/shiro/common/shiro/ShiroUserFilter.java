@@ -1,4 +1,5 @@
 package com.muiboot.shiro.common.shiro;;
+import com.muiboot.shiro.common.util.ServletUtil;
 import org.apache.shiro.web.filter.authc.UserFilter;
 import org.apache.shiro.web.util.WebUtils;
 import org.slf4j.Logger;
@@ -13,10 +14,9 @@ import javax.servlet.http.HttpServletResponse;
  * Created by 75631 on 2018/8/26.
  */
 public class ShiroUserFilter extends UserFilter {
-    private static final Logger log = LoggerFactory.getLogger(ShiroUserFilter.class);
     @Override
     protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
-        if(isAjax(request)){
+        if(ServletUtil.isAjax(request)){
             HttpServletResponse res= (HttpServletResponse) response;
             res.setStatus(HttpServletResponse.SC_SEE_OTHER);
             res.sendError(HttpServletResponse.SC_SEE_OTHER,"登陆超时");
@@ -24,13 +24,5 @@ public class ShiroUserFilter extends UserFilter {
             this.saveRequestAndRedirectToLogin(request, response);
         }
         return false;
-    }
-
-    public static boolean isAjax(ServletRequest request){
-        String header = ((HttpServletRequest) request).getHeader("X-Requested-With");
-        if("XMLHttpRequest".equalsIgnoreCase(header)){
-            return Boolean.TRUE;
-        }
-        return Boolean.FALSE;
     }
 }

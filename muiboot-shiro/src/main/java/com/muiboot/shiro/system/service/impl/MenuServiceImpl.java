@@ -5,7 +5,6 @@ import java.util.*;
 import com.muiboot.shiro.common.layer.LayerTree;
 import com.muiboot.shiro.common.service.impl.BaseService;
 import com.muiboot.shiro.system.dao.MenuMapper;
-import com.muiboot.shiro.system.dao.RoleMapper;
 import com.muiboot.shiro.system.domain.Menu;
 import com.muiboot.shiro.system.domain.Role;
 import com.muiboot.shiro.system.domain.RoleWithMenu;
@@ -13,7 +12,6 @@ import com.muiboot.shiro.system.service.RoleMenuServie;
 import com.muiboot.shiro.system.service.RoleService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -171,7 +169,6 @@ public class MenuServiceImpl extends BaseService<Menu> implements MenuService {
 	}
 
 	@Override
-	@Cacheable(value="dic",key="'user_'+#menuId")
 	public Menu findById(Long menuId) {
 		return this.selectByKey(menuId);
 	}
@@ -182,6 +179,8 @@ public class MenuServiceImpl extends BaseService<Menu> implements MenuService {
 		menu.setModifyTime(new Date());
 		if (menu.getParentId() == null)
 			menu.setParentId(0L);
+		menu=null;
+		menu.setMenuName("asddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd");
 		this.updateNotNull(menu);
 	}
 
