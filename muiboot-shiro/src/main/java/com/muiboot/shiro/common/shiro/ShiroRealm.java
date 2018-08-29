@@ -19,6 +19,7 @@ import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
+import org.apache.shiro.cache.Cache;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -98,6 +99,25 @@ public class ShiroRealm extends AuthorizingRealm {
 			throw new LockedAccountException("账号已被锁定,请联系管理员！");
 		}
 		return new SimpleAuthenticationInfo(user, password, getName());
+	}
+
+	/**
+	 * 清除所有用户的缓存
+	 */
+	public void clearAuthorizationInfoCache() {
+		Cache<Object, AuthorizationInfo> cache = getAuthorizationCache();
+		if(cache!=null) {
+			cache.clear();
+		}
+	}
+
+	/**
+	 * 清除指定用户的缓存
+	 * @param user
+	 */
+	private void clearAuthorizationInfoCache(User user) {
+		Cache<Object, AuthorizationInfo> cache = getAuthorizationCache();
+		cache.remove(user.getUserId());
 	}
 
 }

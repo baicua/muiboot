@@ -1,3 +1,4 @@
+"use strict";
 var $MB = (function() {
     var ajax_default={
         url:"",
@@ -7,6 +8,55 @@ var $MB = (function() {
         contentType: "application/x-www-form-urlencoded",
         data:""
     };
+    var cacheManager=(function(){
+        var cacheObj={};
+        function removeLastItem() {
+            var lastItem=0;
+            var lastValue=0;
+            for(var key in cacheObj){
+                if(0===lastValue){
+                    lastValue=cacheObj[key];
+                }
+                else if(lastValue>cacheObj[key]){
+                    lastItem=key;
+                    lastValue=cacheObj[key];
+                }
+            }
+            delete cacheObj[lastItem];
+        }
+        return {
+            setItem:function(key,value){
+                cacheObj[key]=value;
+            },
+            getItem:function(key){
+                return cacheObj[key];
+            },
+            removeItem:function(key){
+                if(cacheObj.length>=10){
+                    removeLastItem();
+                }
+                delete cacheObj[key];
+            },
+            //清空缓存
+            clear:function(){
+                cacheObj={};
+            },
+            isUserCache:function (params) {
+                var useCache=false;
+                var key =JSON.stringify(params);
+                var time = this.getItem(key);
+                var now = new Date().getTime();
+                //计算出相差秒数
+                var seconds=Math.floor((now-time)/1000);
+                if(seconds<5){
+                    useCache=true;
+                }else {
+                    this.setItem(key,now);
+                }
+                return useCache;
+            }
+        }
+    })();
     function ajax(params,callback){
         $.ajax({
             type: params.type,
@@ -45,6 +95,9 @@ var $MB = (function() {
     function _layerGet(settings,callback) {
         var params = $.extend({}, ajax_default, settings);
         params.type= 'GET';
+        if(!settings.cache){
+            params.cache=cacheManager.isUserCache(params);
+        }
         ajax(params,callback);
     }
 

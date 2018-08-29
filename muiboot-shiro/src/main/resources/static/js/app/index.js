@@ -95,7 +95,7 @@
                 }
             });
         };
-        $.post(ctx + "menu/getUserMenu", { "userName": userName }, function(r) {
+        $.post(ctx + "session/getUserMenu", { "userName": userName }, function(r) {
             if (r.code == 0) {
                 var data = r.msg;
                 $("#navigation").remove("ul");

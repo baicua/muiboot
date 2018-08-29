@@ -43,7 +43,7 @@ public class SessionController {
 		return rspData;
 	}
 
-	@RequestMapping("menu/getUserMenu")
+	@RequestMapping("session/getUserMenu")
 	@ResponseBody
 	public ResponseBo getUserMenu(String userName) {
 		return ResponseBo.ok(this.menuService.getUserMenu(userName));

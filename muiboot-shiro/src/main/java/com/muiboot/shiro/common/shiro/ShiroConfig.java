@@ -136,6 +136,7 @@ public class ShiroConfig {
 		sessionManager.setSessionListeners(listeners);
 		sessionManager.setSessionDAO(sessionDAO());
 		sessionManager.setSessionIdCookieEnabled(true);
+		sessionManager.setSessionValidationSchedulerEnabled(true);
 		sessionManager.setSessionIdUrlRewritingEnabled(false);//url中是否显示session Id
 		sessionManager.setDeleteInvalidSessions(true);// 删除失效的session
 		return sessionManager;

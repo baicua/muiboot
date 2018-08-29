@@ -88,7 +88,7 @@ $(document).ready(function() {
                     return false;
                 }
                 try{
-                    $MB.layerGet({url:ctx + "menu/getMenu",data:{"menuId": menuId},cache:false},function (data) {
+                    $MB.layerGet({url:ctx + "menu/getMenu",data:{"menuId": menuId}},function (data) {
                         if(!data||!data.msg||data.code != 0){
                             layer.msg('请求数据失败,您选择的菜单不存在');
                             return false;
@@ -129,7 +129,7 @@ $(document).ready(function() {
             refresh:function (menuId) {
                 $MB.layerGet({url:ctx+"toolkit/compent/menu/menuInfo.html",cache:true},function(text){
                     var $compent=$("<code></code>").html(text);
-                    $MB.layerGet({url:ctx+"menu/getMenuDetail",data:{menuId:menuId},cache:false},function(data){
+                    $MB.layerGet({url:ctx+"menu/getMenuDetail",data:{menuId:menuId}},function(data){
                         laytpl($compent.find("#layui-table-menu").html()).render(data.msg.menu, function(html){
                             $("#menuInfoPanle").html(html);
                         });
