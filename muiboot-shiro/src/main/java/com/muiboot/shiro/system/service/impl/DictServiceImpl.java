@@ -1,6 +1,9 @@
 package com.muiboot.shiro.system.service.impl;
 
+import com.muiboot.shiro.common.layer.LayerTree;
 import com.muiboot.shiro.common.service.impl.BaseService;
+import com.muiboot.shiro.common.util.TreeUtils;
+import com.muiboot.shiro.system.domain.CoreDic;
 import com.muiboot.shiro.system.domain.Dict;
 import com.muiboot.shiro.system.service.DictService;
 import org.apache.commons.lang.StringUtils;
@@ -16,55 +19,28 @@ import java.util.List;
 
 @Service("dictService")
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
-public class DictServiceImpl extends BaseService<Dict> implements DictService {
+public class DictServiceImpl extends BaseService<CoreDic> implements DictService {
 
 	@Override
-	public List<Dict> findAllDicts(Dict dict) {
-		try {
-			Example example = new Example(Dict.class);
-			Criteria criteria = example.createCriteria();
-			if (StringUtils.isNotBlank(dict.getKeyy())) {
-				criteria.andCondition("keyy=", Long.valueOf(dict.getKeyy()));
-			}
-			if (StringUtils.isNotBlank(dict.getValuee())) {
-				criteria.andCondition("valuee=", dict.getValuee());
-			}
-			if (StringUtils.isNotBlank(dict.getTableName())) {
-				criteria.andCondition("table_name=", dict.getTableName());
-			}
-			if (StringUtils.isNotBlank(dict.getFieldName())) {
-				criteria.andCondition("field_name=", dict.getFieldName());
-			}
-			example.setOrderByClause("dict_id");
-			return this.selectByExample(example);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return new ArrayList<>();
+	public LayerTree<CoreDic> getDictTree() {
+		List<LayerTree<CoreDic>> trees = new ArrayList<>();
+		Example example = new Example(CoreDic.class);
+		Criteria criteria=example.createCriteria();
+		criteria.andEqualTo("valid",1);
+		example.orderBy("orderNum");
+		List<CoreDic> dics = this.selectByExample(example);
+		buildTrees(trees, dics);
+		return TreeUtils.build(trees);
+	}
+
+	private void buildTrees(List<LayerTree<CoreDic>> trees, List<CoreDic> dics) {
+		for (CoreDic dic : dics) {
+			LayerTree<CoreDic> tree = new LayerTree<>();
+			tree.setId(dic.getDicId().toString());
+			tree.setParentId(dic.getParentId().toString());
+			tree.setName(dic.getDicName());
+			//tree.setHref(menu.getUrl());
+			trees.add(tree);
 		}
 	}
-
-	@Override
-	@Transactional
-	public void addDict(Dict dict) {
-		this.save(dict);
-	}
-
-	@Override
-	@Transactional
-	public void deleteDicts(String dictIds) {
-		List<String> list = Arrays.asList(dictIds.split(","));
-		this.batchDelete(list, "dictId", Dict.class);
-	}
-
-	@Override
-	@Transactional
-	public void updateDict(Dict dict) {
-		this.updateNotNull(dict);
-	}
-
-	@Override
-	public Dict findById(Long dictId) {
-		return this.selectByKey(dictId);
-	}
-
 }

@@ -19,7 +19,7 @@
         <!-- 数据库链接地址账号密码 -->
         <jdbcConnection 
             driverClass="com.mysql.jdbc.Driver"
-            connectionURL="jdbc:mysql://182.61.49.93:3306/bsds_schema?characterEncoding=utf8"
+            connectionURL="jdbc:mysql://150.109.103.224:3306/bsds_schema?characterEncoding=utf8"
             userId="bsds"
             password="xdrcft5^">
         </jdbcConnection>
@@ -27,24 +27,24 @@
             <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
         <!-- 生成Model类存放位置 -->
-        <javaModelGenerator targetPackage="com.muiboot.bsds.domain" targetProject="src/main/java">
+        <javaModelGenerator targetPackage="com.muiboot.shiro.system.domain" targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
         <!-- 生成映射文件存放位置 -->
-        <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources">
+        <sqlMapGenerator targetPackage="mapper.system" targetProject="src/main/resources">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
         <!-- 生成Dao类存放位置 -->
         <!-- 客户端代码，生成易于使用的针对Model对象和XML配置文件的代码
             type="ANNOTATEDMAPPER",生成Java Model 和基于注解的Mapper对象
             type="XMLMAPPER",生成SQLMap XML文件和独立的Mapper接口 -->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.muiboot.bsds.dao" targetProject="src/main/java">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.muiboot.shiro.system.dao" targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
         <!-- 配置需要生成的表 -->
-        <table tableName="SEQUENCE" domainObjectName="Sequence" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
-            <generatedKey column="SEQ_NAME" sqlStatement="mysql" identity="false"/>
+        <table tableName="M_DIC" domainObjectName="CoreDic" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="dicId" sqlStatement="mysql" identity="false"/>
         </table>
     </context>
 </generatorConfiguration>

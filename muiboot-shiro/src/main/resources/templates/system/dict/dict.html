@@ -1,84 +1,51 @@
-<div data-th-include="system/dict/dictAdd"></div>
-<div class="card">
-    <div class="card-block">
-        <div class="table-responsive">
-            <div id="data-table_wrapper" class="dataTables_wrapper">
-                <div class="dataTables_buttons hidden-sm-down actions">
-                    <span class="actions__item zmdi zmdi-search" onclick="search()" title="搜索" />
-                    <span class="actions__item zmdi zmdi-refresh-alt" onclick="refresh()" title="刷新" />
-                    <div class="dropdown actions__item">
-                        <i data-toggle="dropdown" class="zmdi zmdi-download">
-		            </i>
-                        <ul class="dropdown-menu dropdown-menu-right">
-                            <a href="javascript:void(0)" class="dropdown-item" data-table-action="excel" onclick="exportDictExcel()">
-		                    Excel (.xlsx)
-		                </a>
-                            <a href="javascript:void(0)" class="dropdown-item" data-table-action="csv" onclick="exportDictCsv()">
-		                    CSV (.csv)
-		                </a>
-                        </ul>
-                    </div>
-                    <div class="dropdown actions__item" shiro:hasAnyPermissions="dict:add,dict:update,dict:delete">
-                        <i data-toggle="dropdown" class="zmdi zmdi-more-vert"></i>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <a href="javascript:void(0)" class="dropdown-item" data-toggle="modal" data-target="#dict-add" shiro:hasPermission="dict:add">新增字典</a>
-                            <a href="javascript:void(0)" class="dropdown-item" onclick="updateDict()" shiro:hasPermission="dict:update">修改字典</a>
-                            <a href="javascript:void(0)" class="dropdown-item" onclick="deleteDicts()" shiro:hasPermission="dict:delete">删除字典</a>
-                        </div>
-                    </div>
-                </div>
-                <div id="data-table_filter" class="dataTables_filter">
-                    <form class="dict-table-form">
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-					               	键：
-					            </span>
-                                    <div class="form-group">
-                                        <input type="text" name="key" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-					               	值：
-					            </span>
-                                    <div class="form-group">
-                                        <input type="text" name="value" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-					               	表名：
-					            </span>
-                                    <div class="form-group">
-                                        <input type="text" name="tableName" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-					               	字段名：
-					            </span>
-                                    <div class="form-group">
-                                        <input type="text" name="fieldName" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="table-responsive">
-                    <table id="dictTable" data-mobile-responsive="true" class="mb-bootstrap-table text-nowrap"></table>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head data-th-include="common/head"></head>
+<body class="layui-layout-body">
+<div data-th-include="common/common"></div>
+<fieldset class="layui-elem-field layui-field-title"><legend>字典管理</legend></fieldset>
+<div class="layui-container ajax-content" lay-filter="ajax-content">
+    <form class="layui-form menu-table-form" action="">
+        <div class="layui-form-item">
+            <div class="layui-inline" style="float: right;margin-bottom: 0px;margin-right: 4px;">
+                <div class="layui-btn-group">
+                    <button title="新增" type="button" id="addBtn"  class="layui-btn layui-btn-primary layui-btn-sm" shiro:hasPermission="menu:add"><i class="layui-icon"></i></button>
+                    <button title="修改" type="button" id="updBtn" class="layui-btn layui-btn-primary layui-btn-sm" shiro:hasPermission="menu:update"><i class="layui-icon"></i></button>
+                    <button title="导出" type="button" id="expBtn" class="layui-btn layui-btn-primary layui-btn-sm" data-table-action="excel" onclick="exportMenuExcel()"><i class="layui-icon layui-icon-download-circle"></i></button>
+                    <button title="删除" type="button" id="delBtn" class="layui-btn layui-btn-primary layui-btn-sm" shiro:hasPermission="menu:delete"><i class="layui-icon"></i></button>
                 </div>
             </div>
         </div>
+    </form>
+    <div class="layui-row">
+        <fieldset class="layui-elem-field" style="min-height: 400px">
+            <legend>字典管理</legend>
+            <div class="layui-col-md3 layui-col-xs12" style="min-height: 400px">
+                <input type="text" name="username" lay-verify="required" placeholder="请输入字典名称" autocomplete="off" class="layui-input">
+                <ul id="dicTree" class="layui-box layui-tree"></ul>
+            </div>
+            <div class="site-tips layui-col-md9 layui-col-md9 layui-col-xs12 layui-anim layui-anim-up" style="min-height: 400px;padding: 10px;">
+                <div class="layui-row layui-col-space15">
+                    <div class="layui-row layui-col-xs12 layui-col-md12">
+                        <div class="layui-card">
+                            <div class="layui-card-header"><i class="layui-icon">&#xe60a;&nbsp;&nbsp;</i>基本信息</div>
+                            <div class="layui-card-body" id="dicInfoPanle" style="min-height: 130px">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-row layui-col-xs12  layui-col-md12">
+                        <div class="layui-card">
+                            <div class="layui-card-header"><i class="layui-icon">&#xe672;&nbsp;&nbsp;</i>数据列表</div>
+                            <div class="layui-card-body" id="dicListPanle" style="min-height: 50px">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
     </div>
+
+    <script data-th-src="@{/js/app/system/dict/dict.js}"></script>
 </div>
-<script data-th-src="@{js/app/system/dict/dict.js}"></script>
-<script data-th-src="@{js/app/system/dict/dictEdit.js}"></script>
+</body>
+</html>
