@@ -5,6 +5,12 @@
         loadspan=layer.load(2,{
             shade: [0.5,'#fff'] //0.1透明度的白色背景
         });
+        if($MB.isMobile()){
+            $(".layui-layout.layui-layout-admin").addClass("shrink");
+            $(document).on("click",".layui-body",function (e) {
+                $(".layui-layout.layui-layout-admin").addClass("shrink");
+            });
+        }
 	}), $(window).on("load", function() {
 	    var str = "";
 	    var forTree = function(o) {

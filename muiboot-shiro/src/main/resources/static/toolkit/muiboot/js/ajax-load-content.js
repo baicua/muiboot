@@ -128,6 +128,7 @@
                     }
                 },
                 complete:function (r) {
+                    if($MB.isMobile()){$(".layui-layout.layui-layout-admin").addClass("shrink")}
                     layer.close(layer_load_index);
                 }
             });

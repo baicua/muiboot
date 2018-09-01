@@ -91,7 +91,7 @@ public class MenuController extends BaseController {
 		return ResponseBo.ok("删除成功！");
 	}
 	
-	/*@Log("修改菜单/按钮")*/
+	@Log("修改菜单/按钮")
 	@RequiresPermissions("menu:update")
 	@RequestMapping("menu/update")
 	@ResponseBody

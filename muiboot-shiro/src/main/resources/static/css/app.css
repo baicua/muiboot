@@ -116,8 +116,28 @@ input.layui-form-danger[type=radio] + div.layui-form-radio>i{
 @media screen and (max-width: 992px) {
   .layui-layout-admin .layui-side {
     transform: translate3d(-200px, 0, 0);
+    -webkit-transform: translate3d(0px, 0, 0);
+    width: 200px;
+  }
+}
+@media screen and (max-width: 992px) {
+  .layui-layout-admin.shrink .layui-side {
+    transform: translate3d(-200px, 0, 0);
     -webkit-transform: translate3d(-200px, 0, 0);
     width: 200px;
+  }
+}
+@media screen and (max-width: 992px) {
+  .layui-layer.layui-layer-page,.layui-layer.layui-layer-page layui-layer-content{
+    width: auto !important;
+    height: auto !important;
+    top: auto !important;
+    left: auto !important;
+  }
+}
+@media screen and (max-width: 992px) {
+  .layui-layer.layui-layer-page layui-layer-content{
+    height: auto !important;
   }
 }
 .search_box {
