@@ -1,14 +1,13 @@
-"use strict";
-$(document).ready(function() {
+;$(document).ready(function() {
+    "use strict";
     //initTreeTable();
-    var element,form,laytpl;
-    setTimeout(function(){
-        layui.use(['element', 'laytpl','form'], function () {
-            element = layui.element,form = layui.form,laytpl = layui.laytpl;
-            element.init();
-            form.render();
-        });
-    },100);
+    var element,form,laytpl,dicutils;
+    layui.use(['element', 'laytpl','form','dicutils'], function () {
+        element = layui.element,form = layui.form,laytpl = layui.laytpl,dicutils=layui.dicutils;
+        element.init();
+        dicutils.load("dicType,yesOrNo,menuType");
+        form.render();
+    });
     setTimeout(function(){
         method.resetTree();
     },100);
@@ -16,10 +15,13 @@ $(document).ready(function() {
         method.add($("#dicInfoPanle table").attr("data-name-dic"));
     });
     $("#updBtn").on("click",function (r) {
-        method.update($("#dicListPanle table").attr("data-name-dic"));
+        method.update($("#dicInfoPanle table").attr("data-name-dic"));
     });
     $("#expBtn").on("click",function (r) {
         method.expMenu();
+    });
+    $("#search_input_span").on("click",function (r) {
+        method.resetTree();
     });
     $("#delBtn").on("click",function (r) {
         method.delMenu($("#menuInfoPanle table").attr("data-name-menu"),"菜单");
@@ -46,7 +48,10 @@ $(document).ready(function() {
         layer.msg('还未开发相应功能');
     });
     var method =(function() {
-        var menuModel ='<fieldset class="layui-elem-field layui-anim layui-anim-up"><legend>-----</legend><form class="layui-form" action=""><div class="layui-row"><div class="layui-col-md6 layui-col-xs12"><label class="layui-form-label" lable-verify="required">菜单名称:</label><div class="layui-input-block"><input type="text" name="menuName" value="{{d.menuName||\"\"}}" lay-verify="required" placeholder="请输入菜单名称"  class="layui-input"><input type="text" name="oldMenuName" value="{{d.oldMenuName||\"\"}}" hidden><input type="text" name="menuId" value="{{d.menuId||\"\"}}" hidden></div></div><div class="layui-col-md6 layui-col-xs12"><label class="layui-form-label" lable-verify="required">菜单类型:</label><div class="layui-input-block"><input type="radio" lay-verify="radio" name="type" value="0" title="菜单" {{#if(d.type == 0){ }}checked{{#}}}><input type="radio" lay-verify="radio" name="type" value="1" title="按钮" {{#if(d.type == 1){ }}checked{{#}}}></div></div></div><div class="layui-row"><div class="layui-col-md6 layui-col-xs12"><label class="layui-form-label">上级菜单:</label><div class="layui-input-block"><input type="text" name="parentId" value="{{d.parentId||\"\"}}"  placeholder="请输入上级菜单"  class="layui-input"></div></div><div class="layui-col-md6 layui-col-xs12"><label class="layui-form-label">菜单图标:</label><div class="layui-input-block"><input type="text" name="icon" value="{{d.icon||\"\"}}" placeholder="请输入菜单图标"  class="layui-input"></div></div></div><div class="layui-row"><div class="layui-col-md6 layui-col-xs12"><label class="layui-form-label">权限描述:</label><div class="layui-input-block"><input type="text" name="perms" value="{{d.perms||\"\"}}" placeholder="请输入权限描述"  class="layui-input"></div></div><div class="layui-col-md6 layui-col-xs12"><label class="layui-form-label">菜单地址:</label><div class="layui-input-block"><input type="text" name="url" value="{{d.url||\"\"}}" placeholder="请输入菜单地址"  class="layui-input"></div></div></div><div class="layui-row"><div class="layui-col-md6 layui-col-xs12"><label class="layui-form-label">菜单排序:</label><div class="layui-input-block"><input type="text" name="orderNum" value="{{d.orderNum||\"\"}}" placeholder="请输入菜单排序"  class="layui-input"></div></div><div class="layui-col-md6 layui-col-xs12"><div class="layui-input-block"></div></div></div></form></fieldset>';
+        var menuModel = "";
+        $MB.layerGet({url:ctx+"model/dic/add.html",cache:true},function(text){
+            menuModel=text;
+        });
         var loadModel=function(data,title,url){
             try{
                 laytpl(menuModel).render(data, function(html){
@@ -55,7 +60,7 @@ $(document).ready(function() {
                         title:title,
                         type: 1,
                         skin: 'layui-layer-rim', //加上边框
-                        area: ['640px', '300px'], //宽高
+                        area: ['640px', '400px'], //宽高
                         content: html,
                         btn: ['保存', '关闭'],
                         btnAlign: 'c',
@@ -64,9 +69,26 @@ $(document).ready(function() {
                         },
                         success:function (layero,index) {
                             layero.addClass("layui-form");
+                            dicutils.render();
                             layero.find(".layui-layer-btn0").attr("lay-filter","form-verify").attr("lay-submit","");
                             method.onsubmit(layero.find(".layui-layer-btn0"),layero,url,function () {
                                 method.refresh($("#menuInfoPanle table").attr("data-name-menu"));
+                            });
+                            form.on('select(dicType)', function(data){
+                                var sel = data.value;
+                                if("SIMPLE"===sel){
+                                    layero.find("[name='content']").attr("lay-verify","required").parents(".layui-row").show(300);
+                                    layero.find("[name='sqlContent']").removeAttr("lay-verify").parents(".layui-row").hide(200);
+                                }else if("SQLDIC"===sel){
+                                    layero.find("[name='content']").removeAttr("lay-verify").parents(".layui-row").hide(200);
+                                    layero.find("[name='sqlContent']").attr("lay-verify","required").parents(".layui-row").show(300);
+                                }else if("TREEDIC"===sel){
+                                    layero.find("[name='content']").removeAttr("lay-verify").parents(".layui-row").hide(200);
+                                    layero.find("[name='sqlContent']").attr("lay-verify","required").parents(".layui-row").show(300);
+                                }else {
+                                    layero.find("[name='content']").attr("lay-verify","required").parents(".layui-row").show(300);
+                                    layero.find("[name='sqlContent']").removeAttr("lay-verify").parents(".layui-row").hide(200);
+                                }
                             });
                             $MB.verify(form);
                             form.render();
@@ -80,20 +102,20 @@ $(document).ready(function() {
         return {
             add:function(dictId){
                 if(!dictId)dictId="";
-                loadModel({parentId:dictId},"新增字典",ctx + "dict/add");
+                loadModel({parentId:dictId,dicType:'SIMPLE',valid:'1'},"新增字典",ctx + "dict/add");
             },
-            update:function(menuId){
-                if(!menuId){
-                    layer.msg('请先选择你想修改的菜单！');
+            update:function(dicId){
+                if(!dicId){
+                    layer.msg('请先选择你想修改的字典！');
                     return false;
                 }
                 try{
-                    $MB.layerGet({url:ctx + "menu/getMenu",data:{"menuId": menuId}},function (data) {
+                    $MB.layerGet({url:ctx + "dict/getDic",data:{"dicId": dicId}},function (data) {
                         if(!data||!data.msg||data.code != 0){
-                            layer.msg('请求数据失败,您选择的菜单不存在');
+                            layer.msg('请求数据失败,您选择的字典不存在');
                             return false;
                         }
-                        loadModel(data.msg,"菜单修改",ctx + "menu/update");
+                        loadModel(data.msg,"字典修改",ctx + "dict/update");
                     });
                 }catch(e) {
                     layer.msg('请求数据异常：'+e.message);
@@ -126,18 +148,19 @@ $(document).ready(function() {
                     }
                 });
             },
-            refresh:function (menuId) {
-                $MB.layerGet({url:ctx+"toolkit/compent/menu/menuInfo.html",cache:true},function(text){
+            refresh:function (dicId) {
+                $MB.layerGet({url:ctx+"model/dic.html",cache:true},function(text){
                     var $compent=$("<code></code>").html(text);
-                    $MB.layerGet({url:ctx+"menu/getMenuDetail",data:{menuId:menuId}},function(data){
-                        laytpl($compent.find("#layui-table-menu").html()).render(data.msg.menu, function(html){
-                            $("#menuInfoPanle").html(html);
+                    $MB.layerGet({url:ctx+"dict/getDicDetail",data:{dicId:dicId}},function(data){
+                        laytpl($compent.find("#layui-table-dic-info").html()).render($.extend({},data.msg.info), function(html){
+                            $("#dicInfoPanle").html(html);
                         });
-                        laytpl($compent.find("#layui-breadcrumb-permission").html()).render(data.msg.permissions, function(html){
-                            $("#menuButtonPanle").html(html);
-                        });
-                        laytpl($compent.find("#layui-breadcrumb-role").html()).render(data.msg.roles, function(html){
-                            $("#menuAuthPanle").html(html);
+                        laytpl($compent.find("#layui-table-dic-list").html()).render($.extend({},data.msg.list), function(html){
+                            $("#dicListPanle").html(html);
+                            if(data.msg.list&&data.msg.list.children){
+                                var nodes=$.extend([], data.msg.list.children);
+                                layui.tree({elem: '#dicListPanle .layui-tree',nodes:nodes});
+                            }
                         });
                         element.init();
                     });
@@ -164,9 +187,11 @@ $(document).ready(function() {
                 });
             },
             resetTree:function(){
-                $MB.layerGet({url:ctx+"dict/tree", cache:false},function (data) {
+                var dicName =$("#search_input_dic").val();
+                var data = {dicName:dicName};
+                $MB.layerGet({url:ctx+"dict/tree",data:data,cache:false},function (data) {
                     var nodes=$.extend([], data.msg.children);
-                   $("#menuTree").empty();
+                   $("#dicTree").empty();
                     layui.tree({
                         elem: '#dicTree'
                         ,nodes:nodes

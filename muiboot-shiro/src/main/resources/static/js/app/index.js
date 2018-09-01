@@ -142,6 +142,10 @@
                 loadMain(url);
 			}
         });
+    }),$(document).ready(function(){
+        layui.extend({
+            dicutils: './toolkit/muiboot/js/dicutils' // {/}的意思即代表采用自有路径，即不跟随 base 路径
+        });
     });
 
 	function loadMain(url) {

@@ -16,10 +16,9 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 @RequestMapping("sys")
 public class SysController extends BaseController {
-    private static final long MAX_AGE =60*60*24*7;//缓存7天
     @ModelAttribute
     public void initBinder(Model model, HttpServletRequest request, HttpServletResponse response){
-        response.setHeader("Cache-Control", "max-age="+MAX_AGE);
+        //response.setHeader("Cache-Control", "max-age="+MAX_AGE);
     }
     @RequestMapping("menu")
     @RequiresPermissions("menu:list")

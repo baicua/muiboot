@@ -179,8 +179,6 @@ public class MenuServiceImpl extends BaseService<Menu> implements MenuService {
 		menu.setModifyTime(new Date());
 		if (menu.getParentId() == null)
 			menu.setParentId(0L);
-		menu=null;
-		menu.setMenuName("asddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd");
 		this.updateNotNull(menu);
 	}
 

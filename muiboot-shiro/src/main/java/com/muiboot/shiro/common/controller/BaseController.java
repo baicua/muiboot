@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 public  abstract class BaseController {
 	protected  final Logger logger = LoggerFactory.getLogger(this.getClass());
+	protected static final long MAX_AGE =60*60*24*7;//缓存7天
 
 	protected Map<String, Object> getDataTable(PageInfo<?> pageInfo) {
 		Map<String, Object> rspData = new HashMap<>();

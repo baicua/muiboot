@@ -82,7 +82,7 @@ var $MB = (function() {
                         }
                     });
                 }else {
-                    layer.alert('请求失败！', {icon: 0});
+                    layer.msg('请求失败！');
                 }
             }
         });

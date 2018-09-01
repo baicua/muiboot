@@ -56,7 +56,7 @@ public class LogAspect {
 	}
 
 	@Around("pointcut()")
-	public Object around(ProceedingJoinPoint point) throws JsonProcessingException {
+	public Object around(ProceedingJoinPoint point) throws Exception {
 		Object result = null;
 		long beginTime = System.currentTimeMillis();
 		try {
@@ -64,6 +64,7 @@ public class LogAspect {
 			result = point.proceed();
 		} catch (Throwable e) {
 			e.printStackTrace();
+			throw new Exception();
 		}
 		// 执行时长(毫秒)
 		long time = System.currentTimeMillis() - beginTime;
