@@ -184,3 +184,21 @@ input.layui-form-danger[type=radio] + div.layui-form-radio>i{
 .layui-input, .layui-textarea {
   overflow-x: hidden;
 }
+.right-bar-mobile{
+  display: none;
+}
+@media screen and (max-width: 992px) {
+  .right-bar-mobile{
+    display: block;
+  }
+  .right-bar-pc{
+    display: none;
+  }
+  .right-bar-mobile .layui-nav .layui-nav-item a{
+    padding: 0 20px;
+  }
+  .right-bar-mobile .layui-nav-child{
+    right: 0;
+    left: auto;
+  }
+}

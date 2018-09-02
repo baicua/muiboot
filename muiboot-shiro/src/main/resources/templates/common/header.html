@@ -18,7 +18,7 @@
         </dl>
     </li>
 </ul>
-<ul class="layui-nav layui-layout-right">
+<ul class="layui-nav layui-layout-right right-bar-pc">
     <li class="layui-nav-item">
         <a href="javascript:;">
             <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
@@ -30,4 +30,14 @@
         </dl>
     </li>
     <li class="layui-nav-item"><a data-th-href="@{/logout}">退出</a></li>
+</ul>
+<ul class="layui-nav layui-layout-right right-bar-mobile">
+    <li class="layui-nav-item">
+        <a href="javascript:;"><img src="http://t.cn/RCzsdCq" class="layui-nav-img"></a>
+        <dl class="layui-nav-child">
+            <dd><a href="">[[${user.realName}]]</a></dd>
+            <dd><a href="">安全设置</a></dd>
+            <dd><a data-th-href="@{/logout}">退出</a></dd>
+        </dl>
+    </li>
 </ul>
