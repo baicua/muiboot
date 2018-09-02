@@ -42,7 +42,7 @@ function login() {
         dataType: "json",
         success: function(r) {
             if (r.code == 0) {
-                location.href = ctx + 'index';
+                location.href = ctx + 'sys';
             } else {
         		// if (r.msg == '验证码错误！') reloadCode();
                 //$MB.n_warning(r.msg);

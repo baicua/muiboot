@@ -81,7 +81,7 @@ public class LoginController extends BaseController {
 
     @RequestMapping("/")
     public String redirectIndex() {
-        return "redirect:/index";
+        return "redirect:/sys";
     }
 
     @GetMapping("/403")
@@ -89,7 +89,7 @@ public class LoginController extends BaseController {
         return "403";
     }
 
-    @RequestMapping("/index")
+    @RequestMapping("/sys")
     public String index(Model model) {
         // 登录成后，即可通过 Subject 获取登录的用户信息
         User user = super.getCurrentUser();

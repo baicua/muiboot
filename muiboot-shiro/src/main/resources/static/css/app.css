@@ -181,3 +181,6 @@ input.layui-form-danger[type=radio] + div.layui-form-radio>i{
 .layui-layer.layui-layer-page.m-layer-visible .layui-layer-content{
   overflow: visible;
 }
+.layui-input, .layui-textarea {
+  overflow-x: hidden;
+}

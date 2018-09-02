@@ -10,15 +10,21 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="format-detection" content="telephone=no">
     <!--[if IE]>
-    <script data-th-src="@{js/jquery1x.js}"></script>
+    <script data-th-src="@{/js/jquery1x.js}"></script>
     <![endif]-->
     <!--[if !IE]> -->
-    <script data-th-src="@{js/jquery.min.js}"></script>
+    <script data-th-src="@{/js/jquery.min.js}"></script>
     <!-- <![endif]-->
     <link rel="shortcut icon" type="image/png" th:href="@{/img/favicon.ico}" />
     <!-- Vendor styles -->
     <link rel="stylesheet" data-th-href="@{/toolkit/layui/css/layui.css}"  media="all"/>
     <link rel="stylesheet" data-th-href="@{/css/app.css}" media="all"/>
+    <script data-th-inline="javascript">
+        var ctx = [[@{/}]];
+        var userName = [[${user.username}]];
+        var theme = [[${user.theme}]];
+        var avatar = ctx + "img/avatar/" + [[${user.avatar}]];
+    </script>
 </head>
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
@@ -33,16 +39,10 @@
 <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
 <div data-th-replace="common/common"></div>
-<script data-th-src="@{js/app/index.js}"></script>
+<script data-th-src="@{/js/app/index.js}"></script>
 <script data-th-src="@{/toolkit/muiboot/js/ajax-load-content.js}"></script>
 
 </body>
-<script data-th-inline="javascript">
-	var ctx = [[@{/}]];
-	var userName = [[${user.username}]];
-	var theme = [[${user.theme}]];
-	var avatar = ctx + "img/avatar/" + [[${user.avatar}]];
-</script>
 <!--[if lt IE 8]>
 <script data-th-inline="javascript">
     layer.msg('本系统不支持IE7以下浏览器访问，推荐使用IE8+ / Chrome / Firefox / Edge 等高级浏览器访问本系统', {

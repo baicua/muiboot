@@ -51,7 +51,7 @@ $(function() {
 });
 
 function refreshUserProfile() {
-    $.post(ctx + "user/profile", function(r) { $main_content.html("").append(r); });
+    $.post(ctx + "user/profile", function(r) { $("#main-content").html("").append(r); });
 }
 
 function editUserProfile() {

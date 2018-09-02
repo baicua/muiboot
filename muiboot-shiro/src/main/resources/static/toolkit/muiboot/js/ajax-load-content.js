@@ -1,8 +1,9 @@
-(function($) {
+;(function($) {
     "use strict";
     var ajax_loaded_page = {urls:{}};//ajax加载的页面
-    var root_url = document.location.pathname.substring(0, document.location.pathname.substr(1).indexOf('/') + 1);
+    var root_url = $MB.getRootPath();
     var $contentArea;
+    var $breadcrumb = $(".breadcrumb");
     var cache={
         sessionCache:{},
          useCache: function(cacheName,url,millisecond){
@@ -27,7 +28,7 @@
                     return false;
                 }
             }
-    }
+    };
     $.fn.ajax_load = function(options, param) {
         // 如果是调用方法
         if (typeof options == 'string') {
@@ -44,13 +45,53 @@
         options = $.extend({}, $.fn.ajax_load.defaults, options || {});
         $contentArea=$(this);
         // 加载数据
-
+        ajax_loaded_page.buildBreadcrumn=function($menu){
+            var hash=$menu.attr("href");
+            if($menu.length>0&&hash){
+                var $menuName=$.trim($menu.text());
+                var id =$menu.attr("menu-id");
+                var breadcrumbMenu=new Object();
+                breadcrumbMenu.id=  new Array();
+                breadcrumbMenu.name=  new Array();
+                $menu.parents("dl").prev().each(function() {
+                    breadcrumbMenu.id.unshift($(this).attr("menu-id"));
+                    breadcrumbMenu.name.unshift($.trim($(this).text()));
+                });
+                var breadcrumnHtml = "";
+                breadcrumnHtml += '<a href=""><i class="layui-icon layui-icon-home" style="font-size: 14px;color: #000;"></i> 首页</a>';
+                for (var i = 0; i < breadcrumbMenu.name.length; i++) {
+                    breadcrumnHtml += '<span lay-separator="">/</span>';
+                    breadcrumnHtml += '<a href="javascript:;" menu-id="'+breadcrumbMenu.id[i]+'" >'+breadcrumbMenu.name[i]+'</a>';
+                }
+                breadcrumnHtml += '<span lay-separator="">/</span>';
+                breadcrumnHtml+= '<a href="'+(!hash?"":hash)+'" menu-id="'+id+'" menu-url="'+(!hash?"":hash)+'"><cite>'+$menuName+'</cite></a>';
+                $breadcrumb.html("").append(breadcrumnHtml);
+                var $parent=$menu.parent("dd");
+                var $parents=$parent.parent("dl").parent();
+                $("#sys-menu-tree").find(".layui-nav-itemed").each(function () {
+                    if(!$(this).is($parents)){
+                        $(this).removeClass("layui-nav-itemed");
+                    }
+                });
+                $("#sys-menu-tree").find(".layui-this").each(function () {
+                    if(!$(this).is($parent)){
+                        $(this).removeClass("layui-this");
+                    }
+                });
+                if(!$parents.hasClass("layui-nav-itemed")){
+                    $parents.addClass("layui-nav-itemed");
+                }
+                if(!$parent.hasClass("layui-this")){
+                    $parent.addClass("layui-this");
+                }
+            }
+        },
         ajax_loaded_page.push=function(url,isLoad){
             var l = this.urls.length;
             if(isLoad)ajax_loaded_page.urls[l]=url;
             ajax_loaded_page.$thisUrl=url;
             ajax_loaded_page.$thisIndex=l;
-            $main_content.attr("ajax-href",url);
+            $("#main-content").attr("forward",url);
             return l;
         },
         ajax_loaded_page.get=function(key){
@@ -70,21 +111,28 @@
             $contentArea.ajaxload(ajax_loaded_page.$thisUrl,false);
         },
         $contentArea.ajaxload =function(url,isLoad){
+            if(!url)return;
             //判断是否使用缓存
-            var useCache=cache.useCache("menuCache",url,new Date().getTime());
+            //var useCache=cache.useCache("menuCache",url,new Date().getTime());
+            var $menu,pushl;
+            if($MB.hasHistoryApi()){
+                $menu=$("#navigation").find("a[menu-url='"+url+"']");
+                pushl=root_url+"sys/"+url;
+                url=root_url + url;
+                history.pushState(null,$menu.text(),pushl);
+            }else {
+                $menu=$("#navigation").find("a[href='"+url+"']");
+                url= root_url+url.replace(/^(\#\!)?\#/, '');
+            }
+            ajax_loaded_page.buildBreadcrumn($menu);
             $.ajax({
-                url: root_url + url,
-                cache: useCache,
+                url: url,
                 beforeSend:function (r) {
-                    if(!$MB.getLoading()){
+                    if(!$MB.getLoading(1)){
                         $MB.setLoading(layer.load(0,{shade: [0.01,'#fff']}));
                     }
                 },
                 success: function (r) {
-                    if (r.indexOf('账户登录') != -1) {
-                        location.href = location;
-                        return;
-                    }
                     try {
                         var $r = $("<code></code>").html(r);//包装数据
                         //var $r=$(r);
@@ -92,9 +140,9 @@
                         $r.find("script").remove();
                         var content=$r.find("div.ajax-content");
                         if(content.length>0){
-                            $main_content.empty().html(content.html());
+                            $contentArea.empty().html(content.html());
                         }else {
-                            $main_content.empty().html($r.html());
+                            $contentArea.empty().html($r.html());
                         }
                         if(!!scripts&&scripts.length>0){
                             scripts.each(function(index,script){
@@ -117,42 +165,27 @@
                             }
                         });
                     }else if(XMLHttpRequest.status===400){
-                        $main_content.load("/error/error.html");
+                        $contentArea.load("/error/error.html");
                     }else if(XMLHttpRequest.status===404){
-                        $main_content.load("/error/error.html");
+                        $contentArea.load("/error/error.html");
                     }else if(XMLHttpRequest.status===500){
-                        $main_content.load("/error/error.html");
+                        $contentArea.load("/error/error.html");
                     }else if(XMLHttpRequest.status===503){
-                        $main_content.load("/error/error.html");
+                        $contentArea.load("/error/error.html");
                     }else {
-                        $main_content.load("/error/error.html");
+                        $contentArea.load("/error/error.html");
                     }
                 },
                 complete:function (r) {
                     if($MB.isMobile()){$(".layui-layout.layui-layout-admin").addClass("shrink")}
-                    setTimeout(function () {
-                        layer.close($MB.getLoading());
+                    var loading = $MB.getLoading(0);
+                    if (loading){
+                        layer.close(loading);
                         $MB.setLoading("");
-                    },400);
+                    }
                 }
             });
-        },
-        $contentArea.forward ==function(){
-            var  $thisIndex=ajax_loaded_page.$thisIndex;
-            if(!$thisIndex&&$thisIndex<ajax_loaded_page.urls.length){
-                $contentArea.refresh(ajax_loaded_page.get($thisIndex+1),false);
-            }else {
-                layer.alert('当前已经是最后一页！', {icon: 0});
-            }
-        },
-        $contentArea.back ==function(){
-            var  $thisIndex=ajax_loaded_page.$thisIndex;
-            if(!$thisIndex||$thisIndex<=1){
-                layer.alert('当前已经是第一页！', {icon: 0});
-            }else {
-                $contentArea.refresh(ajax_loaded_page.get($thisIndex-1),false);
-            }
-        }
+        };
         return $contentArea;
     };
 

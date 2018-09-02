@@ -1,19 +1,61 @@
-	var $breadcrumb = $(".breadcrumb");
-	var $main_content = $("#main-content");
     $(document).ready(function() {
+        //1.如果是移动端，添加触屏关闭菜单事件
         if($MB.isMobile()||$MB.isXsScreen()){
             $(".layui-layout.layui-layout-admin").addClass("shrink");
             $("body").on("touchend",".layui-body",function (e) {
                 $(".layui-layout.layui-layout-admin").addClass("shrink");
             });
         }
-	}), $(window).on("load", function() {
-	    var str = "";
+        //2.初始化字典,菜单插件
+        layui.extend({
+            dicutils: $MB.getRootPath()+'/toolkit/muiboot/js/dicutils',
+            menu: $MB.getRootPath()+'/toolkit/muiboot/js/ajax-load-menu',
+        });
+        //3.hash监听事件
+        if(!$MB.hasHistoryApi()){
+            window.onhashchange=function (e) {
+                var hash =window.location.hash;
+                if(!hash)return;
+                $("#main-content").ajax_load("loading",hash);
+            }
+        }else {
+            $("body").on("click","a[menu-id]",function () {
+                var $this = $(this);
+                var id =$this.attr("menu-id");
+                var $thisa=$("#navigation").find("a[menu-id='"+id+"']");
+                var url =$thisa.attr("menu-url");
+                if(!!url){
+                    $("#main-content").ajax_load("loading",url);
+                }
+            });
+        }
+        //4.菜单栏打开关闭点击监听
+        $(document).on("click",'.layadmin-flexible',function () {
+            if ($(".layui-layout-admin").hasClass("shrink")) {
+                $(".layui-layout-admin").removeClass("shrink");
+                $('.layui-side-scroll li>a,.layui-side-scroll dd>a').unbind("mouseenter").unbind("mouseleave");
+            } else {
+                $(".layui-layout-admin").addClass("shrink");
+                $('.shrink .layui-side-scroll li>a,.shrink .layui-side-scroll dd>a').hover(function (r) {
+                    layer.tips($(this).text(), $(this));
+                },function (r) {
+                    layer.close(layer.index);
+                });
+            }
+        });
+        //5.加载菜单
+        layui.use(['menu'], function(args){
+            layui.menu.loadmenu(userName);
+        });
+	});
+/*
+        $(document).ready(function(){
+	    var str = "",has=$MB.hasHistoryApi();
 	    var forTree = function(o) {
 	        if(!o||o.length===0)return "";
-            str+='<ul class="layui-nav layui-nav-tree"  lay-filter="test">';
+            str+='<ul class="layui-nav layui-nav-tree"  lay-filter="menu" id="sys-menu-tree">';
 	        for (var i = 0; i < o.length; i++) {
-	            var urlstr = '<li class="layui-nav-item">';
+	            var href,urlstr = '<li class="layui-nav-item">';
 	            try {
 	                if (!o[i]["href"] && !!o[i]["icon"]) {
 	                	urlstr+='<a href="javascript:;" menu-id="'+o[i]["id"]+'"><i class="'+o[i]["icon"]+'"></i><span >&nbsp;&nbsp;'+ o[i]["name"] +'</span></a>';
@@ -24,7 +66,8 @@
                         if(o[i]["icon"]){
                             icon=o[i]["icon"];
                         }
-                        urlstr+='<a href="javascript:;" menu-url=' + o[i]["href"]+' menu-id="'+o[i]["id"]+'"><i class="'+icon+'"></i><span >&nbsp;&nbsp;'+ o[i]["name"] +'</span></a>';
+                        href=has?"javascript:;":"#"+o[i]["href"];
+                        urlstr+='<a href="'+href+'" menu-url=' + o[i]["href"]+' menu-id="'+o[i]["id"]+'"><i class="'+icon+'"></i><span >&nbsp;&nbsp;'+ o[i]["name"] +'</span></a>';
 	                }
 	                //str += urlstr;
 	                if (!!o[i]["children"]&&o[i]["children"].length != 0) {
@@ -45,7 +88,7 @@
             if(!o||o.length===0)return "";
             var restr=""
             for (var i = 0; i < o.length; i++) {
-                var urlstr = '<dd>';
+                var urlstr = '<dd>',href;
                 try {
                     if (!o[i]["href"] && !!o[i]["icon"]) {
                         urlstr +='<a href="javascript:;"  menu-id="'+o[i]["id"]+'"><i class="'+o[i]["icon"]+'"></i><span >&nbsp;&nbsp;'+ o[i]["name"] +'</span></a>';
@@ -56,7 +99,8 @@
                         if(o[i]["icon"]){
                             icon=o[i]["icon"];
                         }
-                        urlstr +='<a href="javascript:;" menu-url=' + o[i]["href"]+' menu-id="'+o[i]["id"]+'"><i class="'+o[i]["icon"]+'"></i><span >&nbsp;&nbsp;'+ o[i]["name"] +'</span></a>';
+                        href=has?"javascript:;":"#"+o[i]["href"];
+                        urlstr +='<a href="'+href+'" menu-url=' + o[i]["href"]+' menu-id="'+o[i]["id"]+'"><i class="'+o[i]["icon"]+'"></i><span >&nbsp;&nbsp;'+ o[i]["name"] +'</span></a>';
                     }
                     if (!!o[i]["children"]&&o[i]["children"].length != 0) {
                         urlstr+='<dl class="layui-nav-child">';
@@ -77,19 +121,6 @@
                 //初始化动态元素，一些动态生成的元素如果不设置初始化，将不会有默认的动态效果
                 element.init();
             });
-            $('.layadmin-flexible').click(function() {
-                if ($(".layui-layout-admin").hasClass("shrink")) {
-                    $(".layui-layout-admin").removeClass("shrink");
-                    $('.layui-side-scroll li>a,.layui-side-scroll dd>a').unbind("mouseenter").unbind("mouseleave");
-                } else {
-                    $(".layui-layout-admin").addClass("shrink");
-                    $('.shrink .layui-side-scroll li>a,.shrink .layui-side-scroll dd>a').hover(function (r) {
-                        layer.tips($(this).text(), $(this));
-                    },function (r) {
-                        layer.close(layer.index);
-                    });
-                }
-            });
         };
         $MB.layerPost({url:ctx  + "session/getUserMenu",data:{ "userName": userName }},function (r) {
             if (r.code == 0) {
@@ -97,49 +128,16 @@
                 $("#navigation").remove("ul");
                 $("#navigation").append(forTree(data.children));
                 bindNav();
+                var forward = $("#main-content").attr("forward");
+                if(!!forward){
+                    if($MB.hasHistoryApi()){
+                        $main_content.ajax_load("loading",forward);
+                    }else {
+                        window.location.hash=window.location.hash+"#"+forward;
+                    }
+                }
             } else {
                 layer.msg('获取菜单失败！', {icon: 0});
             }
         });
-	}),$(document).ready(function() {//菜单点击绑定
-        $("body").on("click","a[menu-id]",function () {
-			var $this = $(this);
-			var id =$this.attr("menu-id");
-            var $thisa=$("#navigation").find("a[menu-id='"+id+"']");
-            var url =$thisa.attr("menu-url");
-            if(!!id){
-                var breadcrumbMenu=new Object();
-                breadcrumbMenu.id=  new Array();
-                breadcrumbMenu.name=  new Array();
-                $thisa.parents("dl").prev().each(function() {
-                    breadcrumbMenu.id.unshift($(this).attr("menu-id"));
-                    breadcrumbMenu.name.unshift($(this).text());
-                });
-                var breadcrumnHtml = "";
-                breadcrumnHtml += '<a href=""><i class="layui-icon layui-icon-home" style="font-size: 14px;color: #000;"></i> 首页</a>';
-                for (var i = 0; i < breadcrumbMenu.name.length; i++) {
-                    breadcrumnHtml += '<span lay-separator="">/</span>';
-                    breadcrumnHtml += '<a href="javascript:;" menu-id="'+breadcrumbMenu.id[i]+'" >'+breadcrumbMenu.name[i]+'</a>';
-                }
-                breadcrumnHtml += '<span lay-separator="">/</span>';
-                breadcrumnHtml+= '<a href="javascript:;" menu-id="'+id+'" menu-url="'+(!url?"":url)+'"><cite>'+$thisa.text()+'</cite></a>';
-                $breadcrumb.html("").append(breadcrumnHtml);
-			}
-			if(!!url){
-                var $parent=$thisa.parents("li");
-			    if(!$parent.hasClass("layui-nav-itemed")){
-                    $parent.addClass("layui-nav-itemed");
-                    $thisa.parents("dd").addClass("layui-nav-itemed layui-this");
-                }
-                loadMain(url);
-			}
-        });
-    }),$(document).ready(function(){
-        layui.extend({
-            dicutils: './toolkit/muiboot/js/dicutils' // {/}的意思即代表采用自有路径，即不跟随 base 路径
-        });
-    });
-
-	function loadMain(url) {
-        $main_content.ajax_load("loading",url);
-	};
+	});*/

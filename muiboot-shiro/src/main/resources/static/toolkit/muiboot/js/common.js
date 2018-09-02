@@ -1,6 +1,7 @@
 "use strict";
 var $MB = (function() {
     var loading="";
+    var count=0;
     var ajax_default={
         url:"",
         type: 'POST',
@@ -29,6 +30,24 @@ var $MB = (function() {
             }
         }
         return flag;
+    }
+    function hasHistoryApi() {
+        if (!!(window.history && history.pushState)){
+            return true;
+        } else {
+            return false;
+        }
+    }
+    function getRootPath() {
+        //获取当前网址，如： http://localhost:8083/uimcardprj/share/meun.jsp
+        var curWwwPath = window.document.location.href;
+        //获取主机地址之后的目录，如： /uimcardprj/share/meun.jsp
+        var pathName = window.document.location.pathname;
+        var pos = curWwwPath.indexOf(pathName);
+        //获取主机地址，如： http://localhost:8083
+        var localhostPaht = curWwwPath.substring(0, pos);
+        //获取带"/"的项目名，如：/uimcardprj
+        return (localhostPaht + ctx);
     }
     var cacheManager=(function(){
         var cacheObj={};
@@ -174,10 +193,25 @@ var $MB = (function() {
         isXsScreen:function () {
             return isXsScreen();
         },
-        getLoading:function (){
-            return loading;
+        getLoading:function (flag){
+            if(flag){
+                count++;
+            }else {
+                count--;
+            }
+            if(count<=0&&loading){
+                return loading;
+            }else {
+                return false;
+            }
         },setLoading:function ($loading) {
             loading=$loading;
+        },
+        hasHistoryApi:function () {
+            return hasHistoryApi();
+        },
+        getRootPath:function () {
+            return getRootPath();
         }
     }
 })(jQuery);
