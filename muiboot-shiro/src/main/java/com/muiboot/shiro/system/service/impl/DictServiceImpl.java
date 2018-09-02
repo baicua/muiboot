@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.muiboot.shiro.common.dic.denum.DicType;
 import com.muiboot.shiro.common.layer.LayerTree;
 import com.muiboot.shiro.common.service.impl.BaseService;
+import com.muiboot.shiro.common.util.LogUtil;
 import com.muiboot.shiro.common.util.TreeUtils;
 import com.muiboot.shiro.system.dao.CoreDicMapper;
 import com.muiboot.shiro.system.domain.CoreDic;
@@ -12,8 +13,6 @@ import com.muiboot.shiro.system.service.DictService;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -30,7 +29,7 @@ import java.util.*;
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
 public class DictServiceImpl extends BaseService<CoreDic> implements DictService {
 
-	private static Logger logger = LoggerFactory.getLogger(DictServiceImpl.class);
+	private static final LogUtil logger = LogUtil.getLoger(DictServiceImpl.class);
 	@Autowired
 	private CoreDicMapper dicMapper;
 	@Autowired
@@ -219,7 +218,7 @@ public class DictServiceImpl extends BaseService<CoreDic> implements DictService
 			try {
 				m = jsonMapper.readValue(dic.getContent(), LinkedHashMap.class); //json转换成map;
 			} catch (IOException e) {
-				logger.error("参数错误:字典转换失败");
+				logger.error("key="+dic.getDicKey()+"字典参数错误，字典转换失败。",e,"获取简单字典");
 				return null;
 			}
 		}else if (DicType.SQLDIC.name().equals(dic.getDicType())){
@@ -227,7 +226,7 @@ public class DictServiceImpl extends BaseService<CoreDic> implements DictService
 				try {
 					m=this.nativeSelectBySQL(dic.getSqlContent());
 				}catch (Exception e){
-					logger.error("SQL执行失败："+e.getMessage());
+					logger.error("key="+dic.getDicKey()+"SQL执行失败。",e,"获取SQL字典");
 					return null;
 				}
 			}
@@ -239,7 +238,7 @@ public class DictServiceImpl extends BaseService<CoreDic> implements DictService
 					buildMapTrees(trees, maps);
 					m=TreeUtils.build(trees);
 				}catch (Exception e){
-					logger.error("SQL执行失败："+e.getMessage());
+					logger.error("key="+dic.getDicKey()+"SQL执行失败。",e,"获取树形字典");
 					return null;
 				}
 			}

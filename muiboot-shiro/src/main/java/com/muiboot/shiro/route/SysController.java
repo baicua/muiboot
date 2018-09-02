@@ -22,7 +22,7 @@ public class SysController extends BaseController {
         //response.setHeader("Cache-Control", "max-age="+MAX_AGE);
     }
     @RequestMapping("sys/{forward}")
-    public String dicRoute(@PathVariable(name = "forward") String forward,Model model) {
+    public String sys(@PathVariable(name = "forward") String forward,Model model) {
         model.addAttribute("forward", forward);
         User user = super.getCurrentUser();
         model.addAttribute("user", user);

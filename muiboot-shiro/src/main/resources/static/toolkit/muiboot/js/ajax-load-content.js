@@ -150,7 +150,7 @@
                                 $MB.getScript(script.src,true);
                             })
                         }
-                        ajax_loaded_page.push(url,isLoad);
+                        //ajax_loaded_page.push(url,isLoad);
                     }catch (e) {
                         console.error("error:"+e.message+";url:"+url);
                         return true;
@@ -196,11 +196,7 @@
             $contentArea.refresh();
         },
         loading : function($contentArea, parms) {
-            if(parms){
-                $contentArea.ajaxload(parms,true);
-            }else{
-                $contentArea.refresh();
-            }
+            $contentArea.ajaxload(parms,true);
         },
         popstate:function ($contentArea, parms) {
             $contentArea.ajaxload(parms,false);
