@@ -175,7 +175,8 @@
                         ,nodes:nodes
                         ,click: function(node){
                             menuMethod.refresh(node.id);
-                            $("body .layui-body").animate({scrollTop: $("#menuInfoPanle").offset().top }, {duration: 500,easing: "swing"});
+                            if($MB.isMobile())
+                                $("body .layui-body").animate({scrollTop: $("#menuInfoPanle").parents(".site-tips").offset().top }, {duration: 500,easing: "swing"});
                         }
                     });
                 });

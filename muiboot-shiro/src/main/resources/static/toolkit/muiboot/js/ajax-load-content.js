@@ -119,6 +119,7 @@
                 $menu=$("#navigation").find("a[menu-url='"+url+"']");
                 pushl=root_url+"sys/"+url;
                 url=root_url + url;
+                if(isLoad)
                 history.pushState(null,$menu.text(),pushl);
             }else {
                 $menu=$("#navigation").find("a[href='"+url+"']");
@@ -200,6 +201,9 @@
             }else{
                 $contentArea.refresh();
             }
+        },
+        popstate:function ($contentArea, parms) {
+            $contentArea.ajaxload(parms,false);
         }
     };
     $.fn.ajax_load.defaults = {};

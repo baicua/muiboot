@@ -198,7 +198,8 @@
                         ,nodes:nodes
                         ,click: function(node){
                             method.refresh(node.id);
-                            $("body .layui-body").animate({scrollTop: $("#dicInfoPanle").offset().top }, {duration: 500,easing: "swing"});
+                            if($MB.isMobile())
+                            $("body .layui-body").animate({scrollTop: $("#dicInfoPanle").parents(".site-tips").offset().top }, {duration: 500,easing: "swing"});
                         }
                     });
                 });

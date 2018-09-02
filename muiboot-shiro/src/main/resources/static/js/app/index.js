@@ -29,6 +29,11 @@
                 $("#main-content").ajax_load("loading",url);
             }
         });
+        $(window).on("popstate",function(){
+            var href=window.location.href;
+            var url=href&&href.substring(href.indexOf("sys")+4);
+            $("#main-content").ajax_load("popstate",url);
+        });
     }
     //4.菜单栏打开关闭点击监听
     $(document).on("click",'.layadmin-flexible',function () {
