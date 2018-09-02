@@ -23,9 +23,6 @@ html {
   line-height:24px;
   text-align: center;
 }
-.layui-input, .layui-select, .layui-textarea{
-  height: 28px !important;
-}
 .site-tips{
   margin-bottom: 10px;
   padding: 15px;
@@ -162,6 +159,8 @@ input.layui-form-danger[type=radio] + div.layui-form-radio>i{
   background-color: #808080;
   text-align: center;
   font: 26px/38px sans-serif;
+  position: absolute;
+  right: 12px;
 }
 .hidden{
   display: none;

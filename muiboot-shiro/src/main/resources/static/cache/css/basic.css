@@ -357,3 +357,14 @@ a.btn-register:hover {
 	color: #606060;
 	display: inline-block;
 }
+@media screen and (max-width: 992px) {
+	.wrapper,.login-top,.login-topBg,.login-topStyle,.footer,.loginCen,.login-center {
+		width: auto;
+		min-width: 200px;
+	}
+}
+@media screen and (max-width: 992px) {
+	.login-topBg {
+		background-position: right;
+	}
+}

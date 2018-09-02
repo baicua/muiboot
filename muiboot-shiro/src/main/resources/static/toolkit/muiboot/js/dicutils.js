@@ -56,21 +56,22 @@
                 }else if ($this.hasClass('dic-tree')){
                     var id="dic-tree"+loadedCount,key = $this.attr("dic-map"),value=$this.val(),map =obj.data[key];
                     var verify=$this.attr("lay-verify"),placeholder=$this.attr("placeholder");
-                    if(!map)return false;
-                    var $input=$('<input type="text" '+(!verify?"":"lay-verify="+verify)+' readonly '+(!placeholder?"":"placeholder="+placeholder)+' class="layui-input dic-tree-input">');
-                    var ul =$('<ul id="'+id+'" class="layui-box layui-tree dic-tree-ul"></ul>');
-                    $this.after(ul).after($input),$this.hide();
-                    var nodes=$.extend([],map.children);
-                    if(!!value)defaultNode($this,nodes,value);
-                    ul.empty();
-                    layui.tree({elem: "#"+id,nodes:nodes,click: function(node){
-                        $input.val(node.name),$this.val(node.id),$input.toggleClass("show-tree"), $("body").toggleClass("tree-body");;
+                    if(!!map&&map.children){
+                        var $input=$('<input type="text" '+(!verify?"":"lay-verify="+verify)+' readonly '+(!placeholder?"":"placeholder="+placeholder)+' class="layui-input dic-tree-input">');
+                        var ul =$('<ul id="'+id+'" class="layui-box layui-tree dic-tree-ul"></ul>');
+                        $this.after(ul).after($input),$this.hide();
+                        var nodes=$.extend([],map.children);
+                        if(!!value)defaultNode($this,nodes,value);
+                        ul.empty();
+                        layui.tree({elem: "#"+id,nodes:nodes,click: function(node){
+                            $input.val(node.name),$this.val(node.id),$input.toggleClass("show-tree"), $("body").toggleClass("tree-body");;
                         }
-                    });
-                    $input.on("click",function () {
-                        $input.toggleClass("show-tree");
-                        $("body").toggleClass("tree-body");
-                    });
+                        });
+                        $input.on("click",function () {
+                            $input.toggleClass("show-tree");
+                            $("body").toggleClass("tree-body");
+                        });
+                    }
                 }else if ($this.hasClass('dic-text')){
                     var text = $.trim($this.text());
                     var key = $this.attr("dic-map");

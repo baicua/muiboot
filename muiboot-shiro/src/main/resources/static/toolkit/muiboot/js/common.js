@@ -1,5 +1,6 @@
 "use strict";
 var $MB = (function() {
+    var loading="";
     var ajax_default={
         url:"",
         type: 'POST',
@@ -8,6 +9,13 @@ var $MB = (function() {
         contentType: "application/x-www-form-urlencoded",
         data:""
     };
+    function isXsScreen() {
+        var width=document.body.clientWidth;
+        if(width&&width<992){
+            return true
+        }
+        return false;
+    }
     function IsPC() {
         var userAgentInfo = navigator.userAgent;
         var Agents = ["Android", "iPhone",
@@ -79,11 +87,16 @@ var $MB = (function() {
             async:params.async,
             cache:params.cache,
             beforeSend: function () {
+                if(!loading)loading=layer.load(0,{shade: [0.01,'#fff']});
             },
             success: function (data) {
                 callback(data);
             },
             complete: function () {
+                setTimeout(function () {
+                    layer.close($MB.getLoading());
+                    $MB.setLoading("");
+                },300);
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
                 console.info("error: " + XMLHttpRequest.responseText);
@@ -157,6 +170,14 @@ var $MB = (function() {
         },
         isMobile:function () {
             return !IsPC();
+        },
+        isXsScreen:function () {
+            return isXsScreen();
+        },
+        getLoading:function (){
+            return loading;
+        },setLoading:function ($loading) {
+            loading=$loading;
         }
     }
 })(jQuery);

@@ -5,7 +5,7 @@
     layui.use(['element', 'laytpl','form','dicutils'], function () {
         element = layui.element,form = layui.form,laytpl = layui.laytpl,dicutils=layui.dicutils;
         element.init();
-        dicutils.load("dicType,yesOrNo,menuType");
+        dicutils.load("dicType,yesOrNo,valid,dicCategoryTree,dicCategoryTable");
         form.render();
     });
     setTimeout(function(){
@@ -162,6 +162,7 @@
                                 layui.tree({elem: '#dicListPanle .layui-tree',nodes:nodes});
                             }
                         });
+                        dicutils.render();
                         element.init();
                     });
                 });

@@ -1,13 +1,9 @@
 	var $breadcrumb = $(".breadcrumb");
 	var $main_content = $("#main-content");
-	var loadspan="";
     $(document).ready(function() {
-        loadspan=layer.load(2,{
-            shade: [0.5,'#fff'] //0.1透明度的白色背景
-        });
-        if($MB.isMobile()){
+        if($MB.isMobile()||$MB.isXsScreen()){
             $(".layui-layout.layui-layout-admin").addClass("shrink");
-            $(document).on("click",".layui-body",function (e) {
+            $("body").on("touchend",".layui-body",function (e) {
                 $(".layui-layout.layui-layout-admin").addClass("shrink");
             });
         }
@@ -80,12 +76,6 @@
                 var element = layui.element;
                 //初始化动态元素，一些动态生成的元素如果不设置初始化，将不会有默认的动态效果
                 element.init();
-                //点击事件的监听
-                $('.site-demo-active').on('click', function(){
-                    var othis = $(this);
-                    var type = $(this).data('type');
-                    active[type] ? active[type].call(this, othis) : '';
-                });
             });
             $('.layadmin-flexible').click(function() {
                 if ($(".layui-layout-admin").hasClass("shrink")) {
@@ -101,20 +91,16 @@
                 }
             });
         };
-        $.post(ctx + "session/getUserMenu", { "userName": userName }, function(r) {
+        $MB.layerPost({url:ctx  + "session/getUserMenu",data:{ "userName": userName }},function (r) {
             if (r.code == 0) {
                 var data = r.msg;
                 $("#navigation").remove("ul");
                 $("#navigation").append(forTree(data.children));
+                bindNav();
             } else {
-                layer.alert('获取菜单失败！', {icon: 0});
+                layer.msg('获取菜单失败！', {icon: 0});
             }
-        })
-		.error(function() { layer.alert('获取菜单失败！', {icon: 0});})
-		.complete(function() {
-			layer.close(loadspan);
-            bindNav();
-		});
+        });
 	}),$(document).ready(function() {//菜单点击绑定
         $("body").on("click","a[menu-id]",function () {
 			var $this = $(this);

@@ -72,12 +72,13 @@
         $contentArea.ajaxload =function(url,isLoad){
             //判断是否使用缓存
             var useCache=cache.useCache("menuCache",url,new Date().getTime());
-            var layer_load_index=0;
             $.ajax({
                 url: root_url + url,
                 cache: useCache,
                 beforeSend:function (r) {
-                    layer_load_index=layer.load(2,{shade: [0.5,'#fff']});
+                    if(!$MB.getLoading()){
+                        $MB.setLoading(layer.load(0,{shade: [0.01,'#fff']}));
+                    }
                 },
                 success: function (r) {
                     if (r.indexOf('账户登录') != -1) {
@@ -129,7 +130,10 @@
                 },
                 complete:function (r) {
                     if($MB.isMobile()){$(".layui-layout.layui-layout-admin").addClass("shrink")}
-                    layer.close(layer_load_index);
+                    setTimeout(function () {
+                        layer.close($MB.getLoading());
+                        $MB.setLoading("");
+                    },400);
                 }
             });
         },
