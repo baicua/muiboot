@@ -2,11 +2,12 @@ package com.muiboot.shiro.common.layer;
 
 import com.alibaba.fastjson.JSON;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class LayerTree<T> {
+public class LayerTree<T> implements Serializable{
 	/**
 	 * 节点ID
 	 */

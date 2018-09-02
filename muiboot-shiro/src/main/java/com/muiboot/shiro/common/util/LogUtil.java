@@ -25,17 +25,13 @@ public class LogUtil{
         this.log = log;
     }
 
-    public void error(String message, Exception ex, HttpServletRequest req){
+    public void error(String message, Exception ex,String url){
         String userId="未登录用户";
-        String url="";
         Long user=ShiroUtil.getCurrentUserId();
         if (user!=null){
             userId=user.toString();
         }
-        if (null!=req&&null!=req.getRequestURL()){
-            url=req.getRequestURL().toString();
-        }
-        log.error("user:{},url:{},message:{},Exception:{},errorMessage:{},IP:{}",userId,url,message,ex.getClass(),ex.getMessage(),IPUtils.getIpAddr(req));
+        log.error("user:{},url:{},message:{},Exception:{},errorMessage:{}",userId,url,message,ex.getClass(),ex.getMessage());
         StackTraceElement[] stackTraceElements=ex.getStackTrace();
         if (null!=stackTraceElements){
             StringBuilder error = new StringBuilder();

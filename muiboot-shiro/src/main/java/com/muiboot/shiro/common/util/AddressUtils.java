@@ -14,7 +14,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class AddressUtils {
 
 	private static String getAddresses(String content, String encodingString) throws UnsupportedEncodingException {
-		String urlStr = "http://ip.taobao.com/service/getIpInfo.php";
+		String urlStr = "http://whois.pconline.com.cn/ipJson.jsp";
 		String returnStr = getResult(urlStr, content, encodingString);
 		if (returnStr != null) {
 			returnStr = decodeUnicode(returnStr);
@@ -130,11 +130,11 @@ public class AddressUtils {
 	public static String getRealAddressByIP(String ip, ObjectMapper mapper) {
 		String address = "";
 		try {
-			address = getAddresses("ip=" + ip, "utf-8");
+			address = getAddresses("json=true&ip=" + ip, "gbk");
 			JsonNode node = mapper.readTree(address);
-			JsonNode data = node.get("data");
-			String region = data.get("region").asText();
-			String city = data.get("city").asText();
+			//JsonNode data = node.get("data");
+			String region = node.get("pro").asText();
+			String city = node.get("city").asText();
 			address = region + "" + city;
 		} catch (Exception ignored) {
 

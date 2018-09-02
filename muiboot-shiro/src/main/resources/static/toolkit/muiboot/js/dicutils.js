@@ -76,7 +76,7 @@
                     var text = $.trim($this.text());
                     var key = $this.attr("dic-map");
                     var map =obj.data[key];
-                    $this.text(!map[text]?"/":map[text]);
+                    $this.text(map&&map[text]||text);
                 }
 
             })

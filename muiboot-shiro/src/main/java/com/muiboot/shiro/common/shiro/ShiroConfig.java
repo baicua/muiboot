@@ -29,14 +29,14 @@ import javax.servlet.Filter;
 
 @Configuration
 public class ShiroConfig {
-	
+
 	@Bean
 	public EhCacheManager getEhCacheManager() {
 	    EhCacheManager em = new EhCacheManager();
 	    em.setCacheManagerConfigFile("classpath:config/Ehcache.xml");
 	    return em;
 	}
-	
+
 	@Bean
 	public ShiroFilterFactoryBean shiroFilterFactoryBean(SecurityManager securityManager) {
 		ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
@@ -67,7 +67,7 @@ public class ShiroConfig {
 	}
  
 	@Bean  
-    public SecurityManager securityManager(){  
+    public SecurityManager securityManager(){
        DefaultWebSecurityManager securityManager =  new DefaultWebSecurityManager();
        securityManager.setRealm(shiroRealm());
        securityManager.setRememberMeManager(rememberMeManager());
@@ -92,7 +92,12 @@ public class ShiroConfig {
 		cookie.setMaxAge(86400);
 		return cookie;
 	}
-	
+	@Bean
+	public SimpleCookie simpleIdCookie(){
+		SimpleCookie simpleIdCookie = new SimpleCookie();
+		simpleIdCookie.setName("muiboot.session.id");
+		return simpleIdCookie;
+	}
 	public CookieRememberMeManager rememberMeManager() {
 		CookieRememberMeManager cookieRememberMeManager = new CookieRememberMeManager();
 		cookieRememberMeManager.setCookie(rememberMeCookie());
@@ -139,6 +144,7 @@ public class ShiroConfig {
 		sessionManager.setSessionValidationSchedulerEnabled(true);
 		sessionManager.setSessionIdUrlRewritingEnabled(false);//url中是否显示session Id
 		sessionManager.setDeleteInvalidSessions(true);// 删除失效的session
+		sessionManager.setSessionIdCookie(simpleIdCookie());
 		return sessionManager;
 	}
 }

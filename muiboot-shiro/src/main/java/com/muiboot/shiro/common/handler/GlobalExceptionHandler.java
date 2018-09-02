@@ -19,10 +19,11 @@ public class GlobalExceptionHandler {
 	@ExceptionHandler(value = Exception.class)
 	@ResponseBody
 	public ResponseBo handleException(Exception ex,HttpServletRequest req) {
+		String url=req.getRequestURL().toString();
 		exeService.execute(new Runnable() {
 			@Override
 			public void run() {
-				log.error("操作异常",ex,req);
+				log.error("操作异常",ex,url);
 			}
 		});
 		return ResponseBo.error("操作失败，请联系管理员！");
