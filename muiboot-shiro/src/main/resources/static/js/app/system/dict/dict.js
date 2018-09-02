@@ -1,11 +1,11 @@
 ;$(document).ready(function() {
     "use strict";
     //initTreeTable();
-    var element,form,laytpl,dicutils;
-    layui.use(['element', 'laytpl','form','dicutils'], function () {
-        element = layui.element,form = layui.form,laytpl = layui.laytpl,dicutils=layui.dicutils;
+    var element,form,laytpl,dict;
+    layui.use(['element', 'laytpl','form','dict'], function () {
+        element = layui.element,form = layui.form,laytpl = layui.laytpl,dict=layui.dict;
         element.init();
-        dicutils.load("dicType,yesOrNo,valid,dicCategoryTree,dicCategoryTable");
+        dict.load("dicType,yesOrNo,valid,dicCategoryTree,dicCategoryTable");
         form.render();
     });
     setTimeout(function(){
@@ -69,7 +69,7 @@
                         },
                         success:function (layero,index) {
                             layero.addClass("layui-form");
-                            dicutils.render();
+                            dict.render();
                             layero.find(".layui-layer-btn0").attr("lay-filter","form-verify").attr("lay-submit","");
                             method.onsubmit(layero.find(".layui-layer-btn0"),layero,url,function () {
                                 method.refresh($("#menuInfoPanle table").attr("data-name-menu"));
@@ -162,7 +162,7 @@
                                 layui.tree({elem: '#dicListPanle .layui-tree',nodes:nodes});
                             }
                         });
-                        dicutils.render();
+                        dict.render();
                         element.init();
                     });
                 });

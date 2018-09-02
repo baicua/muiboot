@@ -86,5 +86,5 @@
             })
         }
     };
-    exports('dicutils', obj);
+    exports('dict', obj);
 });

@@ -1,11 +1,11 @@
 ;$(document).ready(function() {
     "use strict";
     //initTreeTable();
-    var element,form,laytpl,dicutils;
+    var element,form,laytpl,dict;
     setTimeout(function(){
-        layui.use(['element', 'laytpl','form',"dicutils"], function () {
-            element = layui.element,form = layui.form,laytpl = layui.laytpl,dicutils=layui.dicutils;
-            dicutils.load("menuType,menuData,menuTree");
+        layui.use(['element', 'laytpl','form',"dict"], function () {
+            element = layui.element,form = layui.form,laytpl = layui.laytpl,dict=layui.dict;
+            dict.load("menuType,menuData,menuTree");
             element.init();
             form.render();
         });
@@ -65,7 +65,7 @@
                         },
                         success:function (layero,index) {
                             layero.addClass("layui-form");
-                            dicutils.render();
+                            dict.render();
                             layero.find(".layui-layer-btn0").attr("lay-filter","form-verify").attr("lay-submit","");
                             menuMethod.onsubmit(layero.find(".layui-layer-btn0"),layero,url,function () {
                                 menuMethod.refresh($("#menuInfoPanle table").attr("data-name-menu"));
@@ -134,7 +134,7 @@
                     $MB.layerGet({url:ctx+"menu/getMenuDetail",data:{menuId:menuId}},function(data){
                         laytpl($compent.find("#layui-table-menu").html()).render($.extend({},data.msg.menu), function(html){
                             $("#menuInfoPanle").html(html);
-                            dicutils.render();
+                            dict.render();
                         });
                         laytpl($compent.find("#layui-breadcrumb-permission").html()).render($.extend({},data.msg.permissions), function(html){
                             $("#menuButtonPanle").html(html);

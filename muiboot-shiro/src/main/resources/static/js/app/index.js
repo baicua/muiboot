@@ -9,7 +9,7 @@
     }
     //2.初始化字典,菜单插件
     layui.extend({
-        dicutils: $MB.getRootPath()+'/toolkit/muiboot/js/dicutils',
+        dict: $MB.getRootPath()+'/toolkit/muiboot/js/ajax-load-dict',
         menu: $MB.getRootPath()+'/toolkit/muiboot/js/ajax-load-menu',
     });
     //3.hash监听事件
