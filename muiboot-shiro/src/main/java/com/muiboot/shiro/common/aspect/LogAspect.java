@@ -71,17 +71,7 @@ public class LogAspect {
 		// 保持日志
 		// 获取request
 		HttpServletRequest request = HttpContextUtils.getHttpServletRequest();
-		exeService.execute(new Runnable() {
-			@Override
-			public void run() {
-				try {
-					saveLog(point, time,request);
-				} catch (JsonProcessingException e) {
-					logger.error("日志保存失败："+e.getMessage());
-					e.printStackTrace();
-				}
-			}
-		});
+		saveLog(point, time,request);
 		return result;
 	}
 
@@ -128,6 +118,6 @@ public class LogAspect {
 		log.setCreateTime(new Date());
 		log.setLocation(AddressUtils.getRealAddressByIP(log.getIp(), mapper));
 		// 保存系统日志
-		this.logService.save(log);
+		this.logService.sendScheduled(log);
 	}
 }
