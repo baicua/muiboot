@@ -25,8 +25,9 @@ public  abstract class BaseController {
 
 	protected Map<String, Object> getDataTable(PageInfo<?> pageInfo) {
 		Map<String, Object> rspData = new HashMap<>();
-		rspData.put("rows", pageInfo.getList());
-		rspData.put("total", pageInfo.getTotal());
+		rspData.put("code", 0);
+		rspData.put("data", pageInfo.getList());
+		rspData.put("count", pageInfo.getTotal());
 		return rspData;
 	}
 

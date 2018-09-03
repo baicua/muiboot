@@ -34,7 +34,7 @@ public class LogController extends BaseController {
 	@RequestMapping("log/list")
 	@ResponseBody
 	public Map<String, Object> logList(QueryRequest request, SysLog log) {
-		PageHelper.startPage(request.getPageNum(), request.getPageSize());
+		PageHelper.startPage(request.getPage(), request.getLimit());
 		List<SysLog> list = this.logService.findAllLogs(log);
 		PageInfo<SysLog> pageInfo = new PageInfo<>(list);
 		return getDataTable(pageInfo);

@@ -1,95 +1,69 @@
-$(function() {
-    var settings = {
-        url: ctx + "log/list",
-        pageSize: 10,
-        queryParams: function(params) {
-            return {
-                pageSize: params.limit,
-                pageNum: params.offset / params.limit + 1,
-                timeField: $(".log-table-form").find("input[name='timeField']").val().trim(),
-                username: $(".log-table-form").find("input[name='username']").val().trim(),
-                operation: $(".log-table-form").find("input[name='operation']").val().trim(),
-            };
-        },
-        columns: [{
-                checkbox: true
-            },
-            {
-                field: 'username',
-                title: '操作用户'
-            }, {
-                field: 'operation',
-                title: '描述'
-            }, {
-                field: 'time',
-                title: '耗时（毫秒）'
-            }, {
-                field: 'method',
-                title: '操作方法',
-            }, {
-                field: 'params',
-                title: '参数'
-            }, {
-                field: 'ip',
-                title: 'IP地址'
-            }, {
-                field: 'location',
-                title: '操作地点'
-            }, {
-                field: 'createTime',
-                title: '操作时间'
-            }
-        ]
-    }
-    $MB.initTable('logTable', settings);
-    $MB.calenders('input[name="timeField"]',true,false);
-});
+;$(document).ready(function() {
+    "use strict";
+    var table;
+    layui.use('table', function(){
+        table = layui.table;
+        //第一个实例
+        table.render({
+            id: 'lay-userOnline'
+            ,elem: '#userOnline'
+            ,url: '/log/list' //数据接口
+            ,page: true //开启分页
+            ,size: 'sm'
+            ,height: 'full-200'
+            ,skin:"line"
+                ,cols: [[
+                {type:'checkbox'}
+                ,{field: 'id', title: 'ID'}
+                ,{field:'username', title: '操作用户'}
+                ,{field:'operation',  title: '描述'}
+                ,{field:'time',  title: '耗时（毫秒）'}
+                ,{field:'ip', title: 'IP地址'}
+                ,{field:'location', title: '操作地点'}
+                ,{field:'createTime', title: '操作时间'}
+            ]]
+        })
 
-function search() {
-    $MB.refreshTable('logTable');
-}
-
-function refresh() {
-    $(".log-table-form")[0].reset();
-    $MB.refreshTable('logTable');
-}
-
-function deleteLogs() {
-    var selected = $("#logTable").bootstrapTable('getSelections');
-    var selected_length = selected.length;
-    if (!selected_length) {
-        $MB.n_warning('请勾选需要删除的日志！');
-        return;
-    }
-    var ids = "";
-    for (var i = 0; i < selected_length; i++) {
-        ids += selected[i].id;
-        if (i != (selected_length - 1)) ids += ",";
-    }
-
-    $MB.confirm({
-        text: "确定删除选中的日志？",
-        confirmButtonText: "确定删除"
-    }, function() {
-        $.post(ctx + 'log/delete', { "ids": ids }, function(r) {
-            if (r.code == 0) {
-                $MB.n_success(r.msg);
-                refresh();
-            } else {
-                $MB.n_danger(r.msg);
-            }
+        $("#expBtn").on("click",function (r) {
+            $MB.layerPost({url: $MB.getRootPath()+"/log/excel",data:{}}, function (r) {
+                if (r.code == 0) {
+                    window.location.href = $MB.getRootPath()+"/common/download?fileName=" + r.msg + "&delete=" + true;
+                } else {
+                    layer.msg(r.msg);
+                }
+            });
+        });
+        $("#delBtn").on("click",function (r) {
+            deleteLogs();
         });
     });
-}
+    function deleteLogs() {
+        var checkStatus = table.checkStatus('lay-userOnline');
+        if(checkStatus.data.length===0){
+            layer.msg('没有选择数据');
+            return;
+        }
+        var ids = "";
+        for (var i = 0; i < checkStatus.data.length; i++) {
+            ids += checkStatus.data[i].id;
+            if (i != (checkStatus.data.length - 1)) ids += ",";
+        }
+        layer.msg('你确定要删除选中日志吗？', {
+            time: 0 //不自动关闭
+            ,btn: ['确定', '取消']
+            ,yes: function(index){
+                layer.close(index);
+                $MB.layerPost({url:ctx + "log/delete",data:{"ids": ids},cache:false},function (data) {
+                    layer.msg(data.msg);
+                    table.reload("lay-userOnline");
+                });
+            }
+        });
+    }
 
-function exportLogExcel(){
-	$.post(ctx+"log/excel",$(".log-table-form").serialize(),function(r){
-		if (r.code == 0) {
-			window.location.href = "common/download?fileName=" + r.msg + "&delete=" + true;
-		} else {
-			$MB.n_warning(r.msg);
-		}
-	});
+});
+function search() {
+    $MB.refreshTable('logTable');
 }
 
 function exportLogCsv(){

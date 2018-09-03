@@ -4,7 +4,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.muiboot.shiro.common.annotation.Log;
+import com.muiboot.shiro.common.controller.BaseController;
+import com.muiboot.shiro.common.domain.QueryRequest;
 import com.muiboot.shiro.common.domain.ResponseBo;
 import com.muiboot.shiro.system.service.MenuService;
 import com.muiboot.shiro.system.service.SessionService;
@@ -18,7 +22,7 @@ import com.muiboot.shiro.system.domain.UserOnline;
 
 
 @Controller
-public class SessionController {
+public class SessionController extends BaseController {
 	
 	@Autowired
     SessionService sessionService;
@@ -26,7 +30,6 @@ public class SessionController {
 	@Autowired
 	private MenuService menuService;
 	
-	@Log("获取在线用户信息")
 	@RequestMapping("session")
 	@RequiresPermissions("session:list")
 	public String online() {
@@ -35,12 +38,11 @@ public class SessionController {
 
 	@ResponseBody
 	@RequestMapping("session/list")
-	public Map<String, Object> list() {
+	public Map<String, Object> list(QueryRequest request) {
+		PageHelper.startPage(request.getPage(), request.getLimit());
 		List<UserOnline> list = sessionService.list();
-		Map<String, Object> rspData = new HashMap<>();
-		rspData.put("rows", list);
-		rspData.put("total", list.size());
-		return rspData;
+		PageInfo<UserOnline> pageInfo = new PageInfo<>(list);
+		return getDataTable(pageInfo);
 	}
 
 	@RequestMapping("session/getUserMenu")

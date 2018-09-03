@@ -1,70 +1,24 @@
-<div class="card">
-    <div class="card-block">
-        <div class="table-responsive">
-            <div id="data-table_wrapper" class="dataTables_wrapper">
-                <div class="dataTables_buttons hidden-sm-down actions">
-                    <span class="actions__item zmdi zmdi-search" onclick="search()" title="搜索" />
-                    <span class="actions__item zmdi zmdi-refresh-alt" onclick="refresh()" title="刷新" />
-                      <div class="dropdown actions__item">
-                        <i data-toggle="dropdown" class="zmdi zmdi-download"></i>
-                        <ul class="dropdown-menu dropdown-menu-right">
-                            <a href="javascript:void(0)" class="dropdown-item" data-table-action="excel" onclick="exportLogExcel()">
-		                    Excel (.xlsx)
-		                </a>
-                            <a href="javascript:void(0)" class="dropdown-item" data-table-action="csv" onclick="exportLogCsv()">
-		                    CSV (.csv)
-		                </a>
-                        </ul>
-                    </div> 
-                    <div class="dropdown actions__item" shiro:hasPermission="log:delete">
-                        <i data-toggle="dropdown" class="zmdi zmdi-more-vert"></i>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <a href="javascript:void(0)" class="dropdown-item" onclick="deleteLogs()" shiro:hasPermission="log:delete">删除日志</a>
-                        </div>
-                    </div>
-                </div>
-                <div id="data-table_filter" class="dataTables_filter">
-                    <form class="log-table-form">
-                        <div class="row">
-                        	<div class="col-sm-4">
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-					               	操作时间：
-					            </span>
-                                    <div class="form-group">
-                                        <input type="text" name="timeField" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-					               	操作用户：
-					            </span>
-                                    <div class="form-group">
-                                        <input type="text" name="username" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-					               	描述：
-					            </span>
-                                    <div class="form-group">
-                                        <input type="text" name="operation" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-                            
-                        </div>
-                    </form>
-                </div>
-                <div class="table-responsive">
-                    <table id="logTable" data-mobile-responsive="true" class="mb-bootstrap-table text-nowrap"></table>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head data-th-include="common/head"></head>
+<body class="layui-layout-body layui-table-body">
+<div data-th-include="common/common"></div>
+<hr>
+<div class="layui-container ajax-content" lay-filter="ajax-content">
+    <form class="layui-form menu-table-form" action="">
+        <div class="layui-form-item">
+            <div class="layui-inline" style="float: right;margin-bottom: 0px;margin-right: 4px;">
+                <div class="layui-btn-group">
+                    <button title="导出" type="button" id="expBtn" class="layui-btn layui-btn-primary layui-btn-sm" data-table-action="excel" onclick="exportMenuExcel()"><i class="layui-icon layui-icon-download-circle"></i></button>
+                    <button title="删除" type="button" id="delBtn" class="layui-btn layui-btn-primary layui-btn-sm" shiro:hasPermission="menu:delete"><i class="layui-icon"></i></button>
                 </div>
             </div>
         </div>
+    </form>
+    <div class="layui-row">
+        <table class="layui-hide" id="userOnline"></table>
     </div>
+    <script data-th-src="@{/js/app/system/log/log.js}"></script>
 </div>
-<script data-th-src="@{js/app/system/log/log.js}"></script>
+</body>
+</html>

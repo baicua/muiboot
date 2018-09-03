@@ -6,23 +6,22 @@ public class QueryRequest implements Serializable {
 
 	private static final long serialVersionUID = -4869594085374385813L;
 
-	private int pageSize;
-	private int pageNum;
+	private int limit;
+	private int page;
 
-	public int getPageSize() {
-		return pageSize;
+	public int getLimit() {
+		return limit;
 	}
 
-	public void setPageSize(int pageSize) {
-		this.pageSize = pageSize;
+	public void setLimit(int limit) {
+		this.limit = limit;
 	}
 
-	public int getPageNum() {
-		return pageNum;
+	public int getPage() {
+		return page;
 	}
 
-	public void setPageNum(int pageNum) {
-		this.pageNum = pageNum;
+	public void setPage(int page) {
+		this.page = page;
 	}
-
 }

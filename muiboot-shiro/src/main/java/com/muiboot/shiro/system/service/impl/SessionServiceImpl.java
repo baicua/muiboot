@@ -1,8 +1,6 @@
 package com.muiboot.shiro.system.service.impl;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 import com.muiboot.shiro.system.domain.User;
 import org.apache.shiro.session.Session;
@@ -64,6 +62,12 @@ public class SessionServiceImpl implements SessionService {
 			userOnline.setTimeout(timeout);
 			list.add(userOnline);
 		}
+		Collections.sort(list, new Comparator<UserOnline>() {
+			@Override
+			public int compare(UserOnline o1, UserOnline o2) {
+				return (int) (o2.getStartTimestamp().getTime()-o1.getStartTimestamp().getTime());
+			}
+		});
 		return list;
 	}
 

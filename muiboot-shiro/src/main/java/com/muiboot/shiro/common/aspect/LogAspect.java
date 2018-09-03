@@ -123,7 +123,7 @@ public class LogAspect {
 		}
 		// 设置IP地址
 		log.setIp(IPUtils.getIpAddr(request));
-		log.setUsername(user.getUsername());
+		log.setUsername(user.getRealName());
 		log.setTime(time);
 		log.setCreateTime(new Date());
 		log.setLocation(AddressUtils.getRealAddressByIP(log.getIp(), mapper));

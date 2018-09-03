@@ -213,3 +213,9 @@ input.layui-form-danger[type=radio] + div.layui-form-radio>i{
     left: auto;
   }
 }
+.layui-table-tips-main{
+  overflow: hidden;
+}
+.layui-table-body.layui-table-main{
+  overflow-x: hidden;
+}

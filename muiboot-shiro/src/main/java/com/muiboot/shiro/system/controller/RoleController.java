@@ -36,7 +36,7 @@ public class RoleController extends BaseController {
 	@RequestMapping("role/list")
 	@ResponseBody
 	public Map<String, Object> roleList(QueryRequest request, Role role) {
-		PageHelper.startPage(request.getPageNum(), request.getPageSize());
+		PageHelper.startPage(request.getPage(), request.getLimit());
 		List<Role> list = this.roleService.findAllRole(role);
 		PageInfo<Role> pageInfo = new PageInfo<>(list);
 		return getDataTable(pageInfo);
