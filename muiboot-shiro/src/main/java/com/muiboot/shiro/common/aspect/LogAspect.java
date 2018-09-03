@@ -87,6 +87,9 @@ public class LogAspect {
 
 	private void saveLog(ProceedingJoinPoint joinPoint, long time,HttpServletRequest request) throws JsonProcessingException {
 		User user = (User) SecurityUtils.getSubject().getPrincipal();
+		if (null==user){
+			user=new User();
+		}
 		MethodSignature signature = (MethodSignature) joinPoint.getSignature();
 		Method method = signature.getMethod();
 		SysLog log = new SysLog();
@@ -110,6 +113,11 @@ public class LogAspect {
 			StringBuilder params = new StringBuilder();
 			for (int i = 0; i < args.length; i++) {
 				params.append("  ").append(paramNames[i]).append(": ").append(this.mapper.writeValueAsString(args[i]));
+				if (params.length()>500){
+					params.delete(500,params.length());
+					params.append("...");
+					continue;
+				}
 			}
 			log.setParams(params.toString());
 		}
