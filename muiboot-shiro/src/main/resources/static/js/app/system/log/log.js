@@ -62,16 +62,3 @@
     }
 
 });
-function search() {
-    $MB.refreshTable('logTable');
-}
-
-function exportLogCsv(){
-	$.post(ctx+"log/csv",$(".log-table-form").serialize(),function(r){
-		if (r.code == 0) {
-			window.location.href = "common/download?fileName=" + r.msg + "&delete=" + true;
-		} else {
-			$MB.n_warning(r.msg);
-		}
-	});
-}

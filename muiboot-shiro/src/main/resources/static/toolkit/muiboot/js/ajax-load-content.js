@@ -147,7 +147,11 @@
                         }
                         if(!!scripts&&scripts.length>0){
                             scripts.each(function(index,script){
-                                $MB.getScript(script.src,true);
+                                if($MB.isMobile()&&script.attributes[1]){
+                                    $MB.getScript(script.attributes[1].value,true);
+                                }else {
+                                    $MB.getScript(script.src,true);
+                                }
                             })
                         }
                         //ajax_loaded_page.push(url,isLoad);

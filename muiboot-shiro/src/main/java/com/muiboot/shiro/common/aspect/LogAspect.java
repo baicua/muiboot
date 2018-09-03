@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import com.muiboot.shiro.common.annotation.Log;
 import com.muiboot.shiro.common.util.HttpContextUtils;
 import com.muiboot.shiro.common.util.IPUtils;
+import com.muiboot.shiro.common.util.ShiroUtil;
 import com.muiboot.shiro.common.util.exec.ExecutorsUtil;
 import com.muiboot.shiro.system.domain.SysLog;
 import com.muiboot.shiro.system.domain.User;
@@ -71,11 +72,12 @@ public class LogAspect {
 		// 保持日志
 		// 获取request
 		HttpServletRequest request = HttpContextUtils.getHttpServletRequest();
+		User user = ShiroUtil.getCurrentUser();
 		exeService.execute(new Runnable() {
 			@Override
 			public void run() {
 				try {
-					saveLog(point, time,request);
+					saveLog(point, time,request,user);
 				} catch (JsonProcessingException e) {
 					logger.error("日志保存失败："+e.getMessage());
 					e.printStackTrace();
@@ -85,8 +87,7 @@ public class LogAspect {
 		return result;
 	}
 
-	private void saveLog(ProceedingJoinPoint joinPoint, long time,HttpServletRequest request) throws JsonProcessingException {
-		User user = (User) SecurityUtils.getSubject().getPrincipal();
+	private void saveLog(ProceedingJoinPoint joinPoint, long time,HttpServletRequest request,User user) throws JsonProcessingException {
 		if (null==user){
 			user=new User();
 		}
@@ -128,6 +129,6 @@ public class LogAspect {
 		log.setCreateTime(new Date());
 		log.setLocation(AddressUtils.getRealAddressByIP(log.getIp(), mapper));
 		// 保存系统日志
-		this.logService.sendScheduled(log);
+		this.logService.save(log);
 	}
 }
