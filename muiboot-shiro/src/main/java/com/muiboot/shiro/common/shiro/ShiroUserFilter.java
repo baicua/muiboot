@@ -18,7 +18,6 @@ public class ShiroUserFilter extends UserFilter {
     protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
         if(ServletUtil.isAjax(request)){
             HttpServletResponse res= (HttpServletResponse) response;
-            res.setStatus(HttpServletResponse.SC_SEE_OTHER);
             res.sendError(HttpServletResponse.SC_SEE_OTHER,"登陆超时");
         }else{
             this.saveRequestAndRedirectToLogin(request, response);

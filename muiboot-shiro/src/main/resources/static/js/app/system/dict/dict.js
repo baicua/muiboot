@@ -53,10 +53,11 @@
             menuModel=text;
         });
         var loadModel=function(data,title,url){
+            var openIndex=0;
             try{
                 laytpl(menuModel).render(data, function(html){
                     //页面层
-                    layer.open({
+                    openIndex=layer.open({
                         title:title,
                         type: 1,
                         skin: 'layui-layer-rim', //加上边框
@@ -96,6 +97,7 @@
                     });
                 });
             }catch (e){
+                layer.close(openIndex);
                 layer.msg('请求数据异常：'+e.message);
             }
         };
@@ -118,6 +120,7 @@
                         loadModel(data.msg,"字典修改",ctx + "dict/update");
                     });
                 }catch(e) {
+                    layer.close(openIndex);
                     layer.msg('请求数据异常：'+e.message);
                 }
             },
