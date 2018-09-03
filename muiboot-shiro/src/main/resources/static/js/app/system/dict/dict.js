@@ -18,34 +18,13 @@
         method.update($("#dicInfoPanle table").attr("data-name-dic"));
     });
     $("#expBtn").on("click",function (r) {
-        method.expMenu();
+        method.exp();
     });
     $("#search_input_span").on("click",function (r) {
         method.resetTree();
     });
     $("#delBtn").on("click",function (r) {
-        method.delMenu($("#menuInfoPanle table").attr("data-name-menu"),"菜单");
-    });
-    $("#menuButtonPanle").on("click","i[function='del']",function (r) {
-        var menuid=$(this).attr("permissionid");
-        if(!menuid){
-            layer.msg('获取按钮信息失败');
-            return;
-        }
-        method.delMenu(menuid,"按钮权限");
-
-    });
-    $("#menuButtonPanle").on("click","a",function (r) {
-        var menuid=$(this).attr("permissionid");
-        if(!menuid){
-            layer.msg('获取按钮信息失败');
-            return;
-        }
-        method.update(menuid);
-
-    });
-    $("#menuAuthPanle").on("click","a",function (r) {
-        layer.msg('还未开发相应功能');
+        method.del($("#dicInfoPanle table").attr("data-name-dic"),"字典");
     });
     var method =(function() {
         var menuModel = "";
@@ -124,8 +103,8 @@
                     layer.msg('请求数据异常：'+e.message);
                 }
             },
-            delMenu:function(menuId,name){
-                if(!menuId){
+            del:function(dicId,name){
+                if(!dicId){
                     layer.msg('请先选择你想删除的'+name+'！');
                     return false;
                 }
@@ -134,18 +113,17 @@
                     ,btn: ['确定', '取消']
                     ,yes: function(index){
                         layer.close(index);
-                        $MB.layerPost({url:ctx + "menu/delete",data:{"ids": menuId},cache:false},function (data) {
+                        $MB.layerPost({url:$MB.getRootPath() + "/dict/delete",data:{"ids": dicId},cache:false},function (data) {
                             layer.msg(data.msg);
                             method.resetTree();
-                            method.refresh($("#menuInfoPanle table").attr("data-name-menu"));
                         });
                     }
                 });
             },
-            expMenu:function(){
-                $MB.layerPost({url: ctx+"menu/excel",data:{}}, function (r) {
+            exp:function(){
+                $MB.layerPost({url: $MB.getRootPath() + "/dict/excel",data:{}}, function (r) {
                     if (r.code == 0) {
-                        window.location.href = "common/download?fileName=" + r.msg + "&delete=" + true;
+                        window.location.href = $MB.getRootPath() + "/common/download?fileName=" + r.msg + "&delete=" + true;
                     } else {
                         layer.msg(r.msg);
                     }

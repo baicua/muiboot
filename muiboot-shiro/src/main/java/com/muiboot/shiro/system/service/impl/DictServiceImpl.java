@@ -7,7 +7,7 @@ import com.muiboot.shiro.common.service.impl.BaseService;
 import com.muiboot.shiro.common.util.LogUtil;
 import com.muiboot.shiro.common.util.TreeUtils;
 import com.muiboot.shiro.system.dao.CoreDicMapper;
-import com.muiboot.shiro.system.domain.CoreDic;
+import com.muiboot.shiro.system.domain.SysDic;
 import com.muiboot.shiro.system.service.DicMapService;
 import com.muiboot.shiro.system.service.DictService;
 import org.apache.commons.collections.CollectionUtils;
@@ -27,7 +27,7 @@ import java.util.*;
 
 @Service("dictService")
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
-public class DictServiceImpl extends BaseService<CoreDic> implements DictService {
+public class DictServiceImpl extends BaseService<SysDic> implements DictService {
 
 	private static final LogUtil logger = LogUtil.getLoger(DictServiceImpl.class);
 	@Autowired
@@ -37,13 +37,13 @@ public class DictServiceImpl extends BaseService<CoreDic> implements DictService
 	@Autowired
 	private DicMapService dicMapService;
 	@Override
-	public LayerTree<CoreDic> getDictTree(String dicName) {
-		List<LayerTree<CoreDic>> trees = new ArrayList<>();
-		Example example = new Example(CoreDic.class);
+	public LayerTree<SysDic> getDictTree(String dicName) {
+		List<LayerTree<SysDic>> trees = new ArrayList<>();
+		Example example = new Example(SysDic.class);
 		Criteria criteria=example.createCriteria();
 		criteria.andEqualTo("valid",1);
 		example.orderBy("orderNum");
-		List<CoreDic> dics = this.selectByExample(example);
+		List<SysDic> dics = this.selectByExample(example);
 		if (StringUtils.isNotBlank(dicName)){
 			dics=findDicsWithNameLike(dics,dicName);
 		}
@@ -56,15 +56,15 @@ public class DictServiceImpl extends BaseService<CoreDic> implements DictService
 	 * @param dics
 	 * @param dicName
 	 */
-	private List<CoreDic> findDicsWithNameLike(List<CoreDic> dics, String dicName) {
-		List<CoreDic> res = new ArrayList<>();
+	private List<SysDic> findDicsWithNameLike(List<SysDic> dics, String dicName) {
+		List<SysDic> res = new ArrayList<>();
 		//1找到搜索节点list
-		List<CoreDic> owners= findDicsByNameLike(dics,dicName);
+		List<SysDic> owners= findDicsByNameLike(dics,dicName);
 		//2.递归查找子节点
-		List<CoreDic> children = new ArrayList<>();
+		List<SysDic> children = new ArrayList<>();
 		findChildren(dics,owners,children);
 		//3.递归查找父节点
-		List<CoreDic> parents=new ArrayList<>();
+		List<SysDic> parents=new ArrayList<>();
 		findParents(dics,owners,parents);
 		if(null!=owners)res.addAll(owners);
 		if(null!=children)res.addAll(children);
@@ -72,18 +72,18 @@ public class DictServiceImpl extends BaseService<CoreDic> implements DictService
 		return res;
 	}
 
-	private List<CoreDic> findParents(List<CoreDic> dics, List<CoreDic> owners,List<CoreDic> parents) {
+	private List<SysDic> findParents(List<SysDic> dics, List<SysDic> owners, List<SysDic> parents) {
 		if (CollectionUtils.isEmpty(dics)||CollectionUtils.isEmpty(owners))return parents;
 		Set<Long> ownerParentsIds=new HashSet<>();
-		Iterator<CoreDic> ownerIt = owners.iterator();
+		Iterator<SysDic> ownerIt = owners.iterator();
 		while(ownerIt.hasNext()){
-			CoreDic d = ownerIt.next();
+			SysDic d = ownerIt.next();
 			ownerParentsIds.add(d.getParentId());
 		}
-		Iterator<CoreDic> it = dics.iterator();
-		List<CoreDic> ownersNew = new ArrayList<>();
+		Iterator<SysDic> it = dics.iterator();
+		List<SysDic> ownersNew = new ArrayList<>();
 		while(it.hasNext()){
-			CoreDic d = it.next();
+			SysDic d = it.next();
 			if(ownerParentsIds.contains(d.getDicId())){
 				parents.add(d);
 				ownersNew.add(d);
@@ -93,18 +93,18 @@ public class DictServiceImpl extends BaseService<CoreDic> implements DictService
 		return findParents(dics,ownersNew,parents);
 	}
 
-	private List<CoreDic> findChildren(List<CoreDic> dics, List<CoreDic> owners,List<CoreDic> children) {
+	private List<SysDic> findChildren(List<SysDic> dics, List<SysDic> owners, List<SysDic> children) {
 		if (CollectionUtils.isEmpty(dics)||CollectionUtils.isEmpty(owners))return children;
 		Set<Long> ownerIds=new HashSet<>();
-		Iterator<CoreDic> ownerIt = owners.iterator();
+		Iterator<SysDic> ownerIt = owners.iterator();
 		while(ownerIt.hasNext()){
-			CoreDic d = ownerIt.next();
+			SysDic d = ownerIt.next();
 			ownerIds.add(d.getDicId());
 		}
-		Iterator<CoreDic> it = dics.iterator();
-		List<CoreDic> ownersNew = new ArrayList<>();
+		Iterator<SysDic> it = dics.iterator();
+		List<SysDic> ownersNew = new ArrayList<>();
 		while(it.hasNext()){
-			CoreDic d = it.next();
+			SysDic d = it.next();
 			if(ownerIds.contains(d.getParentId())){
 				children.add(d);
 				ownersNew.add(d);
@@ -114,12 +114,12 @@ public class DictServiceImpl extends BaseService<CoreDic> implements DictService
 		return findChildren(dics,ownersNew,children);
 	}
 
-	private List<CoreDic> findDicsByNameLike(List<CoreDic> dics, String dicName) {
+	private List<SysDic> findDicsByNameLike(List<SysDic> dics, String dicName) {
 		if (CollectionUtils.isEmpty(dics))return null;
-		List<CoreDic> owners=new ArrayList<>();
-		Iterator<CoreDic> it = dics.iterator();
+		List<SysDic> owners=new ArrayList<>();
+		Iterator<SysDic> it = dics.iterator();
 		while(it.hasNext()){
-			CoreDic d = it.next();
+			SysDic d = it.next();
 			if (d.getDicName().contains(dicName)){
 				owners.add(d);
 				it.remove();
@@ -130,7 +130,7 @@ public class DictServiceImpl extends BaseService<CoreDic> implements DictService
 
 	@Override
 	@Transactional
-	public void add(CoreDic dic) {
+	public void add(SysDic dic) {
 		dic.setCreateDate(new Date());
 		dic.setUpdateDate(new Date());
 		dic.setOrderNum(1);
@@ -143,7 +143,7 @@ public class DictServiceImpl extends BaseService<CoreDic> implements DictService
 
 	@Override
 	public Map findDicDetail(Long dicId) {
-		CoreDic dic = this.mapper.selectByPrimaryKey(dicId);
+		SysDic dic = this.mapper.selectByPrimaryKey(dicId);
 		Map res =new HashMap();
 		Object list= null;
 		list = this.buildDicList(dic);
@@ -169,7 +169,7 @@ public class DictServiceImpl extends BaseService<CoreDic> implements DictService
 	}
 	@Cacheable(value="dicCache",key="'ALLDIC'")
 	private Map<String,Object> getAllDicMap() {
-		List<CoreDic> dics=this.getAllDics();
+		List<SysDic> dics=this.getAllDics();
 		Map<String,Object> res=null;
 		if (CollectionUtils.isNotEmpty(dics)){
 			res=new LinkedHashMap();
@@ -200,18 +200,18 @@ public class DictServiceImpl extends BaseService<CoreDic> implements DictService
 	}
 
 	@Override
-	public List<CoreDic> getAllDics() {
+	public List<SysDic> getAllDics() {
 		return this.dicMapper.selectAll();
 	}
 
 	@Override
 	@CacheEvict(value="dicCache",key="'ALLDIC'")
-	public void updateDicNotNull(CoreDic dict) {
+	public void updateDicNotNull(SysDic dict) {
 		this.updateNotNull(dict);
 	}
 
 	@Override
-	public Object buildDicList(CoreDic dic){
+	public Object buildDicList(SysDic dic){
 		if (dic==null) return null;
 		Object m=null;
 		if (DicType.SIMPLE.name().equals(dic.getDicType())){
@@ -256,14 +256,20 @@ public class DictServiceImpl extends BaseService<CoreDic> implements DictService
 		}
 	}
 
-	private void buildTrees(List<LayerTree<CoreDic>> trees, List<CoreDic> dics) {
-		for (CoreDic dic : dics) {
-			LayerTree<CoreDic> tree = new LayerTree<>();
+	private void buildTrees(List<LayerTree<SysDic>> trees, List<SysDic> dics) {
+		for (SysDic dic : dics) {
+			LayerTree<SysDic> tree = new LayerTree<>();
 			tree.setId(dic.getDicId().toString());
 			tree.setParentId(dic.getParentId().toString());
 			tree.setName(dic.getDicName());
 			//tree.setHref(menu.getUrl());
 			trees.add(tree);
 		}
+	}
+	@Override
+	@Transactional
+	public void deleteDicts(String dictIds) {
+		List<String> list = Arrays.asList(dictIds.split(","));
+		this.batchDelete(list, "dicId", SysDic.class);
 	}
 }

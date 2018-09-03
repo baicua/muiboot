@@ -2,19 +2,19 @@ package com.muiboot.shiro.system.service;
 
 import com.muiboot.shiro.common.layer.LayerTree;
 import com.muiboot.shiro.common.service.IService;
-import com.muiboot.shiro.system.domain.CoreDic;
+import com.muiboot.shiro.system.domain.SysDic;
 
 import java.util.List;
 import java.util.Map;
 
-public interface DictService extends IService<CoreDic> {
-	LayerTree<CoreDic> getDictTree(String dicName);
+public interface DictService extends IService<SysDic> {
+	LayerTree<SysDic> getDictTree(String dicName);
 
     /**
      * 新增字典
      * @param dic
      */
-    void add(CoreDic dic);
+    void add(SysDic dic);
 
     Map findDicDetail(Long dicId);
 
@@ -22,9 +22,11 @@ public interface DictService extends IService<CoreDic> {
 
     Map nativeSelectBySQL(String msql);
 
-    List<CoreDic> getAllDics();
+    List<SysDic> getAllDics();
 
-    void updateDicNotNull(CoreDic dict);
+    void updateDicNotNull(SysDic dict);
 
-    Object buildDicList(CoreDic coreDic);
+    Object buildDicList(SysDic sysDic);
+
+    void deleteDicts(String dictIds);
 }

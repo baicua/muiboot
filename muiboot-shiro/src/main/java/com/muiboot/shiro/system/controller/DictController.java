@@ -3,7 +3,8 @@ package com.muiboot.shiro.system.controller;
 
 
 import com.muiboot.shiro.common.domain.ResponseBo;
-import com.muiboot.shiro.system.domain.CoreDic;
+import com.muiboot.shiro.common.util.FileUtils;
+import com.muiboot.shiro.system.domain.SysDic;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,7 +37,7 @@ public class DictController extends BaseController {
 	@RequiresPermissions("dict:add")
 	@RequestMapping("dict/add")
 	@ResponseBody
-	public ResponseBo addDic(CoreDic dic)  throws Exception{
+	public ResponseBo addDic(SysDic dic)  throws Exception{
 		this.dictService.add(dic);
 		return ResponseBo.ok("新增字典" + dic.getDicName() + "成功！");
 	}
@@ -61,12 +62,19 @@ public class DictController extends BaseController {
 		response.setHeader("Cache-Control", "max-age=5");//缓存5秒
 		return ResponseBo.ok(this.dictService.loadDics(dicKeys));
 	}
-
+	@Log("删除字典")
+	@RequiresPermissions("dict:delete")
+	@RequestMapping("dict/delete")
+	@ResponseBody
+	public ResponseBo deleteMenus(String ids)  throws Exception{
+		this.dictService.deleteDicts(ids);
+		return ResponseBo.ok("删除成功！");
+	}
 	@Log("修改字典 ")
 	@RequiresPermissions("dict:update")
 	@RequestMapping("dict/update")
 	@ResponseBody
-	public ResponseBo updateDict(CoreDic dict) {
+	public ResponseBo updateDict(SysDic dict) {
 		try {
 			dict.setUpdateDate(new Date());
 			this.dictService.updateDicNotNull(dict);
@@ -75,5 +83,11 @@ public class DictController extends BaseController {
 			e.printStackTrace();
 			return ResponseBo.error("修改字典失败，请联系网站管理员！");
 		}
+	}
+
+	@RequestMapping("dict/excel")
+	@ResponseBody
+	public ResponseBo dictExcel(SysDic dic)  throws Exception{
+		return FileUtils.createExcelByPOIKit("字典表", this.dictService.selectAll(), SysDic.class);
 	}
 }

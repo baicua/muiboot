@@ -14,7 +14,7 @@ import java.util.Objects;
  * Created by 75631 on 2018/8/29.
  */
 @Table(name = "M_DIC")
-public class CoreDic implements Serializable {
+public class SysDic implements Serializable {
     @Id
     @GeneratedValue(generator = "JDBC")
     @Column(name = "DIC_ID")
@@ -28,13 +28,13 @@ public class CoreDic implements Serializable {
     @ExportConfig(value = "字典名称")
     private String dicName;
     @Column(name = "DIC_TYPE")
-    @ExportConfig(value = "字典类型")
+    @ExportConfig(value = "字典类型", convert = "s:SIMPLE=简单字典,SQLDIC=SQL字典,URLDIC=URL字典,TREEDIC=树形字典")
     private String dicType;
     @Column(name = "SHOW_ICON")
-    @ExportConfig(value = "是否显示图标")
+    @ExportConfig(value = "是否显示图标",convert = "s:0=否,1=是")
     private Integer showIcon=0;
     @Column(name = "VALID")
-    @ExportConfig(value = "是否有效")
+    @ExportConfig(value = "是否有效",convert = "s:0=否,1=是")
     private Integer valid=0;
     @Column(name = "CONTENT")
     @ExportConfig(value = "字典内容")
@@ -49,10 +49,10 @@ public class CoreDic implements Serializable {
     @Column(name = "ORDER_NUM")
     private Integer orderNum;
     @Column(name = "CREATE_DATE")
-    @ExportConfig(value = "创建时间")
+    @ExportConfig(value = "创建时间", convert = "c:com.muiboot.shiro.common.util.poi.convert.TimeConvert")
     private Date createDate;
     @Column(name = "UPDATE_DATE")
-    @ExportConfig(value = "更新时间")
+    @ExportConfig(value = "更新时间", convert = "c:com.muiboot.shiro.common.util.poi.convert.TimeConvert")
     private Date updateDate;
 
     public Long getDicId() {
@@ -162,10 +162,10 @@ public class CoreDic implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (o == this) return true;
-        if (!(o instanceof CoreDic)) {
+        if (!(o instanceof SysDic)) {
             return false;
         }
-        CoreDic dic = (CoreDic) o;
+        SysDic dic = (SysDic) o;
         return
                 Objects.equals(dicId, dic.dicId) &&
                 Objects.equals(dicKey,dic.dicKey)&&
