@@ -4,10 +4,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.locks.ReentrantReadWriteLock;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.muiboot.shiro.common.service.impl.BaseService;
 import com.muiboot.shiro.common.util.exec.ExecutorsUtil;
@@ -31,7 +30,7 @@ public class LogServiceImpl extends BaseService<SysLog> implements LogService {
 	private LogMapper logMapper;
 	private List<SysLog>  scheduledList= Collections.synchronizedList(new ArrayList<>());
 	private ScheduledExecutorService scheduledThreadPool = ExecutorsUtil.getInstance().getScheduledThreadPool();
-	private ReentrantReadWriteLock rwl = new ReentrantReadWriteLock();
+	private AtomicBoolean hasSubmit= new AtomicBoolean(true);
 	@Override
 	public List<SysLog> findAllLogs(SysLog log) {
 		try {
@@ -75,13 +74,15 @@ public class LogServiceImpl extends BaseService<SysLog> implements LogService {
 	public void sendScheduled(SysLog log) {
 		//三秒后执行
 		scheduledList.add(log);
-		if (scheduledList.size()==1){
+		if (scheduledList.size()==1||hasSubmit.get()){
+			hasSubmit.set(false);
 			scheduledThreadPool.schedule(new Runnable() {
 				@Override
 				public void run() {
 					List<SysLog> copy = new ArrayList<>();
 					CollectionUtils.addAll(copy,scheduledList.iterator());
 					scheduledList.clear();
+					hasSubmit.compareAndSet(false,true);
 					logMapper.insertList(copy);
 				}
 			},3000, TimeUnit.MILLISECONDS);
