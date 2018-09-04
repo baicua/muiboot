@@ -1,10 +1,11 @@
 package com.muiboot.shiro.system.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
 
 @Table(name = "T_DEPT")
-public class Dept {
+public class Dept implements Serializable {
     /**
      * 部门ID
      */
