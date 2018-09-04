@@ -37,6 +37,9 @@ public class LayerTree<T> implements Serializable{
 	 */
 	private Map<String, Object> attributes;
 
+	/**节点级别*/
+	private int level = 0;
+
 	/**
 	 * 节点的子节点
 	 */
@@ -54,6 +57,14 @@ public class LayerTree<T> implements Serializable{
 	 * 是否有子节点
 	 */
 	private boolean hasChildren = false;
+
+	public int getLevel() {
+		return level;
+	}
+
+	public void setLevel(int level) {
+		this.level = level;
+	}
 
 	public String getId() {
 		return id;

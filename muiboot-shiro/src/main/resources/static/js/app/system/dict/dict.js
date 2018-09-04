@@ -52,7 +52,7 @@
                             dict.render();
                             layero.find(".layui-layer-btn0").attr("lay-filter","form-verify").attr("lay-submit","");
                             method.onsubmit(layero.find(".layui-layer-btn0"),layero,url,function () {
-                                method.refresh($("#menuInfoPanle table").attr("data-name-menu"));
+                                method.refresh($("#dicInfoPanle table").attr("data-name-dic"));
                             });
                             form.on('select(dicType)', function(data){
                                 var sel = data.value;
@@ -99,7 +99,6 @@
                         loadModel(data.msg,"字典修改",ctx + "dict/update");
                     });
                 }catch(e) {
-                    layer.close(openIndex);
                     layer.msg('请求数据异常：'+e.message);
                 }
             },

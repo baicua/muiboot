@@ -1,21 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.muiboot.shiro.system.dao.DeptMapper">
-  <resultMap id="deptMap" type="com.muiboot.shiro.system.domain.Dept">
+  <resultMap id="BaseResultMap" type="com.muiboot.shiro.system.domain.Dept">
     <!--
       WARNING - @mbg.generated
     -->
-    <result column="DEPT_ID" jdbcType="DECIMAL" property="deptId" />
-    <result column="PARENT_ID" jdbcType="DECIMAL" property="parentId" />
+    <id column="DEPT_ID" jdbcType="BIGINT" property="deptId" />
+    <result column="PARENT_ID" jdbcType="BIGINT" property="parentId" />
     <result column="DEPT_NAME" jdbcType="VARCHAR" property="deptName" />
-    <result column="ORDER_NUM" jdbcType="DECIMAL" property="orderNum" />
+    <result column="ORDER_NUM" jdbcType="BIGINT" property="orderNum" />
     <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="DEPT_LEVEL" jdbcType="BIGINT" property="deptLevel" />
+    <result column="DEPT_FULL_NAME" jdbcType="VARCHAR" property="deptFullName" />
+    <result column="DESCRIPTION" jdbcType="VARCHAR" property="description" />
+    <result column="VALID" jdbcType="VARCHAR" property="valid" />
+    <result column="TEL" jdbcType="VARCHAR" property="tel" />
+    <result column="EMAIL" jdbcType="VARCHAR" property="email" />
+    <result column="AREA_CODE" jdbcType="VARCHAR" property="areaCode" />
   </resultMap>
   
   <update id="changeToTop" parameterType="java.util.List">
   	UPDATE T_DEPT SET PARENT_ID = 0 WHERE DEPT_ID IN ( SELECT a.DEPT_ID FROM (
   	(SELECT DEPT_ID FROM T_DEPT WHERE PARENT_ID IN
-  	<foreach collection="list" item="deptId" index="index" open="(" close=")" separator=",">
+  	<foreach close=")" collection="list" index="index" item="deptId" open="(" separator=",">
   		#{deptId}
   	</foreach>
   	) ) a )

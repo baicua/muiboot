@@ -1,51 +1,56 @@
-<div data-th-include="system/dept/deptAdd"></div>
-<div class="card">
-    <div class="card-block">
-        <div class="table-responsive">
-            <div id="data-table_wrapper" class="dataTables_wrapper">
-                <div class="dataTables_buttons hidden-sm-down actions">
-                    <span class="actions__item zmdi zmdi-search" onclick="search()" title="搜索" />
-                    <span class="actions__item zmdi zmdi-refresh-alt" onclick="refresh()" title="刷新" />
-                    <div class="dropdown actions__item">
-                        <i data-toggle="dropdown" class="zmdi zmdi-download"></i>
-                        <ul class="dropdown-menu dropdown-menu-right">
-                            <a href="javascript:void(0)" class="dropdown-item" data-table-action="excel"  onclick="exportDeptExcel()">
-		                    	Excel (.xlsx)
-		                	</a>
-                            <a href="javascript:void(0)" class="dropdown-item" data-table-action="csv"  onclick="exportDeptCsv()">
-		                    	CSV (.csv)
-		                	</a>
-                        </ul>
-                    </div>
-                    <div class="dropdown actions__item" shiro:hasAnyPermissions="dept:add,dept:delete,dept:update">
-                        <i data-toggle="dropdown" class="zmdi zmdi-more-vert"></i>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <a href="javascript:void(0)" class="dropdown-item" data-toggle="modal" data-target="#dept-add" shiro:hasPermission="dept:add">新增部门</a>
-                            <a href="javascript:void(0)" class="dropdown-item" onclick="updateDept()" shiro:hasPermission="dept:update">修改部门</a>
-                            <a href="javascript:void(0)" class="dropdown-item" onclick="deleteDepts();" shiro:hasPermission="dept:delete">删除部门</a>
-                        </div>
-                    </div>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head data-th-include="common/head"></head>
+<body class="layui-layout-body layui-table-body">
+<div data-th-include="common/common"></div>
+<hr>
+<div class="layui-container ajax-content" lay-filter="ajax-content">
+    <form class="layui-form menu-table-form" action="">
+        <div class="layui-form-item">
+            <div class="layui-inline" style="float: right;margin-bottom: 0px;margin-right: 4px;">
+                <div class="layui-btn-group">
+                    <button title="新增" type="button" id="addBtn"  class="layui-btn layui-btn-primary layui-btn-sm" shiro:hasPermission="menu:add"><i class="layui-icon"></i></button>
+                    <button title="修改" type="button" id="updBtn" class="layui-btn layui-btn-primary layui-btn-sm" shiro:hasPermission="menu:update"><i class="layui-icon"></i></button>
+                    <button title="导出" type="button" id="expBtn" class="layui-btn layui-btn-primary layui-btn-sm" data-table-action="excel" onclick="exportMenuExcel()"><i class="layui-icon layui-icon-download-circle"></i></button>
+                    <button title="删除" type="button" id="delBtn" class="layui-btn layui-btn-primary layui-btn-sm" shiro:hasPermission="menu:delete"><i class="layui-icon"></i></button>
                 </div>
-                <div id="data-table_filter" class="dataTables_filter">
-                    <form class="dept-table-form">
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-					               	名称：
-					            </span>
-                                    <div class="form-group">
-                                        <input type="text" name="deptName" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <table id="deptTable" data-mobile-responsive="true" class="mb-bootstrap-table"></table>
             </div>
         </div>
+    </form>
+    <div class="layui-row">
+        <fieldset class="layui-elem-field" style="min-height: 400px">
+            <legend>部门管理</legend>
+            <div class="site-tips layui-col-md3 layui-col-xs12" style="min-height: 400px;padding: 10px;">
+                <div class="layui-card" style="min-height: 380px;">
+                    <div class="search_box">
+                        <input  placeholder="请输入部门名称" type="text" id="search_input" autocomplete="off" num="0" >
+                        <span class="btn_search layui-icon layui-icon-search" id="search_input_span"></span>
+                    </div>
+                    <ul id="Tree" class="layui-box layui-tree"></ul>
+                </div>
+            </div>
+            <div class="site-tips layui-col-md9 layui-col-md9 layui-col-xs12 layui-anim layui-anim-up" style="min-height: 400px;padding: 10px;">
+                <div class="layui-row layui-col-space15">
+                    <div class="layui-row layui-col-xs12 layui-col-md12">
+                        <div class="layui-card">
+                            <div class="layui-card-header"><i class="layui-icon">&#xe60a;&nbsp;&nbsp;</i>基本信息</div>
+                            <div class="layui-card-body" id="InfoPanle" style="min-height: 130px">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-row layui-col-xs12  layui-col-md12">
+                        <div class="layui-card">
+                            <div class="layui-card-header"><i class="layui-icon">&#xe672;&nbsp;&nbsp;</i>人员列表</div>
+                            <div class="layui-card-body" id="ListPanle" style="min-height: 50px">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
     </div>
+
+    <script data-th-src="@{/js/app/system/dept/dept.js}"></script>
 </div>
-<script data-th-src="@{js/app/system/dept/dept.js}"></script>
-<script data-th-src="@{js/app/system/dept/deptEdit.js}"></script>
+</body>
+</html>

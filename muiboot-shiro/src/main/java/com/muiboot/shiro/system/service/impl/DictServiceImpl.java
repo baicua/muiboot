@@ -1,7 +1,7 @@
 package com.muiboot.shiro.system.service.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.muiboot.shiro.common.dic.denum.DicType;
+import com.muiboot.shiro.common.menum.DicType;
 import com.muiboot.shiro.common.layer.LayerTree;
 import com.muiboot.shiro.common.service.impl.BaseService;
 import com.muiboot.shiro.common.util.LogUtil;

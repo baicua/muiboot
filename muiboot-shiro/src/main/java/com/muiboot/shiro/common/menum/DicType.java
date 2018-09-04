@@ -1,4 +1,4 @@
-package com.muiboot.shiro.common.dic.denum;
+package com.muiboot.shiro.common.menum;
 
 /**
  * Created by 75631 on 2018/8/29.

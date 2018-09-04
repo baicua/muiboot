@@ -35,6 +35,12 @@ public class DeptServiceImpl extends BaseService<Dept> implements DeptService {
 			tree.setId(dept.getDeptId().toString());
 			tree.setParentId(dept.getParentId().toString());
 			tree.setName(dept.getDeptName());
+			if (dept.getDeptLevel()==0){
+				tree.setIcon("layui-icon layui-icon-group");
+			}else {
+				tree.setIcon("layui-icon layui-icon-user");
+			}
+			tree.setLevel(dept.getDeptLevel());
 			trees.add(tree);
 		}
 		return TreeUtils.build(trees);
@@ -83,7 +89,6 @@ public class DeptServiceImpl extends BaseService<Dept> implements DeptService {
 	public void deleteDepts(String deptIds) {
 		List<String> list = Arrays.asList(deptIds.split(","));
 		this.batchDelete(list, "deptId", Dept.class);
-		this.deptMapper.changeToTop(list);
 	}
 
 	@Override

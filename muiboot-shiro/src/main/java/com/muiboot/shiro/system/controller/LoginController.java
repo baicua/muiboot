@@ -69,8 +69,10 @@ public class LoginController extends BaseController {
             });
             return ResponseBo.ok();
         } catch (UnknownAccountException | IncorrectCredentialsException | LockedAccountException e) {
+            logger.error("登录失败："+e.getMessage());
             return ResponseBo.error(e.getMessage());
         } catch (AuthenticationException e) {
+            logger.error("登录认证失败");
             return ResponseBo.error("认证失败！");
         }
     }

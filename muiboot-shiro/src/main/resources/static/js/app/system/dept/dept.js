@@ -1,91 +1,169 @@
-$(function() {
-    initTreeTable();
-});
-
-function initTreeTable() {
-    var setting = {
-        id: 'deptId',
-        code: 'deptId',
-        url: ctx + 'dept/list',
-        expandAll: true,
-        expandColumn: "2",
-        ajaxParams: {
-            deptName: $(".dept-table-form").find("input[name='deptName']").val().trim()
-        },
-        columns: [{
-                field: 'selectItem',
-                checkbox: true
-            },
-            {
-                title: '编号',
-                field: 'deptId',
-                width: '50px'
-            },
-            {
-                title: '名称',
-                field: 'deptName'
-            },
-            {
-                title: '创建时间',
-                field: 'createTime'
-            }
-        ]
-    }
-    $MB.initTreeTable('deptTable', setting);
-}
-
-function search() {
-    initTreeTable();
-}
-
-function refresh() {
-    $(".dept-table-form")[0].reset();
-    initTreeTable();
-    $MB.refreshJsTree("deptTree", createDeptTree());
-}
-
-function deleteDepts() {
-    var ids = $("#deptTable").bootstrapTreeTable("getSelections");
-    var ids_arr = "";
-    if (!ids.length) {
-        $MB.n_warning("请勾选需要删除的部门！");
-        return;
-    }
-    for (var i = 0; i < ids.length; i++) {
-        ids_arr += ids[i].id;
-        if (i != (ids.length - 1)) ids_arr += ",";
-    }
-    $MB.confirm({
-        text: "确定删除选中部门？",
-        confirmButtonText: "确定删除"
-    }, function() {
-        $.post(ctx + 'dept/delete', { "ids": ids_arr }, function(r) {
-            if (r.code == 0) {
-                $MB.n_success(r.msg);
-                refresh();
-            } else {
-                $MB.n_danger(r.msg);
-            }
-        });
+;$(document).ready(function() {
+    "use strict";
+    //initTreeTable();
+    var element,form,laytpl,dict;
+    layui.use(['element', 'laytpl','form','dict'], function () {
+        element = layui.element,form = layui.form,laytpl = layui.laytpl,dict=layui.dict;
+        element.init();
+        dict.load("valid");
+        form.render();
     });
-}
-
-function exportDeptExcel(){
-	$.post(ctx+"dept/excel",$(".dept-table-form").serialize(),function(r){
-		if (r.code == 0) {
-			window.location.href = "common/download?fileName=" + r.msg + "&delete=" + true;
-		} else {
-			$MB.n_warning(r.msg);
-		}
-	});
-}
-
-function exportDeptCsv(){
-	$.post(ctx+"dept/csv",$(".dept-table-form").serialize(),function(r){
-		if (r.code == 0) {
-			window.location.href = "common/download?fileName=" + r.msg + "&delete=" + true;
-		} else {
-			$MB.n_warning(r.msg);
-		}
-	});
-}
+    setTimeout(function(){
+        method.resetTree();
+    },100);
+    $("#addBtn").on("click",function (r) {
+        method.add($("#InfoPanle table").attr("data-name-id"));
+    });
+    $("#updBtn").on("click",function (r) {
+        method.update($("#InfoPanle table").attr("data-name-id"));
+    });
+    $("#expBtn").on("click",function (r) {
+        method.exp();
+    });
+    $("#search_input_span").on("click",function (r) {
+        method.resetTree();
+    });
+    $("#delBtn").on("click",function (r) {
+        method.del($("#InfoPanle table").attr("data-name-id"),"部门");
+    });
+    var method =(function() {
+        var model = "";
+        $MB.layerGet({url:ctx+"model/dept/add.html",cache:true},function(text){
+            model=text;
+        });
+        var loadModel=function(data,title,url){
+            var openIndex=0;
+            try{
+                laytpl(model).render(data, function(html){
+                    //页面层
+                    openIndex=layer.open({
+                        title:title,
+                        type: 1,
+                        skin: 'layui-layer-rim', //加上边框
+                        area: ['640px', '400px'], //宽高
+                        content: html,
+                        btn: ['保存', '关闭'],
+                        btnAlign: 'c',
+                        yes: function(index, layero){
+                            return false;
+                        },
+                        success:function (layero,index) {
+                            layero.addClass("layui-form");
+                            dict.render();
+                            layero.find(".layui-layer-btn0").attr("lay-filter","form-verify").attr("lay-submit","");
+                            method.onsubmit(layero.find(".layui-layer-btn0"),layero,url,function () {
+                                method.refresh($("#InfoPanle table").attr("data-name-dic"));
+                            });
+                            $MB.verify(form);
+                            form.render();
+                        }
+                    });
+                });
+            }catch (e){
+                layer.close(openIndex);
+                layer.msg('请求数据异常：'+e.message);
+            }
+        };
+        return {
+            add:function($id){
+                if(!$id)$id="";
+                loadModel({parentId:$id,valid:'1'},"新增部门",ctx + "dept/add");
+            },
+            update:function($id){
+                if(!$id){
+                    layer.msg('请先选择你想修改的字典！');
+                    return false;
+                }
+                try{
+                    $MB.layerGet({url:ctx + "dept/getDept",data:{"deptId": $id}},function (data) {
+                        if(!data||!data.msg||data.code != 0){
+                            layer.msg('请求数据失败,您选择的部门不存在');
+                            return false;
+                        }
+                        loadModel(data.msg,"部门修改",ctx + "dept/update");
+                    });
+                }catch(e) {
+                    layer.msg('请求数据异常：'+e.message);
+                }
+            },
+            del:function($id,name){
+                if(!$id){
+                    layer.msg('请先选择你想删除的'+name+'！');
+                    return false;
+                }
+                layer.msg('你确定要删除该'+name+'吗？', {
+                    time: 0 //不自动关闭
+                    ,btn: ['确定', '取消']
+                    ,yes: function(index){
+                        layer.close(index);
+                        $MB.layerPost({url:$MB.getRootPath() + "/dept/delete",data:{"ids": $id},cache:false},function (data) {
+                            layer.msg(data.msg);
+                            method.resetTree();
+                        });
+                    }
+                });
+            },
+            exp:function(){
+                $MB.layerPost({url: $MB.getRootPath() + "/dept/excel",data:{}}, function (r) {
+                    if (r.code == 0) {
+                        window.location.href = $MB.getRootPath() + "/common/download?fileName=" + r.msg + "&delete=" + true;
+                    } else {
+                        layer.msg(r.msg);
+                    }
+                });
+            },
+            refresh:function ($id) {
+                $MB.layerGet({url:ctx+"model/dept.html",cache:true},function(text){
+                    var $compent=$("<code></code>").html(text);
+                    $MB.layerGet({url:ctx+"dict/getDicDetail",data:{deptId:$id}},function(data){
+                        laytpl($compent.find("#layui-table-info").html()).render($.extend({},data.msg.info), function(html){
+                            $("#InfoPanle").html(html);
+                        });
+                        laytpl($compent.find("#layui-table-list").html()).render($.extend({},data.msg.list), function(html){
+                            $("#ListPanle").html(html);
+                        });
+                        dict.render();
+                        element.init();
+                    });
+                });
+            },
+            onsubmit:function (subBtn,layero,url,callback) {
+                form.on("submit(form-verify)", function (data) {
+                    if (!!subBtn.attr("sub")) {
+                        layer.msg("不能重复提交！");
+                        return false;
+                    }
+                    subBtn.attr("sub", true);
+                    $MB.layerPost({url: url, data: layero.find("form").serialize()}, function (r) {
+                        if (r.code == 0) {
+                            layer.msg(r.msg);
+                            method.resetTree();
+                            callback();
+                        } else {
+                            layer.msg(r.msg);
+                            subBtn.removeAttr("sub");
+                        }
+                    });
+                    return false;
+                });
+            },
+            resetTree:function(){
+                var deptName =$("#search_input").val();
+                var data = {deptName:deptName};
+                $MB.layerGet({url:ctx+"dept/tree",data:data,cache:false},function (data) {
+                    var nodes=$.extend([], data.msg.children);
+                    $("#Tree").empty();
+                    layui.tree({
+                        elem: '#Tree'
+                        ,nodes:nodes
+                        ,click: function(node){
+                            method.refresh(node.id);
+                            if($MB.isMobile())
+                                $("body .layui-body").animate({scrollTop: $("#InfoPanle").parents(".site-tips").offset().top }, {duration: 500,easing: "swing"});
+                        }
+                    });
+                });
+            }
+        }
+    })(jQuery);
+});
