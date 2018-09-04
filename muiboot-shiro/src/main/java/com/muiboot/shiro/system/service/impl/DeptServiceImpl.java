@@ -1,9 +1,6 @@
 package com.muiboot.shiro.system.service.impl;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 import com.muiboot.shiro.common.service.impl.BaseService;
 import org.apache.commons.lang.StringUtils;
@@ -100,6 +97,16 @@ public class DeptServiceImpl extends BaseService<Dept> implements DeptService {
 	@Transactional
 	public void updateDept(Dept dept) {
 		this.updateNotNull(dept);
+	}
+
+	@Override
+	public Map getDeptDetail(Long deptId) {
+		//1.获取部门详情
+		Dept dept=this.selectByKey(deptId);
+		//2.获取部门人员列表
+		Map res = new HashMap();
+		res.put("info",dept);
+		return res;
 	}
 
 }

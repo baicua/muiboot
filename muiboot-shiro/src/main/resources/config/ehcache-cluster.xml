@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ehcache name="muiboot" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd">
-    <cacheManagerPeerProviderFactory  class="net.sf.ehcache.distribution.RMICacheManagerPeerProviderFactory"
-            properties="peerDiscovery=manual,rmiUrls=//192.168.93.129:40001/sessionCache"/>           <!--另一台机子的ip缓存信息-->
-    <cacheManagerPeerListenerFactory class="net.sf.ehcache.distribution.RMICacheManagerPeerListenerFactory"
-              properties="hostName=localhost,port=40001,socketTimeoutMillis=2000" />
     <diskStore path="/cache/muiboot"/>
+    <cacheManagerPeerProviderFactory  class="net.sf.ehcache.distribution.RMICacheManagerPeerProviderFactory"
+            properties="peerDiscovery=manual,rmiUrls=//182.61.49.93:40001/sessionCache"/>           <!--另一台机子的ip缓存信息-->
+    <cacheManagerPeerListenerFactory class="net.sf.ehcache.distribution.RMICacheManagerPeerListenerFactory"
+              properties="hostName=VM_0_16_centos,port=40001,socketTimeoutMillis=2000" />
     <defaultCache
         maxElementsInMemory="10000"
         eternal="false"

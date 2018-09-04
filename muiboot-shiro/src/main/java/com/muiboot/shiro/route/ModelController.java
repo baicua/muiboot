@@ -25,8 +25,18 @@ public class ModelController  extends BaseController {
         return "system/model/dic/dic";
     }
 
+    @RequestMapping("dept")
+    public String dept() {
+        return "system/model/dept/dept";
+    }
+
     @RequestMapping("dic/{file}")
     public String dicRoute(@PathVariable(name = "file") String file) {
         return "system/model/dic/"+file;
+    }
+
+    @RequestMapping("dept/{file}")
+    public String deptRoute(@PathVariable(name = "file") String file) {
+        return "system/model/dept/"+file;
     }
 }

@@ -1,6 +1,7 @@
 package com.muiboot.shiro.system.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import com.muiboot.shiro.common.annotation.Log;
 import com.muiboot.shiro.common.domain.ResponseBo;
@@ -50,6 +51,13 @@ public class DeptController {
 			e.printStackTrace();
 			return ResponseBo.error("获取部门信息失败，请联系网站管理员！");
 		}
+	}
+
+	@RequestMapping("dept/getDeptDetail")
+	@ResponseBody
+	public ResponseBo getDeptDetail(Long deptId) {
+		Map deptDetail = this.deptService.getDeptDetail(deptId);
+		return ResponseBo.ok(deptDetail);
 	}
 	
 	@RequestMapping("dept/list")

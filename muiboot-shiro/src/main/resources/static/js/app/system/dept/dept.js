@@ -115,7 +115,7 @@
             refresh:function ($id) {
                 $MB.layerGet({url:ctx+"model/dept.html",cache:true},function(text){
                     var $compent=$("<code></code>").html(text);
-                    $MB.layerGet({url:ctx+"dict/getDicDetail",data:{deptId:$id}},function(data){
+                    $MB.layerGet({url:ctx+"dept/getDeptDetail",data:{deptId:$id}},function(data){
                         laytpl($compent.find("#layui-table-info").html()).render($.extend({},data.msg.info), function(html){
                             $("#InfoPanle").html(html);
                         });

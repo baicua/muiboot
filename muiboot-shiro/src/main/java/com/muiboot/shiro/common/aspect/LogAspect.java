@@ -55,15 +55,14 @@ public class LogAspect {
 	}
 
 	@Around("pointcut()")
-	public Object around(ProceedingJoinPoint point) throws Exception {
+	public Object around(ProceedingJoinPoint point) throws Throwable {
 		Object result = null;
 		long beginTime = System.currentTimeMillis();
 		try {
 			// 执行方法
 			result = point.proceed();
 		} catch (Throwable e) {
-			e.printStackTrace();
-			throw new Exception();
+			throw e.getCause();//异常抛给全局异常处理
 		}
 		// 执行时长(毫秒)
 		long time = System.currentTimeMillis() - beginTime;

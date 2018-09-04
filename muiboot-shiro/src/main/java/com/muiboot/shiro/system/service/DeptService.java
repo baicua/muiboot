@@ -1,6 +1,7 @@
 package com.muiboot.shiro.system.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.muiboot.shiro.common.layer.LayerTree;
 import com.muiboot.shiro.common.service.IService;
@@ -21,4 +22,6 @@ public interface DeptService extends IService<Dept> {
 	void updateDept(Dept dept);
 
 	void deleteDepts(String deptIds);
+
+    Map getDeptDetail(Long deptId);
 }
