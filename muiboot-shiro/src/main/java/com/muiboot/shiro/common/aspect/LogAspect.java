@@ -26,6 +26,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.LocalVariableTableParameterNameDiscoverer;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -46,9 +47,6 @@ public class LogAspect {
 
 	@Autowired
 	ObjectMapper mapper;
-
-	ExecutorService exeService= ExecutorsUtil.getInstance().getMultilThreadExecutor();
-
 	protected  final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 
@@ -73,20 +71,10 @@ public class LogAspect {
 		// 获取request
 		HttpServletRequest request = HttpContextUtils.getHttpServletRequest();
 		User user = ShiroUtil.getCurrentUser();
-		exeService.execute(new Runnable() {
-			@Override
-			public void run() {
-				try {
-					saveLog(point, time,request,user);
-				} catch (JsonProcessingException e) {
-					logger.error("日志保存失败："+e.getMessage());
-					e.printStackTrace();
-				}
-			}
-		});
+		saveLog(point, time,request,user);
 		return result;
 	}
-
+	@Async
 	private void saveLog(ProceedingJoinPoint joinPoint, long time,HttpServletRequest request,User user) throws JsonProcessingException {
 		if (null==user){
 			user=new User();
