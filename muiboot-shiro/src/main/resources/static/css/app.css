@@ -175,6 +175,9 @@ input.layui-form-danger[type=radio] + div.layui-form-radio>i{
   background-color: #ffffff;
   border-color: #C9C9C9;
 }
+.dic-tree-ul.layui-tree ul li:hover {
+  background-color: #f8f8f8;
+}
 .dic-tree-input.show-tree + i + ul{
   display: block;
   border-top: 1px dashed #cbcbcb;
@@ -227,4 +230,10 @@ input.layui-form-danger[type=radio] + div.layui-form-radio>i{
 }
 .layui-form-select dl{
   overflow-y: visible;
+}
+.layui-tree.dic-tree-ul li ul {
+  margin-left: 0px;
+}
+.layui-tree.dic-tree-ul li ul a{
+  margin-left: 22px;
 }

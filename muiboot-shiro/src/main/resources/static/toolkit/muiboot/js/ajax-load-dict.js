@@ -30,7 +30,7 @@
             loadedCount+=1;
             if ($this.hasClass('dic-map')){
                 var key = $this.attr("dic-map");
-                var value=$this.prop("dic-value");
+                var value=$this.attr("dic-value");
                 var isInit = $this.hasClass("dic-finish");
                 var val =$this.val();
                 var map =key&&data[key];
@@ -43,7 +43,9 @@
                     if(isInit){
                         $this.val(val);
                     }else {
-                        $this.val(value||'');
+                        if(value&&value!="undefined"){
+                            $this.val(value);
+                        }
                         $this.addClass("dic-finish");
                     }
                 }
