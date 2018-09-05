@@ -48,8 +48,8 @@
                             return false;
                         },
                         success:function (layero,index) {
-                            layero.addClass("layui-form");
                             dict.render();
+                            layero.addClass("layui-form");
                             layero.find(".layui-layer-btn0").attr("lay-filter","form-verify").attr("lay-submit","");
                             method.onsubmit(layero.find(".layui-layer-btn0"),layero,url,function () {
                                 method.refresh($("#InfoPanle table").attr("data-name-id"));
@@ -60,7 +60,7 @@
                     });
                 });
             }catch (e){
-                layer.close(openIndex);
+                console.error(e);
                 layer.msg('请求数据异常：'+e.message);
             }
         };
@@ -151,7 +151,7 @@
                 var deptName =$("#search_input").val();
                 var data = {deptName:deptName};
                 $MB.layerGet({url:ctx+"dept/tree",data:data},function (data) {
-                    var nodes=$.extend([], data.msg.children);debugger;
+                    var nodes=$.extend([], data.msg.children);
                     if(nodes.length>0&&nodes[0].children.length>0){
                         nodes[0].spread=true;
                     }

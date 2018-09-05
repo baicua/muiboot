@@ -30,7 +30,7 @@
             loadedCount+=1;
             if ($this.hasClass('dic-map')){
                 var key = $this.attr("dic-map");
-                var value=$this.attr("dic-value");
+                var value=$this.prop("dic-value");
                 var isInit = $this.hasClass("dic-finish");
                 var val =$this.val();
                 var map =key&&data[key];
@@ -110,6 +110,7 @@
                 init($select)
             }catch(e) {
                console.error(e.message);
+               return false;
             }
         },
         get:function (k) {

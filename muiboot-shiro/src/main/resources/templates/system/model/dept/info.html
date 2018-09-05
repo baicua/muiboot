@@ -5,6 +5,6 @@
     <tr><th>部门简称</th><td>{{ d.deptName||'/' }}</td><th>部门全称</th><td>{{ d.deptFullName||'/' }}</td></tr>
     <tr><th>上级部门</th><td><span class="dic-text" dic-map="dicDeptFirstTable">{{ d.parentId||'/' }}</span></td><th>行政区划</th><td>{{ d.areaCode||'/' }}</td></tr>
     <tr><th>联系电话</th><td>{{ d.tel||'/' }}</td><th>联系邮箱</th><td>{{ d.email||'/' }}</td></tr>
-    <tr><th>是否禁用</th><td><span class="dic-text" dic-map="disableDic">{{ d.valid}}</span></td><th>部门描述</th><td>{{ d.description||'/' }}</td></tr>
+    <tr><th>状态</th><td><span class="dic-text" dic-map="disableDic">{{ d.valid}}</span></td><th>部门描述</th><td>{{ d.description||'/' }}</td></tr>
     </tbody>
 </table>

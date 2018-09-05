@@ -22,7 +22,7 @@
                 ,{field:'location', title: '操作地点'}
                 ,{field:'createTime', title: '操作时间'}
             ]]
-        })
+        });
 
         $("#expBtn").on("click",function (r) {
             $MB.layerPost({url: $MB.getRootPath()+"/log/excel",data:{}}, function (r) {
