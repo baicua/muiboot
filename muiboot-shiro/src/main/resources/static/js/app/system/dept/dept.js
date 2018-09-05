@@ -5,7 +5,7 @@
     layui.use(['element', 'laytpl','form','dict'], function () {
         element = layui.element,form = layui.form,laytpl = layui.laytpl,dict=layui.dict;
         element.init();
-        dict.load("valid");
+        dict.load("dicDeptLevel,dicDeptFirstTree,disableDic,dicDeptFirstTable");
         form.render();
     });
     setTimeout(function(){
@@ -40,7 +40,7 @@
                         title:title,
                         type: 1,
                         skin: 'layui-layer-rim', //加上边框
-                        area: ['640px', '400px'], //宽高
+                        area: ['640px', '350px'], //宽高
                         content: html,
                         btn: ['保存', '关闭'],
                         btnAlign: 'c',
@@ -52,7 +52,7 @@
                             dict.render();
                             layero.find(".layui-layer-btn0").attr("lay-filter","form-verify").attr("lay-submit","");
                             method.onsubmit(layero.find(".layui-layer-btn0"),layero,url,function () {
-                                method.refresh($("#InfoPanle table").attr("data-name-dic"));
+                                method.refresh($("#InfoPanle table").attr("data-name-id"));
                             });
                             $MB.verify(form);
                             form.render();
@@ -96,7 +96,7 @@
                     ,btn: ['确定', '取消']
                     ,yes: function(index){
                         layer.close(index);
-                        $MB.layerPost({url:$MB.getRootPath() + "/dept/delete",data:{"ids": $id},cache:false},function (data) {
+                        $MB.layerPost({url:"/dept/delete",data:{"ids": $id},cache:false},function (data) {
                             layer.msg(data.msg);
                             method.resetTree();
                         });
@@ -104,7 +104,7 @@
                 });
             },
             exp:function(){
-                $MB.layerPost({url: $MB.getRootPath() + "/dept/excel",data:{}}, function (r) {
+                $MB.layerPost({url:"/dept/excel",data:{}}, function (r) {
                     if (r.code == 0) {
                         window.location.href = $MB.getRootPath() + "/common/download?fileName=" + r.msg + "&delete=" + true;
                     } else {
@@ -150,8 +150,11 @@
             resetTree:function(){
                 var deptName =$("#search_input").val();
                 var data = {deptName:deptName};
-                $MB.layerGet({url:ctx+"dept/tree",data:data,cache:false},function (data) {
-                    var nodes=$.extend([], data.msg.children);
+                $MB.layerGet({url:ctx+"dept/tree",data:data},function (data) {
+                    var nodes=$.extend([], data.msg.children);debugger;
+                    if(nodes.length>0&&nodes[0].children.length>0){
+                        nodes[0].spread=true;
+                    }
                     $("#Tree").empty();
                     layui.tree({
                         elem: '#Tree'

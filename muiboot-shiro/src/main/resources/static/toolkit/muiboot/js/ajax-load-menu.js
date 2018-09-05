@@ -2,7 +2,7 @@
     "use strict";
     var $ = layui.jquery;
     var element=layui.element;
-    var url=$MB.getRootPath()+"session/getUserMenu",has=$MB.hasHistoryApi();
+    var url="/session/getUserMenu",has=$MB.hasHistoryApi();
     function loadmenu(usename) {
         $MB.layerGet({url:url,data:{ "userName": usename}},function (r) {
             if (r.code == 0) {
@@ -16,7 +16,7 @@
                     if(has){
                         $maincontent.ajax_load("loading",forward);
                     }else {
-                        window.location.href=$MB.getRootPath()+"sys"+"#"+forward;
+                        window.location.href=$MB.getRootPath()+"/sys"+"#"+forward;
                     }
                 }
                 element.init();

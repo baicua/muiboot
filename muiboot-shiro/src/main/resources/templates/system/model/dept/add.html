@@ -3,60 +3,72 @@
     <form class="layui-form" action="">
         <div class="layui-row">
             <div class="layui-col-md6 layui-col-xs12">
-                <label class="layui-form-label">上级字典:</label>
+                <label class="layui-form-label">上级部门:</label>
                 <div class="layui-input-block">
-                    <input type="text" name="parentId" dic-map="dicCategoryTree" value="{{d.parentId}}"placeholder="请选择上级字典" class="layui-input dic-tree">
-                    <input type="text" name="dicId"value="{{d.dicId||''}}" hidden>
+                    <input type="text" name="parentId" dic-map="dicDeptFirstTree" value="{{d.parentId||''}}"placeholder="请选择上级部门" class="layui-input dic-tree">
+                    <input type="text" name="deptId"value="{{d.deptId||''}}" hidden>
                 </div>
             </div>
             <div class="layui-col-md6 layui-col-xs12">
-                <label class="layui-form-label" lable-verify="required">字典编号:</label>
+                <label class="layui-form-label" lable-verify="required">部门级别:</label>
                 <div class="layui-input-block">
-                    <input type="text" lay-verify="required" name="dicKey" value="{{d.dicKey||''}}"placeholder="请输入字典编号" class="layui-input">
+                    <select lay-verify="required" name="deptLevel" dic-map="dicDeptLevel" dic-value="{{d.deptLevel}}" placeholder="请选择部门级别" class="layui-input dic-map"/>
                 </div>
             </div>
         </div>
         <div class="layui-row">
             <div class="layui-col-md6 layui-col-xs12">
-                <label class="layui-form-label" lable-verify="required">字典名称:</label>
+                <label class="layui-form-label" lable-verify="required">部门简称:</label>
                 <div class="layui-input-block">
-                    <input type="text" lay-verify="required" name="dicName" value="{{d.dicName||''}}"placeholder="请输入字典名称" class="layui-input">
+                    <input type="text" lay-verify="required" name="deptName" value="{{d.deptName||''}}"placeholder="请输入部门简称" class="layui-input">
                 </div>
             </div>
             <div class="layui-col-md6 layui-col-xs12">
-                <label class="layui-form-label" lable-verify="required">字典类型:</label>
+                <label class="layui-form-label">部门全称:</label>
                 <div class="layui-input-block">
-                    <select lay-verify="required" lay-filter="dicType" name="dicType" dic-map="dicType" dic-value="{{d.dicType||''}}"placeholder="请选择字典类型" class="layui-input dic-map"></select>
+                    <input type="text"  name="deptFullName" value="{{d.deptFullName||''}}"placeholder="请输入部门全称" class="layui-input">
                 </div>
             </div>
         </div>
         <div class="layui-row">
             <div class="layui-col-md6 layui-col-xs12">
-                <label class="layui-form-label">显示图标:</label>
+                <label class="layui-form-label">联系电话:</label>
                 <div class="layui-input-block">
-                    <input type="checkbox"name="showIcon" lay-skin="switch" lay-text="是|否" value="1" {{d.showIcon=='1'?'checked':''}}>
+                    <input type="text"  name="tel" value="{{d.tel||''}}"placeholder="请输入联系电话" class="layui-input">
                 </div>
             </div>
             <div class="layui-col-md6 layui-col-xs12">
-                <label class="layui-form-label" >是否有效:</label>
+                <label class="layui-form-label" >联系邮箱:</label>
                 <div class="layui-input-block">
-                    <input type="checkbox"  name="valid" lay-skin="switch" lay-text="有效|无效" value="1" {{d.valid=='1'?'checked':''}}>
+                    <input type="text"  name="email" value="{{d.email||''}}"placeholder="请输入联系邮箱" class="layui-input">
                 </div>
             </div>
         </div>
-        <div class="layui-row {{d.dicType=='SIMPLE'?'':'hidden'}}">
-            <div class="layui-col-md12 layui-col-xs12">
-                <label class="layui-form-label" lable-verify="required">字典内容:</label>
+        <div class="layui-row">
+            <div class="layui-col-md6 layui-col-xs12">
+                <label class="layui-form-label">行政区划:</label>
                 <div class="layui-input-block">
-                    <textarea  type="text"  lay-verify="{{d.dicType=='SIMPLE'?'required':''}}" name="content" placeholder="请输入字典内容" class="layui-textarea">{{ d.content||''}}</textarea>
+                    <input type="text"  name="areaCode" value="{{d.areaCode||''}}"placeholder="请选择行政区划" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-col-md6 layui-col-xs12">
+                <label class="layui-form-label" >联系地址:</label>
+                <div class="layui-input-block">
+                    <input type="text"  placeholder="请输入联系地址" class="layui-input">
                 </div>
             </div>
         </div>
-        <div class="layui-row {{d.dicType!='SIMPLE'?'':'hidden'}}">
-            <div class="layui-col-md12 layui-col-xs12">
-                <label class="layui-form-label" lable-verify="required">字典SQL:</label>
+        <div class="layui-row">
+            <div class="layui-col-md6 layui-col-xs12">
+                <label class="layui-form-label">是否禁用:</label>
                 <div class="layui-input-block">
-                    <textarea type="text" name="sqlContent" lay-verify="{{d.dicType!='SIMPLE'?'required':''}}" placeholder="请输入字典SQL" class="layui-textarea" >{{ d.sqlContent||''}}</textarea>
+                    <input type="checkbox"  name="valid" lay-skin="switch" lay-text="启用|禁用" value="1" {{d.valid=='1'?'checked':''}}>
+                </div>
+            </div>
+            <div class="layui-col-md6 layui-col-xs12">
+                <label class="layui-form-label" >部门描述:</label>
+                <div class="layui-input-block">
+                    <input type="text"  name="description" value="{{d.description||''}}"placeholder="请输入部门描述" class="layui-input">
                 </div>
             </div>
         </div>

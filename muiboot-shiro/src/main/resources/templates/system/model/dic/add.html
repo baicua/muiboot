@@ -5,7 +5,7 @@
             <div class="layui-col-md6 layui-col-xs12">
                 <label class="layui-form-label">上级字典:</label>
                 <div class="layui-input-block">
-                    <input type="text" name="parentId" dic-map="dicCategoryTree" value="{{d.parentId}}"placeholder="请选择上级字典" class="layui-input dic-tree">
+                    <input type="text" name="parentId" dic-map="dicCategoryTree" value="{{d.parentId||''}}"placeholder="请选择上级字典" class="layui-input dic-tree">
                     <input type="text" name="dicId"value="{{d.dicId||''}}" hidden>
                 </div>
             </div>

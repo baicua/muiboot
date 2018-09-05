@@ -235,7 +235,7 @@ public class DictServiceImpl extends BaseService<SysDic> implements DictService 
 				try {
 					List<Map> maps =this.dicMapper.nativeSelectBySQL(dic.getSqlContent());
 					List<LayerTree<Map>> trees = new ArrayList<>();
-					buildMapTrees(trees, maps);
+					buildMapTrees(trees, maps,dic);
 					m=TreeUtils.build(trees);
 				}catch (Exception e){
 					logger.error("key="+dic.getDicKey()+"SQL执行失败。",e,"获取树形字典");
@@ -246,12 +246,20 @@ public class DictServiceImpl extends BaseService<SysDic> implements DictService 
 		return m;
 	}
 
-	private void buildMapTrees(List<LayerTree<Map>> trees, List<Map> maps) {
+	private void buildMapTrees(List<LayerTree<Map>> trees, List<Map> maps,SysDic dic) {
 		for (Map map : maps) {
 			LayerTree<Map> tree = new LayerTree<>();
 			tree.setId(String.valueOf(map.get("k")));
 			tree.setParentId(String.valueOf(map.get("p")));
 			tree.setName(String.valueOf(map.get("v")));
+			if(1==dic.getShowIcon()){
+				Object icon=map.get("i");
+				if (null==icon){
+					tree.setIcon("layui-icon layui-icon-group");
+				}else {
+					tree.setIcon(icon.toString());
+				}
+			}
 			trees.add(tree);
 		}
 	}

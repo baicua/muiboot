@@ -122,7 +122,7 @@
                 });
             },
             expMenu:function(){
-                $MB.layerPost({url: $MB.getRootPath()+"/menu/excel",data:{}}, function (r) {
+                $MB.layerPost({url:"/menu/excel",data:{}}, function (r) {
                     if (r.code == 0) {
                         window.location.href = $MB.getRootPath()+"/common/download?fileName=" + r.msg + "&delete=" + true;
                     } else {

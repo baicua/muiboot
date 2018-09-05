@@ -112,7 +112,7 @@
                     ,btn: ['确定', '取消']
                     ,yes: function(index){
                         layer.close(index);
-                        $MB.layerPost({url:$MB.getRootPath() + "/dict/delete",data:{"ids": dicId},cache:false},function (data) {
+                        $MB.layerPost({url:"/dict/delete",data:{"ids": dicId},cache:false},function (data) {
                             layer.msg(data.msg);
                             method.resetTree();
                         });
@@ -120,9 +120,9 @@
                 });
             },
             exp:function(){
-                $MB.layerPost({url: $MB.getRootPath() + "/dict/excel",data:{}}, function (r) {
+                $MB.layerPost({url: "/dict/excel",data:{}}, function (r) {
                     if (r.code == 0) {
-                        window.location.href = $MB.getRootPath() + "/common/download?fileName=" + r.msg + "&delete=" + true;
+                        window.location.href ="/common/download?fileName=" + r.msg + "&delete=" + true;
                     } else {
                         layer.msg(r.msg);
                     }

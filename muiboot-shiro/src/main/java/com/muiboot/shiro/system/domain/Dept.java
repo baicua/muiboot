@@ -59,7 +59,7 @@ public class Dept implements Serializable {
      * 有效性，有效：禁用否，无效：禁用是
      */
     @Column(name = "VALID")
-    private String valid;
+    private String valid="0";
 
     /**
      * 电话号码

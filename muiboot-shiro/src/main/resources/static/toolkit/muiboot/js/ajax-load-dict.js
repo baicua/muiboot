@@ -31,43 +31,63 @@
             if ($this.hasClass('dic-map')){
                 var key = $this.attr("dic-map");
                 var value=$this.attr("dic-value");
-                var map =value&&data[key];
+                var isInit = $this.hasClass("dic-finish");
+                var val =$this.val();
+                var map =key&&data[key];
                 if(!!map){
                     $this.empty();
                     $this.append("<option value=''>--请选择--</option>");
                     for(var k in map){
                         $this.append("<option value='"+k+"'>"+map[k]+"</option>");
                     }
-                    $this.val(value||'');
+                    if(isInit){
+                        $this.val(val);
+                    }else {
+                        $this.val(value||'');
+                        $this.addClass("dic-finish");
+                    }
                 }
             }else if ($this.hasClass('dic-tree')){
-                var id="dic-tree"+loadedCount,key = $this.attr("dic-map"),value=$this.val(),map =data[key]||"";
+                var id="dic-tree"+loadedCount,key = $this.attr("dic-map"),value=$this.val(),map =key&&data[key]||"";
                 var verify=$this.attr("lay-verify"),placeholder=$this.attr("placeholder");
+                var isInit = $this.hasClass("dic-finish");
                 if(!!map&&map.children){
-                    var $input=$('<input type="text" '+(!verify?"":"lay-verify="+verify)+' readonly '+(!placeholder?"":"placeholder="+placeholder)+' class="layui-input dic-tree-input">');
-                    var ul =$('<ul id="'+id+'" class="layui-box layui-tree dic-tree-ul"></ul>');
-                    var cancel = $('<i class="layui-icon layui-icon-close-fill"></i>');
-                    $this.after(ul).after(cancel).after($input),$this.hide();
+                    var $input,ul,cancel;
+                    if(isInit){
+                        $input=$this.siblings(".dic-tree-input");
+                        ul=$this.siblings(".dic-tree-ul");
+                        $input=$this.siblings("dic-tree-close");
+                    }else {
+                        $input=$('<input type="text" '+(!verify?"":"lay-verify="+verify)+' readonly '+(!placeholder?"":"placeholder="+placeholder)+' class="layui-input dic-tree-input">');
+                        ul =$('<ul id="'+id+'" class="layui-box layui-tree dic-tree-ul"></ul>');
+                        cancel = $('<i class="layui-icon layui-icon-close-fill dic-tree-close"></i>');
+                        $this.after(ul).after(cancel).after($input),$this.hide();
+                        $input.on("click",function () {
+                            $input.toggleClass("show-tree");
+                            $("body").toggleClass("tree-body");
+                        });
+                        cancel.on("click",function () {
+                            $this.val(""),$input.val("");
+                        });
+                        $this.addClass("dic-finish");
+                        $this.attr("treeId",id);
+                    }
                     var nodes=$.extend([],map.children);
                     if(!!value)defaultNode($this,nodes,value);
                     ul.empty();
-                    layui.tree({elem: "#"+id,nodes:nodes,click: function(node){
+                    layui.tree({elem: "#"+$this.attr("treeId"),nodes:nodes,click: function(node){
                         $input.val(node.name||''),$this.val(node.id),$input.toggleClass("show-tree"), $("body").toggleClass("tree-body");;
                     }
                     });
-                    $input.on("click",function () {
-                        $input.toggleClass("show-tree");
-                        $("body").toggleClass("tree-body");
-                    });
-                    cancel.on("click",function () {
-                        $this.val(""),$input.val("");
-                    });
                 }
             }else if ($this.hasClass('dic-text')){
+                var isInit = $this.hasClass("dic-finish");
+                if(isInit)return;
                 var text = $.trim($this.text());
                 var key = $this.attr("dic-map");
                 var map =data[key];
                 $this.text(map&&map[text]||text);
+                $this.addClass("dic-finish");
             }
 
         })

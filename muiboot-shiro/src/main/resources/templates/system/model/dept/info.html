@@ -1,10 +1,10 @@
-<table class="layui-table layui-anim layui-anim-up" lay-size="sm" data-name-dic="{{ d.deptId }}">
+<table class="layui-table layui-anim layui-anim-up" lay-size="sm" data-name-id="{{ d.deptId }}">
     <colgroup><col width="150"><col width="200"><col width="150"><col width="200"></colgroup>
     <tbody>
-    <tr><th>部门ID</th><td>{{ d.deptId||'/'}}</td><th>部门类型</th><td>{{ d.deptType||'/'}}</td></tr>
+    <tr><th>部门ID</th><td>{{ d.deptId||'/'}}</td><th>部门级别</th><td><span class="dic-text" dic-map="dicDeptLevel">{{ d.deptLevel}}</span></td></tr>
     <tr><th>部门简称</th><td>{{ d.deptName||'/' }}</td><th>部门全称</th><td>{{ d.deptFullName||'/' }}</td></tr>
-    <tr><th>上级部门</th><td>{{ d.parentId||'/' }}</td><th>行政区划</th><td>{{ d.areaCode||'/' }}</td></tr>
+    <tr><th>上级部门</th><td><span class="dic-text" dic-map="dicDeptFirstTable">{{ d.parentId||'/' }}</span></td><th>行政区划</th><td>{{ d.areaCode||'/' }}</td></tr>
     <tr><th>联系电话</th><td>{{ d.tel||'/' }}</td><th>联系邮箱</th><td>{{ d.email||'/' }}</td></tr>
-    <tr><th>是否禁用</th><td>{{ d.valid||'/' }}</td><th>部门描述</th><td>{{ d.description||'/' }}</td></tr>
+    <tr><th>是否禁用</th><td><span class="dic-text" dic-map="disableDic">{{ d.valid}}</span></td><th>部门描述</th><td>{{ d.description||'/' }}</td></tr>
     </tbody>
 </table>
