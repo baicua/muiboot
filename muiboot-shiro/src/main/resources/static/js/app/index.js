@@ -1,5 +1,6 @@
 ;$(document).ready(function() {
     "use strict";
+    var $maincontent=$("#main-content");
     //1.如果是移动端，添加触屏关闭菜单事件
     if($MB.isMobile()||$MB.isXsScreen()){
         $(".layui-layout.layui-layout-admin").addClass("shrink");
@@ -17,7 +18,7 @@
         window.onhashchange=function (e) {
             var hash =window.location.hash;
             if(!hash)return;
-            $("#main-content").ajax_load("loading",hash);
+            $maincontent.ajax_load("loading",hash);
         }
     }else {
         $("body").on("click","a[menu-id]",function () {
@@ -26,13 +27,13 @@
             var $thisa=$("#navigation").find("a[menu-id='"+id+"']");
             var url =$thisa.attr("menu-url");
             if(!!url){
-                $("#main-content").ajax_load("loading",url);
+                $maincontent.ajax_load("loading",url);
             }
         });
         $(window).on("popstate",function(){
             var href=window.location.href;
             var url=href&&href.substring(href.indexOf("sys")+4);
-            $("#main-content").ajax_load("popstate",url);
+            $maincontent.ajax_load("popstate",url);
         });
     }
     //4.菜单栏打开关闭点击监听

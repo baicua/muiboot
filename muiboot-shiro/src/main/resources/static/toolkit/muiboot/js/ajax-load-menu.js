@@ -6,13 +6,15 @@
     function loadmenu(usename) {
         $MB.layerGet({url:url,data:{ "userName": usename}},function (r) {
             if (r.code == 0) {
+                var $navigation=$("#navigation");
+                var $maincontent=$("#main-content");
                 var data = r.msg;
-                $("#navigation").remove("ul");
-                $("#navigation").append(forTree(data.children));
-                var forward = $("#main-content").attr("forward");
+                $navigation.remove("ul");
+                $navigation.append(forTree(data.children));
+                var forward = $maincontent.attr("forward");
                 if(!!forward){
                     if(has){
-                        $("#main-content").ajax_load("loading",forward);
+                        $maincontent.ajax_load("loading",forward);
                     }else {
                         window.location.href=$MB.getRootPath()+"sys"+"#"+forward;
                     }

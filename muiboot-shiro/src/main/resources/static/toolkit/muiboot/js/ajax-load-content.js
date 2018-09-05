@@ -4,6 +4,7 @@
     var root_url = $MB.getRootPath();
     var $contentArea;
     var $breadcrumb = $(".breadcrumb");
+    var $navigation=$("#navigation");
     var cache={
         sessionCache:{},
          useCache: function(cacheName,url,millisecond){
@@ -116,13 +117,13 @@
             //var useCache=cache.useCache("menuCache",url,new Date().getTime());
             var $menu,pushl;
             if($MB.hasHistoryApi()){
-                $menu=$("#navigation").find("a[menu-url='"+url+"']");
+                $menu=$navigation.find("a[menu-url='"+url+"']");
                 pushl=root_url+"sys/"+url;
                 url=root_url + url;
                 if(isLoad)
                 history.pushState(null,$menu.text(),pushl);
             }else {
-                $menu=$("#navigation").find("a[href='"+url+"']");
+                $menu=$navigation.find("a[href='"+url+"']");
                 url= root_url+url.replace(/^(\#\!)?\#/, '');
             }
             ajax_loaded_page.buildBreadcrumn($menu);
