@@ -177,6 +177,7 @@ input.layui-form-danger[type=radio] + div.layui-form-radio>i{
 }
 .dic-tree-input.show-tree + i + ul{
   display: block;
+  border-top: 1px dashed #cbcbcb;
 }
 .dic-tree-input +i{
   position: absolute;
@@ -218,4 +219,9 @@ input.layui-form-danger[type=radio] + div.layui-form-radio>i{
 }
 .layui-table-body.layui-table-main{
   overflow-x: hidden;
+}
+.dic-tree-input.show-tree{
+  border-radius:0px;
+  border-bottom: 0px;
+  border-color: #C9C9C9!important;
 }
