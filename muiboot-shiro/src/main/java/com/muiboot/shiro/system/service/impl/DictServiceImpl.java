@@ -41,7 +41,7 @@ public class DictServiceImpl extends BaseService<SysDic> implements DictService 
 		List<LayerTree<SysDic>> trees = new ArrayList<>();
 		Example example = new Example(SysDic.class);
 		Criteria criteria=example.createCriteria();
-		criteria.andEqualTo("valid",1);
+		//criteria.andEqualTo("valid",1);
 		example.orderBy("orderNum");
 		List<SysDic> dics = this.selectByExample(example);
 		if (StringUtils.isNotBlank(dicName)){

@@ -21,6 +21,32 @@
             }
         });
     };
+    var data={};
+    var storage=window.localStorage;
+    var cacheName="DIC_CACHE";
+    var get=function (k) {
+        if(!storage){
+            return k&&data[k];
+        }else {
+            var item=$.extend({},JSON.parse(storage.getItem(cacheName)));
+            return k&&item&&item[k];
+        }
+    };
+    var put=function (all) {
+        if(!storage){
+            for (var key in all){
+                data[key]=all[key];
+            }
+            return true;
+        }else {
+            var map =$.extend({},JSON.parse(storage.getItem(cacheName)));
+            for (var key in all){
+                map[key]=all[key];
+            }
+            storage.setItem(cacheName,JSON.stringify(map));
+            return true;
+        }
+    };
     var init=function($select){
         if(!$select){
             $select=$("[dic-map]");
@@ -33,7 +59,7 @@
                 var value=$this.attr("dic-value");
                 var isInit = $this.hasClass("dic-finish");
                 var val =$this.val();
-                var map =key&&obj.get(key);
+                var map =key&&get(key);
                 if(!!map){
                     $this.empty();
                     $this.append("<option value=''>--请选择--</option>");
@@ -50,7 +76,7 @@
                     }
                 }
             }else if ($this.hasClass('dic-tree')){
-                var id="dic-tree"+loadedCount,key = $this.attr("dic-map"),value=$this.val(),map =key&&obj.get(key)||"";
+                var id="dic-tree"+loadedCount,key = $this.attr("dic-map"),value=$this.val(),map =key&&get(key)||"";
                 var verify=$this.attr("lay-verify"),placeholder=$this.attr("placeholder");
                 var isInit = $this.hasClass("dic-finish");
                 if(!!map&&map.children){
@@ -75,6 +101,9 @@
                         $this.attr("treeId",id);
                     }
                     var nodes=$.extend([],map.children);
+                    if(nodes.length>0&&nodes[0].children.length>0){
+                        nodes[0].spread=true;
+                    }
                     if(!!value)defaultNode($this,nodes,value);
                     ul.empty();
                     layui.tree({elem: "#"+$this.attr("treeId"),nodes:nodes,click: function(node){
@@ -87,23 +116,21 @@
                 if(isInit)return;
                 var text = $.trim($this.text());
                 var key = $this.attr("dic-map");
-                var map =obj.get(key);
+                var map =get(key);
                 $this.text(map&&map[text]||text);
                 $this.addClass("dic-finish");
             }
 
         })
     };
-    var data={};
-    var storage=window.localStorage;
-    var cacheName="DIC_CACHE";
+
     var obj = {
         load: function ($data) {
             $.getJSON(baseUrl,{dicKeys:$data},function (r) {
                 if(!r||!r.msg||r.code != 0){
                     return false;
                 }else {
-                    this.put(r.msg);
+                    put(r.msg);
                 }
             })
         },
@@ -113,29 +140,6 @@
             }catch(e) {
                console.error(e.message);
                return false;
-            }
-        },
-        get:function (k) {
-            if(!storage){
-                return k&&data[k];
-            }else {
-                var item=$.extend({},JSON.parse(storage.getItem(cacheName)));
-                return k&&item&&item[k];
-            }
-        },
-        put:function (all) {
-            if(!storage){
-                for (var key in all){
-                    data[key]=all[key];
-                }
-                return true;
-            }else {
-                var map =$.extend({},JSON.parse(storage.getItem(cacheName)));
-                for (var key in all){
-                    map[key]=all[key];
-                }
-                storage.setItem(cacheName,JSON.stringify(map));
-                return true;
             }
         }
     };

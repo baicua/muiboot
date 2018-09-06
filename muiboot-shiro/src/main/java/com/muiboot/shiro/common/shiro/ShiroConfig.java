@@ -33,7 +33,7 @@ public class ShiroConfig {
 	@Bean
 	public EhCacheManager getEhCacheManager() {
 	    EhCacheManager em = new EhCacheManager();
-	    em.setCacheManagerConfigFile("classpath:config/ehcache-cluster.xml");
+	    em.setCacheManagerConfigFile("classpath:config/ehcache.xml");
 	    return em;
 	}
 

@@ -69,6 +69,7 @@ public class DeptController {
 	@ResponseBody
 	public ResponseBo deptExcel(Dept dept) {
 		try {
+			dept.setValid("");
 			List<Dept> list = this.deptService.findAllDepts(dept);
 			return FileUtils.createExcelByPOIKit("部门表", list, Dept.class);
 		} catch (Exception e) {

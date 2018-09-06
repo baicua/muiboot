@@ -20,7 +20,7 @@ public class SysDic implements Serializable {
     @Column(name = "DIC_ID")
     private Long dicId;
     @Column(name = "PARENT_ID")
-    private Long parentId=0L;
+    private Long parentId;
     @Column(name = "DIC_KEY")
     @ExportConfig(value = "字典编号")
     private String dicKey;
@@ -32,10 +32,10 @@ public class SysDic implements Serializable {
     private String dicType;
     @Column(name = "SHOW_ICON")
     @ExportConfig(value = "是否显示图标",convert = "s:0=否,1=是")
-    private int showIcon=0;
+    private Integer showIcon;
     @Column(name = "VALID")
     @ExportConfig(value = "是否有效",convert = "s:0=否,1=是")
-    private int valid=1;
+    private Integer valid;
     @Column(name = "CONTENT")
     @ExportConfig(value = "字典内容")
     private String content;
@@ -95,19 +95,19 @@ public class SysDic implements Serializable {
         this.dicType = dicType;
     }
 
-    public int getValid() {
+    public Integer getValid() {
         return valid;
     }
 
-    public void setValid(int valid) {
+    public void setValid(Integer valid) {
         this.valid = valid;
     }
 
-    public int getShowIcon() {
+    public Integer getShowIcon() {
         return showIcon;
     }
 
-    public void setShowIcon(int showIcon) {
+    public void setShowIcon(Integer showIcon) {
         this.showIcon = showIcon;
     }
 
