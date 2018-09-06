@@ -6,14 +6,51 @@
 <hr>
 <div class="layui-container ajax-content" lay-filter="ajax-content">
     <form class="layui-form table-form" action="">
-        <div class="layui-form-item">
-            <div class="layui-inline" style="float: right;margin-bottom: 0px;margin-right: 4px;">
-                <div class="layui-btn-group">
-                    <button title="新增" type="button" id="addBtn"  class="layui-btn layui-btn-primary layui-btn-sm" shiro:hasPermission="menu:add"><i class="layui-icon"></i></button>
-                    <button title="修改" type="button" id="updBtn" class="layui-btn layui-btn-primary layui-btn-sm" shiro:hasPermission="menu:update"><i class="layui-icon"></i></button>
-                    <button title="导入" type="button" id="impBtn" class="layui-btn layui-btn-primary layui-btn-sm" ><i class="layui-icon layui-icon-upload-circle"></i></button>
-                    <button title="导出" type="button" id="expBtn" class="layui-btn layui-btn-primary layui-btn-sm" ><i class="layui-icon layui-icon-download-circle"></i></button>
-                    <button title="删除" type="button" id="delBtn" class="layui-btn layui-btn-primary layui-btn-sm" shiro:hasPermission="menu:delete"><i class="layui-icon"></i></button>
+        <div class="layui-row">
+            <div class="layui-col-md8 layui-col-xs12">
+                <div class="layui-col-md6 layui-col-xs12">
+                    <label class="layui-form-label">所属部门:</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="deptId" dic-map="dicDeptFirstTree" placeholder="请选择部门" class="layui-input dic-tree">
+                    </div>
+                </div>
+                <div class="layui-col-md6 layui-col-xs12">
+                    <label class="layui-form-label">用户名:</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="username" dic-map="dicDeptFirstTree" placeholder="请输入用户名" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md4 layui-col-xs12">
+                <div class="layui-inline" style="float: right;margin-bottom: 0px;">
+                    <button title="查询" type="button" id="seacrhBtn" class="layui-btn layui-btn-primary layui-btn-sm" ><i class="layui-icon">&#xe615;</i>查询</button>
+                    <div class="layui-btn-group">
+                        <button title="新增" type="button" id="addBtn"  class="layui-btn layui-btn-primary layui-btn-sm" shiro:hasPermission="menu:add"><i class="layui-icon"></i></button>
+                        <button title="修改" type="button" id="updBtn" class="layui-btn layui-btn-primary layui-btn-sm" shiro:hasPermission="menu:update"><i class="layui-icon"></i></button>
+                        <button title="导入" type="button" id="impBtn" class="layui-btn layui-btn-primary layui-btn-sm" ><i class="layui-icon layui-icon-upload-circle"></i></button>
+                        <button title="导出" type="button" id="expBtn" class="layui-btn layui-btn-primary layui-btn-sm" ><i class="layui-icon layui-icon-download-circle"></i></button>
+                        <button title="删除" type="button" id="delBtn" class="layui-btn layui-btn-primary layui-btn-sm" shiro:hasPermission="menu:delete"><i class="layui-icon"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-row search-more">
+            <div class="layui-col-md4 layui-col-xs12">
+                <label class="layui-form-label">所属部门:</label>
+                <div class="layui-input-block">
+                    <input type="text" name="deptId" dic-map="dicDeptFirstTree" placeholder="请选择部门" class="layui-input dic-tree">
+                </div>
+            </div>
+            <div class="layui-col-md4 layui-col-xs12">
+                <label class="layui-form-label">所属部门:</label>
+                <div class="layui-input-block">
+                    <input type="text" name="deptId" dic-map="dicDeptFirstTree" placeholder="请选择部门" class="layui-input dic-tree">
+                </div>
+            </div>
+            <div class="layui-col-md4 layui-col-xs12">
+                <label class="layui-form-label">所属部门:</label>
+                <div class="layui-input-block">
+                    <input type="text" name="deptId" dic-map="dicDeptFirstTree" placeholder="请选择部门" class="layui-input dic-tree">
                 </div>
             </div>
         </div>
