@@ -252,7 +252,7 @@ public class DictServiceImpl extends BaseService<SysDic> implements DictService 
 			tree.setId(String.valueOf(map.get("k")));
 			tree.setParentId(String.valueOf(map.get("p")));
 			tree.setName(String.valueOf(map.get("v")));
-			if(1==dic.getShowIcon()){
+			if("1".equals(dic.getShowIcon())){
 				Object icon=map.get("i");
 				if (null==icon){
 					tree.setIcon("layui-icon layui-icon-group");

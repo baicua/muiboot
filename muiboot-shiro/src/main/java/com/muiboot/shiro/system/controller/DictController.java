@@ -39,10 +39,10 @@ public class DictController extends BaseController {
 	@ResponseBody
 	public ResponseBo addDic(SysDic dic)  throws Exception{
 		if (null==dic.getShowIcon()){
-			dic.setShowIcon(0);
+			dic.setShowIcon("0");
 		}
 		if (null==dic.getValid()){
-			dic.setValid(0);
+			dic.setValid("0");
 		}
 		this.dictService.add(dic);
 		return ResponseBo.ok("新增字典" + dic.getDicName() + "成功！");
@@ -84,10 +84,10 @@ public class DictController extends BaseController {
 		try {
 			dict.setUpdateDate(new Date());
 			if (null==dict.getShowIcon()){
-				dict.setShowIcon(0);
+				dict.setShowIcon("0");
 			}
 			if (null==dict.getValid()){
-				dict.setValid(0);
+				dict.setValid("0");
 			}
 			this.dictService.updateDicNotNull(dict);
 			return ResponseBo.ok("修改字典成功！");

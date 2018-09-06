@@ -8,7 +8,7 @@
     <id column="DIC_ID" jdbcType="BIGINT" property="dicId" />
     <result column="PARENT_ID" jdbcType="BIGINT" property="parentId" />
     <result column="DIC_KEY" jdbcType="VARCHAR" property="dicKey" />
-    <result column="VALID" jdbcType="INTEGER" property="valid" />
+    <result column="VALID" jdbcType="VARCHAR" property="valid" />
     <result column="DIC_NAME" jdbcType="VARCHAR" property="dicName" />
     <result column="DIC_TYPE" jdbcType="VARCHAR" property="dicType" />
     <result column="SHOW_ICON" jdbcType="INTEGER" property="showIcon" />

@@ -24,7 +24,7 @@
   
   <select id="findUserWithDept" resultType="user" parameterType="user">
   		SELECT U.USER_ID USERID,U.USERNAME,U.EMAIL,U.MOBILE,U.STATUS,U.CRATE_TIME CRATETIME,
-  		U.SSEX,D.DEPT_NAME DEPTNAME FROM T_USER U
+  		U.SSEX,D.DEPT_NAME DEPTNAME,U.REAL_NAME REALNAME   FROM T_USER U
   		LEFT JOIN T_DEPT D ON(U.DEPT_ID = D.DEPT_ID)
   		WHERE 1=1
   		<if test="username != null and username != ''">

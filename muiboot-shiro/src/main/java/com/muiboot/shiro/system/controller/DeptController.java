@@ -69,7 +69,6 @@ public class DeptController {
 	@ResponseBody
 	public ResponseBo deptExcel(Dept dept) {
 		try {
-			dept.setValid("");
 			List<Dept> list = this.deptService.findAllDepts(dept);
 			return FileUtils.createExcelByPOIKit("部门表", list, Dept.class);
 		} catch (Exception e) {
@@ -106,6 +105,12 @@ public class DeptController {
 	@ResponseBody
 	public ResponseBo addRole(Dept dept) {
 		try {
+			if (StringUtils.isBlank(dept.getValid())){
+				dept.setValid("0");
+			}
+			if (dept.getParentId()==null){
+				dept.setParentId(0L);
+			}
 			this.deptService.addDept(dept);
 			return ResponseBo.ok("新增部门成功！");
 		} catch (Exception e) {

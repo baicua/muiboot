@@ -16,9 +16,9 @@
                 ,{field: 'userId', title: 'userId'}
                 ,{field:'username', title: '用户名'}
                 ,{field:'realName',  title: '真实姓名'}
-                ,{field:'deptName',  title: 'deptName'}
+                ,{field:'deptName',  title: '所属部门'}
                 ,{field:'email', title: '邮箱'}
-                ,{field:'tel', title: '手机号'}
+                ,{field:'mobile', title: '手机号'}
                 ,{field:'ssex', title: '性别'}
                 ,{field:'status', title: '状态'}
             ]]
