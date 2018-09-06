@@ -2,7 +2,7 @@ package com.muiboot.shiro.system.service.impl;
 
 import com.muiboot.shiro.common.service.impl.BaseService;
 import com.muiboot.shiro.system.domain.SysDic;
-import com.muiboot.shiro.system.service.DicMapService;
+import com.muiboot.shiro.system.service.DicCacheService;
 import com.muiboot.shiro.system.service.DictService;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ import java.util.Map;
  */
 @Service("dicMapService")
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
-public class DicMapServiceImpl extends BaseService<SysDic> implements DicMapService {
+public class DicCacheServiceImpl extends BaseService<SysDic> implements DicCacheService {
     @Autowired
     private DictService dictService;
     @Override

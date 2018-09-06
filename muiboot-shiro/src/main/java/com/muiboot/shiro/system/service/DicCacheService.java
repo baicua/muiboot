@@ -8,6 +8,6 @@ import java.util.Map;
 /**
  * Created by 75631 on 2018/9/1.
  */
-public interface DicMapService extends IService<SysDic> {
+public interface DicCacheService extends IService<SysDic> {
      Map<String,Object> getAllDicMap();
 }
