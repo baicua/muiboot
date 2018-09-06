@@ -25,12 +25,6 @@ public class LogController extends BaseController {
 	@Autowired
 	private LogService logService;
 
-	@RequestMapping("log")
-	@RequiresPermissions("log:list")
-	public String index() {
-		return "system/log/log";
-	}
-
 	@RequestMapping("log/list")
 	@ResponseBody
 	public Map<String, Object> logList(QueryRequest request, SysLog log) {

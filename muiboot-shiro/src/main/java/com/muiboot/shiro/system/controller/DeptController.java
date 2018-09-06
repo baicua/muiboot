@@ -23,12 +23,6 @@ public class DeptController {
 	@Autowired
 	private DeptService deptService;
 
-	@RequestMapping("dept")
-	@RequiresPermissions("dept:list")
-	public String index() {
-		return "system/dept/dept";
-	}
-
 	@RequestMapping("dept/tree")
 	@ResponseBody
 	public ResponseBo getDeptTree() {

@@ -31,14 +31,6 @@ public class UserController extends BaseController {
 
 	private static final String ON = "on";
 
-	@RequestMapping("user")
-	@RequiresPermissions("user:list")
-	public String index(Model model) {
-		User user = super.getCurrentUser();
-		model.addAttribute("user", user);
-		return "system/user/user";
-	}
-
 	@RequestMapping("user/checkUserName")
 	@ResponseBody
 	public boolean checkUserName(String username, String oldusername) {

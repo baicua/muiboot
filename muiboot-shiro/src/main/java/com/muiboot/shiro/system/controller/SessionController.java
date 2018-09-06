@@ -29,12 +29,6 @@ public class SessionController extends BaseController {
 
 	@Autowired
 	private MenuService menuService;
-	
-	@RequestMapping("session")
-	@RequiresPermissions("session:list")
-	public String online() {
-		return "system/monitor/online";
-	}
 
 	@ResponseBody
 	@RequestMapping("session/list")

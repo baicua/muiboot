@@ -38,4 +38,26 @@ public class SysController extends BaseController {
     public String dict() {
         return "system/dict/dict";
     }
+    @RequestMapping("dept")
+    @RequiresPermissions("dept:list")
+    public String dept() {
+        return "system/dept/dept";
+    }
+    @RequestMapping("log")
+    @RequiresPermissions("log:list")
+    public String log() {
+        return "system/log/log";
+    }
+    @RequestMapping("session")
+    @RequiresPermissions("session:list")
+    public String online() {
+        return "system/monitor/online";
+    }
+    @RequestMapping("user")
+    @RequiresPermissions("user:list")
+    public String index(Model model) {
+        User user = super.getCurrentUser();
+        model.addAttribute("user", user);
+        return "system/user/user";
+    }
 }
