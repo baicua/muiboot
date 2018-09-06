@@ -106,7 +106,7 @@
             exp:function(){
                 $MB.layerPost({url:"/dept/excel",data:{}}, function (r) {
                     if (r.code == 0) {
-                        window.location.href = $MB.getRootPath() + "/common/download?fileName=" + r.msg + "&delete=" + true;
+                        window.location.href ="/common/download?fileName=" + r.msg + "&delete=" + true;
                     } else {
                         layer.msg(r.msg);
                     }
