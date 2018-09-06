@@ -8,7 +8,7 @@ import com.muiboot.shiro.common.util.LogUtil;
 import com.muiboot.shiro.common.util.TreeUtils;
 import com.muiboot.shiro.system.dao.SysDicMapper;
 import com.muiboot.shiro.system.domain.SysDic;
-import com.muiboot.shiro.system.service.DicMapService;
+import com.muiboot.shiro.system.service.DicCacheService;
 import com.muiboot.shiro.system.service.DictService;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.MapUtils;
@@ -35,7 +35,7 @@ public class DictServiceImpl extends BaseService<SysDic> implements DictService 
 	@Autowired
 	ObjectMapper jsonMapper;
 	@Autowired
-	private DicMapService dicMapService;
+	private DicCacheService dicCacheService;
 	@Override
 	public LayerTree<SysDic> getDictTree(String dicName) {
 		List<LayerTree<SysDic>> trees = new ArrayList<>();
@@ -155,7 +155,7 @@ public class DictServiceImpl extends BaseService<SysDic> implements DictService 
 	@Override
 	public Map loadDics(String[] dicKeys) {
 		if (null==dicKeys||dicKeys.length==0)return null;
-		Map<String,Object> dicMap = dicMapService.getAllDicMap();
+		Map<String,Object> dicMap = dicCacheService.getAllDicMap();
 		Map<String,Object> res=null;
 		if (MapUtils.isNotEmpty(dicMap)){
 			res=new LinkedHashMap<String,Object>();
