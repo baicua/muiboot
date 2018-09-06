@@ -33,7 +33,7 @@
                 var value=$this.attr("dic-value");
                 var isInit = $this.hasClass("dic-finish");
                 var val =$this.val();
-                var map =key&&data[key];
+                var map =key&&obj.get(key);
                 if(!!map){
                     $this.empty();
                     $this.append("<option value=''>--请选择--</option>");
@@ -50,7 +50,7 @@
                     }
                 }
             }else if ($this.hasClass('dic-tree')){
-                var id="dic-tree"+loadedCount,key = $this.attr("dic-map"),value=$this.val(),map =key&&data[key]||"";
+                var id="dic-tree"+loadedCount,key = $this.attr("dic-map"),value=$this.val(),map =key&&obj.get(key)||"";
                 var verify=$this.attr("lay-verify"),placeholder=$this.attr("placeholder");
                 var isInit = $this.hasClass("dic-finish");
                 if(!!map&&map.children){
@@ -87,7 +87,7 @@
                 if(isInit)return;
                 var text = $.trim($this.text());
                 var key = $this.attr("dic-map");
-                var map =data[key];
+                var map =obj.get(key);
                 $this.text(map&&map[text]||text);
                 $this.addClass("dic-finish");
             }
@@ -95,15 +95,15 @@
         })
     };
     var data={};
+    var storage=window.localStorage;
+    var cacheName="DIC_CACHE";
     var obj = {
         load: function ($data) {
             $.getJSON(baseUrl,{dicKeys:$data},function (r) {
                 if(!r||!r.msg||r.code != 0){
                     return false;
                 }else {
-                    for (var key in r.msg){
-                        data[key]=r.msg[key];
-                    }
+                    this.put(r.msg);
                 }
             })
         },
@@ -116,9 +116,27 @@
             }
         },
         get:function (k) {
-
+            if(!storage){
+                return k&&data[k];
+            }else {
+                var item=$.extend({},JSON.parse(storage.getItem(cacheName)));
+                return k&&item&&item[k];
+            }
         },
         put:function (all) {
+            if(!storage){
+                for (var key in all){
+                    data[key]=all[key];
+                }
+                return true;
+            }else {
+                var map =$.extend({},JSON.parse(storage.getItem(cacheName)));
+                for (var key in all){
+                    map[key]=all[key];
+                }
+                storage.setItem(cacheName,JSON.stringify(map));
+                return true;
+            }
         }
     };
     exports('dict', obj);
