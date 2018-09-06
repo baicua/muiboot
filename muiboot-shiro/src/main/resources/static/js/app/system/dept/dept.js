@@ -31,7 +31,7 @@
         $MB.layerGet({url:ctx+"model/dept/add.html",cache:true},function(text){
             model=text;
         });
-        var loadModel=function(data,title,url){
+        function loadModel(data,title,url){
             var openIndex=0;
             try{
                 laytpl(model).render(data, function(html){
