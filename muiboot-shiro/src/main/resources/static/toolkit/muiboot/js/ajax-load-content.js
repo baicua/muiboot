@@ -5,31 +5,6 @@
     var $contentArea;
     var $breadcrumb = $(".breadcrumb");
     var $navigation=$("#navigation");
-    var cache={
-        sessionCache:{},
-         useCache: function(cacheName,url,millisecond){
-                if(this.sessionCache[url])return true;
-                this.sessionCache[url]=true;
-                if(!window.localStorage)return false;
-                var storage=window.localStorage;
-                var data=$.extend({},JSON.parse(storage.getItem(cacheName)));
-                var oldmillisecond=data[url];
-                if(!oldmillisecond){
-                    data[url]=millisecond;
-                    storage.setItem(cacheName,JSON.stringify(data));
-                    return false;
-                }
-                //计算出相差天数
-                var days=Math.floor((millisecond-oldmillisecond)/(24*3600*1000));
-                if(days<=7){
-                    return true;
-                }else {
-                    data[url]=millisecond;
-                    storage.setItem(cacheName,JSON.stringify(data));
-                    return false;
-                }
-            }
-    };
     $.fn.ajax_load = function(options, param) {
         // 如果是调用方法
         if (typeof options == 'string') {
@@ -87,34 +62,8 @@
                 }
             }
         },
-        ajax_loaded_page.push=function(url,isLoad){
-            var l = this.urls.length;
-            if(isLoad)ajax_loaded_page.urls[l]=url;
-            ajax_loaded_page.$thisUrl=url;
-            ajax_loaded_page.$thisIndex=l;
-            $("#main-content").attr("forward",url);
-            return l;
-        },
-        ajax_loaded_page.get=function(key){
-            if(typeof key === 'string'){
-                for (var k in ajax_loaded_page.urls){
-                    if(ajax_loaded_page.urls[k]===key){
-                        return k;
-                    }
-                }
-                return undefined;
-            }else {
-                return ajax_loaded_page.urls[key];
-            }
-        },
-
-        $contentArea.refresh = function(){
-            $contentArea.ajaxload(ajax_loaded_page.$thisUrl,false);
-        },
         $contentArea.ajaxload =function(url,isLoad){
             if(!url)return;
-            //判断是否使用缓存
-            //var useCache=cache.useCache("menuCache",url,new Date().getTime());
             var $menu,pushl;
             if($MB.hasHistoryApi()){
                 $menu=$navigation.find("a[menu-url='"+url+"']");
@@ -155,7 +104,6 @@
                                 }
                             })
                         }
-                        //ajax_loaded_page.push(url,isLoad);
                     }catch (e) {
                         console.error("error:"+e.message+";url:"+url);
                         return true;
@@ -197,9 +145,6 @@
 
     // 组件方法封装........
     $.fn.ajax_load.methods = {
-        refresh : function($contentArea) {
-            $contentArea.refresh();
-        },
         loading : function($contentArea, parms) {
             $contentArea.ajaxload(parms,true);
         },

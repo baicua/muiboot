@@ -1,4 +1,4 @@
-;layui.define(['jquery','menu','element'], function (exports) {
+;layui.define(['jquery','element'], function (exports) {
     "use strict";
     var $ = layui.jquery;
     var element=layui.element;
