@@ -6,7 +6,7 @@ import com.muiboot.shiro.common.layer.LayerTree;
 import com.muiboot.shiro.common.service.impl.BaseService;
 import com.muiboot.shiro.common.util.LogUtil;
 import com.muiboot.shiro.common.util.TreeUtils;
-import com.muiboot.shiro.system.dao.CoreDicMapper;
+import com.muiboot.shiro.system.dao.SysDicMapper;
 import com.muiboot.shiro.system.domain.SysDic;
 import com.muiboot.shiro.system.service.DicMapService;
 import com.muiboot.shiro.system.service.DictService;
@@ -31,7 +31,7 @@ public class DictServiceImpl extends BaseService<SysDic> implements DictService 
 
 	private static final LogUtil logger = LogUtil.getLoger(DictServiceImpl.class);
 	@Autowired
-	private CoreDicMapper dicMapper;
+	private SysDicMapper dicMapper;
 	@Autowired
 	ObjectMapper jsonMapper;
 	@Autowired

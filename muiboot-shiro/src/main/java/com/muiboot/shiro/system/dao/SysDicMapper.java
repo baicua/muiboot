@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 import java.util.Map;
 
-public interface CoreDicMapper extends MyMapper<SysDic> {
+public interface SysDicMapper extends MyMapper<SysDic> {
     /**
      * 原生SQL查询
      * @param msql

@@ -19,6 +19,8 @@
                 ,{field:'operation',  title: '描述'}
                 ,{field:'time',  title: '耗时（毫秒）'}
                 ,{field:'ip', title: 'IP地址'}
+                ,{field:'method',  title: '操作方法'}
+                ,{field:'params',  title: '参数'}
                 ,{field:'location', title: '操作地点'}
                 ,{field:'createTime', title: '操作时间'}
             ]]
