@@ -21,6 +21,14 @@
 但是，市面上的Material Design风格前端组件基本不兼容IE8及以下，所以前端选择了兼容性
 较好的layui.后台框架实在FEBS基础上修改，站在巨人的肩上。
 ````
+##待做功能
+- 工作流 activiti
+- 模板打印 ？
+- 无状态登录 jwt
+- BO主键生成策略，兼容mysql,oracle
+- 图表系统 zeppelin
+- 分布式环境 ehcache集群or redis
+- 文件在线预览
 ## 技术选型
 ### 后端
 
