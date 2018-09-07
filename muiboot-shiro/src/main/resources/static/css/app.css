@@ -181,7 +181,7 @@ input.layui-form-danger[type=radio] + div.layui-form-radio>i{
 .dic-tree-input.show-tree + i + ul{
   display: block;
   border-top: 1px dashed #cbcbcb;
-  margin-top: -1px;
+  margin-top: -2px;
 }
 .dic-tree-input +i{
   position: absolute;

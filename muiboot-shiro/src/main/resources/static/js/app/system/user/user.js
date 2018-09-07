@@ -1,15 +1,15 @@
 ;$(document).ready(function() {
     "use strict";
-    var table;
-    layui.use('table', function(){
-        table = layui.table;
+    var table,dict,form;
+    layui.use(['dict','table'], function(){
+        table = layui.table,dict=layui.dict,form=layui.form;
         table.render({
             id: 'lay-user-list'
             ,elem: '#userList'
             ,url: '/user/list' //数据接口
             ,page: true //开启分页
             ,size: 'sm'
-            ,height: 'full-200'
+            ,height: 'full-300'
             ,skin:"line"
             ,cols: [[
                 {type:'checkbox'}
@@ -23,6 +23,9 @@
                 ,{field:'status', title: '状态'}
             ]]
         });
+        dict.load("dicDeptFirstTree,disableDic");
+        dict.render();
+        form.render();
         $("#expBtn").on("click",function (r) {
             $MB.layerPost({url: "/user/excel",data:{}}, function (r) {
                 if (r.code == 0) {

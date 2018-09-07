@@ -3,10 +3,10 @@
     "use strict";
     var $ = layui.jquery;
     var baseUrl=ctx+"dict/loadDics";
-    $(document).on("click",".tree-body",function (e) {
+    $(document).on("click","body",function (e) {
         if($(e.target).closest(".dic-tree-input,.dic-tree-ul").length == 0){
-            $(".dic-tree-input").toggleClass("show-tree");
-            $("body").toggleClass("tree-body");
+            $(".dic-tree-input").removeClass("show-tree");
+            $("body").removeClass("tree-body");
         }
     });
     var defaultNode=function ($this,nodes,id) {
