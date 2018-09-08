@@ -76,7 +76,10 @@ public class LoginController extends BaseController {
             return ResponseBo.error("认证失败！");
         }
     }
-
+    @RequestMapping("home")
+    public String home() {
+        return "system/home/default";
+    }
     @GetMapping(value = "gifCode")
     public void getGifCode(HttpServletResponse response, HttpServletRequest request) {
         try {
@@ -110,6 +113,7 @@ public class LoginController extends BaseController {
         // 登录成后，即可通过 Subject 获取登录的用户信息
         User user = super.getCurrentUser();
         model.addAttribute("user", user);
+        model.addAttribute("forward", "home");
         return "index";
     }
 }

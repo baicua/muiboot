@@ -34,7 +34,7 @@
                     breadcrumbMenu.name.unshift($.trim($(this).text()));
                 });
                 var breadcrumnHtml = "";
-                breadcrumnHtml += '<a href=""><i class="layui-icon layui-icon-home" style="font-size: 14px;color: #000;"></i> 首页</a>';
+                breadcrumnHtml += '<a href="/sys"><i class="layui-icon layui-icon-home" style="font-size: 14px;color: #000;"></i> 首页</a>';
                 for (var i = 0; i < breadcrumbMenu.name.length; i++) {
                     breadcrumnHtml += '<span lay-separator="">/</span>';
                     breadcrumnHtml += '<a href="javascript:;" menu-id="'+breadcrumbMenu.id[i]+'" >'+breadcrumbMenu.name[i]+'</a>';
