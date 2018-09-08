@@ -5,7 +5,7 @@
     layui.use(['element', 'laytpl','form','dict'], function () {
         element = layui.element,form = layui.form,laytpl = layui.laytpl,dict=layui.dict;
         element.init();
-        dict.load("dicDeptLevel,dicDeptFirstTree,disableDic,dicDeptFirstTable");
+        dict.load("dicOrganLevel,dicOrganTree,disableDic,dicOrganTable");
         form.render();
     });
     setTimeout(function(){
@@ -28,7 +28,7 @@
     });
     var method =(function() {
         var model = "";
-        $MB.layerGet({url:ctx+"model/dept/add.html",cache:true},function(text){
+        $MB.layerGet({url:ctx+"model/organ/add.html",cache:true},function(text){
             model=text;
         });
         function loadModel(data,title,url){
@@ -67,7 +67,7 @@
         return {
             add:function($id){
                 if(!$id)$id="";
-                loadModel({parentId:$id,valid:'1'},"新增部门",ctx + "dept/add");
+                loadModel({parentId:$id,valid:'1'},"新增部门",ctx + "organ/add");
             },
             update:function($id){
                 if(!$id){
@@ -75,12 +75,12 @@
                     return false;
                 }
                 try{
-                    $MB.layerGet({url:ctx + "dept/getDept",data:{"deptId": $id}},function (data) {
+                    $MB.layerGet({url:ctx + "organ/getOrgan",data:{"organId": $id}},function (data) {
                         if(!data||!data.msg||data.code != 0){
                             layer.msg('请求数据失败,您选择的部门不存在');
                             return false;
                         }
-                        loadModel(data.msg,"部门修改",ctx + "dept/update");
+                        loadModel(data.msg,"部门修改",ctx + "organ/update");
                     });
                 }catch(e) {
                     layer.msg('请求数据异常：'+e.message);
@@ -96,7 +96,7 @@
                     ,btn: ['确定', '取消']
                     ,yes: function(index){
                         layer.close(index);
-                        $MB.layerPost({url:"/dept/delete",data:{"ids": $id},cache:false},function (data) {
+                        $MB.layerPost({url:"/organ/delete",data:{"ids": $id},cache:false},function (data) {
                             layer.msg(data.msg);
                             method.resetTree();
                         });
@@ -104,7 +104,7 @@
                 });
             },
             exp:function(){
-                $MB.layerPost({url:"/dept/excel",data:{}}, function (r) {
+                $MB.layerPost({url:"/organ/excel",data:{}}, function (r) {
                     if (r.code == 0) {
                         window.location.href ="/common/download?fileName=" + r.msg + "&delete=" + true;
                     } else {
@@ -113,9 +113,9 @@
                 });
             },
             refresh:function ($id) {
-                $MB.layerGet({url:ctx+"model/dept.html",cache:true},function(text){
+                $MB.layerGet({url:ctx+"model/organ.html",cache:true},function(text){
                     var $compent=$("<code></code>").html(text);
-                    $MB.layerGet({url:ctx+"dept/getDeptDetail",data:{deptId:$id}},function(data){
+                    $MB.layerGet({url:ctx+"organ/getOrganDetail",data:{organId:$id}},function(data){
                         laytpl($compent.find("#layui-table-info").html()).render($.extend({},data.msg.info), function(html){
                             $("#InfoPanle").html(html);
                         });
@@ -148,9 +148,9 @@
                 });
             },
             resetTree:function(){
-                var deptName =$("#search_input").val();
-                var data = {deptName:deptName};
-                $MB.layerGet({url:ctx+"dept/tree",data:data},function (data) {
+                var organName =$("#search_input").val();
+                var data = {organName:organName};
+                $MB.layerGet({url:ctx+"organ/tree",data:data},function (data) {
                     var nodes=$.extend([], data.msg.children);
                     if(nodes.length>0&&nodes[0].children.length>0){
                         nodes[0].spread=true;

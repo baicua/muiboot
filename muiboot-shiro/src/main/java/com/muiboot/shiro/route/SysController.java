@@ -38,10 +38,10 @@ public class SysController extends BaseController {
     public String dict() {
         return "system/dict/dict";
     }
-    @RequestMapping("dept")
-    @RequiresPermissions("dept:list")
-    public String dept() {
-        return "system/dept/dept";
+    @RequestMapping("organ")
+    @RequiresPermissions("organ:list")
+    public String organ() {
+        return "system/organ/organ";
     }
     @RequestMapping("log")
     @RequiresPermissions("log:list")

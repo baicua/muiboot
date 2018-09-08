@@ -16,6 +16,7 @@
                 ,{field: 'userId', title: 'userId'}
                 ,{field:'username', title: '用户名'}
                 ,{field:'realName',  title: '真实姓名'}
+                ,{field:'organName',  title: '所属机关'}
                 ,{field:'deptName',  title: '所属部门'}
                 ,{field:'email', title: '邮箱'}
                 ,{field:'mobile', title: '手机号'}
@@ -23,7 +24,7 @@
                 ,{field:'status', title: '状态'}
             ]]
         });
-        dict.load("dicDeptFirstTree,disableDic");
+        dict.load("dicOrganTree,disableDic");
         dict.render();
         form.render();
         $("#expBtn").on("click",function (r) {

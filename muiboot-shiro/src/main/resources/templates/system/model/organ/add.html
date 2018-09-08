@@ -3,30 +3,30 @@
     <form class="layui-form" action="">
         <div class="layui-row">
             <div class="layui-col-md6 layui-col-xs12">
-                <label class="layui-form-label">上级部门:</label>
+                <label class="layui-form-label">上级机构:</label>
                 <div class="layui-input-block">
-                    <input type="text" name="parentId" dic-map="dicDeptFirstTree" value="{{d.parentId||''}}"placeholder="请选择上级部门" class="layui-input dic-tree">
+                    <input type="text" name="parentId" dic-map="dicOrganTree" value="{{d.parentId||''}}"placeholder="请选择上级机构" class="layui-input dic-tree">
                     <input type="text" name="deptId"value="{{d.deptId||''}}" hidden>
                 </div>
             </div>
             <div class="layui-col-md6 layui-col-xs12">
-                <label class="layui-form-label" lable-verify="required">部门级别:</label>
+                <label class="layui-form-label" lable-verify="required">机构类型:</label>
                 <div class="layui-input-block">
-                    <select lay-verify="required" name="deptLevel" dic-map="dicDeptLevel" dic-value="{{d.deptLevel}}" placeholder="请选择部门级别" class="layui-input dic-map"/>
+                    <select lay-verify="required" name="organType" dic-map="dicOrganType" dic-value="{{d.organType}}" placeholder="请选择机构类型" class="layui-input dic-map"/>
                 </div>
             </div>
         </div>
         <div class="layui-row">
             <div class="layui-col-md6 layui-col-xs12">
-                <label class="layui-form-label" lable-verify="required">部门简称:</label>
+                <label class="layui-form-label" lable-verify="required">机构简称:</label>
                 <div class="layui-input-block">
-                    <input type="text" lay-verify="required" name="deptName" value="{{d.deptName||''}}"placeholder="请输入部门简称" class="layui-input">
+                    <input type="text" lay-verify="required" name="organName" value="{{d.organName||''}}"placeholder="请输入机构简称" class="layui-input">
                 </div>
             </div>
             <div class="layui-col-md6 layui-col-xs12">
-                <label class="layui-form-label">部门全称:</label>
+                <label class="layui-form-label">机构全称:</label>
                 <div class="layui-input-block">
-                    <input type="text"  name="deptFullName" value="{{d.deptFullName||''}}"placeholder="请输入部门全称" class="layui-input">
+                    <input type="text"  name="organFullName" value="{{d.organFullName||''}}"placeholder="请输入机构全称" class="layui-input">
                 </div>
             </div>
         </div>
@@ -66,9 +66,9 @@
                 </div>
             </div>
             <div class="layui-col-md6 layui-col-xs12">
-                <label class="layui-form-label" >部门描述:</label>
+                <label class="layui-form-label" >机构描述:</label>
                 <div class="layui-input-block">
-                    <input type="text"  name="description" value="{{d.description||''}}"placeholder="请输入部门描述" class="layui-input">
+                    <input type="text"  name="description" value="{{d.description||''}}"placeholder="请输入机构描述" class="layui-input">
                 </div>
             </div>
         </div>

@@ -22,9 +22,9 @@ public class ModelController  extends BaseController {
         return "system/model/dic/dic";
     }
 
-    @RequestMapping("dept")
-    public String dept() {
-        return "system/model/dept/dept";
+    @RequestMapping("organ")
+    public String organ() {
+        return "system/model/organ/organ";
     }
 
     @RequestMapping("dic/{file}")
@@ -32,8 +32,8 @@ public class ModelController  extends BaseController {
         return "system/model/dic/"+file;
     }
 
-    @RequestMapping("dept/{file}")
-    public String deptRoute(@PathVariable(name = "file") String file) {
-        return "system/model/dept/"+file;
+    @RequestMapping("organ/{file}")
+    public String organRoute(@PathVariable(name = "file") String file) {
+        return "system/model/organ/"+file;
     }
 }
