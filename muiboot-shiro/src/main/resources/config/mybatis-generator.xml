@@ -43,8 +43,8 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
         <!-- 配置需要生成的表 -->
-        <table tableName="T_ORGAN" domainObjectName="Organ" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
-            <generatedKey column="organId" sqlStatement="mysql" identity="false"/>
+        <table tableName="M_GROUP" domainObjectName="SysGroup" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="groupId" sqlStatement="mysql" identity="false"/>
         </table>
     </context>
 </generatorConfiguration>

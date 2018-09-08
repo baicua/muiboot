@@ -8,8 +8,8 @@ import com.muiboot.shiro.common.controller.BaseController;
 import com.muiboot.shiro.common.domain.ResponseBo;
 import com.muiboot.shiro.common.layer.LayerTree;
 import com.muiboot.shiro.common.util.FileUtils;
-import com.muiboot.shiro.system.domain.Organ;
-import com.muiboot.shiro.system.service.OrganService;
+import com.muiboot.shiro.system.domain.SysGroup;
+import com.muiboot.shiro.system.service.GroupService;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,16 +18,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-public class OrganController extends BaseController{
+public class GroupController extends BaseController{
 
 	@Autowired
-	private OrganService organService;
+	private GroupService groupService;
 
-	@RequestMapping("organ/tree")
+	@RequestMapping("group/tree")
 	@ResponseBody
-	public ResponseBo getOrganTree() {
+	public ResponseBo getGroupTree() {
 		try {
-			LayerTree<Organ> tree = this.organService.getOrganTree();
+			LayerTree<SysGroup> tree = this.groupService.getGroupTree();
 			return ResponseBo.ok(tree);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -35,49 +35,49 @@ public class OrganController extends BaseController{
 		}
 	}
 
-	@RequestMapping("organ/getOrgan")
+	@RequestMapping("group/getGroup")
 	@ResponseBody
-	public ResponseBo getOrgan(Long organId) {
+	public ResponseBo getGroup(Long groupId) {
 		try {
-			Organ organ = this.organService.findById(organId);
-			return ResponseBo.ok(organ);
+			SysGroup group = this.groupService.findById(groupId);
+			return ResponseBo.ok(group);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return ResponseBo.error("获取部门信息失败，请联系网站管理员！");
 		}
 	}
 
-	@RequestMapping("organ/getOrganDetail")
+	@RequestMapping("group/getGroupDetail")
 	@ResponseBody
-	public ResponseBo getOrganDetail(Long organId) {
-		Map organDetail = this.organService.getOrganDetail(organId);
-		return ResponseBo.ok(organDetail);
+	public ResponseBo getGroupDetail(Long groupId) {
+		Map groupDetail = this.groupService.getGroupDetail(groupId);
+		return ResponseBo.ok(groupDetail);
 	}
 	
-	@RequestMapping("organ/list")
+	@RequestMapping("group/list")
 	@ResponseBody
-	public List<Organ> organList(Organ organ) {
-		return this.organService.findAllOrgans(organ);
+	public List<SysGroup> GroupList(SysGroup group) {
+		return this.groupService.findAllGroups(group);
 	}
 	
-	@RequestMapping("organ/excel")
+	@RequestMapping("group/excel")
 	@ResponseBody
-	public ResponseBo organExcel(Organ organ) {
+	public ResponseBo GroupExcel(SysGroup group) {
 		try {
-			List<Organ> list = this.organService.findAllOrgans(organ);
-			return FileUtils.createExcelByPOIKit("机构表", list, Organ.class);
+			List<SysGroup> list = this.groupService.findAllGroups(group);
+			return FileUtils.createExcelByPOIKit("机构表", list, SysGroup.class);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return ResponseBo.error("导出Excel失败，请联系网站管理员！");
 		}
 	}
 
-	@RequestMapping("organ/csv")
+	@RequestMapping("group/csv")
 	@ResponseBody
-	public ResponseBo organCsv(Organ organ){
+	public ResponseBo GroupCsv(SysGroup group){
 		try {
-			List<Organ> list = this.organService.findAllOrgans(organ);
-			return FileUtils.createCsv("机构表", list, Organ.class);
+			List<SysGroup> list = this.groupService.findAllGroups(group);
+			return FileUtils.createCsv("机构表", list, SysGroup.class);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return ResponseBo.error("导出Csv失败，请联系网站管理员！");
@@ -85,18 +85,18 @@ public class OrganController extends BaseController{
 	}
 
 	@Log("新增组织机构")
-	@RequiresPermissions("organ:add")
-	@RequestMapping("organ/add")
+	@RequiresPermissions("group:add")
+	@RequestMapping("group/add")
 	@ResponseBody
-	public ResponseBo addOrgan(Organ organ) {
+	public ResponseBo addGroup(SysGroup group) {
 		try {
-			if (StringUtils.isBlank(organ.getValid())){
-				organ.setValid("0");
+			if (StringUtils.isBlank(group.getValid())){
+				group.setValid("0");
 			}
-			if (organ.getParentId()==null){
-				organ.setParentId(0L);
+			if (group.getParentId()==null){
+				group.setParentId(0L);
 			}
-			this.organService.addOrgan(organ);
+			this.groupService.addGroup(group);
 			return ResponseBo.ok("新增组织机构成功！");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -105,12 +105,12 @@ public class OrganController extends BaseController{
 	}
 
 	@Log("删除组织机构")
-	@RequiresPermissions("organ:delete")
-	@RequestMapping("organ/delete")
+	@RequiresPermissions("group:delete")
+	@RequestMapping("group/delete")
 	@ResponseBody
-	public ResponseBo deleteOrgans(String ids) {
+	public ResponseBo deleteGroups(String ids) {
 		try {
-			this.organService.deleteOrgans(ids);
+			this.groupService.deleteGroups(ids);
 			return ResponseBo.ok("删除组织机构成功！");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -119,12 +119,12 @@ public class OrganController extends BaseController{
 	}
 	
 	@Log("修改组织机构")
-	@RequiresPermissions("organ:update")
-	@RequestMapping("organ/update")
+	@RequiresPermissions("group:update")
+	@RequestMapping("group/update")
 	@ResponseBody
-	public ResponseBo updateOrgan(Organ organ) {
+	public ResponseBo updateGroup(SysGroup group) {
 		try {
-			this.organService.updateOrgan(organ);
+			this.groupService.updateGroup(group);
 			return ResponseBo.ok("修改组织机构成功！");
 		} catch (Exception e) {
 			e.printStackTrace();

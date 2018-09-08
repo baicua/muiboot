@@ -53,12 +53,12 @@ public class User implements Serializable {
 	@Column(name = "PASSWORD")
 	private String password;
 
-	@Column(name = "DEPT_ID")
-	private Long deptId;
+	@Column(name = "GROUP_ID")
+	private Long groupId;
 
 	@Transient
 	@ExportConfig(value = "部门")
-	private String deptName;
+	private String groupName;
 
 	@Column(name = "EMAIL")
 	@ExportConfig(value = "邮箱")
@@ -148,18 +148,20 @@ public class User implements Serializable {
 		this.password = password == null ? null : password.trim();
 	}
 
-	/**
-	 * @return DEPT_ID
-	 */
-	public Long getDeptId() {
-		return deptId;
+	public Long getGroupId() {
+		return groupId;
 	}
 
-	/**
-	 * @param deptId
-	 */
-	public void setDeptId(Long deptId) {
-		this.deptId = deptId;
+	public void setGroupId(Long groupId) {
+		this.groupId = groupId;
+	}
+
+	public String getGroupName() {
+		return groupName;
+	}
+
+	public void setGroupName(String groupName) {
+		this.groupName = groupName;
 	}
 
 	/**
@@ -266,14 +268,6 @@ public class User implements Serializable {
 
 	public void setTheme(String theme) {
 		this.theme = theme;
-	}
-
-	public String getDeptName() {
-		return deptName;
-	}
-
-	public void setDeptName(String deptName) {
-		this.deptName = deptName;
 	}
 
 	public String getAvatar() {

@@ -5,14 +5,14 @@
             <div class="layui-col-md6 layui-col-xs12">
                 <label class="layui-form-label">上级机构:</label>
                 <div class="layui-input-block">
-                    <input type="text" name="parentId" dic-map="dicOrganTree" value="{{d.parentId||''}}"placeholder="请选择上级机构" class="layui-input dic-tree">
-                    <input type="text" name="deptId"value="{{d.deptId||''}}" hidden>
+                    <input type="text" name="parentId" dic-map="DIC_ORGAN_TREE" value="{{d.parentId||''}}"placeholder="请选择上级机构" class="layui-input dic-tree">
+                    <input type="text" name="groupId"value="{{d.groupId||''}}" hidden>
                 </div>
             </div>
             <div class="layui-col-md6 layui-col-xs12">
                 <label class="layui-form-label" lable-verify="required">机构类型:</label>
                 <div class="layui-input-block">
-                    <select lay-verify="required" name="organType" dic-map="dicOrganType" dic-value="{{d.organType}}" placeholder="请选择机构类型" class="layui-input dic-map"/>
+                    <select lay-verify="required" name="groupType" dic-map="DIC_GROUP_TYPE" dic-value="{{d.groupType}}" placeholder="请选择机构类型" class="layui-input dic-map"/>
                 </div>
             </div>
         </div>
@@ -20,13 +20,13 @@
             <div class="layui-col-md6 layui-col-xs12">
                 <label class="layui-form-label" lable-verify="required">机构简称:</label>
                 <div class="layui-input-block">
-                    <input type="text" lay-verify="required" name="organName" value="{{d.organName||''}}"placeholder="请输入机构简称" class="layui-input">
+                    <input type="text" lay-verify="required" name="groupName" value="{{d.groupName||''}}"placeholder="请输入机构简称" class="layui-input">
                 </div>
             </div>
             <div class="layui-col-md6 layui-col-xs12">
                 <label class="layui-form-label">机构全称:</label>
                 <div class="layui-input-block">
-                    <input type="text"  name="organFullName" value="{{d.organFullName||''}}"placeholder="请输入机构全称" class="layui-input">
+                    <input type="text"  name="groupFullName" value="{{d.groupFullName||''}}"placeholder="请输入机构全称" class="layui-input">
                 </div>
             </div>
         </div>
