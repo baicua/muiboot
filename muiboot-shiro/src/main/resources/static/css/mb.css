@@ -120,6 +120,9 @@
 
 
 /*轮播样式*/
+.layui-fluid .layui-card .layui-card-body{
+    border-top: 2px solid #009688;
+}
 .mb-carousel-home .layui-carousel-ind{
     top: -40px;
     position: absolute;

@@ -3,7 +3,7 @@
     "use strict";
     var $ = layui.jquery,form=layui.form;
     var baseUrl=ctx+"dict/loadDics";
-    $(document).on("click","body",function (e) {
+    $("body").on("click","#main-content",function (e) {
         if($(e.target).closest(".dic-tree-input,.dic-tree-ul").length == 0){
             $(".dic-tree-input").removeClass("show-tree");
             $("body").removeClass("tree-body");
@@ -58,8 +58,7 @@
         $MB.layerGet(param,function (r) {
             if(r.code == 0){
                 $this.val("");
-                $this.empty();
-                $this.append("<option value=''>--请选择--</option>");
+                $this.empty().append("<option value=''>--请选择--</option>");
                 for(var k in r.msg){
                     $this.append("<option value='"+k+"'>"+r.msg[k]+"</option>");
                 }
@@ -81,8 +80,7 @@
                 var val =$this.val();
                 var map =key&&get(key);
                 if(!!map){
-                    $this.empty();
-                    $this.append("<option value=''>--请选择--</option>");
+                    $this.empty().append("<option value=''>--请选择--</option>");
                     for(var k in map){
                         $this.append("<option value='"+k+"'>"+map[k]+"</option>");
                     }

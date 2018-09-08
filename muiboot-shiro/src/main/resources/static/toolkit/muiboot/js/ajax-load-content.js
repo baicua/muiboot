@@ -41,7 +41,7 @@
                 }
                 breadcrumnHtml += '<span lay-separator="">/</span>';
                 breadcrumnHtml+= '<a href="'+(!hash?"":hash)+'" menu-id="'+id+'" menu-url="'+(!hash?"":hash)+'"><cite>'+$menuName+'</cite></a>';
-                $breadcrumb.html("").append(breadcrumnHtml);
+                $breadcrumb.empty().append(breadcrumnHtml);
                 var $parent=$menu.parent("dd");
                 var $parents=$parent.parent("dl").parent();
                 $("#sys-menu-tree").find(".layui-nav-itemed").each(function () {
@@ -86,7 +86,6 @@
                 success: function (r) {
                     try {
                         var $r = $("<code></code>").html(r);//包装数据
-                        //var $r=$(r);
                         var scripts = $r.find("div.ajax-content script");
                         $r.find("script").remove();
                         var content=$r.find("div.ajax-content");
@@ -102,8 +101,10 @@
                                 }else {
                                     $MB.getScript(script.src,true);
                                 }
-                            })
+                            });
                         }
+                        scripts.remove();
+                        $r.empty().remove();
                     }catch (e) {
                         console.error("error:"+e.message+";url:"+url);
                         return true;
