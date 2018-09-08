@@ -24,4 +24,7 @@ public interface GroupService extends IService<SysGroup> {
 	void deleteGroups(String groupIds);
 
     Map getGroupDetail(Long groupId);
+
+
+	Map getDeptByParent(Long parentId);
 }

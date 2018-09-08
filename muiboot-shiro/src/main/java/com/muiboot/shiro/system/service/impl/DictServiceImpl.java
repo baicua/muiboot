@@ -242,6 +242,13 @@ public class DictServiceImpl extends BaseService<SysDic> implements DictService 
 					return null;
 				}
 			}
+		}else if (DicType.URLDIC.name().equals(dic.getDicType())){
+			try {
+				m = jsonMapper.readValue(dic.getContent(), LinkedHashMap.class); //json转换成map;
+			} catch (IOException e) {
+				logger.error("key="+dic.getDicKey()+"字典参数错误，字典转换失败。",e,"获取简单字典");
+				return null;
+			}
 		}
 		return m;
 	}

@@ -10,6 +10,7 @@
 	<result column="REAL_NAME" jdbcType="VARCHAR" property="realName" />
     <result column="PASSWORD" jdbcType="VARCHAR" property="password" />
     <result column="GROUP_ID" jdbcType="DECIMAL" property="groupId" />
+	  <result column="ORGAN_ID" jdbcType="DECIMAL" property="organId" />
     <result column="EMAIL" jdbcType="VARCHAR" property="email" />
     <result column="MOBILE" jdbcType="VARCHAR" property="mobile" />
     <result column="STATUS" jdbcType="CHAR" property="status" />
@@ -24,15 +25,27 @@
   
   <select id="findUserWithDept" resultType="user" parameterType="user">
   		SELECT U.USER_ID USERID,U.USERNAME,U.EMAIL,U.MOBILE,U.STATUS,U.CRATE_TIME CRATETIME,
-  		U.SSEX,D.GROUP_NAME GROUPNAME,U.REAL_NAME REALNAME   FROM T_USER U
+  		U.SSEX,D.GROUP_NAME GROUPNAME,U.REAL_NAME REALNAME,D.PARENT_ID  organId    FROM T_USER U
   		LEFT JOIN M_GROUP D ON(U.GROUP_ID = D.GROUP_ID AND D.GROUP_TYPE='2')
   		WHERE 1=1
   		<if test="username != null and username != ''">
         	AND U.USERNAME = #{username}
 	    </if>
-	    <if test="groupId != null and groupId != ''">
-	        AND D.GROUP_ID = #{groupId}
+	  <if test="realName != null and realName != ''">
+		  AND U.REAL_NAME = #{realName}
+	  </if>
+	    <if test="organId != null and organId != ''">
+	        AND D.PARENT_ID = #{organId}
 	    </if>
+	  <if test="groupId != null and groupId != ''">
+		  AND U.GROUP_ID = #{groupId}
+	  </if>
+	  <if test="status != null and status != ''">
+		  AND U.STATUS = #{status}
+	  </if>
+	  <if test="mobile != null and mobile != ''">
+		  AND U.MOBILE = #{mobile}
+	  </if>
   		<if test="ssex != null and ssex != ''">
 	        AND U.SSEX = #{ssex}
 	    </if>

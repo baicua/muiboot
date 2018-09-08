@@ -106,16 +106,19 @@ var $MB = (function() {
             async:params.async,
             cache:params.cache,
             beforeSend: function () {
-                if(!loading)loading=layer.load(0,{shade: [0.01,'#fff']});
+                if(!$MB.getLoading(1)){
+                    $MB.setLoading(layer.load(0,{shade: [0.01,'#fff']}));
+                }
             },
             success: function (data) {
                 callback(data);
             },
             complete: function () {
-                setTimeout(function () {
-                    layer.close($MB.getLoading());
+                var loading = $MB.getLoading(0);
+                if (loading){
+                    layer.close(loading);
                     $MB.setLoading("");
-                },300);
+                }
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
                 console.info("error: " + XMLHttpRequest.responseText);

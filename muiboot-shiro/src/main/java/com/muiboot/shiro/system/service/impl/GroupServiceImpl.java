@@ -6,6 +6,7 @@ import com.muiboot.shiro.common.menum.GroupType;
 import com.muiboot.shiro.common.service.impl.BaseService;
 import com.muiboot.shiro.system.dao.SysGroupMapper;
 import com.muiboot.shiro.system.domain.SysGroup;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,8 +49,18 @@ public class GroupServiceImpl extends BaseService<SysGroup> implements GroupServ
 	public List<SysGroup> findAllGroups(SysGroup group) {
 		try {
 			Example example = new Example(SysGroup.class);
+			Example.Criteria criteria=example.createCriteria();
 			if (StringUtils.isNotBlank(group.getGroupName())) {
-				example.createCriteria().andEqualTo("groupName",group.getGroupName());
+				criteria.andEqualTo("groupName",group.getGroupName());
+			}
+			if (null!=group.getParentId()) {
+				criteria.andEqualTo("parentId",group.getParentId());
+			}
+			if (StringUtils.isNotBlank(group.getValid())) {
+				criteria.andEqualTo("valid",group.getValid());
+			}
+			if (StringUtils.isNotBlank(group.getGroupType())) {
+				criteria.andEqualTo("groupType",group.getGroupType());
 			}
 			example.setOrderByClause("group_id");
 			return this.selectByExample(example);
@@ -105,6 +116,22 @@ public class GroupServiceImpl extends BaseService<SysGroup> implements GroupServ
 		//2.获取部门人员列表
 		Map res = new HashMap();
 		res.put("info",group);
+		return res;
+	}
+
+	@Override
+	public Map getDeptByParent(Long parentId) {
+		SysGroup $group = new SysGroup();
+		$group.setParentId(parentId);
+		$group.setValid("1");
+		$group.setGroupType(GroupType.DEPT.getType());
+		List<SysGroup> groups=this.findAllGroups($group);
+		LinkedHashMap<Long,String> res = new LinkedHashMap<>();
+		if (CollectionUtils.isNotEmpty(groups)){
+			for (SysGroup group:groups){
+				res.put(group.getGroupId(),group.getGroupName());
+			}
+		}
 		return res;
 	}
 }

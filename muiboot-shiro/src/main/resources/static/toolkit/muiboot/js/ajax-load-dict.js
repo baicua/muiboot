@@ -1,7 +1,7 @@
-;layui.define(['jquery','tree'], function (exports) {
+;layui.define(['jquery','tree','form'], function (exports) {
     var loadedCount=0;
     "use strict";
-    var $ = layui.jquery;
+    var $ = layui.jquery,form=layui.form;
     var baseUrl=ctx+"dict/loadDics";
     $(document).on("click","body",function (e) {
         if($(e.target).closest(".dic-tree-input,.dic-tree-ul").length == 0){
@@ -47,6 +47,26 @@
             return true;
         }
     };
+    var resetMap=function($this,$setting,$parent){
+        if(!$parent){
+            $this.val("");
+            $this.empty();
+            form.render("select","dic-filter");
+            return;
+        }
+        var param = $.extend($setting,{data:{parentId:$parent}});
+        $MB.layerGet(param,function (r) {
+            if(r.code == 0){
+                $this.val("");
+                $this.empty();
+                $this.append("<option value=''>--请选择--</option>");
+                for(var k in r.msg){
+                    $this.append("<option value='"+k+"'>"+r.msg[k]+"</option>");
+                }
+                form.render("select","dic-filter");
+            }
+        });
+    }
     var init=function($select){
         if(!$select){
             $select=$("[dic-map]");
@@ -86,7 +106,7 @@
                         ul=$this.siblings(".dic-tree-ul");
                         $input=$this.siblings("dic-tree-close");
                     }else {
-                        $input=$('<input type="text" '+(!verify?"":"lay-verify="+verify)+' readonly '+(!placeholder?"":"placeholder="+placeholder)+' class="layui-input dic-tree-input">');
+                        $input=$('<input name="ignore-form" type="text" '+(!verify?"":"lay-verify="+verify)+' readonly '+(!placeholder?"":"placeholder="+placeholder)+' class="layui-input dic-tree-input">');
                         ul =$('<ul id="'+id+'" class="layui-box layui-tree dic-tree-ul"></ul>');
                         cancel = $('<i class="layui-icon layui-icon-close-fill dic-tree-close"></i>');
                         $this.after(ul).after(cancel).after($input),$this.hide();
@@ -95,7 +115,7 @@
                             $("body").toggleClass("tree-body");
                         });
                         cancel.on("click",function () {
-                            $this.val(""),$input.val("");
+                            $this.val("").change(),$input.val("");
                         });
                         $this.addClass("dic-finish");
                         $this.attr("treeId",id);
@@ -107,7 +127,7 @@
                     if(!!value)defaultNode($this,nodes,value);
                     ul.empty();
                     layui.tree({elem: "#"+$this.attr("treeId"),nodes:nodes,click: function(node){
-                        $input.val(node.name||''),$this.val(node.id),$input.toggleClass("show-tree"), $("body").toggleClass("tree-body");;
+                        $input.val(node.name||''),$this.val(node.id).change(),$input.toggleClass("show-tree"), $("body").toggleClass("tree-body");;
                     }
                     });
                 }
@@ -119,6 +139,22 @@
                 var map =get(key);
                 $this.text(map&&map[text]||text);
                 $this.addClass("dic-finish");
+            }else if ($this.hasClass('dic-map-url')){
+                var key = $this.attr("dic-map");
+                var isInit = $this.hasClass("dic-finish");
+                var val =$this.val();
+                var parent =$($this.attr("dic-parent"));
+                var setting =key&&get(key);
+                if(parent.length>0&&setting){
+                    if(isInit){
+                        resetMap(setting,parent.val()||"");
+                    }else {
+                        $this.addClass("dic-finish");
+                        parent.on("change",function () {
+                            resetMap($this,setting,parent.val());
+                        })
+                    }
+                }
             }
 
         })

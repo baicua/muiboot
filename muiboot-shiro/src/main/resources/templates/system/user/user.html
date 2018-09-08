@@ -5,25 +5,25 @@
 <div data-th-include="common/common"></div>
 <hr>
 <div class="layui-container ajax-content" lay-filter="ajax-content">
-    <form class="layui-form table-form" action="">
+    <form class="layui-form table-form" action="" lay-filter="search-form">
         <div class="layui-row">
             <div class="layui-row">
                 <div class="layui-col-md4 layui-col-xs12">
                     <label class="layui-form-label">所属机关:</label>
                     <div class="layui-input-block">
-                        <input type="text" name="organId" dic-map="dicOrganTree" placeholder="请选择机关" class="layui-input dic-tree">
+                        <input type="text" name="organId" dic-map="DIC_ORGAN_TREE" placeholder="请选择所属机关" class="layui-input dic-tree">
                     </div>
                 </div>
-                <div class="layui-col-md4 layui-col-xs12">
+                <div class="layui-col-md4 layui-col-xs12 layui-form" lay-filter="dic-filter" >
                     <label class="layui-form-label">所属部门:</label>
                     <div class="layui-input-block">
-                        <input type="text" name="deptId" dic-map="dicOrganTree" placeholder="请选择机关" class="layui-input dic-tree">
+                        <select name="deptId" dic-map="DIC_DEPT_URL"  dic-parent="input[name='organId']" placeholder="请选择所属部门" class="dic-map-url"></select>
                     </div>
                 </div>
                 <div class="layui-col-md4 layui-col-xs12">
                     <label class="layui-form-label">状态:</label>
                     <div class="layui-input-block">
-                        <select lay-verify="required"  name="valid" dic-map="disableDic" placeholder="请选择状态" class="layui-input dic-map"></select>
+                        <select name="valid" dic-map="DIC_DISABLE" placeholder="请选择状态" class="layui-input dic-map"></select>
                     </div>
                 </div>
             </div>
@@ -51,8 +51,8 @@
         <hr>
         <div class="layui-row">
             <div class="layui-col-md12 layui-col-xs12 center">
-                <button type="button" class="mb-btn mb-btn-form mb-btn-search">查询</button>
-                <button type="button" class="mb-btn mb-btn-form mb-btn-empty">重置</button>
+                <button type="button" lay-submit lay-filter="search" class="mb-btn mb-btn-form mb-btn-search">查询</button>
+                <button type="button" lay-submit lay-filter="reset" class="mb-btn mb-btn-form mb-btn-empty">重置</button>
             </div>
         </div>
     </form>

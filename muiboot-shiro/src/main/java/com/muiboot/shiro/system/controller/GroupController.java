@@ -35,6 +35,18 @@ public class GroupController extends BaseController{
 		}
 	}
 
+	@RequestMapping("group/getDeptByParent")
+	@ResponseBody
+	public ResponseBo getGroupDicByParent(Long parentId) {
+		try {
+			Map groups = this.groupService.getDeptByParent(parentId);
+			return ResponseBo.ok(groups);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseBo.error("获取部门信息失败，请联系网站管理员！");
+		}
+	}
+
 	@RequestMapping("group/getGroup")
 	@ResponseBody
 	public ResponseBo getGroup(Long groupId) {

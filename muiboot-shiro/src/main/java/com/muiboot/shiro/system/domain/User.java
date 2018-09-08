@@ -60,6 +60,9 @@ public class User implements Serializable {
 	@ExportConfig(value = "部门")
 	private String groupName;
 
+	@Transient
+	private Long organId;
+
 	@Column(name = "EMAIL")
 	@ExportConfig(value = "邮箱")
 	private String email;
@@ -154,6 +157,14 @@ public class User implements Serializable {
 
 	public void setGroupId(Long groupId) {
 		this.groupId = groupId;
+	}
+
+	public Long getOrganId() {
+		return organId;
+	}
+
+	public void setOrganId(Long organId) {
+		this.organId = organId;
 	}
 
 	public String getGroupName() {
