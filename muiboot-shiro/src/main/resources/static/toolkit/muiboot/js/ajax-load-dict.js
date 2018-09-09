@@ -3,7 +3,7 @@
     "use strict";
     var $ = layui.jquery,form=layui.form;
     var baseUrl=ctx+"dict/loadDics";
-    $("body").on("click","#main-content",function (e) {
+    $(document).on("click","body",function (e) {
         if($(e.target).closest(".dic-tree-input,.dic-tree-ul").length == 0){
             $(".dic-tree-input").removeClass("show-tree");
             $("body").removeClass("tree-body");

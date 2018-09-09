@@ -3,15 +3,13 @@
     //initTreeTable();
     var element,form,laytpl,dict;
     setTimeout(function(){
-        layui.use(['element', 'laytpl','form',"dict"], function () {
+        layui.use(['element', 'laytpl','form',"dict","tree"], function () {
             element = layui.element,form = layui.form,laytpl = layui.laytpl,dict=layui.dict;
             dict.load("menuType,menuData,menuTree");
             element.init();
+            menuMethod.resetTree('#menuTree');
             form.render();
         });
-    },100);
-    setTimeout(function(){
-        menuMethod.resetTree('#menuTree');
     },100);
     $("#addBtn").on("click",function (r) {
         menuMethod.add($("#menuInfoPanle table").attr("data-name-menu"));

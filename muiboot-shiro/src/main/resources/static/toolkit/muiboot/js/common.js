@@ -10,6 +10,10 @@ var $MB = (function() {
         contentType: "application/x-www-form-urlencoded",
         data:""
     };
+    var layer;
+    layui.use('layer', function () {
+        layer = layui.layer;
+    });
     function isXsScreen() {
         var width=document.body.clientWidth;
         if(width&&width<992){
