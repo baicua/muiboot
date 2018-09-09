@@ -9,6 +9,8 @@
 /*文本框修改*/
 .layui-input, .layui-select, .layui-textarea {
     height: 25px;
+    line-height: 25px;
+    vertical-align: middle;
     border-width: 1px;
     border-style: solid;
     background-color: #fff;
@@ -132,8 +134,8 @@
     padding: 14px 14px 14px 8px;
     font-size: 18px;
     line-height: 0px;
-    color: #1E9FFF;
-    border-left: 5px solid #1E9FFF;
+    color: #23262e;
+    border-left: 5px solid #23262e;
     border-radius: 0 2px 2px 0;
 }
 

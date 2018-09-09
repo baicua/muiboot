@@ -186,7 +186,7 @@ input.layui-form-danger[type=radio] + div.layui-form-radio>i{
 .dic-tree-input +i{
   position: absolute;
   right: 5px;
-  top: 6px;
+  top: 3px;
   cursor: pointer;
   color: #b3b3b3;
   display: none;

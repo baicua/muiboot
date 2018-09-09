@@ -1,81 +1,29 @@
-;(function($) {
+;(function($ , undefined) {
     "use strict";
-    var ajax_loaded_page = {urls:{}};//ajax加载的页面
     var root_url = $MB.getRootPath();
-    var $contentArea;
-    var $breadcrumb = $(".breadcrumb");
-    var $navigation=$("#navigation");
-    $.fn.ajax_load = function(options, param) {
-        // 如果是调用方法
-        if (typeof options == 'string') {
-            if(!$contentArea){
-                $contentArea =this.ajax_load();
-                return $contentArea.ajax_load(options,param);
-            }
-            return $.fn.ajax_load.methods[options]($contentArea, param);
-        }
-        if(!!$contentArea){
-            return $contentArea;
-        }
-        // 如果是初始化组件
-        options = $.extend({}, $.fn.ajax_load.defaults, options || {});
-        $contentArea=$(this);
-        // 加载数据
-        ajax_loaded_page.buildBreadcrumn=function($menu){
-            var hash=$menu.attr("href");
-            if($menu.length>0&&hash){
-                var $menuName=$.trim($menu.text());
-                var id =$menu.attr("menu-id");
-                var breadcrumbMenu=new Object();
-                breadcrumbMenu.id=  new Array();
-                breadcrumbMenu.name=  new Array();
-                $menu.parents("dl").prev().each(function() {
-                    breadcrumbMenu.id.unshift($(this).attr("menu-id"));
-                    breadcrumbMenu.name.unshift($.trim($(this).text()));
-                });
-                var breadcrumnHtml = "";
-                breadcrumnHtml += '<a href="/sys"><i class="layui-icon layui-icon-home" style="font-size: 14px;color: #000;"></i> 首页</a>';
-                for (var i = 0; i < breadcrumbMenu.name.length; i++) {
-                    breadcrumnHtml += '<span lay-separator="">/</span>';
-                    breadcrumnHtml += '<a href="javascript:;" menu-id="'+breadcrumbMenu.id[i]+'" >'+breadcrumbMenu.name[i]+'</a>';
-                }
-                breadcrumnHtml += '<span lay-separator="">/</span>';
-                breadcrumnHtml+= '<a href="'+(!hash?"":hash)+'" menu-id="'+id+'" menu-url="'+(!hash?"":hash)+'"><cite>'+$menuName+'</cite></a>';
-                $breadcrumb.empty().append(breadcrumnHtml);
-                var $parent=$menu.parent("dd");
-                var $parents=$parent.parent("dl").parent();
-                $("#sys-menu-tree").find(".layui-nav-itemed").each(function () {
-                    if(!$(this).is($parents)){
-                        $(this).removeClass("layui-nav-itemed");
-                    }
-                });
-                $("#sys-menu-tree").find(".layui-this").each(function () {
-                    if(!$(this).is($parent)){
-                        $(this).removeClass("layui-this");
-                    }
-                });
-                if(!$parents.hasClass("layui-nav-itemed")){
-                    $parents.addClass("layui-nav-itemed");
-                }
-                if(!$parent.hasClass("layui-this")){
-                    $parent.addClass("layui-this");
-                }
-            }
-        },
-        $contentArea.ajaxload =function(url,isLoad){
-            if(!url)return;
+    function MbAjax(contentArea, options,$url) {
+        var $contentArea = $(contentArea);
+        this.loading = function(parms) {
+            ajaxload(parms,true);
+        };
+        this.popstate = function(parms) {
+            ajaxload(parms,false);
+        };
+        function ajaxload(url,isLoad){
+            var $navigation=$("#navigation");
             var $menu,pushl;
+            if(!url)return;
             if($MB.hasHistoryApi()){
                 $menu=$navigation.find("a[menu-url='"+url+"']");
                 pushl=root_url+"sys/"+url;
                 url=root_url + url;
                 if(isLoad)
-                history.pushState(null,$menu.text(),pushl);
+                    history.pushState(null,$menu.text(),pushl);
             }else {
                 $menu=$navigation.find("a[href='"+url+"']");
                 url= root_url+url.replace(/^(\#\!)?\#/, '');
             }
-            ajax_loaded_page.buildBreadcrumn($menu);
+            updateBreadcrumbs($menu);
             $.ajax({
                 url: url,
                 beforeSend:function (r) {
@@ -103,8 +51,8 @@
                                 }
                             });
                         }
-                        scripts.remove();
-                        $r.empty().remove();
+                        scripts=null;
+                        $r=null;
                     }catch (e) {
                         console.error("error:"+e.message+";url:"+url);
                         return true;
@@ -141,17 +89,69 @@
                 }
             });
         };
-        return $contentArea;
-    };
-
-    // 组件方法封装........
-    $.fn.ajax_load.methods = {
-        loading : function($contentArea, parms) {
-            $contentArea.ajaxload(parms,true);
-        },
-        popstate:function ($contentArea, parms) {
-            $contentArea.ajaxload(parms,false);
+        function updateBreadcrumbs($menu){
+            var hash=$menu.attr("href");
+            var $breadcrumb = $(".breadcrumb");
+            if($menu.length>0&&hash){
+                var $menuName=$.trim($menu.text());
+                var id =$menu.attr("menu-id");
+                var breadcrumbMenu=new Object();
+                breadcrumbMenu.id=  new Array();
+                breadcrumbMenu.name=  new Array();
+                $menu.parents("dl").prev().each(function() {
+                    breadcrumbMenu.id.unshift($(this).attr("menu-id"));
+                    breadcrumbMenu.name.unshift($.trim($(this).text()));
+                });
+                var breadcrumnArray=new Array();
+                breadcrumnArray.push('<a href="/sys"><i class="layui-icon layui-icon-home" style="font-size: 14px;color: #000;"></i> 首页</a>');
+                for (var i = 0; i < breadcrumbMenu.name.length; i++) {
+                    breadcrumnArray.push('<span lay-separator="">/</span>');
+                    breadcrumnArray.push('<a href="javascript:;" menu-id="');
+                    breadcrumnArray.push(breadcrumbMenu.id[i]);
+                    breadcrumnArray.push('" >');
+                    breadcrumnArray.push(breadcrumbMenu.name[i]);
+                    breadcrumnArray.push('</a>');
+                }
+                breadcrumnArray.push('<span lay-separator="">/</span>');
+                breadcrumnArray.push('<a href="');
+                breadcrumnArray.push(!hash?"":hash);
+                breadcrumnArray.push('" menu-id="');
+                breadcrumnArray.push(id);
+                breadcrumnArray.push('" menu-url="');
+                breadcrumnArray.push(!hash?"":hash);
+                breadcrumnArray.push('"><cite>');
+                breadcrumnArray.push($menuName);
+                breadcrumnArray.push('</cite></a>');
+                $breadcrumb.empty().append(breadcrumnArray.join(""));
+                var $parent=$menu.parent("dd");
+                var $parents=$parent.parent("dl").parent();
+                $("#sys-menu-tree").find(".layui-nav-itemed").each(function () {
+                    if(!$(this).is($parents)){
+                        $(this).removeClass("layui-nav-itemed");
+                    }
+                });
+                $("#sys-menu-tree").find(".layui-this").each(function () {
+                    if(!$(this).is($parent)){
+                        $(this).removeClass("layui-this");
+                    }
+                });
+                if(!$parents.hasClass("layui-nav-itemed")){
+                    $parents.addClass("layui-nav-itemed");
+                }
+                if(!$parent.hasClass("layui-this")){
+                    $parent.addClass("layui-this");
+                }
+                hash=breadcrumnArray=$breadcrumb=$parent=$parent=null;
+            }
         }
-    };
-    $.fn.ajax_load.defaults = {};
+    }//ajaxload
+
+    $.fn.ajaxLoad = $.fn.ajax_load = function (option,$url) {
+        var method_call;
+        var $this = $(this);
+        var data = $this.data('ajax_load');
+        if (!data) $this.data('ajax_load', (data = new MbAjax(this, option,$url)));
+        method_call = data[option];
+        return (method_call === undefined) ? null : method_call($url);
+    }
 })(jQuery);
