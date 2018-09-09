@@ -9,7 +9,7 @@
             ,url: '/user/list' //数据接口
             ,page: true //开启分页
             ,size: 'sm'
-            ,height: 'full-300'
+            ,height: 'full'
             ,skin:"line"
             ,cols: [[
                 {type:'checkbox'}
