@@ -24,7 +24,7 @@
     var data={};
     var storage=window.localStorage;
     var cacheName="DIC_CACHE";
-    var get=function (k) {
+    function get(k) {
         if(!storage){
             return k&&data[k];
         }else {
@@ -32,7 +32,7 @@
             return k&&item&&item[k];
         }
     };
-    var put=function (all) {
+    function put(all) {
         if(!storage){
             for (var key in all){
                 data[key]=all[key];
@@ -47,7 +47,7 @@
             return true;
         }
     };
-    var resetMap=function($this,$setting,$parent){
+    function resetMap($this,$setting,$parent){
         if(!$parent){
             $this.val("");
             $this.empty();
@@ -66,7 +66,7 @@
             }
         });
     };
-    var init=function($select){
+    function init($select){
         if(!$select){
             $select=$("[dic-map]");
         }
@@ -170,7 +170,7 @@
         },
         render:function ($select){
             try {
-                init($select)
+                init($select);
             }catch(e) {
                console.error(e.message);
                return false;
