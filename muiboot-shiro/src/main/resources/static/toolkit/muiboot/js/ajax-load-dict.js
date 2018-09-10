@@ -28,7 +28,7 @@
         if(!storage){
             return k&&data[k];
         }else {
-            var item=$.extend({},JSON.parse(storage.getItem(cacheName)));
+            var item=JSON.parse(storage.getItem(cacheName))||{};
             return k&&item&&item[k];
         }
     };
@@ -39,7 +39,7 @@
             }
             return true;
         }else {
-            var map =$.extend({},JSON.parse(storage.getItem(cacheName)));
+            var map =JSON.parse(storage.getItem(cacheName))||{};
             for (var key in all){
                 map[key]=all[key];
             }
@@ -65,7 +65,7 @@
                 form.render("select","dic-filter");
             }
         });
-    }
+    };
     var init=function($select){
         if(!$select){
             $select=$("[dic-map]");
