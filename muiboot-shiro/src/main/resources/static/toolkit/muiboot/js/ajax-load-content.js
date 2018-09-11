@@ -51,6 +51,7 @@
                                 }
                             });
                         }
+                        content=null;
                         scripts=null;
                         $r=null;
                     }catch (e) {
