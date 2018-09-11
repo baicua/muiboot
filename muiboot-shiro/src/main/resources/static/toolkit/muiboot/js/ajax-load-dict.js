@@ -98,21 +98,29 @@
                 var verify=$this.attr("lay-verify"),placeholder=$this.attr("placeholder");
                 var isInit = $this.hasClass("dic-finish");
                 if(!!map&&map.children){
-                    var $input,ul,cancel;
+                    var $input,$ul,$cancel,_input,_ul,_cancel;
                     if(isInit){
                         $input=$this.siblings(".dic-tree-input");
-                        ul=$this.siblings(".dic-tree-ul");
-                        $input=$this.siblings("dic-tree-close");
+                        $ul=$this.siblings(".dic-tree-ul");
+                        $cancel=$this.siblings(".dic-tree-close");
                     }else {
-                        $input=$('<input name="ignore-form" type="text" '+(!verify?"":"lay-verify="+verify)+' readonly '+(!placeholder?"":"placeholder="+placeholder)+' class="layui-input dic-tree-input">');
-                        ul =$('<ul id="'+id+'" class="layui-box layui-tree dic-tree-ul"></ul>');
-                        cancel = $('<i class="layui-icon layui-icon-close-fill dic-tree-close"></i>');
-                        $this.after(ul).after(cancel).after($input),$this.hide();
+                        _input=['<input name="ignore-form" type="text" '
+                            ,(!verify?"":"lay-verify="+verify)
+                            ,'readonly'
+                            ,(!placeholder?"":"placeholder="+placeholder)
+                            ,' class="layui-input dic-tree-input">'].join(" ");
+                        _ul =$('<ul id="'+id+'" class="layui-box layui-tree dic-tree-ul"></ul>');
+                        _cancel = $('<i class="layui-icon layui-icon-close-fill dic-tree-close"></i>');
+                        $this.after(_ul).after(_cancel).after(_input),$this.hide();
+                        $input=$this.siblings(".dic-tree-input");
+                        $ul=$this.siblings(".dic-tree-ul");
+                        $cancel=$this.siblings(".dic-tree-close");
+
                         $input.on("click",function () {
                             $input.toggleClass("show-tree");
                             $("body").toggleClass("tree-body");
                         });
-                        cancel.on("click",function () {
+                        $cancel.on("click",function () {
                             $this.val("").change(),$input.val("");
                         });
                         $this.addClass("dic-finish");
@@ -123,9 +131,9 @@
                         nodes[0].spread=true;
                     }
                     if(!!value)defaultNode($this,nodes,value);
-                    ul.empty();
+                    $ul.empty();
                     layui.tree({elem: "#"+$this.attr("treeId"),nodes:nodes,click: function(node){
-                        $input.val(node.name||''),$this.val(node.id).change(),$input.toggleClass("show-tree"), $("body").toggleClass("tree-body");;
+                        $input.val(node.name||''),$this.val(node.id).change(),$input.toggleClass("show-tree"), $("body").toggleClass("tree-body");
                     }
                     });
                 }
