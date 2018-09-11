@@ -57,8 +57,8 @@ public class SessionServiceImpl implements SessionService {
 			} else {
 				userOnline.setStatus("1");
 			}
-			String address = AddressUtils.getRealAddressByIP(userOnline.getHost(), mapper);
-			userOnline.setLocation(address);
+			//String address = AddressUtils.getRealAddressByIP(userOnline.getHost(), mapper);
+			//userOnline.setLocation(address);
 			userOnline.setTimeout(timeout);
 			list.add(userOnline);
 		}

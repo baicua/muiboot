@@ -60,7 +60,7 @@ input.layui-form-danger[type=radio] + div.layui-form-radio>i{
   top: 0;
   z-index: 1002;
   width: 200px;
-  height: 49px;
+  height: 60px;
   padding: 0 15px;
   box-sizing: border-box;
   overflow: hidden;
@@ -72,8 +72,14 @@ input.layui-form-danger[type=radio] + div.layui-form-radio>i{
 }
 .layui-side-menu .layui-nav{
   width: 200px;
-  margin-top: 50px;
+  margin-top: 60px;
   background: 0 0;
+}
+.layui-side-menu .layui-nav.layui-nav-tree>li>a>i{
+   font-size: 20px;
+ }
+.layui-side-menu .layui-nav.layui-nav-tree>li dl{
+  text-indent: 20px;
 }
 .layui-layout-admin .layui-header .layui-nav {
   padding: 0 0px;

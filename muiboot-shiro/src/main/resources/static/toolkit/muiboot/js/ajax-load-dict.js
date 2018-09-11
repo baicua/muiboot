@@ -126,7 +126,7 @@
                     ul.empty();
                     layui.tree({elem: "#"+$this.attr("treeId"),nodes:nodes,click: function(node){
                         $input.val(node.name||''),$this.val(node.id).change(),$input.toggleClass("show-tree"), $("body").toggleClass("tree-body");;
-                    }
+                        }
                     });
                 }
             }else if ($this.hasClass('dic-text')){

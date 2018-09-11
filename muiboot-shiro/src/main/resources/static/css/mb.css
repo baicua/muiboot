@@ -27,6 +27,10 @@
     line-height: 24px;
     text-align: right;
 }
+/*弹窗提示，按钮居中*/
+.layui-layer-btn{
+    text-align: center !important;
+}
 /*按钮样式*/
 .mb-btn{
     display: inline-block;
