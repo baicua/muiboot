@@ -51,6 +51,7 @@
                                 }
                             });
                         }
+                        content=null;
                         scripts=null;
                         $r=null;
                     }catch (e) {
@@ -80,7 +81,6 @@
                     }
                 },
                 complete:function (r) {
-                    if($MB.isMobile()){$(".layui-layout.layui-layout-admin").addClass("shrink")}
                     var loading = $MB.getLoading(0);
                     if (loading){
                         layer.close(loading);

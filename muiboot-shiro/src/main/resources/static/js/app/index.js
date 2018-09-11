@@ -49,6 +49,7 @@
             });
         }
     });
+    if($MB.isMobile()){$(".layui-layout.layui-layout-admin").addClass("shrink")}
     //5.加载菜单
     layui.use(['menu'], function(args){
         layui.menu.loadmenu(userName);
