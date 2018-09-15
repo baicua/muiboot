@@ -136,6 +136,12 @@ public class GroupController extends BaseController{
 	@ResponseBody
 	public ResponseBo updateGroup(SysGroup group) {
 		try {
+			if (StringUtils.isBlank(group.getValid())){
+				group.setValid("0");
+			}
+			if (group.getParentId()==null){
+				group.setParentId(0L);
+			}
 			this.groupService.updateGroup(group);
 			return ResponseBo.ok("修改组织机构成功！");
 		} catch (Exception e) {
