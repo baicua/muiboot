@@ -110,6 +110,8 @@
 .mb-btn-group {
     display: inline-block;
     vertical-align: middle;
+    float: right;
+    margin-bottom: 2px;
 }
 .mb-btn-group .mb-btn {
     font-weight: 500;
@@ -150,7 +152,7 @@
 /*列表详情页*/
 /*引用块样式*/
 .mb-elem-quote{
-    padding: 14px 14px 14px 8px;
+    padding: 14px 0px 14px 10px;
     font-size: 18px;
     line-height: 0px;
     color: #23262e;
@@ -217,4 +219,9 @@
     white-space: nowrap;
     font-size: 14px;
     text-align: center;
+}
+
+/*表格样式修改*/
+.layui-table, .layui-table-view {
+    margin: 2px 0;
 }
