@@ -48,7 +48,6 @@ input.layui-form-danger[type=radio] + div.layui-form-radio>i{
   color: #FF5722!important
 }
 .layui-layout-admin .layui-side-menu{
-  top: 0;
   z-index: 1001;
   transition: all .3s;
   -webkit-transition: all .3s;
@@ -72,7 +71,6 @@ input.layui-form-danger[type=radio] + div.layui-form-radio>i{
 }
 .layui-side-menu .layui-nav{
   width: 200px;
-  margin-top: 60px;
   background: 0 0;
 }
 .layui-side-menu .layui-nav.layui-nav-tree>li>a>i{

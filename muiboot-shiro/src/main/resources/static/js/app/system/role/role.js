@@ -1,83 +1,63 @@
-$(function() {
-    var settings = {
-        url: ctx + "role/list",
-        pageSize: 10,
-        queryParams: function(params) {
-            return {
-                pageSize: params.limit,
-                pageNum: params.offset / params.limit + 1,
-                roleName: $(".role-table-form").find("input[name='roleName']").val().trim(),
-            };
-        },
-        columns: [{
-            checkbox: true
-        }, {
-            field: 'roleName',
-            title: '角色'
-        }, {
-            field: 'remark',
-            title: '描述'
-        }, {
-            field: 'createTime',
-            title: '创建时间'
-        }]
-    };
-    $MB.initTable('roleTable', settings);
-});
-
-function search() {
-    $MB.refreshTable('roleTable');
-}
-
-function refresh() {
-    $(".role-table-form")[0].reset();
-    $MB.refreshTable('roleTable');
-}
-
-function deleteRoles() {
-    var selected = $("#roleTable").bootstrapTable('getSelections');
-    var selected_length = selected.length;
-    if (!selected_length) {
-        $MB.n_warning('请勾选需要删除的角色！');
-        return;
-    }
-    var ids = "";
-    for (var i = 0; i < selected_length; i++) {
-        ids += selected[i].roleId;
-        if (i != (selected_length - 1)) ids += ",";
-    }
-
-    $MB.confirm({
-        text: "删除选中角色将导致该角色对应账户失去相应的权限，确定删除？",
-        confirmButtonText: "确定删除"
-    }, function() {
-        $.post(ctx + 'role/delete', { "ids": ids }, function(r) {
+;$(document).ready(function() {
+    "use strict";
+    var table,dict,form;
+    layui.use(['dict','table'], function(){
+        table = layui.table,dict=layui.dict,form=layui.form;
+        table.render({
+            id: 'lay-role-list'
+            ,elem: '#roleList'
+            ,url: '/role/list' //数据接口
+            ,page: true //开启分页
+            ,size: 'sm'
+            ,height: 'full'
+            ,skin:"line"
+            ,cols: [[
+                {type:'checkbox'}
+                ,{field: 'roleId', title: 'roleId'}
+                ,{field:'roleName', title: '角色名'}
+                ,{field:'remark',  title: '备注'}
+                ,{field:'createTime',  title: '创建时间'}
+                ,{field:'modifyTime',  title: '修改时间'}
+            ]]
+        });
+        dict.load("DIC_ORGAN_TREE,DIC_DISABLE,DIC_DEPT_URL");
+        dict.render();
+        form.render();
+        form.on('submit(search)', function($data){
+            var data = $data.field;
+            delete data["ignore-form"];
+            table.reload('lay-role-list', {
+                where: $.extend({},data)//设定异步数据接口的额外参数，任意设
+                ,page: {
+                    curr: 1 //重新从第 1 页开始
+                }
+            });
+            return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+        });
+        form.on('submit(reset)', function(data){
+            form.val("search-form", {
+                "organId": ""
+                ,"ignore-form": ""
+                ,"deptId": ""
+                ,"valid": ""
+                ,"username": ""
+                ,"realName":  ""
+                ,"mobile": ""
+            });
+            return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+        });
+    });
+    $("#expBtn").on("click",function (r) {
+        $MB.layerPost({url: "/role/excel",data:{}}, function (r) {
             if (r.code == 0) {
-                $MB.n_success(r.msg);
-                refresh();
+                window.location.href = $MB.getRootPath()+"/common/download?fileName=" + r.msg + "&delete=" + true;
             } else {
-                $MB.n_danger(r.msg);
+                layer.msg(r.msg);
             }
         });
     });
-}
-
-function exportRoleExcel(){
-	$.post(ctx+"role/excel",$(".role-table-form").serialize(),function(r){
-		if (r.code == 0) {
-			window.location.href = "common/download?fileName=" + r.msg + "&delete=" + true;
-		} else {
-			$MB.n_warning(r.msg);
-		}
-	});
-}
-
-function exportRoleCsv(){
-	$.post(ctx+"role/csv",$(".role-table-form").serialize(),function(r){
-		if (r.code == 0) {
-			window.location.href = "common/download?fileName=" + r.msg + "&delete=" + true;
-		} else {
-			$MB.n_warning(r.msg);
-		}
-	});
-}
+    $("#delBtn").on("click",function (r) {
+    });
+    $("#delBtn").on("click",function (r) {
+    });
+});

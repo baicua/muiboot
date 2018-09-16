@@ -1,52 +1,81 @@
-<div data-th-include="system/role/roleAdd"></div>
-<div class="card">
-    <div class="card-block">
-        <div class="table-responsive">
-            <div id="data-table_wrapper" class="dataTables_wrapper">
-                <div class="dataTables_buttons hidden-sm-down actions">
-                    <span class="actions__item zmdi zmdi-search" onclick="search()" title="搜索" />
-                    <span class="actions__item zmdi zmdi-refresh-alt" onclick="refresh()" title="刷新" />
-                    <div class="dropdown actions__item">
-                        <i data-toggle="dropdown" class="zmdi zmdi-download">
-		            </i>
-                        <ul class="dropdown-menu dropdown-menu-right">
-                            <a href="javascript:void(0)" class="dropdown-item" data-table-action="excel" onclick="exportRoleExcel()">
-		                    Excel (.xlsx)
-		                </a>
-                            <a href="javascript:void(0)" class="dropdown-item" data-table-action="csv" onclick="exportRoleCsv()">
-		                    CSV (.csv)
-		                </a>
-                        </ul>
-                    </div>
-                    <div class="dropdown actions__item" shiro:hasAnyPermissions="role:add,role:delete,role:update">
-                        <i data-toggle="dropdown" class="zmdi zmdi-more-vert"></i>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <a href="javascript:void(0)" class="dropdown-item" data-toggle="modal" data-target="#role-add" shiro:hasPermission="role:add">新增角色</a>
-                            <a href="javascript:void(0)" class="dropdown-item" onclick="updateRole()" shiro:hasPermission="role:update">修改角色</a>
-                            <a href="javascript:void(0)" class="dropdown-item" onclick="deleteRoles()" shiro:hasPermission="role:delete">删除角色</a>
-                        </div>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head data-th-include="common/head"></head>
+<body class="layui-layout-body layui-table-body">
+<div data-th-include="common/common"></div>
+<hr>
+<div class="layui-container ajax-content" lay-filter="ajax-content">
+    <form class="layui-form table-form" action="" lay-filter="search-form">
+        <div class="layui-row">
+            <div class="layui-row">
+                <div class="layui-col-md4 layui-col-xs12">
+                    <label class="layui-form-label">所属机关:</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="organId" dic-map="DIC_ORGAN_TREE" placeholder="请选择所属机关" class="layui-input dic-tree">
                     </div>
                 </div>
-                <div id="data-table_filter" class="dataTables_filter">
-                    <form class="role-table-form">
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-					               	角色：
-					            </span>
-                                    <div class="form-group">
-                                        <input type="text" name="roleName" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
+                <div class="layui-col-md4 layui-col-xs12 layui-form" lay-filter="dic-filter" >
+                    <label class="layui-form-label">所属部门:</label>
+                    <div class="layui-input-block">
+                        <select name="deptId" dic-map="DIC_DEPT_URL"  dic-parent="input[name='organId']" placeholder="请选择所属部门" class="dic-map-url"></select>
+                    </div>
                 </div>
-                <table id="roleTable" data-mobile-responsive="true" class="mb-bootstrap-table text-nowrap"></table>
+                <div class="layui-col-md4 layui-col-xs12">
+                    <label class="layui-form-label">状态:</label>
+                    <div class="layui-input-block">
+                        <select name="valid" dic-map="DIC_DISABLE" placeholder="请选择状态" class="layui-input dic-map"></select>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col-md4 layui-col-xs12">
+                    <label class="layui-form-label">用户名:</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="username" placeholder="请输入用户名" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-col-md4 layui-col-xs12">
+                    <label class="layui-form-label">真实姓名:</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="realName" placeholder="请输入真实姓名" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-col-md4 layui-col-xs12">
+                    <label class="layui-form-label">手机号:</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="mobile"  placeholder="请输入手机号" class="layui-input">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="layui-row">
+            <div class="layui-col-md12 layui-col-xs12 center">
+                <button type="button" lay-submit lay-filter="search" class="mb-btn mb-btn-form mb-btn-search">查询</button>
+                <button type="button" lay-submit lay-filter="reset" class="mb-btn mb-btn-form mb-btn-empty">重置</button>
+            </div>
+        </div>
+    </form>
+    <div class="layui-row">
+        <div class="layui-col-md8 layui-col-xs4">
+            <blockquote class="mb-elem-quote">角色列表</blockquote>
+        </div>
+        <div class="layui-col-md4 layui-col-xs8">
+            <div class="layui-inline" style="float: right;margin-bottom: 0px;">
+                <div class="mb-btn-group">
+                    <button title="新增" type="button" id="addBtn"  class="mb-btn mb-btn-empty" shiro:hasPermission="menu:add"><i class="layui-icon"></i></button>
+                    <button title="修改" type="button" id="updBtn" class="mb-btn mb-btn-empty" shiro:hasPermission="menu:update"><i class="layui-icon"></i></button>
+                    <button title="导入" type="button" id="impBtn" class="mb-btn mb-btn-empty" ><i class="layui-icon layui-icon-upload-circle"></i></button>
+                    <button title="导出" type="button" id="expBtn" class="mb-btn mb-btn-empty" ><i class="layui-icon layui-icon-download-circle"></i></button>
+                    <button title="删除" type="button" id="delBtn" class="mb-btn mb-btn-empty" shiro:hasPermission="menu:delete"><i class="layui-icon"></i></button>
+                </div>
             </div>
         </div>
     </div>
+    <div class="layui-row">
+        <table class="layui-hide" id="roleList"></table>
+    </div>
+    <script data-th-src="@{/js/app/system/role/role.js}" />
 </div>
-<script data-th-src="@{js/app/system/role/role.js}"></script>
-<script data-th-src="@{js/app/system/role/roleEdit.js}"></script>
+</body>
+</html>
