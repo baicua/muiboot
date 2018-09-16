@@ -82,6 +82,15 @@ input.layui-form-danger[type=radio] + div.layui-form-radio>i{
 .layui-layout-admin .layui-header .layui-nav {
   padding: 0 0px;
 }
+.mb-banner .breadcrumb>a{
+  font-size: 11px;
+}
+.mb-banner.layui-card-header{
+  height: 20px;
+  line-height: 20px;
+  padding: 0 5px;
+  border-bottom: 1.5px solid #f2f2f2;
+}
 .layui-layout-body .shrink. layui-logo {
   width: 60px;
   background-image: url(res/logo.png);
