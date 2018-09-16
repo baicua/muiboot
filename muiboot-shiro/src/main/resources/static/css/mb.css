@@ -117,7 +117,7 @@
     -webkit-transition: all .2s ease-in-out;
     transition: all .2s ease-in-out;
     display: inline-block;
-    height: 24px;
+    height: 28px;
     padding: 0 6px;
     border: none;
     border-radius: 2px;
@@ -126,7 +126,7 @@
     touch-action: manipulation;
     background-image: none;
     text-align: center;
-    line-height: 24px;
+    line-height: 28px;
     vertical-align: middle;
     white-space: nowrap;
     -webkit-user-select: none;
