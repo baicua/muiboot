@@ -89,6 +89,7 @@
     height: 22px;
     padding: 0 5px;
     font-size: 12px;
+    width: 60px;
 }
 .mb-btn.mb-btn-form +.mb-btn.mb-btn-form{
     margin-left: 10px;
@@ -109,28 +110,42 @@
 .mb-btn-group {
     display: inline-block;
     vertical-align: middle;
-    font-size: 0
 }
 .mb-btn-group .mb-btn {
-    height: 30px;
-    line-height: 30px;
-    padding: 0 10px;
-    font-size: 12px;
-    margin-left: 0!important;
-    margin-right: 0!important;
-    border-radius: 0;
+    font-weight: 500;
+    color: #000000;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+    display: inline-block;
+    height: 24px;
+    padding: 0 6px;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    background-image: none;
+    text-align: center;
+    line-height: 24px;
+    vertical-align: middle;
+    white-space: nowrap;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font-size: .875rem;
+    font-family: inherit;
+    letter-spacing: .03em;
+    position: relative;
+    overflow: hidden;
+    color: rgba(0,0,0,.87);
+    background-color: transparent;
+    animation-duration: 0.0001s;
+    animation-name: mui-btn-inserted;
 }
-.mb-btn-group .mb-btn:first-child {
-    border-radius: 2px 0 0 2px
-}
-.mb-btn-group .mb-btn:last-child {
-    border-radius: 0 2px 2px 0
-}
-.mb-btn-group .mb-btn+.mb-btn {
-    border-left: none;
-}
-.mb-btn-group+.mb-btn-group {
-    margin-left: 10px
+.mb-btn-group>.mb-btn:hover,.mb-btn-group>.mb-btn:focus,.mb-btn-group>.mb-btn:active{
+    color: #1e9fff;
+    background-color: #f2f2f2;
 }
 /*列表详情页*/
 /*引用块样式*/
