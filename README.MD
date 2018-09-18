@@ -2,21 +2,36 @@
 系统功能模块组成如下所示：
 ```
 ├─系统管理
-│  ├─字典管理
+│  ├─菜单管理 --完成
+│  ├─部门管理
 │  ├─用户管理
-│  ├─菜单管理
 │  ├─角色管理
-│  └─部门管理
+│  ├─字典管理 --完成
+│  └─配置管理
+│      ├─邮箱配置
+│      ├─缓存配置
+│  ├─接口管理
+│      ├─接口配置
+│      ├─接口监控
 ├─系统监控
-│  ├─在线用户
-│  └─系统日志
-├─文件管理
-│  ├─记录单
-│  └─记录本
-├─申领记录单
-├─申领记录表
-└─申领记录
+│  ├─在线用户 --完成
+│  └─系统日志 --完成
+
 ```
+关于系统
+````
+本是想使用Material Design作为前端风格，springboot作为后端框架，所以取名MUIBOOT；
+但是，市面上的Material Design风格前端组件基本不兼容IE8及以下，所以前端选择了兼容性
+较好的layui.后台框架实在FEBS基础上修改，站在巨人的肩上。
+````
+##待做功能
+- 工作流 activiti
+- 模板打印 ？
+- 无状态登录 jwt
+- BO主键生成策略，兼容mysql,oracle
+- 图表系统 zeppelin
+- 分布式环境 ehcache集群or redis
+- 文件在线预览
 ## 技术选型
 ### 后端
 
@@ -34,31 +49,13 @@
 
 - 日志打印：logback
 
-- 其他：fastjson，poi，javacsv，quartz等。
+- 其他：fastjson，poi，javacsv等。
 
 ### 前端
  
-- 基础框架：Bootstrap
+- 基础框架：layiui
 
 - JavaScript框架：jQuery
-
-- 消息组件：Bootstrap notify
-
-- 提示框插件：SweetAlert2
-
-- 树形插件：jsTree
-
-- 树形表格插件：jqTreeGrid
-
-- 表格插件：BootstrapTable
-
-- 表单校验插件：jQuery-validate
-
-- 多选下拉框插件：multiple-select
-
-- 图表插件：Highcharts
-
-- 时间插件：daterangepicker
 
 ### 开发环境
 
@@ -73,3 +70,6 @@
 - 版本管理：git
 ### 参考项目
 [FEBS](https://gitee.com/github-16661027/project)权限管理系统
+
+### 预览地址
+http://www.baicua.com

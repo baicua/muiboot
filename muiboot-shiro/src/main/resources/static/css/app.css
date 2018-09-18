@@ -1,0 +1,255 @@
+@charset "UTF-8";
+html {
+  -ms-overflow-style: scrollbar;
+  -webkit-tap-highlight-color: transparent;
+}
+::-webkit-scrollbar
+{
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track
+{
+  border-radius: 1px;
+}
+::-webkit-scrollbar-thumb
+{
+  border-radius: 1px;
+  background: rgba(0,0,0,.1);
+}
+::-webkit-scrollbar{width:8px;background:#f5f5f5;border-radius:4px}::-webkit-scrollbar-track,::-webkit-scrollbar-thumb{border-radius:4px}::-webkit-scrollbar-thumb{min-height:20px;background-clip:content-box;box-shadow:0 0 0 5px #e0e0e0 inset}::-webkit-scrollbar-corner{background:transparent}.hotelInfoBox::-webkit-scrollbar{width:8px;background:#eee;border-radius:5px}::-webkit-scrollbar-track,::-webkit-scrollbar-thumb{border-radius:5px}::-webkit-scrollbar-thumb{min-height:20px;background-clip:content-box;box-shadow:0 0 0 5px rgba(0, 0, 0, .1) inset}::-webkit-scrollbar-corner{background:transparent}.city_mdd_depa,.city_mdd_dest,.city_mdd_hotel{display:none}.scenic_list::-webkit-scrollbar{width:8px;background-color:rgba(155,155,155,0.1);border-radius:5px}.scenic_list::-webkit-scrollbar-track,::-webkit-scrollbar-thumb{border-radius:5px}.scenic_list::-webkit-scrollbar-thumb{min-height:20px;background-clip:content-box;box-shadow:0 0 0 5px rgba(0,0,0,.1) inset}.scenic_list::-webkit-scrollbar-corner{background:transparent}
+.layui-layout-admin .layui-footer{
+  height:24px;
+  line-height:24px;
+  text-align: center;
+}
+.site-tips{
+  margin-bottom: 10px;
+  padding: 15px;
+  line-height: 22px;
+  border-left: 2px solid #808080;
+  background-color: #f2f2f2;
+}
+.ajax-content{
+  width: 100%;
+}
+.layui-form-item{
+  margin-bottom: 0px;
+}
+.layui-form-label[lable-verify="required"]{
+  color: red;
+}
+.layui-form-label[lable-verify="required"]:after{
+  color: red;
+  content: "*";
+  margin-right: -5px;
+}
+input.layui-form-danger[type=radio] + div.layui-form-radio{
+  color: #FF5722!important
+}
+input.layui-form-danger[type=radio] + div.layui-form-radio>i{
+  color: #FF5722!important
+}
+.layui-layout-admin .layui-side-menu{
+  z-index: 1001;
+  transition: all .3s;
+  -webkit-transition: all .3s;
+  background-color: #20222A !important
+}
+.layui-layout-admin .layui-logo{
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 1002;
+  width: 200px;
+  height: 60px;
+  padding: 0 15px;
+  box-sizing: border-box;
+  overflow: hidden;
+  font-weight: 300;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-color: #20222A;
+  box-shadow: 0 1px 2px 0 rgba(0,0,0,.15);
+}
+.layui-side-menu .layui-nav{
+  width: 200px;
+  background: 0 0;
+}
+.layui-side-menu .layui-nav.layui-nav-tree>li>a>i{
+   font-size: 20px;
+ }
+.layui-side-menu .layui-nav.layui-nav-tree>li dl{
+  text-indent: 20px;
+}
+.layui-layout-admin .layui-header .layui-nav {
+  padding: 0 0px;
+}
+.mb-banner .breadcrumb>a,.mb-banner .breadcrumb>a>i{
+  font-size: 12px;
+}
+.mb-banner.layui-card-header{
+  height: 20px;
+  line-height: 20px;
+  padding: 0 5px;
+  border-bottom: 1.5px solid #f2f2f2;
+}
+.layui-layout-body .shrink. layui-logo {
+  width: 60px;
+  background-image: url(res/logo.png);
+}
+.shrink .layui-footer,.shrink .layui-body{
+  left: 60px;
+}
+.shrink .layui-side{
+  width: 60px;
+}
+.shrink .layui-logo{
+  width: 60px;
+}
+.shrink .layui-side .layui-side-scroll a span,.layui-nav .layui-icon-spread-left,.shrink .layui-nav .layui-icon-shrink-right{
+  display: none;
+}
+.shrink .layui-nav .layui-icon-spread-left{
+  display: block;
+}
+.shrink .layui-side-scroll li>a,.shrink .layui-side-scroll dd>a{
+  width: 40px;
+  padding-right: 0px;
+}
+.shrink  .layui-layout-left {
+  left: 60px;
+}
+
+@media screen and (max-width:992px) {
+  .layui-layout-admin .layui-body, .layui-layout-admin .layui-footer, .layui-layout-admin .layui-layout-left {
+    left: 0;
+  }
+}
+@media screen and (max-width: 992px) {
+  .layui-layout-admin .layui-side {
+    transform: translate3d(-200px, 0, 0);
+    -webkit-transform: translate3d(0px, 0, 0);
+    width: 200px;
+  }
+}
+@media screen and (max-width: 992px) {
+  .layui-layout-admin.shrink .layui-side {
+    transform: translate3d(-200px, 0, 0);
+    -webkit-transform: translate3d(-200px, 0, 0);
+    width: 200px;
+  }
+}
+@media screen and (max-width: 992px) {
+  .layui-layer.layui-layer-page,.layui-layer.layui-layer-page layui-layer-content{
+    width: auto !important;
+    height: auto !important;
+    top: auto !important;
+    left: auto !important;
+  }
+}
+@media screen and (max-width: 992px) {
+  .layui-layer.layui-layer-page layui-layer-content{
+    height: auto !important;
+  }
+}
+.search_box {
+  height: 36px;
+  border: #808080 solid 2px;
+}
+.search_box input{
+  border: none;
+  height: 20px;
+  line-height: 20px;
+  padding: 8px 10px;
+  outline: none;
+  color: #666;
+  font-size: 12px;
+  width: 74%;
+}
+.search_box .btn_search {
+  float: right;
+  width: 42px;
+  height: 36px;
+  cursor: pointer;
+  background-color: #808080;
+  text-align: center;
+  font: 26px/38px sans-serif;
+  position: absolute;
+  right: 12px;
+}
+.hidden{
+  display: none;
+}
+.dic-tree-input + i + ul{
+  display: none;
+  border: 1px solid;
+  color: #e8e8e8;
+  position: absolute;
+  z-index: 999;
+  width: 99%;
+  background-color: #ffffff;
+  border-color: #C9C9C9;
+}
+.dic-tree-ul.layui-tree ul li:hover {
+  background-color: #f8f8f8;
+}
+.dic-tree-input.show-tree + i + ul{
+  display: block;
+  border-top: 1px dashed #cbcbcb;
+  margin-top: -2px;
+}
+.dic-tree-input +i{
+  position: absolute;
+  right: 5px;
+  top: 3px;
+  cursor: pointer;
+  color: #b3b3b3;
+  display: none;
+}
+.dic-tree-input.show-tree +i,.dic-tree-input +i:focus{
+  display: block;
+}
+.layui-layer.layui-layer-page.m-layer-visible .layui-layer-content{
+  overflow: visible;
+}
+.layui-input, .layui-textarea {
+  overflow-x: hidden;
+}
+.right-bar-mobile{
+  display: none;
+}
+@media screen and (max-width: 992px) {
+  .right-bar-mobile{
+    display: block;
+  }
+  .right-bar-pc{
+    display: none;
+  }
+  .right-bar-mobile .layui-nav .layui-nav-item a{
+    padding: 0 20px;
+  }
+  .right-bar-mobile .layui-nav-child{
+    right: 0;
+    left: auto;
+  }
+}
+.layui-table-tips-main{
+  overflow: hidden;
+}
+.layui-table-body.layui-table-main{
+  overflow-x: hidden;
+}
+.dic-tree-input.show-tree{
+  border-radius:0px;
+  border-color: #C9C9C9!important;
+}
+.layui-form-select dl{
+  overflow-y: visible;
+}
+.layui-tree.dic-tree-ul li ul {
+  margin-left: 0px;
+}
+.layui-tree.dic-tree-ul li ul a{
+  margin-left: 22px;
+}

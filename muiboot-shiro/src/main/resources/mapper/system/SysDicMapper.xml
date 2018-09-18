@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.muiboot.shiro.system.dao.SysDicMapper">
+  <resultMap id="BaseResultMap" type="com.muiboot.shiro.system.domain.SysDic">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="DIC_ID" jdbcType="BIGINT" property="dicId" />
+    <result column="PARENT_ID" jdbcType="BIGINT" property="parentId" />
+    <result column="DIC_KEY" jdbcType="VARCHAR" property="dicKey" />
+    <result column="VALID" jdbcType="VARCHAR" property="valid" />
+    <result column="DIC_NAME" jdbcType="VARCHAR" property="dicName" />
+    <result column="DIC_TYPE" jdbcType="VARCHAR" property="dicType" />
+    <result column="SHOW_ICON" jdbcType="INTEGER" property="showIcon" />
+    <result column="CONTENT" jdbcType="VARCHAR" property="content" />
+    <result column="SQL_CONTENT" jdbcType="VARCHAR" property="sqlContent" />
+    <result column="VERSION" jdbcType="VARCHAR" property="version" />
+    <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="UPDATE_DATE" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="ORDER_NUM" jdbcType="INTEGER" property="orderNum" />
+  </resultMap>
+
+  <select id="nativeSelectBySQL" parameterType="String" resultType="java.util.Map">
+    ${msql}
+  </select>
+</mapper>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.muiboot.shiro.system.dao.RoleMapper">
+  <resultMap id="roleMap" type="com.muiboot.shiro.system.domain.Role">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <result column="ROLE_ID" jdbcType="DECIMAL" property="roleId" />
+    <result column="ROLE_NAME" jdbcType="VARCHAR" property="roleName" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="MODIFY_TIME" jdbcType="TIMESTAMP" property="modifyTime" />
+  </resultMap>
+  
+  <select id="findUserRole" resultMap="roleMap">
+  	SELECT R.* FROM T_ROLE R
+  	LEFT JOIN T_USER_ROLE UR ON(R.ROLE_ID = UR.ROLE_ID)
+	LEFT JOIN T_USER U ON(U.USER_ID = UR.USER_ID)
+	WHERE U.USERNAME = #{userName}
+  </select>
+  
+  <select id="findById" resultType="roleWithMenu">
+  	SELECT R.ROLE_ID ROLEID,R.ROLE_NAME ROLENAME,R.REMARK,
+  	RM.MENU_ID MENUID FROM T_ROLE R
+	LEFT JOIN T_ROLE_MENU RM ON(R.ROLE_ID = RM.ROLE_ID)
+	WHERE R.ROLE_ID = #{roleId}
+  </select>
+
+    <select id="findByMenuId" resultType="roleWithMenu">
+        SELECT R.ROLE_ID ROLEID,R.ROLE_NAME ROLENAME,R.REMARK,
+        RM.MENU_ID MENUID FROM T_ROLE R
+        LEFT JOIN T_ROLE_MENU RM ON(R.ROLE_ID = RM.ROLE_ID)
+        WHERE RM.MENU_ID = #{menuId}
+    </select>
+  
+</mapper>

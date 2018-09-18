@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head data-th-include="common/head"></head>
+<body class="layui-layout-body layui-table-body">
+<div data-th-include="common/common"></div>
+<hr>
+<div class="layui-container ajax-content" lay-filter="ajax-content">
+    <fieldset class="layui-elem-field layui-field-title">
+        <legend>在线用户</legend>
+    </fieldset>
+    <div class="layui-row">
+        <div class="layui-col-md12 layui-col-xs12" style="min-height: 400px;">
+            <div class="layui-card">
+                <table class="layui-hide" id="userOnline"></table>
+            </div>
+        </div>
+    </div>
+    <script data-th-src="@{/js/app/system/monitor/online.js}"></script>
+</div>
+</body>
+</html>

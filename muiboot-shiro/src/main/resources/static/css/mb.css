@@ -1,0 +1,227 @@
+/**
+   #框架样式
+ */
+@charset "UTF-8";
+/*公共样式*/
+.center{
+    text-align: center;
+}
+/*文本框修改*/
+.layui-input, .layui-select, .layui-textarea {
+    height: 25px;
+    line-height: 25px;
+    vertical-align: middle;
+    border-width: 1px;
+    border-style: solid;
+    background-color: #fff;
+    border-radius: 2px;
+}
+.layui-form-radio {
+    margin: 0px 10px 0 0;
+}
+.layui-form-label {
+    float: left;
+    display: block;
+    padding: 0px 6px 0px 21px;
+    font-weight: 400;
+    line-height: 24px;
+    text-align: right;
+}
+/*弹窗提示，按钮居中*/
+.layui-layer-btn{
+    text-align: center !important;
+}
+/*按钮样式*/
+.mb-btn{
+    display: inline-block;
+    color: #fff;
+    white-space: nowrap;
+    text-align: center;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    line-height: normal;
+
+    outline: 0;
+    -webkit-appearance: none;
+    transition: all .3s;
+    -webkit-transition: all .3s;
+    box-sizing: border-box;
+
+    font-family: inherit;
+    font-size: inherit;
+    font-style: inherit;
+    font-weight: inherit;
+    margin: 0;
+    position: relative;
+    overflow: hidden;
+}
+.mb-btn:hover{
+    opacity: .8;
+    filter: alpha(opacity=80);
+    color: #fff;
+}
+.mb-btn:focus{
+    box-shadow:0px 0px 4px 2px #1e9fff82;
+}
+.mb-btn:after{
+    content: "";
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    background-image: radial-gradient(circle, #1E9FFF 10%, transparent 10.01%);
+    background-repeat: no-repeat;
+    background-position: 50%;
+    transform: scale(10, 10);
+    opacity: 0;
+    transition: transform .3s, opacity .5s;
+}
+.mb-btn:active:after{
+    transform: scale(0, 0);
+    opacity: .3;
+    transition: 0s;
+}
+.mb-btn.mb-btn-form{
+    height: 22px;
+    padding: 0 5px;
+    font-size: 12px;
+    width: 60px;
+}
+.mb-btn.mb-btn-form +.mb-btn.mb-btn-form{
+    margin-left: 10px;
+}
+.mb-btn.mb-btn-search{
+    background-color: #1E9FFF;
+}
+.mb-btn.mb-btn-empty{
+    border: 1px solid #C9C9C9;
+    background-color: #fff;
+    color: #555;
+}
+.mb-btn.mb-btn-empty:hover{
+    border-color: #1E9FFF;
+    color: #1E9FFF;
+}
+/*按钮组*/
+.mb-btn-group {
+    display: inline-block;
+    vertical-align: middle;
+    float: right;
+    margin-bottom: 2px;
+}
+.mb-btn-group .mb-btn {
+    font-weight: 500;
+    color: #000000;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+    display: inline-block;
+    height: 28px;
+    padding: 0 6px;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    background-image: none;
+    text-align: center;
+    line-height: 28px;
+    vertical-align: middle;
+    white-space: nowrap;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font-size: .875rem;
+    font-family: inherit;
+    letter-spacing: .03em;
+    position: relative;
+    overflow: hidden;
+    color: rgba(0,0,0,.87);
+    background-color: transparent;
+    animation-duration: 0.0001s;
+    animation-name: mui-btn-inserted;
+}
+.mb-btn-group>.mb-btn:hover,.mb-btn-group>.mb-btn:focus,.mb-btn-group>.mb-btn:active{
+    color: #1e9fff;
+    background-color: #f2f2f2;
+}
+/*列表详情页*/
+/*引用块样式*/
+.mb-elem-quote{
+    padding: 14px 0px 14px 10px;
+    font-size: 18px;
+    line-height: 0px;
+    color: #23262e;
+    border-left: 2px solid #808080;
+    border-radius: 0 2px 2px 0;
+}
+
+
+/*轮播样式*/
+.layui-fluid .layui-card .layui-card-body{
+    border-top: 2px solid #009688;
+}
+.mb-carousel-home .layui-carousel-ind{
+    top: -40px;
+    position: absolute;
+    text-align: right;
+}
+.mb-carousel-home .layui-carousel-ind li.layui-this {
+    background-color: #030303;;
+}
+.mb-carousel-home ul li{
+    background-color: #fff;
+    cursor: pointer;
+}
+.mb-backlog ul li a{
+    display: block;
+    padding: 10px 15px;
+    background-color: #f8f8f8;
+    color: #999;
+    border-radius: 2px;
+    transition: all .3s;
+    -webkit-transition: all .3s;
+}
+.mb-backlog ul li a h3{
+    padding-bottom: 10px;
+    font-size: 12px;
+}
+.mb-backlog ul li a p cite{
+    font-style: normal;
+    font-size: 30px;
+    font-weight: 300;
+    color: #009688;
+}
+.mb-shortcut li .layui-icon{
+     display: inline-block;
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    border-radius: 2px;
+    font-size: 30px;
+    background-color: #F8F8F8;
+    color: #333;
+    transition: all .3s;
+    -webkit-transition: all .3s;
+}
+.mb-shortcut li cite {
+    position: relative;
+    top: 2px;
+    display: block;
+    color: #666;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 14px;
+    text-align: center;
+}
+
+/*表格样式修改*/
+.layui-table, .layui-table-view {
+    margin: 2px 0;
+}
