@@ -9,9 +9,10 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import com.muiboot.shiro.common.annotation.ExportConfig;
+import com.muiboot.shiro.common.domain.BaseModel;
 
 @Table(name = "T_MENU")
-public class Menu implements Serializable {
+public class Menu extends BaseModel implements Serializable {
 
 	private static final long serialVersionUID = 7187628714679791771L;
 
@@ -196,5 +197,13 @@ public class Menu implements Serializable {
 	 */
 	public void setModifyTime(Date modifyTime) {
 		this.modifyTime = modifyTime;
+	}
+
+	/**
+	 * The identify of the object
+	 */
+	@Override
+	public Object getPrimaryKey() {
+		return this.menuId;
 	}
 }

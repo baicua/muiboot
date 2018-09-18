@@ -1,10 +1,13 @@
 package com.muiboot.shiro.system.domain;
 
+import com.muiboot.shiro.common.domain.BaseModel;
+
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
 
 @Table(name = "M_GROUP")
-public class SysGroup {
+public class SysGroup extends BaseModel implements Serializable {
     /**
      * 机构ID
      */
@@ -292,5 +295,13 @@ public class SysGroup {
      */
     public void setAreaCode(String areaCode) {
         this.areaCode = areaCode == null ? null : areaCode.trim();
+    }
+
+    /**
+     * 实体主键
+     */
+    @Override
+    public Object getPrimaryKey() {
+        return groupId;
     }
 }

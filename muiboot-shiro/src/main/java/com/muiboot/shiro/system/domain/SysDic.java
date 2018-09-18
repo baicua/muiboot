@@ -1,6 +1,7 @@
 package com.muiboot.shiro.system.domain;
 
 import com.muiboot.shiro.common.annotation.ExportConfig;
+import com.muiboot.shiro.common.domain.BaseModel;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -14,7 +15,7 @@ import java.util.Objects;
  * Created by 75631 on 2018/8/29.
  */
 @Table(name = "M_DIC")
-public class SysDic implements Serializable {
+public class SysDic extends BaseModel implements Serializable {
     @Id
     @GeneratedValue(generator = "JDBC")
     @Column(name = "DIC_ID")
@@ -157,6 +158,14 @@ public class SysDic implements Serializable {
 
     public void setUpdateDate(Date updateDate) {
         this.updateDate = updateDate;
+    }
+
+    /**
+     * 实体主键
+     */
+    @Override
+    public Object getPrimaryKey() {
+        return dicKey;
     }
 
     @Override

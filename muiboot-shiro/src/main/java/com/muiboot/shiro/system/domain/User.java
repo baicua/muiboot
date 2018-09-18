@@ -10,9 +10,10 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import com.muiboot.shiro.common.annotation.ExportConfig;
+import com.muiboot.shiro.common.domain.BaseModel;
 
 @Table(name = "T_USER")
-public class User implements Serializable {
+public class User extends BaseModel implements Serializable{
 
 	private static final long serialVersionUID = -4852732617765810959L;
 	/**
@@ -305,4 +306,11 @@ public class User implements Serializable {
 		this.roleName = roleName;
 	}
 
+	/**
+	 * 实体主键
+	 */
+	@Override
+	public Object getPrimaryKey() {
+		return userId;
+	}
 }

@@ -9,9 +9,10 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import com.muiboot.shiro.common.annotation.ExportConfig;
+import com.muiboot.shiro.common.domain.BaseModel;
 
 @Table(name = "T_ROLE")
-public class Role implements Serializable {
+public class Role extends BaseModel implements Serializable {
 
 	private static final long serialVersionUID = -1714476694755654924L;
 
@@ -103,5 +104,13 @@ public class Role implements Serializable {
 	 */
 	public void setModifyTime(Date modifyTime) {
 		this.modifyTime = modifyTime;
+	}
+
+	/**
+	 * The identify of the object
+	 */
+	@Override
+	public Object getPrimaryKey() {
+		return roleId;
 	}
 }
