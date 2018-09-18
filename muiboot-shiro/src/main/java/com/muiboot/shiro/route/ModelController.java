@@ -8,7 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Created by 75631 on 2018/8/31.
+ * <p>Title: </p>
+ * <p>Description: 弹窗页面</p>
+ *
+ * @author jin
+ * @version 1.0 2018/9/18
  */
 @Controller
 @RequestMapping("model")

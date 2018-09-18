@@ -19,7 +19,13 @@ import com.muiboot.shiro.system.service.DictService;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
-
+/**
+ * <p>Title: </p>
+ * <p>Description: 字典处理</p>
+ *
+ * @author jin
+ * @version 1.0 2018/9/18
+ */
 @Controller
 public class DictController extends BaseController {
 

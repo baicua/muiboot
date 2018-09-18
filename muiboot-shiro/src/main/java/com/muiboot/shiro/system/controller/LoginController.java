@@ -26,7 +26,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Objects;
 import java.util.concurrent.ExecutorService;
-
+/**
+ * <p>Title: </p>
+ * <p>Description: 登录逻辑</p>
+ *
+ * @author jin
+ * @version 1.0 2018/9/18
+ */
 @Controller
 public class LoginController extends BaseController {
 

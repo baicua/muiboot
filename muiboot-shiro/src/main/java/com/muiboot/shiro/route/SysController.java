@@ -13,10 +13,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Created by 75631 on 2018/8/19.
- */
+* <p>Description: 菜单跳转</p>
+* @version 1.0 2018/9/18
+* @author jin
+*/
 @Controller
 public class SysController extends BaseController {
+    //预处理信息，设置页面缓存时间
     @ModelAttribute
     public void initBinder(Model model, HttpServletRequest request, HttpServletResponse response){
         //response.setHeader("Cache-Control", "max-age="+MAX_AGE);

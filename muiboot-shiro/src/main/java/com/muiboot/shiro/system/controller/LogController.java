@@ -18,7 +18,13 @@ import com.github.pagehelper.PageInfo;
 import com.muiboot.shiro.common.controller.BaseController;
 import com.muiboot.shiro.system.domain.SysLog;
 import com.muiboot.shiro.system.service.LogService;
-
+/**
+ * <p>Title: </p>
+ * <p>Description: 日志</p>
+ *
+ * @author jin
+ * @version 1.0 2018/9/18
+ */
 @Controller
 public class LogController extends BaseController {
 
