@@ -37,9 +37,9 @@
         var that = this
             ,options = that.config;
 
-        options.elem = $(options.elem);
+        var $table= $(options.elem);
         options.where = options.where || {};
-        options.id = options.id || options.elem.attr('id') || options.index;
+        options.id = options.id || $table.attr('id') || options.index;
 
         //请求参数的自定义格式
         options.request = $.extend({
@@ -586,6 +586,7 @@
         //操作栏
         that.layFixRight.css('right', scollWidth - 1);
     };
+
     var obj = {
         render: function (options) {
         },
