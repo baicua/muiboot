@@ -1,4 +1,4 @@
-<div class="layui-card">
+<!--<div class="layui-card">
     <div class="layui-card-header mb-banner">
         <span class="layui-breadcrumb breadcrumb">
           <a href=""><i class="layui-icon layui-icon-home"></i> 首页</a>
@@ -6,4 +6,16 @@
     </div>
     <div id="main-content" class="layui-card-body" th:attr="forward=${forward}">
     </div>
+</div>-->
+<div class="mb-card">
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            <li><a href="/"><i class="layui-icon layui-icon-home"></i>首页</a></li>
+        </ul>
+    </div>
+    <div id="main-content" class="mb-card-body" th:attr="forward=${forward}">
+    </div>
 </div>
+
+

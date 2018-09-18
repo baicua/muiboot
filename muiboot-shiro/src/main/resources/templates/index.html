@@ -20,6 +20,7 @@
     <link rel="stylesheet" data-th-href="@{/toolkit/layui/css/layui.css}"  media="all"/>
     <link rel="stylesheet" data-th-href="@{/css/mb.css}">
     <link rel="stylesheet" data-th-href="@{/css/app.css}" media="all"/>
+    <link rel="stylesheet" data-th-href="@{/toolkit/theme/css/theme.css}" media="all"/>
     <script data-th-inline="javascript">
         var ctx = [[@{/}]];
         var userName = [[${user.username}]];
@@ -28,11 +29,11 @@
     </script>
 </head>
 <body class="layui-layout-body">
-<div class="layui-layout layui-layout-admin">
-    <div class="layui-header" data-th-include="common/header"></div>
-    <div class="layui-side layui-side-menu" data-th-include="common/aside"></div>
-    <div class="layui-body" data-th-include="common/main"></div>
-    <div class="layui-footer" data-th-include="common/footer"></div>
+<div class="layui-layout mb-layout-admin">
+    <div class="mb-header" data-th-include="common/header"></div>
+    <div class="mb-side-menu" data-th-include="common/aside"></div>
+    <div class="mb-body" data-th-include="common/main"></div>
+    <div class="mb-footer" data-th-include="common/footer"></div>
 </div>
 <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
 <!--[if lt IE 9]>
