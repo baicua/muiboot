@@ -16,7 +16,7 @@
                     if(has){
                         $maincontent.ajax_load("loading",forward);
                     }else {
-                        window.location.href=$MB.getRootPath()+"/sys"+"#"+forward;
+                        window.location.href=$MB.getRootPath()+"sys"+"#"+forward;
                     }
                 }
                 element.init();
