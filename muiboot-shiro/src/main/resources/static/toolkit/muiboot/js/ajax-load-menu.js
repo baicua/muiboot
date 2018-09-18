@@ -1,3 +1,6 @@
+/**
+ * 菜单工具
+ */
 ;layui.define(['jquery','element'], function (exports) {
     "use strict";
     var $ = layui.jquery;

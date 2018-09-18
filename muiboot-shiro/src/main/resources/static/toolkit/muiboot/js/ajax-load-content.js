@@ -1,3 +1,6 @@
+/**
+ * 主区域ajax修改
+ */
 ;(function($ , undefined) {
     "use strict";
     var root_url = $MB.getRootPath();

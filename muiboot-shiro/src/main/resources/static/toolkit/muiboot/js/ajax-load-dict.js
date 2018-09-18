@@ -1,3 +1,6 @@
+/**
+ * 字典工具
+ */
 ;layui.define(['jquery','tree','form'], function (exports) {
     var loadedCount=0;
     "use strict";
