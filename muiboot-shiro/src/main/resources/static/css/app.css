@@ -155,7 +155,7 @@ input.layui-form-danger[type=radio] + div.layui-form-radio>i{
 }
 .search_box {
   height: 36px;
-  border: #3eafe07d solid 2px;
+  border: #3eafe0 solid 2px;
 }
 .search_box input{
   border: none;
@@ -172,12 +172,15 @@ input.layui-form-danger[type=radio] + div.layui-form-radio>i{
   width: 42px;
   height: 36px;
   cursor: pointer;
-  background-color: #3eafe07d;
+  background-color: #3eafe0;
   text-align: center;
   font: 26px/38px sans-serif;
   position: absolute;
   right: 12px;
   color: white;
+  filter: alpha(opacity=70);
+  -moz-opacity: .7;
+  opacity: 0.7;
 }
 .hidden{
   display: none;
@@ -253,4 +256,10 @@ input.layui-form-danger[type=radio] + div.layui-form-radio>i{
 }
 .layui-tree.dic-tree-ul li ul a{
   margin-left: 22px;
+}
+.layui-nav-itemed>.layui-nav-child {
+  background-color: #163152!important;
+  filter: alpha(opacity=70);
+  -moz-opacity: .7;
+  opacity: 0.7;
 }
