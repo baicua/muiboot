@@ -11,7 +11,7 @@ body{font-family:'微软雅黑'; margin:0 auto;min-width:980px;}
 }
 .mb-layout-admin> .mb-body{
     top: 88px;
-    bottom: 13px;
+    bottom: 20px;
     left: 186px;
     position: absolute;
     right: 0;
@@ -30,7 +30,7 @@ body{font-family:'微软雅黑'; margin:0 auto;min-width:980px;}
     overflow-y: auto;
     position: absolute;
     bottom: 0px;
-    top: 40px;
+    top: 20px;
     right: 0px;
     left: 0px;
     padding: 4px 4px;
@@ -77,16 +77,32 @@ body{font-family:'微软雅黑'; margin:0 auto;min-width:980px;}
 @media screen and (max-width: 992px) {
     .mb-layout-admin .mb-side-menu {
         transform: translate3d(-186px, 0, 0);
-        -webkit-transform: translate3d(0px, 0, 0);
+        -webkit-transform: translate3d(-186px, 0, 0);
         width: 186px;
     }
 }
 @media screen and (max-width: 992px) {
     .mb-layout-admin.shrink .mb-side-menu {
-        transform: translate3d(-200px, 0, 0);
-        -webkit-transform: translate3d(-200px, 0, 0);
-        width: 200px;
+        transform: translate3d(-186px, 0, 0);
+        -webkit-transform: translate3d(-186px, 0, 0);
+        width: 186px;
     }
+}
+.model{
+    height:45px;color:#fff;font-size:14px;line-height:45px;
+    padding: 8px 23px 15px 23px;
+}
+.workspace{
+background:url(../images/icon01.png) repeat-x;
+}
+.manage-model{
+    background:url(../images/icon02.png) repeat-x;
+}
+.design-model{
+    background:url(../images/icon03.png) repeat-x;
+}
+.system-model{
+    background:url(../images/icon06.png) repeat-x;
 }
 ul{display:block;margin:0;padding:0;list-style:none;}
 li{display:block;margin:0;padding:0;list-style: none;}

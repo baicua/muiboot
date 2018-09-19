@@ -155,7 +155,7 @@ input.layui-form-danger[type=radio] + div.layui-form-radio>i{
 }
 .search_box {
   height: 36px;
-  border: #808080 solid 2px;
+  border: #3eafe07d solid 2px;
 }
 .search_box input{
   border: none;
@@ -172,11 +172,12 @@ input.layui-form-danger[type=radio] + div.layui-form-radio>i{
   width: 42px;
   height: 36px;
   cursor: pointer;
-  background-color: #808080;
+  background-color: #3eafe07d;
   text-align: center;
   font: 26px/38px sans-serif;
   position: absolute;
   right: 12px;
+  color: white;
 }
 .hidden{
   display: none;
