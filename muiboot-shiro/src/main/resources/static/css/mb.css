@@ -61,9 +61,9 @@
     filter: alpha(opacity=80);
     color: #fff;
 }
-.mb-btn:focus{
+/*.mb-btn:focus{
     box-shadow:0px 0px 4px 2px #1e9fff82;
-}
+}*/
 .mb-btn:after{
     content: "";
     display: block;

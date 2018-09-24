@@ -41,10 +41,12 @@ body{font-family:'微软雅黑'; margin:0 auto;min-width:980px;}
     transition: all .3s;
     -webkit-transition: all .3s;
     background-color: #3f97c9 !important;
-    top: 88px;
+    top: 128px;
     width: 186px;
     bottom: 0px;
     background: url(../images/leftline.gif) repeat-y right;
+    left: 0;
+    overflow-x: hidden;
 }
 .mb-layout-admin .mb-side-menu ul.layui-nav{
     background-color: #3f97c9;
@@ -62,7 +64,10 @@ body{font-family:'微软雅黑'; margin:0 auto;min-width:980px;}
     background-color: #eee;
     text-align: center;
 }
-.mb-side-menu .layui-side-scroll,.mb-side-menu .layui-nav-tree{
+.mb-side-menu .layui-side-scroll{
+    width: 204px;
+}
+.mb-side-menu .layui-nav-tree{
     width: 186px;
 }
 .mb-side-menu .layui-nav-tree .layui-nav-child dd.layui-this, .mb-side-menu .layui-nav-tree .layui-nav-child dd.layui-this a,.mb-side-menu .layui-nav-tree .layui-this,.mb-side-menu .layui-nav-tree .layui-this>a,.mb-side-menu .layui-nav-tree .layui-this>a:hover ,.mb-side-menu .layui-nav-tree a:hover{
@@ -170,7 +175,8 @@ h2{font-weight:normal;}
 .user i{display:inline-block;margin-right:5px;font-style:normal;line-height:30px; font-size:14px;color:#b8ceda;}
 
 /*left.html*/
-.lefttop{background:url(../images/lefttop.gif) repeat-x;height:40px;color:#fff;font-size:14px;line-height:40px;}
+.lefttop{background:url(../images/lefttop.gif) repeat-x;height:40px;color:#fff;font-size:14px;line-height:40px;    float: left;
+    width: 186px;}
 .lefttop span{margin-left:8px; margin-top:10px;margin-right:8px; background:url(../images/leftico.png) no-repeat; width:20px; height:21px;float:left;}
 .leftmenu{width:187px;padding-bottom: 9999px;margin-bottom: -9999px; overflow:hidden; background:url(../images/leftline.gif) repeat-y right;}
 .leftmenu dd{background:url(../images/leftmenubg.gif) repeat-x;line-height:35px;font-weight:bold;font-size:14px;border-right:solid 1px #b7d5df;}
