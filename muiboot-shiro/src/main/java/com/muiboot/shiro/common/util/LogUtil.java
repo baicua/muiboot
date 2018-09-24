@@ -26,24 +26,39 @@ public class LogUtil{
     }
 
     public void error(String message, Exception ex,String url){
-        String userId="未登录用户";
+        long threadId=Thread.currentThread().getId();
+        error(message,ex,url,threadId);
+    }
+    public void error(String message, Exception ex,String url,long threadId){
+        String userId="nouser";
         Long user=ShiroUtil.getCurrentUserId();
         if (user!=null){
             userId=user.toString();
         }
-        log.error("user:{},url:{},message:{},Exception:{},errorMessage:{}",userId,url,message,ex.getClass(),ex.getMessage());
-        StackTraceElement[] stackTraceElements=ex.getStackTrace();
+        log.error("threadId:{},user:{},url:{},message:{},Exception:{},,Caused:{},errorMessage:{}",threadId,userId,url,message,ex.getClass(),ex.getCause().getClass(),ex.getCause().getMessage());
+        StackTraceElement[] stackTraceElements=ex.getCause().getStackTrace();
         if (null!=stackTraceElements){
-            StringBuilder error = new StringBuilder();
+            StringBuilder error = new StringBuilder("threadId:").append(threadId).append(",Caused by:");
+            error.append(ex.getCause().getClass()).append(":").append(ex.getCause().getMessage()).append("\n");;
             for (StackTraceElement stackTraceElement : stackTraceElements) {
-                if (stackTraceElement.getClassName().contains("muiboot")){
-                    error.append("{class:").append(stackTraceElement.getClassName()).append(",");
-                    error.append("method:").append(stackTraceElement.getMethodName()).append(",");
-                    error.append("line:").append(stackTraceElement.getLineNumber()).append("}");
-                    log.error(error.toString());
-                    error.delete(0,error.length());
-                }
+                error.append("at :").append(stackTraceElement.getClassName()).append(",");
+                error.append("method:").append(stackTraceElement.getMethodName()).append(",");
+                error.append("line:").append(stackTraceElement.getLineNumber()).append("");
+                error.append("\n");
             }
+            log.error(error.toString());
         }
+    }
+    public void info(String message,String url){
+        long threadId=Thread.currentThread().getId();
+        info(message,url,threadId);
+    }
+    public void info(String message,String url,long threadId){
+        String userId="nouser";
+        Long user=ShiroUtil.getCurrentUserId();
+        if (user!=null){
+            userId=user.toString();
+        }
+        log.info("threadId:{},user:{},url:{},message:{}",threadId,userId,url,message);
     }
 }

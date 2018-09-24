@@ -135,7 +135,6 @@ public class GroupController extends BaseController{
 	@RequestMapping("group/update")
 	@ResponseBody
 	public ResponseBo updateGroup(SysGroup group) {
-		try {
 			if (StringUtils.isBlank(group.getValid())){
 				group.setValid("0");
 			}
@@ -144,9 +143,6 @@ public class GroupController extends BaseController{
 			}
 			this.groupService.updateGroup(group);
 			return ResponseBo.ok("修改组织机构成功！");
-		} catch (Exception e) {
-			e.printStackTrace();
-			return ResponseBo.error("修改组织机构失败，请联系网站管理员！");
-		}
+
 	}
 }

@@ -2,28 +2,22 @@ package com.muiboot.shiro.common.aspect;
 
 import java.lang.reflect.Method;
 import java.util.Date;
-import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 
 import javax.servlet.http.HttpServletRequest;
 
 import com.muiboot.shiro.common.annotation.Log;
-import com.muiboot.shiro.common.util.HttpContextUtils;
-import com.muiboot.shiro.common.util.IPUtils;
-import com.muiboot.shiro.common.util.ShiroUtil;
+import com.muiboot.shiro.common.util.*;
 import com.muiboot.shiro.common.util.exec.ExecutorsUtil;
 import com.muiboot.shiro.system.domain.SysLog;
 import com.muiboot.shiro.system.domain.User;
 import com.muiboot.shiro.system.service.LogService;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import org.apache.shiro.SecurityUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.LocalVariableTableParameterNameDiscoverer;
 import org.springframework.scheduling.annotation.Async;
@@ -31,12 +25,8 @@ import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import com.muiboot.shiro.common.util.AddressUtils;
-
 /**
  * AOP 记录用户操作日志
- * @link https://mrbird.cc/Spring-Boot-AOP%20log.html
- * @author MrBird
  */
 @Aspect
 @Component
@@ -47,9 +37,10 @@ public class LogAspect {
 
 	@Autowired
 	ObjectMapper mapper;
-	protected  final Logger logger = LoggerFactory.getLogger(this.getClass());
 
+	private static final LogUtil log = LogUtil.getLoger(LogAspect.class);
 
+	ExecutorService exeService= ExecutorsUtil.getInstance().getMultilThreadExecutor();
 	@Pointcut("@annotation(com.muiboot.shiro.common.annotation.Log)")
 	public void pointcut() {
 	}
@@ -70,7 +61,16 @@ public class LogAspect {
 		// 获取request
 		HttpServletRequest request = HttpContextUtils.getHttpServletRequest();
 		User user = ShiroUtil.getCurrentUser();
-		saveLog(point, time,request,user);
+		exeService.execute(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					saveLog(point, time,request,user);
+				} catch (JsonProcessingException e) {
+					log.error("记录保存失败",e,"");
+				}
+			}
+		});
 		return result;
 	}
 	@Async
