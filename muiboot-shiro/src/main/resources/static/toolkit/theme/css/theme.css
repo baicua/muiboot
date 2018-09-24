@@ -4,7 +4,7 @@ html {
     -webkit-tap-highlight-color: transparent;
 }
 *{font-size:9pt;border:0;margin:0;padding:0;}
-body{font-family:'微软雅黑'; margin:0 auto;min-width:980px;}
+body{font-family:'微软雅黑'; margin:0 auto;}
 .mb-header{
     background:url(../images/topbg.gif) repeat-x;
     height: 88px;
@@ -91,6 +91,11 @@ body{font-family:'微软雅黑'; margin:0 auto;min-width:980px;}
         transform: translate3d(-186px, 0, 0);
         -webkit-transform: translate3d(-186px, 0, 0);
         width: 186px;
+    }
+}
+@media screen and (max-width:992px) {
+    .mb-layout-admin .lefttop,.mb-layout-admin .topleft,.mb-layout-admin .topright{
+        display:none;
     }
 }
 .model{
