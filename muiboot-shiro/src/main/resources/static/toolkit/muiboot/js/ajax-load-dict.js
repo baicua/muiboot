@@ -113,7 +113,7 @@
                             ,(!placeholder?"":"placeholder="+placeholder)
                             ,' class="layui-input dic-tree-input">'].join(" ");
                         _ul =$('<ul id="'+id+'" class="layui-box layui-tree dic-tree-ul"></ul>');
-                        _cancel = $('<i class="layui-icon layui-icon-close-fill dic-tree-close"></i>');
+                        _cancel = $('<i class="layui-icon layui-icon-close-fill  mb-close dic-tree-close"></i>');
                         $this.after(_ul).after(_cancel).after(_input),$this.hide();
                         $input=$this.siblings(".dic-tree-input");
                         $ul=$this.siblings(".dic-tree-ul");

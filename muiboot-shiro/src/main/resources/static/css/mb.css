@@ -106,6 +106,9 @@
     border-color: #1E9FFF;
     color: #1E9FFF;
 }
+.mb-close:hover{
+    color: #3f97c9;
+}
 /*按钮组*/
 .mb-btn-group {
     display: inline-block;
