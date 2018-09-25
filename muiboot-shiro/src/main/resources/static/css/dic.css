@@ -1,0 +1,13 @@
+/**
+   #框架样式
+ */
+@charset "UTF-8";
+/*字典样式*/
+.DIC_DISABLE_0{
+    color: red;
+    border-bottom: 1px dashed;
+}
+.DIC_DISABLE_1{
+    color: #67d100;
+    border-bottom: 1px dashed;
+}
