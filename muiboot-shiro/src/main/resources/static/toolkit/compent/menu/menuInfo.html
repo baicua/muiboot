@@ -3,8 +3,8 @@
         <colgroup><col width="150"><col width="200"><col width="150"><col width="200"></colgroup>
         <tbody>
         <tr><th>菜单ID</th><td>{{ d.menuId||'/' }}</td><th>菜单名称</th><td>{{ d.menuName||'/'}}</td></tr>
-        <tr><th>上级菜单</th><td><span class="dic-text" dic-map="menuData">{{ d.parentId||'/' }}</span></td><th>权限描述</th><td>{{ d.perms||'/' }}</td></tr>
-        <tr><th>菜单类型</th><td><span class="dic-text" dic-map="menuType">{{ d.type||'/' }}</span></td><th>菜单图标</th><td>{{ d.icon||'/' }}</td></tr>
+        <tr><th>上级菜单</th><td><span class="dic-text" dic-map="DIC_MENU_DATA">{{ d.parentId||'/' }}</span></td><th>权限描述</th><td>{{ d.perms||'/' }}</td></tr>
+        <tr><th>菜单类型</th><td><span class="dic-text" dic-map="DIC_MENU_TYPE">{{ d.type||'/' }}</span></td><th>菜单图标</th><td>{{ d.icon||'/' }}</td></tr>
         <tr><th>菜单地址</th><td>{{ d.url||'/' }}</td><th>菜单排序</th><td>{{ d.orderNum||'/' }}</td></tr>
         </tbody>
     </table>

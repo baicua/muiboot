@@ -5,7 +5,7 @@
     layui.use(['element', 'laytpl','form','dict'], function () {
         element = layui.element,form = layui.form,laytpl = layui.laytpl,dict=layui.dict;
         element.init();
-        dict.load("dicType,yesOrNo,valid,dicCategoryTree,dicCategoryTable");
+        dict.load("DIC_DIC_TYPE,DIC_YESORNO,DIC_VALID,DIC_CATEGORY_TREE,DIC_CATEGORY_TABLE");
         form.render();
     });
     setTimeout(function(){

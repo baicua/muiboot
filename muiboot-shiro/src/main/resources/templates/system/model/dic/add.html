@@ -5,7 +5,7 @@
             <div class="layui-col-md6 layui-col-xs12">
                 <label class="layui-form-label">上级字典:</label>
                 <div class="layui-input-block">
-                    <input type="text" name="parentId" dic-map="dicCategoryTree" value="{{d.parentId||''}}"placeholder="请选择上级字典" class="layui-input dic-tree">
+                    <input type="text" name="parentId" dic-map="DIC_CATEGORY_TREE" value="{{d.parentId||''}}"placeholder="请选择上级字典" class="layui-input dic-tree">
                     <input type="text" name="dicId"value="{{d.dicId||''}}" hidden>
                 </div>
             </div>
@@ -26,7 +26,7 @@
             <div class="layui-col-md6 layui-col-xs12">
                 <label class="layui-form-label" lable-verify="required">字典类型:</label>
                 <div class="layui-input-block">
-                    <select lay-verify="required" lay-filter="dicType" name="dicType" dic-map="dicType" dic-value="{{d.dicType||''}}"placeholder="请选择字典类型" class="layui-input dic-map"></select>
+                    <select lay-verify="required" lay-filter="dicType" name="dicType" dic-map="DIC_DIC_TYPE" dic-value="{{d.dicType||''}}"placeholder="请选择字典类型" class="layui-input dic-map"></select>
                 </div>
             </div>
         </div>
@@ -44,7 +44,7 @@
                 </div>
             </div>
         </div>
-        <div class="layui-row {{d.dicType=='SIMPLE'?'':'hidden'}}">
+        <div class="layui-row {{d.dicType=='SIMPLE'||d.dicType=='URLDIC'?'':'hidden'}}">
             <div class="layui-col-md12 layui-col-xs12">
                 <label class="layui-form-label" lable-verify="required">字典内容:</label>
                 <div class="layui-input-block">
@@ -52,7 +52,7 @@
                 </div>
             </div>
         </div>
-        <div class="layui-row {{d.dicType!='SIMPLE'?'':'hidden'}}">
+        <div class="layui-row {{d.dicType=='SQLDIC'||d.dicType=='TREEDIC'?'':'hidden'}}">
             <div class="layui-col-md12 layui-col-xs12">
                 <label class="layui-form-label" lable-verify="required">字典SQL:</label>
                 <div class="layui-input-block">

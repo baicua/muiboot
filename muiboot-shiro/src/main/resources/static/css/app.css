@@ -263,3 +263,6 @@ input.layui-form-danger[type=radio] + div.layui-form-radio>i{
   -moz-opacity: .7;
   opacity: 0.7;
 }
+.layui-form-switch{
+ margin-top: 0px;
+}
