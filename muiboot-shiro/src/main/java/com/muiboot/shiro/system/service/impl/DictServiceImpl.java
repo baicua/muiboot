@@ -167,22 +167,6 @@ public class DictServiceImpl extends BaseService<SysDic> implements DictService 
 		}
 		return res;
 	}
-	@Cacheable(value="dicCache",key="'ALLDIC'")
-	private Map<String,Object> getAllDicMap() {
-		List<SysDic> dics=this.getAllDics();
-		Map<String,Object> res=null;
-		if (CollectionUtils.isNotEmpty(dics)){
-			res=new LinkedHashMap();
-			for (int i=0,l=dics.size();i<l;i++){
-				Object dicMap = this.buildDicList(dics.get(i));
-				if (null!=dicMap){
-					res.put(dics.get(i).getDicKey(),dicMap);
-				}
-			}
-		}
-		return res;
-	}
-
 	@Override
 	public Map nativeSelectBySQL(String msql) {
 		if (StringUtils.isBlank(msql))return null;

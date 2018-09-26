@@ -7,7 +7,7 @@
     var element=layui.element;
     var url="/session/getUserMenu",has=$MB.hasHistoryApi();
     function loadmenu(usename) {
-        $MB.layerGet({url:url,data:{ "userName": usename}},function (r) {
+        $MB.layerGet({url:url,data:{ "userName": usename},cache:true},function (r) {
             if (r.code == 0) {
                 var $navigation=$("#navigation");
                 var $maincontent=$("#main-content");

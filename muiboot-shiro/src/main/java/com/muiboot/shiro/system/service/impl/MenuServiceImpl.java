@@ -12,6 +12,7 @@ import com.muiboot.shiro.system.service.RoleMenuServie;
 import com.muiboot.shiro.system.service.RoleService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -109,6 +110,7 @@ public class MenuServiceImpl extends BaseService<Menu> implements MenuService {
 	}
 
 	@Override
+	@Cacheable(value="sessionCache",key="#userName")
 	public LayerTree<Menu> getUserMenu(String userName) {
 		List<LayerTree<Menu>> trees = new ArrayList<>();
 		List<Menu> menus = this.findUserMenus(userName);
