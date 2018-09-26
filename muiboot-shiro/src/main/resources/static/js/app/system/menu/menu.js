@@ -5,7 +5,7 @@
     setTimeout(function(){
         layui.use(['element', 'laytpl','form',"dict","tree"], function () {
             element = layui.element,form = layui.form,laytpl = layui.laytpl,dict=layui.dict;
-            dict.load("DIC_MENU_TYPE,DIC_MENU_DATA,DIC_MENU_DATA");
+            dict.load("DIC_MENU_TYPE,DIC_MENU_DATA,DIC_MENU_TREE");
             element.init();
             menuMethod.resetTree('#menuTree');
             form.render();
