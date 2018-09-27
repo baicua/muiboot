@@ -1,0 +1,18 @@
+{{# if (d.children){ }}
+<ul class="layui-box layui-tree"></ul>
+{{# }else{ }}
+<table class="layui-table layui-anim layui-anim-up" lay-size="sm">
+    <colgroup><col width="150"><col width="200"><col width="150"><col width="200"></colgroup>
+    <thead><tr><th>字典KEY</th><th>字典VALUE</th><th>字典KEY</th><th>字典VALUE</th></tr></thead>
+    <tbody>
+    {{#  var index=0 }}
+    {{#  layui.each(d, function(key, value){ }}
+    {{# if (index%2==0){ }}<tr>{{# }; }}
+    <td>{{ key}}</td><td>{{value }}</td>
+    {{# if (index%2==1){ }}</tr>{{# }; }}
+    {{#  index+=1 }}
+    {{#  }); }}
+    {{# if (index>0&&index%2==0){ }}</tr>{{# }; }}
+    </tbody>
+</table>
+{{# }; }}

@@ -40,4 +40,8 @@ public class ModelController  extends BaseController {
     public String groupRoute(@PathVariable(name = "file") String file) {
         return "system/model/group/"+file;
     }
+    @RequestMapping("user/{file}")
+    public String userRoute(@PathVariable(name = "file") String file) {
+        return "system/model/user/"+file;
+    }
 }
