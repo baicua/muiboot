@@ -29,10 +29,10 @@
   		LEFT JOIN M_GROUP D ON(U.GROUP_ID = D.GROUP_ID AND D.GROUP_TYPE='2')
   		WHERE 1=1
   		<if test="username != null and username != ''">
-        	AND U.USERNAME = #{username}
+        	AND U.USERNAME  LIKE '%' #{username} '%'
 	    </if>
 	  <if test="realName != null and realName != ''">
-		  AND U.REAL_NAME = #{realName}
+		  AND U.REAL_NAME LIKE '%' #{realName} '%'
 	  </if>
 	    <if test="organId != null and organId != ''">
 	        AND D.PARENT_ID = #{organId}
@@ -44,13 +44,10 @@
 		  AND U.STATUS = #{status}
 	  </if>
 	  <if test="mobile != null and mobile != ''">
-		  AND U.MOBILE = #{mobile}
+		  AND U.MOBILE  LIKE '%' #{mobile} '%'
 	  </if>
   		<if test="ssex != null and ssex != ''">
 	        AND U.SSEX = #{ssex}
-	    </if>
-	    <if test="status != null and status != ''">
-	        AND U.STATUS = #{status}
 	    </if>
   		order by U.USER_ID
   </select>

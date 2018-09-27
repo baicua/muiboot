@@ -46,7 +46,7 @@ public class User extends BaseModel implements Serializable{
 	@ExportConfig(value = "登录名")
 	private String username;
 
-	/*真实姓名*/
+	/*真实名*/
 	@Column(name = "REAL_NAME")
 	@ExportConfig(value = "用户名")
 	private String realName;
@@ -73,7 +73,7 @@ public class User extends BaseModel implements Serializable{
 	private String mobile;
 
 	@Column(name = "STATUS")
-	@ExportConfig(value = "状态", convert = "s:0=锁定,1=有效")
+	@ExportConfig(value = "状态", convert = "s:0=禁用,1=启用")
 	private String status = STATUS_VALID;
 
 	@Column(name = "CRATE_TIME")

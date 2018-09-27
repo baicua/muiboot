@@ -35,11 +35,12 @@ public class LogUtil{
         if (user!=null){
             userId=user.toString();
         }
-        log.error("threadId:{},user:{},url:{},message:{},Exception:{},,Caused:{},errorMessage:{}",threadId,userId,url,message,ex.getClass(),ex.getCause().getClass(),ex.getCause().getMessage());
-        StackTraceElement[] stackTraceElements=ex.getCause().getStackTrace();
+        Throwable throwable=ex.getCause()==null?ex:ex.getCause();
+        log.error("threadId:{},user:{},url:{},message:{},Exception:{},,Caused:{},errorMessage:{}",threadId,userId,url,message,ex.getClass(),throwable.getClass(),throwable.getMessage());
+        StackTraceElement[] stackTraceElements=throwable.getStackTrace();
         if (null!=stackTraceElements){
             StringBuilder error = new StringBuilder("threadId:").append(threadId).append(",Caused by:");
-            error.append(ex.getCause().getClass()).append(":").append(ex.getCause().getMessage()).append("\n");;
+            error.append(throwable.getClass()).append(":").append(throwable.getMessage()).append("\n");;
             for (StackTraceElement stackTraceElement : stackTraceElements) {
                 error.append("at :").append(stackTraceElement.getClassName()).append(",");
                 error.append("method:").append(stackTraceElement.getMethodName()).append(",");

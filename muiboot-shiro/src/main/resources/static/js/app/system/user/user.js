@@ -3,6 +3,9 @@
     var table,dict,form;
     layui.use(['dict','table'], function(){
         table = layui.table,dict=layui.dict,form=layui.form;
+        dict.load("DIC_ORGAN_TREE,DIC_SEX,DIC_DISABLE,DIC_DEPT_URL");
+        dict.render();
+        form.render();
         table.render({
             id: 'lay-user-list'
             ,elem: '#userList'
@@ -13,20 +16,24 @@
             ,skin:"line"
             ,cols: [[
                 {type:'checkbox'}
-                ,{field: 'userId', title: 'userId'}
+                ,{field: 'userId', title: 'userId',hide:true}
                 ,{field:'username', title: '用户名'}
-                ,{field:'realName',  title: '真实姓名'}
+                ,{field:'realName',  title: '真实名'}
                 ,{field:'organId',  title: '所属机关'}
                 ,{field:'groupName',  title: '所属部门'}
                 ,{field:'email', title: '邮箱'}
                 ,{field:'mobile', title: '手机号'}
-                ,{field:'ssex', title: '性别'}
-                ,{field:'status', title: '状态'}
-            ]]
+                ,{field:'ssex', title: '性别',templet: function(d){
+                    return '<span class="dic-text" dic-map="DIC_SEX">'+ d.ssex +'</span>';
+                }}
+                ,{field:'status', title: '状态',templet: function(d){
+                    return '<span class="dic-text" dic-map="DIC_DISABLE">'+ d.status +'</span>';
+                }}
+            ]],
+            done: function(res, curr, count){
+                dict.render($('.layui-table [dic-map]'));
+            }
         });
-        dict.load("DIC_ORGAN_TREE,DIC_DISABLE,DIC_DEPT_URL");
-        dict.render();
-        form.render();
         form.on('submit(search)', function($data){
             var data = $data.field;
             delete data["ignore-form"];
@@ -43,7 +50,7 @@
                 "organId": ""
                 ,"ignore-form": ""
                 ,"deptId": ""
-                ,"valid": ""
+                ,"status": ""
                 ,"username": ""
                 ,"realName":  ""
                 ,"mobile": ""
