@@ -172,7 +172,7 @@
         var setting =key&&get(key);
         if(parent.length>0&&setting){
             if(isInit){
-                resetMap(setting,parent.val()||"");
+                resetMap($this,parent.val()||"");
             }else {
                 $this.addClass("dic-finish");
                 parent.on("change",function () {

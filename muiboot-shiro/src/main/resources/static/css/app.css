@@ -194,6 +194,8 @@ input.layui-form-danger[type=radio] + div.layui-form-radio>i{
   width: 99%;
   background-color: #ffffff;
   border-color: #C9C9C9;
+  height: 222px;
+  overflow-y: auto;
 }
 .dic-tree-ul.layui-tree ul li:hover {
   background-color: #f8f8f8;
