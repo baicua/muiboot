@@ -12,6 +12,7 @@ import com.muiboot.shiro.system.service.DicCacheService;
 import com.muiboot.shiro.system.service.DictService;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.MapUtils;
+import org.apache.commons.lang.BooleanUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
@@ -130,6 +131,7 @@ public class DictServiceImpl extends BaseService<SysDic> implements DictService 
 
 	@Override
 	@Transactional
+	@CacheEvict(value="dicCache",key="'ALLDIC'")
 	public void add(SysDic dic) {
 		dic.setCreateDate(new Date());
 		dic.setUpdateDate(new Date());
@@ -251,6 +253,10 @@ public class DictServiceImpl extends BaseService<SysDic> implements DictService 
 					tree.setIcon(icon.toString());
 				}
 			}
+			Object hasChecked=map.get("hasChecked");
+			if (null!=hasChecked){
+				tree.setHasChecked(BooleanUtils.toBoolean(((Long) hasChecked).intValue()));
+			}
 			trees.add(tree);
 		}
 	}
@@ -267,6 +273,7 @@ public class DictServiceImpl extends BaseService<SysDic> implements DictService 
 	}
 	@Override
 	@Transactional
+	@CacheEvict(value="dicCache",key="'ALLDIC'")
 	public void deleteDicts(String dictIds) {
 		List<String> list = Arrays.asList(dictIds.split(","));
 		this.batchDelete(list, "dicId", SysDic.class);

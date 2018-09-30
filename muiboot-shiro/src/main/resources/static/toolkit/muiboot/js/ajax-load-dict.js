@@ -12,17 +12,26 @@
             $("body").removeClass("tree-body");
         }
     });
+    var dicArray= new Array;
     var defaultNode=function ($this,nodes,id) {
+        var success=false;
         layui.each(nodes, function(index, item){
             var hasChild = item.children && item.children.length > 0;
+            dicArray.push(item.name);
             if(item.id===id){
                 var $inputshow=$this.siblings(".dic-tree-input");
-                $inputshow.length>0&&($inputshow[0].value=item.name),$this.val(item.id);
-                return;
+                $inputshow.length>0&&($inputshow[0].value=dicArray.join("/")),$this.val(item.id);
+                dicArray.length=0;
+                success=true;
+                return true;
             }else if(hasChild){
-                 defaultNode($this,item.children,id);
+                if(defaultNode($this,item.children,id)) return true;
+            }else {
+                dicArray.pop();
             }
         });
+        dicArray.pop();
+        return success;
     };
     var data={};
     var storage=window.localStorage;
@@ -150,7 +159,11 @@
             if(!!value)defaultNode($this,nodes,value);
             $ul.empty();
             layui.tree({elem: "#"+$this.attr("treeId"),nodes:nodes,click: function(node){
-                $input.val(node.name||''),$this.val(node.id).change(),$input.toggleClass("show-tree"), $("body").toggleClass("tree-body");
+                if(!node.hasChecked){
+                    return false;
+                }
+                defaultNode($this,nodes,node.id);
+                $this.val(node.id).change(),$input.toggleClass("show-tree"), $("body").toggleClass("tree-body");
             }
             });
         }

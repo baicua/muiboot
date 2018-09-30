@@ -191,11 +191,15 @@ input.layui-form-danger[type=radio] + div.layui-form-radio>i{
   color: #e8e8e8;
   position: absolute;
   z-index: 999;
-  width: 99%;
   background-color: #ffffff;
   border-color: #C9C9C9;
-  height: 222px;
+  height: 200px;
   overflow-y: auto;
+  right: 0px;
+  left: 0px;
+}
+.layui-form-select dl{
+  top: 25px;
 }
 .dic-tree-ul.layui-tree ul li:hover {
   background-color: #f8f8f8;
@@ -254,10 +258,13 @@ input.layui-form-danger[type=radio] + div.layui-form-radio>i{
   overflow-y: visible;
 }
 .layui-tree.dic-tree-ul li ul {
-  margin-left: 0px;
+  left: 0px;
 }
-.layui-tree.dic-tree-ul li ul a{
-  margin-left: 22px;
+.layui-tree li>a {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 13px;
 }
 .layui-nav-itemed>.layui-nav-child {
   background-color: #163152!important;

@@ -32,6 +32,11 @@ public class LayerTree<T> implements Serializable{
 	 * 节点是否被选中 true false
 	 */
 	private boolean checked = false;
+
+	/**
+	 * 节点是否可以点击
+	 */
+	private boolean hasChecked = true;
 	/**
 	 * 节点属性
 	 */
@@ -154,8 +159,16 @@ public class LayerTree<T> implements Serializable{
 		this.hasChildren = hasChildren;
 	}
 
+	public boolean isHasChecked() {
+		return hasChecked;
+	}
+
+	public void setHasChecked(boolean hasChecked) {
+		this.hasChecked = hasChecked;
+	}
+
 	public LayerTree(String id, String name, Map<String, Object> state, boolean spread, boolean checked, Map<String, Object> attributes,
-                     List<LayerTree<T>> children, String icon, String href, boolean isParent, boolean isChildren, String parentID) {
+					 List<LayerTree<T>> children, String icon, String href, boolean isParent, boolean isChildren, String parentID) {
 		super();
 		this.id = id;
 		this.name = name;

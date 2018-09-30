@@ -26,15 +26,14 @@ public class User extends BaseModel implements Serializable{
 	public static final String DEFAULT_THEME = "green";
 
 	public static final String DEFAULT_AVATAR = "default.jpg";
-
 	/**
 	 * 性别
 	 */
-	public static final String SEX_MALE = "0";
+	public static final String SEX_MALE = "1";
 
-	public static final String SEX_FEMALE = "1";
+	public static final String SEX_FEMALE = "2";
 
-	public static final String SEX_UNKNOW = "2";
+	public static final String SEX_UNKNOW = "0";
 
 	@Id
 	@GeneratedValue(generator = "JDBC")
@@ -74,7 +73,7 @@ public class User extends BaseModel implements Serializable{
 
 	@Column(name = "STATUS")
 	@ExportConfig(value = "状态", convert = "s:0=禁用,1=启用")
-	private String status = STATUS_VALID;
+	private String status;
 
 	@Column(name = "CRATE_TIME")
 	@ExportConfig(value = "创建时间", convert = "c:com.muiboot.shiro.common.util.poi.convert.TimeConvert")

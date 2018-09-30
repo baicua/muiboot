@@ -45,7 +45,7 @@ public class UserController extends BaseController {
 	@ResponseBody
 	public ResponseBo getUser(Long userId) {
 		try {
-			User user = this.userService.findById(userId);
+			User user = this.userService.selectByKey(userId);
 			return ResponseBo.ok(user);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -119,10 +119,12 @@ public class UserController extends BaseController {
 	@ResponseBody
 	public ResponseBo addUser(User user, Long[] roles) {
 		try {
-			if (ON.equalsIgnoreCase(user.getStatus()))
-				user.setStatus(User.STATUS_VALID);
-			else
+			if (StringUtils.isBlank(user.getSsex())){
+				user.setSsex(User.SEX_FEMALE);
+			}
+			if (StringUtils.isBlank(user.getStatus())){
 				user.setStatus(User.STATUS_LOCK);
+			}
 			this.userService.addUser(user, roles);
 			return ResponseBo.ok("新增用户成功！");
 		} catch (Exception e) {
@@ -137,10 +139,12 @@ public class UserController extends BaseController {
 	@ResponseBody
 	public ResponseBo updateUser(User user, Long[] rolesSelect) {
 		try {
-			if (ON.equalsIgnoreCase(user.getStatus()))
-				user.setStatus(User.STATUS_VALID);
-			else
+			if (StringUtils.isBlank(user.getSsex())){
+				user.setSsex(User.SEX_FEMALE);
+			}
+			if (StringUtils.isBlank(user.getStatus())){
 				user.setStatus(User.STATUS_LOCK);
+			}
 			this.userService.updateUser(user, rolesSelect);
 			return ResponseBo.ok("修改用户成功！");
 		} catch (Exception e) {

@@ -13,6 +13,7 @@ import com.muiboot.shiro.system.domain.UserRole;
 import com.muiboot.shiro.system.domain.UserWithRole;
 import com.muiboot.shiro.system.service.UserRoleService;
 import com.muiboot.shiro.system.service.UserService;
+import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -88,12 +89,16 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
 		user.setCrateTime(new Date());
 		user.setTheme(User.DEFAULT_THEME);
 		user.setAvatar(User.DEFAULT_AVATAR);
-		user.setPassword(MD5Utils.encrypt(user.getUsername(), user.getPassword()));
+		if (StringUtils.isBlank(user.getPassword())){
+			user.setPassword("111111");
+		}
+		user.setPassword(MD5Utils.encrypt(user.getUsername(),user.getPassword()));
 		this.save(user);
 		setUserRoles(user, roles);
 	}
 
 	private void setUserRoles(User user, Long[] roles) {
+		if (null==roles)return;
 		for (Long roleId : roles) {
 			UserRole ur = new UserRole();
 			ur.setUserId(user.getUserId());
@@ -109,9 +114,9 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
 		user.setUsername(null);
 		user.setModifyTime(new Date());
 		this.updateNotNull(user);
-		Example example = new Example(UserRole.class);
-		example.createCriteria().andCondition("user_id=", user.getUserId());
-		this.userRoleMapper.deleteByExample(example);
+		//Example example = new Example(UserRole.class);
+		//example.createCriteria().andCondition("user_id=", user.getUserId());
+		//this.userRoleMapper.deleteByExample(example);
 		setUserRoles(user, roles);
 	}
 
