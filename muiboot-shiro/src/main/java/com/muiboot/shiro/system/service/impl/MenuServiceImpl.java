@@ -54,7 +54,7 @@ public class MenuServiceImpl extends BaseService<Menu> implements MenuService {
 		List<Menu> menus=null;
 		if(User.SUPPER_USER.equals(userName)){
 			Example example = new Example(Menu.class);
-			example.createCriteria().andEqualTo("userName",userName);
+			example.createCriteria().andEqualTo("type",Menu.TYPE_MENU);
 			menus=menuMapper.selectByExample(example);
 		}else{
 			menus=this.menuMapper.findUserMenus(userName);

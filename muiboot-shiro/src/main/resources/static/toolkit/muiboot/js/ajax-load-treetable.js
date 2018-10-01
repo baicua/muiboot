@@ -15,9 +15,6 @@
         ,branch: ['&#xe622;', '&#xe624;'] //父节点
         ,leaf: '&#xe621;' //叶节点
     };
-    $("body").on("click",".mb-tree-checkbox",function (e) {
-        $(this).toggleClass("mb-checked");
-    });
     //初始化
     Tree.prototype.init = function(elem){
         var that = this;
@@ -30,12 +27,13 @@
     };
 
     //树节点解析
-    Tree.prototype.tree = function(elem, children){
+    Tree.prototype.tree = function(elem, children,tindex){
         var that = this, options = that.options
         var nodes = children || options.nodes;
-        var tindex=tindex||'0';
+        var tindex=tindex||'treeindex';
         layui.each(nodes, function(index, item){
             var hasChild = item.children && item.children.length > 0;
+            var thisIndex=[tindex,item.id].join("-");
             var ul = $('<ul class="'+ (item.spread ? "layui-show" : "") +'"></ul>');
             var li = $(['<li '+ (item.spread ? 'data-spread="'+ item.spread +'"' : '') +'>'
                 //展开箭头
@@ -47,7 +45,7 @@
 
                 //复选框/单选框
                 ,function(){
-                    return options.check ? ('<input type="checkbox" name="checkNodes" value="'+item.id+'" lay-skin="primary">') : '';
+                    return options.check ? ('<input type="checkbox" treeIndex="'+thisIndex+'" name="checkNodes" '+(item.checked?"checked":"")+' value="'+item.id+'" lay-filter="treeBox" lay-skin="primary">') : '';
                 }()
 
                 //节点
@@ -61,7 +59,8 @@
                     if(!!item.attributes){
                         var checkBoxs=new Array;
                         layui.each(item.attributes, function(key, value){
-                            checkBoxs.push('<input type="checkbox" name="checkNodes" value="'+key+'" title='+value+' lay-skin="primary">');
+                            var checkboxIndex=[thisIndex,key].join("-");
+                            checkBoxs.push('<input type="checkbox" name="checkNodes" lay-filter="treeBox" treeIndex="'+checkboxIndex+'" '+(value.checked?"checked":"")+' value="'+key+'" title='+value.name+' lay-skin="primary">');
                         });
                         return checkBoxs.join("");
                     }else {
@@ -73,7 +72,7 @@
             //如果有子节点，则递归继续生成树
             if(hasChild){
                 li.append(ul);
-                that.tree(ul, item.children);
+                that.tree(ul, item.children,thisIndex);
             }
 
             elem.append(li);
@@ -201,6 +200,24 @@
             return hint.error('layui.treeTable 没有找到'+ options.elem +'元素');
         }
         tree.init(elem);
-        form.render();
+        form.on('checkbox(treeBox)', function(data){
+            var $this =$(data.elem);
+            var treeindex=$this.attr("treeindex");
+            if(treeindex&&treeindex!="undefined"){
+                $(".mb-tree-table").find('input[type="checkbox"][treeindex^="'+treeindex+'-"]').prop('checked', data.elem.checked);
+                if(data.elem.checked){
+                    var treeindexSplit=treeindex.split('-');
+                    if(treeindexSplit&&treeindexSplit.length>1){
+                        var treeindexP=new Array;
+                        for (var i=0;i<treeindexSplit.length-1;i++){
+                            treeindexP.push(treeindexSplit[i]);
+                            $(".mb-tree-table").find('input[type="checkbox"][treeindex="'+treeindexP.join("-")+'"]').prop('checked', data.elem.checked);
+                        }
+                    }
+                }
+            }
+            form.render('checkbox');
+        });
+        form.render('checkbox');
     });
 });

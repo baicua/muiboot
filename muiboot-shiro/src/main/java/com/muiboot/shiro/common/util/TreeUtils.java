@@ -22,7 +22,7 @@ public class TreeUtils {
 				String id = parent.getId();
 				if (id != null && id.equals(pid)) {
 					if ("attribute".equals(children.getLevel())){
-						parent.getAttributes().put(children.getId(),children.getName());
+						parent.getAttributes().put(children.getId(),children);
 					}else {
 						parent.getChildren().add(children);
 						children.setHasParent(true);
