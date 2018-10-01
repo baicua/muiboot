@@ -29,6 +29,14 @@ public class Role extends BaseModel implements Serializable {
 	@ExportConfig(value = "角色KEY")
 	private String roleKey;
 
+	@Column(name = "ROLE_LEVEL")
+	@ExportConfig(value = "角色级别")
+	private Integer roleLevel=0;//0:全局角色，1机关角色
+
+	@Column(name = "GROUP_ID")
+	@ExportConfig(value = "描述")
+	private Long groupId=0L;//机关ID
+
 	@Column(name = "REMARK")
 	@ExportConfig(value = "描述")
 	private String remark;
@@ -88,6 +96,22 @@ public class Role extends BaseModel implements Serializable {
 	 */
 	public void setRemark(String remark) {
 		this.remark = remark == null ? null : remark.trim();
+	}
+
+	public Integer getRoleLevel() {
+		return roleLevel;
+	}
+
+	public void setRoleLevel(Integer roleLevel) {
+		this.roleLevel = roleLevel;
+	}
+
+	public Long getGroupId() {
+		return groupId;
+	}
+
+	public void setGroupId(Long groupId) {
+		this.groupId = groupId;
 	}
 
 	/**

@@ -6,8 +6,10 @@ import java.util.Date;
 import java.util.List;
 
 import com.muiboot.shiro.common.service.impl.BaseService;
+import com.muiboot.shiro.common.util.ShiroUtil;
 import com.muiboot.shiro.system.domain.RoleMenu;
 import com.muiboot.shiro.system.domain.RoleWithMenu;
+import com.muiboot.shiro.system.domain.User;
 import com.muiboot.shiro.system.service.RoleService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,10 +48,13 @@ public class RoleServiceImpl extends BaseService<Role> implements RoleService {
 	@Override
 	public List<Role> findAllRole(Role role) {
 		try {
+			User user = ShiroUtil.getCurrentUser();
 			Example example = new Example(Role.class);
+			Example.Criteria criteria=example.createCriteria();
 			if (StringUtils.isNotBlank(role.getRoleName())) {
-				example.createCriteria().andCondition("role_name=", role.getRoleName());
+				criteria.andCondition("role_name=", role.getRoleName());
 			}
+			criteria.andCondition("group_id=role_level*", user.getOrganId());
 			example.setOrderByClause("create_time");
 			return this.selectByExample(example);
 		} catch (Exception e) {

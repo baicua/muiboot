@@ -9,9 +9,11 @@ import com.muiboot.shiro.common.exception.BusinessException;
 import com.muiboot.shiro.common.service.impl.BaseService;
 import com.muiboot.shiro.common.util.MD5Utils;
 import com.muiboot.shiro.system.dao.UserMapper;
+import com.muiboot.shiro.system.domain.SysGroup;
 import com.muiboot.shiro.system.domain.User;
 import com.muiboot.shiro.system.domain.UserRole;
 import com.muiboot.shiro.system.domain.UserWithRole;
+import com.muiboot.shiro.system.service.GroupService;
 import com.muiboot.shiro.system.service.UserRoleService;
 import com.muiboot.shiro.system.service.UserService;
 import org.apache.commons.lang.StringUtils;
@@ -37,15 +39,22 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
 	@Autowired
 	private UserRoleService userRoleService;
 
+	@Autowired
+	private GroupService groupService;
+
 	@Override
 	public User findByName(String userName) {
 		Example example = new Example(User.class);
-		example.createCriteria().andCondition("lower(username)=", userName.toLowerCase());
+		example.createCriteria().andCondition("username=", userName.toLowerCase());
 		List<User> list = this.selectByExample(example);
 		if (list.size() == 0) {
 			return null;
 		} else {
-			return list.get(0);
+			User user =list.get(0);
+			SysGroup group = groupService.findById(user.getGroupId());
+			user.setGroupName(group.getGroupName());
+			user.setOrganId(group.getParentId());
+			return user;
 		}
 	}
 

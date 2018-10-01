@@ -9,6 +9,8 @@
     <result column="ROLE_NAME" jdbcType="VARCHAR" property="roleName" />
       <result column="ROLE_KEY" jdbcType="VARCHAR" property="roleKey" />
     <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+      <result column="ROLE_LEVEL" jdbcType="DECIMAL" property="roleLevel" />
+      <result column="GROUP_ID" jdbcType="DECIMAL" property="groupId" />
     <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
     <result column="MODIFY_TIME" jdbcType="TIMESTAMP" property="modifyTime" />
   </resultMap>
