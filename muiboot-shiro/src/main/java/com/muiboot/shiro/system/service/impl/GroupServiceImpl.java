@@ -62,7 +62,7 @@ public class GroupServiceImpl extends BaseService<SysGroup> implements GroupServ
 			if (StringUtils.isNotBlank(group.getGroupType())) {
 				criteria.andEqualTo("groupType",group.getGroupType());
 			}
-			example.setOrderByClause("group_id");
+			example.setOrderByClause("group_type desc,group_id");
 			return this.selectByExample(example);
 		} catch (Exception e) {
 			e.printStackTrace();

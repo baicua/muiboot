@@ -9,7 +9,6 @@
     }
     //2.初始化字典,菜单插件
     layui.extend({
-        dict: '/toolkit/muiboot/js/ajax-load-dict',
         menu: '/toolkit/muiboot/js/ajax-load-menu'
     });
     //3.hash监听事件
