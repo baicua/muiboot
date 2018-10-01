@@ -21,9 +21,13 @@ public class TreeUtils {
 			for (LayerTree<T> parent : nodes) {
 				String id = parent.getId();
 				if (id != null && id.equals(pid)) {
-					parent.getChildren().add(children);
-					children.setHasParent(true);
-					parent.setChildren(true);
+					if ("attribute".equals(children.getLevel())){
+						parent.getAttributes().put(children.getId(),children.getName());
+					}else {
+						parent.getChildren().add(children);
+						children.setHasParent(true);
+						parent.setChildren(true);
+					}
 					continue;
 				}
 			}
@@ -35,7 +39,7 @@ public class TreeUtils {
 		root.setParentId("");
 		root.setHasParent(false);
 		root.setChildren(true);
-		root.setChecked(true);
+		//root.setChecked(true);
 		root.setChildren(topNodes);
 		root.setName("根节点");
 		return root;

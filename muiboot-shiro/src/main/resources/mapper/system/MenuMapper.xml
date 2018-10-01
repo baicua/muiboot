@@ -35,6 +35,22 @@
         left join T_USER u on (u.USER_ID = ur.USER_ID)
         where u.USERNAME = #{userName}) order by m.ORDER_NUM
   </select>
+    <select id="findUserAuths" resultMap="menu">
+        select m.* from T_MENU m
+        where m.MENU_ID in
+        (select distinct rm.MENU_ID from T_ROLE_MENU rm
+        left join T_ROLE r on(rm.ROLE_ID = r.ROLE_ID)
+        left join T_USER_ROLE ur on(ur.ROLE_ID = r.ROLE_ID)
+        left join T_USER u on (u.USER_ID = ur.USER_ID)
+        where u.USERNAME = #{userName}) order by m.ORDER_NUM
+    </select>
+
+    <select id="findByRole" resultMap="menu">
+  	select m.* from T_MENU m
+  	    left join T_ROLE_MENU rm on(rm.MENU_ID = m.MENU_ID)
+  	    left join T_ROLE r on(rm.ROLE_ID = r.ROLE_ID)
+        where r.ROLE_ID = #{roleId}
+    </select>
   
    <update id="changeToTop" parameterType="java.util.List">
   	update T_MENU set PARENT_ID = 0 where MENU_ID in ( select a.MENU_ID from (

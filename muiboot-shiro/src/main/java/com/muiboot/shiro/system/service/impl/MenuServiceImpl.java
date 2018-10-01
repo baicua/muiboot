@@ -4,12 +4,16 @@ import java.util.*;
 
 import com.muiboot.shiro.common.layer.LayerTree;
 import com.muiboot.shiro.common.service.impl.BaseService;
+import com.muiboot.shiro.common.util.ShiroUtil;
 import com.muiboot.shiro.system.dao.MenuMapper;
 import com.muiboot.shiro.system.domain.Menu;
 import com.muiboot.shiro.system.domain.Role;
 import com.muiboot.shiro.system.domain.RoleWithMenu;
 import com.muiboot.shiro.system.service.RoleMenuServie;
 import com.muiboot.shiro.system.service.RoleService;
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections.ListUtils;
+import org.apache.commons.collections.SetUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
@@ -184,4 +188,35 @@ public class MenuServiceImpl extends BaseService<Menu> implements MenuService {
 		this.updateNotNull(menu);
 	}
 
+	@Override
+	public LayerTree<Menu> getAuthList(Long roleId) {
+		List<Menu> auths = this.menuMapper.findUserAuths(ShiroUtil.getCurrentUser().getUsername());
+		List<Menu> selects =null;
+		Set<Long> selectsMenuIds=new HashSet<>();
+		if (null!=roleId){
+			selects = this.menuMapper.findByRole(roleId);
+			if (CollectionUtils.isNotEmpty(selects)){
+				for (Menu m:selects){
+					selectsMenuIds.add(m.getMenuId());
+				}
+			}
+		}
+		List<LayerTree<Menu>> trees = new ArrayList<>();
+		for (Menu menu : auths) {
+			LayerTree<Menu> tree = new LayerTree<>();
+			tree.setId(menu.getMenuId().toString());
+			tree.setParentId(menu.getParentId().toString());
+			tree.setName(menu.getMenuName());
+			tree.setIcon(menu.getIcon());
+			tree.setHref(menu.getUrl());
+			if (selectsMenuIds.contains(menu.getMenuId())){
+				tree.setChecked(Boolean.TRUE);
+			}
+			if (Menu.TYPE_BUTTON.equals(menu.getType())){
+				tree.setLevel("attribute");
+			}
+			trees.add(tree);
+		}
+		return TreeUtils.build(trees);
+	}
 }

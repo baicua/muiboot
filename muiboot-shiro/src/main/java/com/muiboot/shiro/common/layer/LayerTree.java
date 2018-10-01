@@ -1,6 +1,7 @@
 package com.muiboot.shiro.common.layer;
 
 import com.alibaba.fastjson.JSON;
+import org.apache.commons.collections.map.HashedMap;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -40,7 +41,7 @@ public class LayerTree<T> implements Serializable{
 	/**
 	 * 节点属性
 	 */
-	private Map<String, Object> attributes;
+	private Map<String, Object> attributes=new HashedMap();
 
 	/**节点级别*/
 	private String level;

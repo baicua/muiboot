@@ -45,6 +45,12 @@ public class SessionController extends BaseController {
 		return ResponseBo.ok(this.menuService.getUserMenu(userName));
 	}
 
+	@RequestMapping("session/getAuthList")
+	@ResponseBody
+	public ResponseBo getAuthList(Long roleId) {
+		return ResponseBo.ok(this.menuService.getAuthList(roleId));
+	}
+
 	@ResponseBody
 	@RequiresPermissions("user:kickout")
 	@RequestMapping("session/forceLogout")

@@ -44,4 +44,9 @@ public class ModelController  extends BaseController {
     public String userRoute(@PathVariable(name = "file") String file) {
         return "system/model/user/"+file;
     }
+
+    @RequestMapping("role/{file}")
+    public String roleRoute(@PathVariable(name = "file") String file) {
+        return "system/model/role/"+file;
+    }
 }

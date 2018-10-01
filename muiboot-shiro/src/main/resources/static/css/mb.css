@@ -228,3 +228,55 @@
 .layui-table, .layui-table-view {
     margin: 2px 0;
 }
+
+/*树形表格*/
+.mb-unselect.mb-tree-checkbox> i{
+    color: #fff;
+    padding-left: 4px;
+}
+.mb-checked.mb-tree-checkbox> i{
+    border-color: #5FB878;
+    background-color: #5FB878;
+    color: #fff;
+}
+.mb-tree-checkbox{
+    position: relative;
+    cursor: pointer;
+    font-size: 0;
+    -webkit-transition: .1s linear;
+    transition: .1s linear;
+    box-sizing: border-box;
+    line-height: normal!important;
+    width: 18px;
+    height: 18px;
+    border: none!important;
+    margin-right: 0;
+    padding-left: 20px;
+    padding-right: 0;
+    background: 0 0;
+    display: inline-block;
+    vertical-align: middle;
+}
+.mb-tree-checkbox:hover i {
+    border-color: #5FB878;
+    color: #fff;
+}
+.mb-tree-checkbox i{
+    position: absolute;
+    text-align: center;
+    right: auto;
+    left: 0;
+    line-height: 14px;
+    border: 1px solid #d2d2d2;
+    font-size: 12px;
+    border-radius: 2px;
+    background-color: #fff;
+    -webkit-transition: .1s linear;
+    transition: .1s linear;
+}
+.mb-tree-table li ul{
+    margin-left: 35px;
+}
+.mb-tree-table .layui-form-checkbox i{
+    color: #fff;
+}

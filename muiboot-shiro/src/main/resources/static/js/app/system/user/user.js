@@ -68,7 +68,6 @@
         method.add();
     });
     $("#updBtn").on("click", function (r) {
-        debugger;
         method.update(table.checkStatus('lay-user-list'));
     });
     $("#expBtn").on("click", function (r) {
@@ -122,7 +121,7 @@
         };
         return {
             add: function () {
-                loadModel({status: 1, ssex: 1}, "新增用户", ctx + "user/add");
+                loadModel({status: 1, ssex: 1}, "新增角色", ctx + "user/add");
             },
             update: function (checkStatus) {
                 if (checkStatus.data.length !== 1) {

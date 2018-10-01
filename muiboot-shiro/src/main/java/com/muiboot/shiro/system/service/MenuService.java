@@ -37,4 +37,6 @@ public interface MenuService extends IService<Menu> {
 	void deleteMeuns(String menuIds);
 
 	Map findMenuDetail(Long menuId);
+
+	LayerTree<Menu> getAuthList(Long roleId);
 }

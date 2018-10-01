@@ -22,11 +22,11 @@ public class Role extends BaseModel implements Serializable {
 	private Long roleId;
 
 	@Column(name = "ROLE_NAME")
-	@ExportConfig(value = "角色")
+	@ExportConfig(value = "角色名称")
 	private String roleName;
 
 	@Column(name = "ROLE_KEY")
-	@ExportConfig(value = "角色KEY")
+	@ExportConfig(value = "角色编号")
 	private String roleKey;
 
 	@Column(name = "ROLE_LEVEL")
@@ -34,7 +34,7 @@ public class Role extends BaseModel implements Serializable {
 	private Integer roleLevel=0;//0:全局角色，1机关角色
 
 	@Column(name = "GROUP_ID")
-	@ExportConfig(value = "描述")
+	@ExportConfig(value = "角色所属机关")
 	private Long groupId=0L;//机关ID
 
 	@Column(name = "REMARK")
