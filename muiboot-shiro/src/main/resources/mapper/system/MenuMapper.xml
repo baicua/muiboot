@@ -23,17 +23,24 @@
         left join T_USER u on(u.USER_ID = ur.USER_ID)
         left join T_ROLE_MENU rm on(rm.ROLE_ID = r.ROLE_ID) 
         left join T_MENU m on(m.MENU_ID = rm.MENU_ID )
-        where u.USERNAME = #{userName} and m.PERMS is not null and m.PERMS &lt;&gt; ''
+        where 1=1
+      <if test="userName != null and userName != ''">
+          AND u.USERNAME = #{userName}
+      </if>
+        and m.PERMS is not null and m.PERMS &lt;&gt; ''
   </select>
   
   <select id="findUserMenus" resultMap="menu">
-  	select m.* from T_MENU m
-    where m.TYPE &lt;&gt; 1 and m.MENU_ID in
-        (select distinct rm.MENU_ID from T_ROLE_MENU rm
-		left join T_ROLE r on(rm.ROLE_ID = r.ROLE_ID)
-        left join T_USER_ROLE ur on(ur.ROLE_ID = r.ROLE_ID)
-        left join T_USER u on (u.USER_ID = ur.USER_ID)
-        where u.USERNAME = #{userName}) order by m.ORDER_NUM
+      select m.* from T_MENU m
+      where m.TYPE = 0 and m.MENU_ID in
+      (select distinct rm.MENU_ID from T_ROLE_MENU rm
+      left join T_ROLE r on(rm.ROLE_ID = r.ROLE_ID)
+      left join T_USER_ROLE ur on(ur.ROLE_ID = r.ROLE_ID)
+      left join T_USER u on (u.USER_ID = ur.USER_ID)
+      where 1=1
+      <if test="userName != null and userName != ''">
+          AND u.USERNAME = #{userName}
+      </if>)order by m.ORDER_NUM
   </select>
     <select id="findUserAuths" resultMap="menu">
         select m.* from T_MENU m
@@ -42,7 +49,11 @@
         left join T_ROLE r on(rm.ROLE_ID = r.ROLE_ID)
         left join T_USER_ROLE ur on(ur.ROLE_ID = r.ROLE_ID)
         left join T_USER u on (u.USER_ID = ur.USER_ID)
-        where u.USERNAME = #{userName}) order by m.ORDER_NUM
+        where 1=1
+        <if test="userName != null and userName != ''">
+            AND u.USERNAME = #{userName}
+        </if>
+        )order by m.ORDER_NUM
     </select>
 
     <select id="findByRole" resultMap="menu">

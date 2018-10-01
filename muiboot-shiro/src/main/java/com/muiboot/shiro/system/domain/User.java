@@ -26,6 +26,8 @@ public class User extends BaseModel implements Serializable{
 	public static final String DEFAULT_THEME = "green";
 
 	public static final String DEFAULT_AVATAR = "default.jpg";
+
+	public static final String SUPPER_USER = "admin";
 	/**
 	 * 性别
 	 */

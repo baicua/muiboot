@@ -4,14 +4,15 @@ import java.util.List;
 
 import com.muiboot.shiro.common.config.MyMapper;
 import com.muiboot.shiro.system.domain.Menu;
+import org.apache.ibatis.annotations.Param;
 
 public interface MenuMapper extends MyMapper<Menu> {
 	
-	List<Menu> findUserPermissions(String userName);
+	List<Menu> findUserPermissions(@Param(value = "userName")String userName);
 	
-	List<Menu> findUserMenus(String userName);
+	List<Menu> findUserMenus(@Param(value = "userName") String userName);
 
-	List<Menu> findUserAuths(String userName);
+	List<Menu> findUserAuths(@Param(value = "userName")String userName);
 
 	List<Menu> findByRole(Long roleId);
 

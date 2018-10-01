@@ -2,6 +2,7 @@ package com.muiboot.shiro.system.service.impl;
 
 import java.util.*;
 
+import com.muiboot.shiro.common.exception.BusinessException;
 import com.muiboot.shiro.common.layer.LayerTree;
 import com.muiboot.shiro.common.service.impl.BaseService;
 import com.muiboot.shiro.common.util.ShiroUtil;
@@ -9,6 +10,7 @@ import com.muiboot.shiro.system.dao.MenuMapper;
 import com.muiboot.shiro.system.domain.Menu;
 import com.muiboot.shiro.system.domain.Role;
 import com.muiboot.shiro.system.domain.RoleWithMenu;
+import com.muiboot.shiro.system.domain.User;
 import com.muiboot.shiro.system.service.RoleMenuServie;
 import com.muiboot.shiro.system.service.RoleService;
 import org.apache.commons.collections.CollectionUtils;
@@ -46,7 +48,18 @@ public class MenuServiceImpl extends BaseService<Menu> implements MenuService {
 
 	@Override
 	public List<Menu> findUserMenus(String userName) {
-		return this.menuMapper.findUserMenus(userName);
+		if(StringUtils.isBlank(userName)){
+			throw new BusinessException("用户名不能为空！");
+		}
+		List<Menu> menus=null;
+		if(User.SUPPER_USER.equals(userName)){
+			Example example = new Example(Menu.class);
+			example.createCriteria().andEqualTo("userName",userName);
+			menus=menuMapper.selectByExample(example);
+		}else{
+			menus=this.menuMapper.findUserMenus(userName);
+		}
+		return menus;
 	}
 
 	@Override
@@ -133,7 +146,7 @@ public class MenuServiceImpl extends BaseService<Menu> implements MenuService {
 	@Override
 	public Menu findByNameAndType(String menuName, String type) {
 		Example example = new Example(Menu.class);
-		example.createCriteria().andCondition("lower(menu_name)=", menuName.toLowerCase()).andEqualTo("type",
+		example.createCriteria().andCondition("menu_name=", menuName).andEqualTo("type",
 				Long.valueOf(type));
 		List<Menu> list = this.selectByExample(example);
 		if (list.size() == 0) {
@@ -190,7 +203,13 @@ public class MenuServiceImpl extends BaseService<Menu> implements MenuService {
 
 	@Override
 	public LayerTree<Menu> getAuthList(Long roleId) {
-		List<Menu> auths = this.menuMapper.findUserAuths(ShiroUtil.getCurrentUser().getUsername());
+		String userName = ShiroUtil.getCurrentUser().getUsername();
+		List<Menu> auths =null;
+		if(User.SUPPER_USER.equals(userName)){
+			auths=menuMapper.selectAll();
+		}else{
+			auths = this.menuMapper.findUserAuths(userName);
+		}
 		List<Menu> selects =null;
 		Set<Long> selectsMenuIds=new HashSet<>();
 		if (null!=roleId){

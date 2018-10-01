@@ -274,6 +274,11 @@
     -webkit-transition: .1s linear;
     transition: .1s linear;
 }
+.mb-tree-table li{
+    text-overflow: ellipsis;
+    overflow: auto;
+    white-space: normal;
+}
 .mb-tree-table li ul{
     margin-left: 35px;
 }
