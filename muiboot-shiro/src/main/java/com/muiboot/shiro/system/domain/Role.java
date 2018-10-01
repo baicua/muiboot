@@ -25,6 +25,10 @@ public class Role extends BaseModel implements Serializable {
 	@ExportConfig(value = "角色")
 	private String roleName;
 
+	@Column(name = "ROLE_KEY")
+	@ExportConfig(value = "角色KEY")
+	private String roleKey;
+
 	@Column(name = "REMARK")
 	@ExportConfig(value = "描述")
 	private String remark;
@@ -62,6 +66,14 @@ public class Role extends BaseModel implements Serializable {
 	 */
 	public void setRoleName(String roleName) {
 		this.roleName = roleName == null ? null : roleName.trim();
+	}
+
+	public String getRoleKey() {
+		return roleKey;
+	}
+
+	public void setRoleKey(String roleKey) {
+		this.roleKey = roleKey;
 	}
 
 	/**

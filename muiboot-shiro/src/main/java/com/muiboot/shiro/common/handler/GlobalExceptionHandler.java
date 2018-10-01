@@ -1,6 +1,7 @@
 package com.muiboot.shiro.common.handler;
 
 import com.muiboot.shiro.common.domain.ResponseBo;
+import com.muiboot.shiro.common.exception.BusinessException;
 import com.muiboot.shiro.common.util.LogUtil;
 import org.apache.shiro.authz.AuthorizationException;
 import org.apache.shiro.session.ExpiredSessionException;
@@ -26,6 +27,13 @@ public class GlobalExceptionHandler {
 		String url=req.getRequestURL().toString();
 		log.error("操作异常",ex,url);
 		return ResponseBo.error("操作失败，请联系管理员！");
+	}
+	@ExceptionHandler(value = BusinessException.class)
+	@ResponseBody
+	public ResponseBo handleBusinessException(BusinessException ex, HttpServletRequest req) {
+		String url=req.getRequestURL().toString();
+		log.error("操作异常",ex,url);
+		return ResponseBo.error(ex.getMessage());
 	}
 	@ExceptionHandler(value = AuthorizationException.class)
 	@ResponseBody

@@ -14,6 +14,7 @@
             ,cols: [[
                 {type:'checkbox'}
                 ,{field: 'roleId', title: 'roleId'}
+                ,{field:'roleKey', title: '角色编号'}
                 ,{field:'roleName', title: '角色名'}
                 ,{field:'remark',  title: '备注'}
                 ,{field:'createTime',  title: '创建时间'}

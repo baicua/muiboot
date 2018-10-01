@@ -118,19 +118,14 @@ public class UserController extends BaseController {
 	@RequestMapping("user/add")
 	@ResponseBody
 	public ResponseBo addUser(User user, Long[] roles) {
-		try {
-			if (StringUtils.isBlank(user.getSsex())){
-				user.setSsex(User.SEX_FEMALE);
-			}
-			if (StringUtils.isBlank(user.getStatus())){
-				user.setStatus(User.STATUS_LOCK);
-			}
-			this.userService.addUser(user, roles);
-			return ResponseBo.ok("新增用户成功！");
-		} catch (Exception e) {
-			e.printStackTrace();
-			return ResponseBo.error("新增用户失败，请联系网站管理员！");
+		if (StringUtils.isBlank(user.getSsex())){
+			user.setSsex(User.SEX_FEMALE);
 		}
+		if (StringUtils.isBlank(user.getStatus())){
+			user.setStatus(User.STATUS_LOCK);
+		}
+		this.userService.addUser(user, roles);
+		return ResponseBo.ok("新增用户成功！");
 	}
 
 	@Log("修改用户")

@@ -21,10 +21,3 @@
 <script data-th-src="@{/js/jquery.min.js}"></script>
 <!-- <![endif]-->
 <script data-th-inline="javascript">var ctx = [[@{/}]];</script>
-<script data-th-inline="javascript">
-    $(document).ready(function() {
-        layui.extend({
-            dict: '/toolkit/muiboot/js/ajax-load-dict' // {/}的意思即代表采用自有路径，即不跟随 base 路径
-        });
-    });
-</script>

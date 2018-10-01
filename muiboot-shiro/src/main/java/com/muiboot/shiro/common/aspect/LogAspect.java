@@ -53,7 +53,9 @@ public class LogAspect {
 			// 执行方法
 			result = point.proceed();
 		} catch (Throwable e) {
-			throw e.getCause();//异常抛给全局异常处理
+			Throwable cause=e.getCause();
+			if (null==cause)cause=e;
+			throw cause;//异常抛给全局异常处理
 		}
 		// 执行时长(毫秒)
 		long time = System.currentTimeMillis() - beginTime;
