@@ -202,6 +202,12 @@
                     return false;
                 }else {
                     put(r.msg);
+                    try {
+                        init();
+                    }catch(e) {
+                        console.error(e.message);
+                        return false;
+                    }
                 }
             })
         },

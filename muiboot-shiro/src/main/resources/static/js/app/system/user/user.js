@@ -3,7 +3,6 @@
     var table, dict, form, laytpl, layer;
     table = layui.table, dict = layui.dict, form = layui.form, laytpl = layui.laytpl, layer = layui.layer;
     dict.load("DIC_ORGAN_TREE,DIC_SEX,DIC_DISABLE,DIC_DEPT_URL,DIC_DEPT_TREE,DIC_ORGAN_TABLE");
-    dict.render();
     form.render();
     table.render({
         id: 'lay-user-list'
