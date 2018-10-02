@@ -10,6 +10,7 @@ import com.muiboot.shiro.common.service.impl.BaseService;
 import com.muiboot.shiro.common.util.ShiroUtil;
 import com.muiboot.shiro.system.domain.*;
 import com.muiboot.shiro.system.service.RoleService;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -100,6 +101,21 @@ public class RoleServiceImpl extends BaseService<Role> implements RoleService {
 	@Transactional
 	public void deleteRoles(String roleIds) {
 		List<String> list = Arrays.asList(roleIds.split(","));
+		Example example = new Example(Role.class);
+		Example.Criteria criteria=example.createCriteria();
+		criteria.andIn("roleId", list);
+		Long organId = ShiroUtil.getCurrentUser().getOrganId();
+		if (null!=organId){
+			criteria.andEqualTo("groupId",organId);
+		}
+		List<Role> roles=this.selectByExample(example);
+		if (CollectionUtils.isEmpty(roles)){
+			throw new BusinessException("您没有这些角色的删除权限！");
+		}
+		list.clear();
+		for (Role role:roles){
+			list.add(role.getRoleId().toString());
+		}
 		this.batchDelete(list, "roleId", Role.class);
 
 		this.roleMenuService.deleteRoleMenusByRoleId(roleIds);
@@ -145,6 +161,26 @@ public class RoleServiceImpl extends BaseService<Role> implements RoleService {
 		example.createCriteria().andCondition("role_id=", role.getRoleId());
 		this.roleMenuMapper.deleteByExample(example);
 		setRoleMenus(role, menuIds);
+	}
+
+	@Override
+	public void grant(Long[] userIds, Long[] roleIds) {
+		if (null==userIds||null==roleIds){
+			throw new BusinessException("授权用户或者角色不能为空！");
+		}
+		List<UserRole> userRoleList=new ArrayList<>();
+		for (Long userId :userIds){
+			for (Long roleId :roleIds){
+				UserRole userRole=new UserRole(userId,roleId);
+				List<UserRole> userRoles=userRoleService.findByEntity(userRole);
+				if (CollectionUtils.isEmpty(userRoles)){
+					userRoleList.add(userRole);
+				}
+			}
+		}
+		if (CollectionUtils.isNotEmpty(userRoleList)){
+			userRoleService.insertList(userRoleList);
+		}
 	}
 
 }

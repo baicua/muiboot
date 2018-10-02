@@ -16,6 +16,12 @@ public class UserRole implements Serializable{
 	@Column(name = "ROLE_ID")
 	private Long roleId;
 
+	public UserRole(Long userId,Long roleId){
+		this.userId=userId;
+		this.roleId=roleId;
+	}
+	public UserRole(){
+	}
 	/**
 	 * @return USER_ID
 	 */

@@ -13,10 +13,7 @@
         ,height: 'full'
         ,skin:"line"
         ,cols: [[
-            {type:'checkbox',templet: function (d) {
-                d.
-                return '<span class="dic-text" dic-map="DIC_ROLE_LEVEL">' + d.roleLevel + '</span>';
-            }}
+            {type:'checkbox'}
             ,{field: 'roleId', title: 'roleId'}
             ,{field:'roleKey', title: '角色编号'}
             ,{field:'roleName', title: '角色名'}
@@ -182,7 +179,17 @@
                 , height: 'full'
                 , skin: "line"
                 , cols: [[
-                    {type: 'checkbox'}
+                    {type: 'checkbox',checked:function (d) {debugger;
+                        var checkeds=$("#user-select").find("input[name='userIds']:checked");
+                        if(checkeds.length>0){
+                            for (var i in checkeds){
+                                if(checkeds[i].value==d.userId){
+                                    return true;
+                                }
+                            }
+                        }
+                        return false;
+                    }}
                     , {field: 'userId', title: 'userId', hide: true}
                     , {field: 'username', title: '用户名'}
                     , {field: 'realName', title: '真实名'}
@@ -193,7 +200,7 @@
                     dict.render($('.layui-table [dic-map]'));
                 }
             });
-            table.on('checkbox(users)', function(obj){debugger;
+            table.on('checkbox(users)', function(obj){
                 if(obj.type=='one'){
                     if(obj.checked){//当前是否选中状态
                         var $select=$("#user-select").find("input[name='userIds'][value='"+obj.data.userId+"']");

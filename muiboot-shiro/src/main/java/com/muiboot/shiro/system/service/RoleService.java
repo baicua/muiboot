@@ -23,4 +23,11 @@ public interface RoleService extends IService<Role> {
 	void updateRole(Role role, Long[] menuIds);
 
 	void deleteRoles(String roleIds);
+
+	/**
+	 * 批量授权
+	 * @param userIds
+	 * @param roleIds
+	 */
+    void grant(Long[] userIds, Long[] roleIds);
 }

@@ -102,13 +102,8 @@ public class RoleController extends BaseController {
 	@RequestMapping("role/delete")
 	@ResponseBody
 	public ResponseBo deleteRoles(String ids) {
-		try {
-			this.roleService.deleteRoles(ids);
-			return ResponseBo.ok("删除角色成功！");
-		} catch (Exception e) {
-			e.printStackTrace();
-			return ResponseBo.error("删除角色失败，请联系网站管理员！");
-		}
+		this.roleService.deleteRoles(ids);
+		return ResponseBo.ok("删除角色成功！");
 	}
 
 	@Log("修改角色")
@@ -118,5 +113,13 @@ public class RoleController extends BaseController {
 	public ResponseBo updateRole(Role role, Long[] menuId) {
 		this.roleService.updateRole(role, menuId);
 		return ResponseBo.ok("修改角色成功！");
+	}
+
+	@Log("用户授权")
+	@RequestMapping("role/grant")
+	@ResponseBody
+	public ResponseBo grant(Long[] userIds, Long[] roleIds) {
+		this.roleService.grant(userIds, roleIds);
+		return ResponseBo.ok("用户授权成功！");
 	}
 }

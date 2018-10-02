@@ -748,7 +748,14 @@ layui.define(['laytpl', 'laypage', 'layer', 'form', 'util'], function(exports){
                 LAY_INDEX: numbers
               }, item1)
               ,checkName = table.config.checkName;
-              
+              var checked=item3.checked ? function(){
+                          return typeof item3.checked === 'function'
+                              ? item3.checked(tplData)
+                              : false;
+                      }():false;
+              if(checked){
+                  tplData[checkName]=checked;
+              }
               //渲染不同风格的列
               switch(item3.type){
                 case 'checkbox':
