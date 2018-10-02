@@ -45,7 +45,7 @@
 
                 //复选框/单选框
                 ,function(){
-                    return options.check ? ('<input type="checkbox" treeIndex="'+thisIndex+'" name="checkNodes" '+(item.checked?"checked":"")+' value="'+item.id+'" lay-filter="treeBox" lay-skin="primary">') : '';
+                    return options.check ? ('<input type="checkbox" treeIndex="'+thisIndex+'" name="'+options.checkName+'" '+(item.checked?"checked":"")+' value="'+item.id+'" lay-filter="treeBox" lay-skin="primary">') : '';
                 }()
 
                 //节点
@@ -60,7 +60,7 @@
                         var checkBoxs=new Array;
                         layui.each(item.attributes, function(key, value){
                             var checkboxIndex=[thisIndex,key].join("-");
-                            checkBoxs.push('<input type="checkbox" name="checkNodes" lay-filter="treeBox" treeIndex="'+checkboxIndex+'" '+(value.checked?"checked":"")+' value="'+key+'" title='+value.name+' lay-skin="primary">');
+                            checkBoxs.push('<input type="checkbox" name="'+options.checkName+'" lay-filter="treeBox" treeIndex="'+checkboxIndex+'" '+(value.checked?"checked":"")+' value="'+key+'" title='+value.name+' lay-skin="primary">');
                         });
                         return checkBoxs.join("");
                     }else {

@@ -17,6 +17,11 @@
             ,{field: 'roleId', title: 'roleId'}
             ,{field:'roleKey', title: '角色编号'}
             ,{field:'roleName', title: '角色名'}
+            ,{field:'roleLevel', title: '角色级别',
+                templet: function (d) {
+                    return '<span class="dic-text" dic-map="DIC_ROLE_LEVEL">' + d.roleLevel + '</span>';
+                }
+            }
             ,{field:'remark',  title: '备注'}
             ,{field:'createTime',  title: '创建时间'}
             ,{field:'modifyTime',  title: '修改时间'}
@@ -100,6 +105,7 @@
                                 layui.treeTable({
                                     elem: '#authTree'
                                     ,nodes:nodes
+                                    ,checkName:"menuId"
                                     ,check:"checkbox"
                                     ,click: function(node){
                                         return false;
@@ -117,7 +123,7 @@
         };
         return {
             add: function () {
-                loadModel({roleLevel: 1}, "新增角色", ctx + "role/add");
+                loadModel({roleLevel: 0}, "新增角色", ctx + "role/add");
             },
             update: function (checkStatus) {
                 if (checkStatus.data.length !== 1) {
@@ -146,7 +152,7 @@
                 for (var i in checkStatus.data) {
                     roleArr.push(checkStatus.data[i].roleId);
                 }
-                layer.msg('你确定要删除选中的用户吗？', {
+                layer.msg('你确定要删除选中的角色吗？', {
                     time: 0 //不自动关闭
                     , btn: ['确定', '取消']
                     , yes: function (index) {

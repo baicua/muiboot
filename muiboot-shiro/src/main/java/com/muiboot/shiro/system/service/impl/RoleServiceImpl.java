@@ -7,11 +7,10 @@ import java.util.List;
 
 import com.muiboot.shiro.common.service.impl.BaseService;
 import com.muiboot.shiro.common.util.ShiroUtil;
-import com.muiboot.shiro.system.domain.RoleMenu;
-import com.muiboot.shiro.system.domain.RoleWithMenu;
-import com.muiboot.shiro.system.domain.User;
+import com.muiboot.shiro.system.domain.*;
 import com.muiboot.shiro.system.service.RoleService;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -19,7 +18,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.muiboot.shiro.system.dao.RoleMapper;
 import com.muiboot.shiro.system.dao.RoleMenuMapper;
-import com.muiboot.shiro.system.domain.Role;
 import com.muiboot.shiro.system.service.RoleMenuServie;
 import com.muiboot.shiro.system.service.UserRoleService;
 import tk.mybatis.mapper.entity.Example;
@@ -54,7 +52,7 @@ public class RoleServiceImpl extends BaseService<Role> implements RoleService {
 			if (StringUtils.isNotBlank(role.getRoleName())) {
 				criteria.andCondition("role_name=", role.getRoleName());
 			}
-			criteria.andCondition("group_id=role_level*", user.getOrganId());
+			criteria.andCondition("role_level*group_id=role_level*", user.getOrganId());
 			example.setOrderByClause("create_time");
 			return this.selectByExample(example);
 		} catch (Exception e) {
@@ -78,18 +76,23 @@ public class RoleServiceImpl extends BaseService<Role> implements RoleService {
 	@Override
 	@Transactional
 	public void addRole(Role role, Long[] menuIds) {
+		role.setGroupId(ShiroUtil.getCurrentUser().getOrganId());
 		role.setCreateTime(new Date());
 		this.save(role);
 		setRoleMenus(role, menuIds);
 	}
 
 	private void setRoleMenus(Role role, Long[] menuIds) {
+		if (null==menuIds)return;
+		List<RoleMenu> menus=new ArrayList<>();
 		for (Long menuId : menuIds) {
 			RoleMenu rm = new RoleMenu();
 			rm.setMenuId(menuId);
 			rm.setRoleId(role.getRoleId());
-			this.roleMenuMapper.insert(rm);
+			menus.add(rm);
+			//this.roleMenuMapper.insert(rm);
 		}
+		roleMenuMapper.insertList(menus);
 	}
 
 	@Override
@@ -127,6 +130,7 @@ public class RoleServiceImpl extends BaseService<Role> implements RoleService {
 	@Transactional
 	public void updateRole(Role role, Long[] menuIds) {
 		role.setModifyTime(new Date());
+		role.setGroupId(ShiroUtil.getCurrentUser().getOrganId());
 		this.updateNotNull(role);
 		Example example = new Example(RoleMenu.class);
 		example.createCriteria().andCondition("role_id=", role.getRoleId());

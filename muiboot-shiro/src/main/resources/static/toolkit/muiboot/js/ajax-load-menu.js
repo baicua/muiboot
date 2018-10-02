@@ -36,16 +36,16 @@
             var href,urlstr = '<li class="layui-nav-item">';
             try {
                 if (!o[i]["href"] && !!o[i]["icon"]) {
-                    urlstr+='<a href="javascript:;" menu-id="'+o[i]["id"]+'"><i class="'+o[i]["icon"]+'"></i><span >&nbsp;&nbsp;'+ o[i]["name"] +'</span></a>';
+                    urlstr+='<a href="javascript:;" menu-id="'+o[i]["id"]+'"><i class="'+o[i]["icon"]+'"></i><span >&nbsp;&nbsp;'+ o[i]["name"] +'</span><i class="focus"></i></a>';
                 } else if (!o[i]["href"]) {
-                    urlstr+='<a href="javascript:;" menu-id="'+o[i]["id"]+'"><span >&nbsp;&nbsp;'+ o[i]["name"] +'</span></a>';
+                    urlstr+='<a href="javascript:;" menu-id="'+o[i]["id"]+'"><span >&nbsp;&nbsp;'+ o[i]["name"] +'</span><i class="focus"></i></a>';
                 } else {
                     var icon="";
                     if(o[i]["icon"]){
                         icon=o[i]["icon"];
                     }
                     href=has?"javascript:;":"#"+o[i]["href"];
-                    urlstr+='<a href="'+href+'" menu-url=' + o[i]["href"]+' menu-id="'+o[i]["id"]+'"><i class="'+icon+'"></i><span >&nbsp;&nbsp;'+ o[i]["name"] +'</span></a>';
+                    urlstr+='<a href="'+href+'" menu-url=' + o[i]["href"]+' menu-id="'+o[i]["id"]+'"><i class="'+icon+'"></i><span >&nbsp;&nbsp;'+ o[i]["name"] +'</span><i class="focus"></i></a>';
                 }
                 //str += urlstr;
                 if (!!o[i]["children"]&&o[i]["children"].length != 0) {
@@ -69,16 +69,16 @@
             var urlstr = '<dd>',href;
             try {
                 if (!o[i]["href"] && !!o[i]["icon"]) {
-                    urlstr +='<a href="javascript:;"  menu-id="'+o[i]["id"]+'"><i class="'+o[i]["icon"]+'"></i><span >&nbsp;&nbsp;'+ o[i]["name"] +'</span></a>';
+                    urlstr +='<a href="javascript:;"  menu-id="'+o[i]["id"]+'"><i class="'+o[i]["icon"]+'"></i><span >&nbsp;&nbsp;'+ o[i]["name"] +'</span><i class="focus"></i></a>';
                 } else if (!o[i]["href"]) {
-                    urlstr +='<a href="javascript:;" menu-id="'+o[i]["id"]+'"><span >&nbsp;&nbsp;'+ o[i]["name"] +'</span></a>';
+                    urlstr +='<a href="javascript:;" menu-id="'+o[i]["id"]+'"><span >&nbsp;&nbsp;'+ o[i]["name"] +'</span><i class="focus"></i></a>';
                 } else {
                     var icon="";
                     if(o[i]["icon"]){
                         icon=o[i]["icon"];
                     }
                     href=has?"javascript:;":"#"+o[i]["href"];
-                    urlstr +='<a href="'+href+'" menu-url=' + o[i]["href"]+' menu-id="'+o[i]["id"]+'"><i class="'+o[i]["icon"]+'"></i><span >&nbsp;&nbsp;'+ o[i]["name"] +'</span></a>';
+                    urlstr +='<a href="'+href+'" menu-url=' + o[i]["href"]+' menu-id="'+o[i]["id"]+'"><i class="'+o[i]["icon"]+'"></i><span >&nbsp;&nbsp;'+ o[i]["name"] +'</span><i class="focus"></i></a>';
                 }
                 if (!!o[i]["children"]&&o[i]["children"].length != 0) {
                     urlstr+='<dl class="layui-nav-child">';

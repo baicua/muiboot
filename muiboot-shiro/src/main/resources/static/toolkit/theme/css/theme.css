@@ -72,6 +72,16 @@ html {
     background: url(../images/libg.png) repeat-x;
     color: #fff;
 }
+.mb-side-menu .layui-nav-tree .layui-nav-child .layui-this >a>i.focus {
+    -webkit-transition: all .2s;
+    position: absolute;
+    top: 50%;
+    border-width: 8px;
+    margin-top: -7px;
+    right: 0px;
+    border-style: solid;
+    border-color: transparent #fff transparent transparent;
+}
 @media screen and (max-width:992px) {
     .mb-layout-admin .mb-body, .mb-layout-admin .mb-footer{
         left: 0;

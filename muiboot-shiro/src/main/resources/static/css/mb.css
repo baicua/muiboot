@@ -116,6 +116,9 @@
     float: right;
     margin-bottom: 2px;
 }
+.mb-btn-group .layui-icon{
+    font-size: 14px;
+}
 .mb-btn-group .mb-btn {
     font-weight: 500;
     color: #000000;
@@ -149,8 +152,8 @@
     animation-name: mui-btn-inserted;
 }
 .mb-btn-group>.mb-btn:hover,.mb-btn-group>.mb-btn:focus,.mb-btn-group>.mb-btn:active{
-    color: #1e9fff;
-    background-color: #f2f2f2;
+    color: #fff;
+    background-color: #1e9fff;
 }
 /*列表详情页*/
 /*引用块样式*/
@@ -276,7 +279,7 @@
 }
 .mb-tree-table li{
     text-overflow: ellipsis;
-    overflow: auto;
+    overflow: visible;
     white-space: normal;
 }
 .mb-tree-table li ul{
@@ -284,4 +287,5 @@
 }
 .mb-tree-table .layui-form-checkbox i{
     color: #fff;
+    padding-left: 2px;
 }

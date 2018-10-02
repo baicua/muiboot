@@ -70,7 +70,7 @@ public class RoleController extends BaseController {
 	@ResponseBody
 	public ResponseBo getRole(Long roleId) {
 		try {
-			Role role = this.roleService.findRoleWithMenus(roleId);
+			Role role = this.roleService.selectByKey(roleId);
 			return ResponseBo.ok(role);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -93,13 +93,8 @@ public class RoleController extends BaseController {
 	@RequestMapping("role/add")
 	@ResponseBody
 	public ResponseBo addRole(Role role, Long[] menuId) {
-		try {
-			this.roleService.addRole(role, menuId);
-			return ResponseBo.ok("新增角色成功！");
-		} catch (Exception e) {
-			e.printStackTrace();
-			return ResponseBo.error("新增角色失败，请联系网站管理员！");
-		}
+		this.roleService.addRole(role, menuId);
+		return ResponseBo.ok("新增角色成功！");
 	}
 
 	@Log("删除角色")
