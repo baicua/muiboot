@@ -59,6 +59,9 @@
     $("#updBtn").on("click", function (r) {
         method.update(table.checkStatus('lay-role-list'));
     });
+    $("#grantBtn").on("click", function (r) {
+        method.grant(table.checkStatus('lay-role-list'));
+    });
     $("#expBtn").on("click", function (r) {
         $MB.layerPost({url: "/role/excel", data: {}}, function (r) {
             if (r.code == 0) {
@@ -121,13 +124,80 @@
                 layer.msg('请求数据异常：' + e.message);
             }
         };
+        function grant(checkStatus) {
+            if (checkStatus.data.length === 0) {
+                layer.msg('请先选择角色！');
+                return false;
+            }
+            var roleArr = new Array;
+            var roleNames=new Array;
+            for (var i in checkStatus.data) {
+                roleArr.push(checkStatus.data[i].roleId);
+                roleNames.push(checkStatus.data[i].roleName)
+            }
+            var openIndex = 0;
+            try {
+                $MB.layerGet({url: ctx + "model/role/grant.html", cache: true}, function (text) {
+                    laytpl(text).render({roleIds:roleArr.join(",")}, function (html) {
+                        //页面层
+                        openIndex = layer.open({
+                            title: "用户授权("+roleNames.join("、")+")",
+                            type: 1,
+                            skin: 'layui-layer-rim', //加上边框
+                            area: ['640px', '400px'], //宽高
+                            content: html,
+                            btn: ['保存', '关闭'],
+                            btnAlign: 'c',
+                            yes: function (index, layero) {
+                                return false;
+                            },
+                            success: function (layero, index) {
+                                layero.addClass("layui-form");
+                                dict.render();
+                                loadusers();
+                                layero.find(".layui-layer-btn0").attr("lay-filter", "form-verify").attr("lay-submit", "");
+                                method.onsubmit(layero.find(".layui-layer-btn0"), layero, ctx + "role/grant", function () {
+
+                                });
+                                form.render();
+                            }
+                        });
+                    });
+                });
+            } catch (e) {
+                layer.close(openIndex);
+                layer.msg('请求数据异常：' + e.message);
+            }
+        }
+        function loadusers() {
+            table.render({
+                id: 'lay-user-grout'
+                , elem: '#users-grout-list'
+                , url: '/user/list' //数据接口
+                , page: true //开启分页
+                , size: 'sm'
+                , height: 'full'
+                , skin: "line"
+                , cols: [[
+                    {type: 'checkbox'}
+                    , {field: 'userId', title: 'userId', hide: true}
+                    , {field: 'username', title: '用户名'}
+                    , {field: 'realName', title: '真实名'}
+                    , {field: 'groupName', title: '所属部门'}
+                    , {field: 'mobile', title: '手机号'}
+                ]],
+                done: function (res, curr, count) {
+                    dict.render($('.layui-table [dic-map]'));
+                }
+            });
+        }
         return {
             add: function () {
                 loadModel({roleLevel: 0}, "新增角色", ctx + "role/add");
             },
             update: function (checkStatus) {
                 if (checkStatus.data.length !== 1) {
-                    layer.msg('请先一个角色修改！');
+                    layer.msg('请先现在一个角色修改！');
                     return false;
                 }
                 var roleId = checkStatus.data[0].roleId;
@@ -186,6 +256,9 @@
                     });
                     return false;
                 });
+            },
+            grant:function (checkStatus) {
+                grant(checkStatus);
             }
         }
     })(jQuery);

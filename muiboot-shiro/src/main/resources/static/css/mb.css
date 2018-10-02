@@ -289,3 +289,8 @@
     color: #fff;
     padding-left: 2px;
 }
+
+/*多选按钮样式*/
+.mb-card-select .layui-form-checkbox>span{
+    width: 75px;
+}
