@@ -125,7 +125,7 @@
             },
             update: function (checkStatus) {
                 if (checkStatus.data.length !== 1) {
-                    layer.msg('请先一个用户修改！');
+                    layer.msg('请先选择一个用户修改！');
                     return false;
                 }
                 var userId = checkStatus.data[0].userId;
