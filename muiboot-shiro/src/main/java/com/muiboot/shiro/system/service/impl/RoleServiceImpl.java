@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import com.muiboot.shiro.common.exception.BusinessException;
 import com.muiboot.shiro.common.service.impl.BaseService;
 import com.muiboot.shiro.common.util.ShiroUtil;
 import com.muiboot.shiro.system.domain.*;
@@ -130,6 +131,14 @@ public class RoleServiceImpl extends BaseService<Role> implements RoleService {
 	@Transactional
 	public void updateRole(Role role, Long[] menuIds) {
 		role.setModifyTime(new Date());
+		//role.setGroupId(ShiroUtil.getCurrentUser().getOrganId());
+		Role roleold= roleMapper.selectByPrimaryKey(role.getRoleId());
+		if (roleold==null){
+			throw new BusinessException("角色不存在");
+		}
+		if (!ShiroUtil.getCurrentUser().getOrganId().equals(roleold.getGroupId())){
+			throw new BusinessException("只能修改本局创建角色，该角色无法修改");
+		}
 		role.setGroupId(ShiroUtil.getCurrentUser().getOrganId());
 		this.updateNotNull(role);
 		Example example = new Example(RoleMenu.class);

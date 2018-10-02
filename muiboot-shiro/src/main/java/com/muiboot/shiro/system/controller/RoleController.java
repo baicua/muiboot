@@ -116,12 +116,7 @@ public class RoleController extends BaseController {
 	@RequestMapping("role/update")
 	@ResponseBody
 	public ResponseBo updateRole(Role role, Long[] menuId) {
-		try {
-			this.roleService.updateRole(role, menuId);
-			return ResponseBo.ok("修改角色成功！");
-		} catch (Exception e) {
-			e.printStackTrace();
-			return ResponseBo.error("修改角色失败，请联系网站管理员！");
-		}
+		this.roleService.updateRole(role, menuId);
+		return ResponseBo.ok("修改角色成功！");
 	}
 }
