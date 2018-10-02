@@ -3,7 +3,7 @@
     <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
     <ul class="layui-tab-title">
         <li class="layui-this">用户列表</li>
-        <li>已选用户<span class="layui-badge">0</span></li>
+        <li>已选用户<span class="layui-badge" id="select-num">0</span></li>
     </ul>
     <div class="layui-tab-content mb-tab-body">
         <div class="layui-tab-item layui-show">
@@ -27,45 +27,13 @@
                 </div>
             </div>
             <div class="layui-row">
-                <table class="layui-hide" id="users-grout-list"></table>
+                <table class="layui-hide" id="users-grout-list" lay-filter="users"></table>
             </div>
         </div>
         <div class="layui-tab-item ">
             <div class="layui-card">
                 <div class="layui-card-body">
                     <div class="layui-row mb-card-select" id="user-select">
-                        <div class="layui-col-md3 layui-col-xs4 layui-timeline-title">
-                            <input type="checkbox" name="userId" title="写作" checked>
-                        </div>
-                        <div class="layui-col-md3 layui-col-xs4 layui-timeline-title">
-                            <input type="checkbox" name="like[write]" title="写作" checked>
-                        </div>
-                        <div class="layui-col-md3 layui-col-xs4 layui-timeline-title">
-                            <input type="checkbox" name="like[write]" title="写作" checked>
-                        </div>
-                        <div class="layui-col-md3 layui-col-xs4 layui-timeline-title">
-                            <input type="checkbox" name="like[write]" title="写作" checked>
-                        </div>                <div class="layui-col-md3 layui-col-xs4">
-                        <input type="checkbox" name="like[write]" title="写作" checked>
-                    </div>
-                        <div class="layui-col-md3 layui-col-xs4 layui-timeline-title">
-                            <input type="checkbox" name="like[write]" title="啊啊啊啊啊啊啊" checked>
-                        </div>                <div class="layui-col-md3 layui-col-xs4">
-                        <input type="checkbox" name="like[write]" title="写啊啊作" checked>
-                    </div>
-                        <div class="layui-col-md3 layui-col-xs4 layui-timeline-title">
-                            <input type="checkbox" name="like[write]" title="啊啊啊" checked>
-                        </div>                <div class="layui-col-md3 layui-col-xs4">
-                        <input type="checkbox" name="like[write]" title="史诗" checked>
-                    </div>
-                        <div class="layui-col-md3 layui-col-xs4 layui-timeline-title">
-                            <input type="checkbox" name="like[write]" title="啊" checked>
-                        </div>                <div class="layui-col-md3 layui-col-xs4 layui-timeline-title">
-                        <input type="checkbox" name="like[write]" title="少时诵诗书所所所所" checked>
-                    </div>
-                        <div class="layui-col-md3 layui-col-xs4 layui-timeline-title">
-                            <input type="checkbox" name="like[write]" title="写作" checked>
-                        </div>
                     </div>
                 </div>
             </div>

@@ -1057,13 +1057,13 @@ layui.define(['laytpl', 'laypage', 'layer', 'form', 'util'], function(exports){
     if(table.checkStatus(that.key).isAll){
       if(!checkAllElem[0].checked){
         checkAllElem.prop('checked', true);
-        that.renderForm('checkbox');
+        //that.renderForm('checkbox');
       }
       syncColsCheck(true);
     } else {
       if(checkAllElem[0].checked){
         checkAllElem.prop('checked', false);
-        that.renderForm('checkbox');
+        //that.renderForm('checkbox');
       }
       syncColsCheck(false);
     }
@@ -1435,7 +1435,7 @@ layui.define(['laytpl', 'laypage', 'layer', 'form', 'util'], function(exports){
       ,index = checkbox.parents('tr').eq(0).data('index')
       ,checked = checkbox[0].checked
       ,isAll = checkbox.attr('lay-filter') === 'layTableAllChoose';
-      
+
       //全选
       if(isAll){
         childs.each(function(i, item){
@@ -1443,7 +1443,7 @@ layui.define(['laytpl', 'laypage', 'layer', 'form', 'util'], function(exports){
           that.setCheckData(i, checked);
         });
         that.syncCheckAll();
-        that.renderForm('checkbox');
+        //that.renderForm('checkbox');
       } else {
         that.setCheckData(index, checked);
         that.syncCheckAll();
@@ -1452,6 +1452,7 @@ layui.define(['laytpl', 'laypage', 'layer', 'form', 'util'], function(exports){
         checked: checked
         ,type: isAll ? 'all' : 'one'
       }));
+      that.renderForm('checkbox');
     });
     
     //单选框选择
@@ -1863,6 +1864,10 @@ layui.define(['laytpl', 'laypage', 'layer', 'form', 'util'], function(exports){
   
   //自动完成渲染
   table.init();
+  //获取配置
+  table.getAllData = function(id){
+      return  table.cache[id];
+  };
   
   exports(MOD_NAME, table);
 });

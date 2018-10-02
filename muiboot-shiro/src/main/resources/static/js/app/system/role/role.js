@@ -13,7 +13,10 @@
         ,height: 'full'
         ,skin:"line"
         ,cols: [[
-            {type:'checkbox'}
+            {type:'checkbox',templet: function (d) {
+                d.
+                return '<span class="dic-text" dic-map="DIC_ROLE_LEVEL">' + d.roleLevel + '</span>';
+            }}
             ,{field: 'roleId', title: 'roleId'}
             ,{field:'roleKey', title: '角色编号'}
             ,{field:'roleName', title: '角色名'}
@@ -189,6 +192,44 @@
                 done: function (res, curr, count) {
                     dict.render($('.layui-table [dic-map]'));
                 }
+            });
+            table.on('checkbox(users)', function(obj){debugger;
+                if(obj.type=='one'){
+                    if(obj.checked){//当前是否选中状态
+                        var $select=$("#user-select").find("input[name='userIds'][value='"+obj.data.userId+"']");
+                        if($select.length>0){
+                            $select.prop('checked',obj.checked);
+                        }else {
+                            $("#user-select").append('<div class="layui-col-md3 layui-col-xs4 layui-timeline-title"><input type="checkbox" name="userIds" title="'+obj.data.realName+'" value="'+obj.data.userId+'" checked></div>');
+                        }
+                    }else {
+                        var $select=$("#user-select").find("input[name='userIds'][value='"+obj.data.userId+"']");
+                        $select.prop('checked',obj.checked);
+                    }
+                }else {
+                    if(obj.checked){
+                        var checkStatus = table.checkStatus('lay-user-grout');
+                        for (var i in checkStatus.data) {
+                            var $select=$("#user-select").find("input[name='userIds'][value='"+checkStatus.data[i].userId+"']");
+                            if($select.length>0){
+                                $select.prop('checked',obj.checked);
+                            }else {
+                                $("#user-select").append('<div class="layui-col-md3 layui-col-xs4 layui-timeline-title"><input type="checkbox" name="userIds" title="'+checkStatus.data[i].realName+'" value="'+checkStatus.data[i].userId+'" checked></div>');
+                            }
+                        }
+                    }else {
+                        var data = table.getAllData('lay-user-grout');
+                        for (var i in data) {
+                            var $select=$("#user-select").find("input[name='userIds'][value='"+data[i].userId+"']");
+                            if($select.length>0){
+                                $select.prop('checked',obj.checked);
+                            }
+                        }
+                    }
+                }
+                var checkeds=$("#user-select").find("input[name='userIds']:checked");
+                $("#select-num").text(checkeds.length);
+                form.render('checkbox');
             });
         }
         return {
