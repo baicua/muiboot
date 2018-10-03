@@ -3,6 +3,7 @@ package com.muiboot.shiro.common.shiro;
 import java.util.*;
 
 import com.muiboot.shiro.common.listener.ShiroSessionListener;
+import net.sf.ehcache.CacheManager;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.codec.Base64;
 import org.apache.shiro.mgt.SecurityManager;

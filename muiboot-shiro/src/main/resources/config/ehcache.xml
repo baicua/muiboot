@@ -26,5 +26,13 @@
         timeToLiveSeconds="3600"
         overflowToDisk="true"
         statistics="true" />
+    <cache
+            name="CACHE_GENERATE_KEY"
+            maxElementsInMemory="2000"
+            maxEntriesLocalHeap="2000"
+            eternal="true"
+            timeToLiveSeconds="3600"
+            overflowToDisk="true"
+            statistics="true" />
 </ehcache>
 
