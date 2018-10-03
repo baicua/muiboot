@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.w3.org/1999/xhtml">
 <head data-th-include="common/head"></head>
 <body class="layui-layout-body layui-table-body">
 <div data-th-include="common/common"></div>
@@ -11,10 +11,10 @@
         </div>
         <div class="layui-col-md9 layui-col-xs9">
                 <div class="mb-btn-group">
-                    <button title="新增" type="button" id="addBtn"  class="mb-btn" shiro:hasPermission="menu:add"><i class="layui-icon"></i>新增</button>
-                    <button title="修改" type="button" id="updBtn" class="mb-btn" shiro:hasPermission="menu:update"><i class="layui-icon"></i>修改</button>
-                    <button title="导出" type="button" id="expBtn" class="mb-btn" data-table-action="excel" onclick="exportMenuExcel()"><i class="layui-icon layui-icon-download-circle"></i>导出</button>
-                    <button title="删除" type="button" id="delBtn" class="mb-btn" shiro:hasPermission="menu:delete"><i class="layui-icon"></i>删除</button>
+                    <button title="新增" type="button" id="addBtn"  class="mb-btn" shiro:hasPermission="group:add"><i class="layui-icon"></i>新增</button>
+                    <button title="修改" type="button" id="updBtn" class="mb-btn" shiro:hasPermission="group:update"><i class="layui-icon"></i>修改</button>
+                    <button title="导出" type="button" id="expBtn" class="mb-btn" shiro:hasPermission="group:exp"><i class="layui-icon layui-icon-download-circle"></i>导出</button>
+                    <button title="删除" type="button" id="delBtn" class="mb-btn" shiro:hasPermission="group:delete"><i class="layui-icon"></i>删除</button>
             </div>
         </div>
     </div>
