@@ -27,7 +27,7 @@
       <if test="userName != null and userName != ''">
           AND u.USERNAME = #{userName}
       </if>
-        and m.PERMS is not null and m.PERMS &lt;&gt; ''
+        and m.PERMS is not null and length(m.PERMS) > 0
   </select>
   
   <select id="findUserMenus" resultMap="menu">

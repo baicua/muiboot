@@ -52,7 +52,7 @@ public class MenuServiceImpl extends BaseService<Menu> implements MenuService {
 		}
 		if (User.SUPPER_USER.equals(userName)){
 			Example example = new Example(Menu.class);
-			example.createCriteria().andIsNotNull("perms");
+			example.createCriteria().andIsNotNull("perms").andCondition("length(perms)>0");
 			example.orderBy("orderNum");
 			return menuMapper.selectByExample(example);
 		}
