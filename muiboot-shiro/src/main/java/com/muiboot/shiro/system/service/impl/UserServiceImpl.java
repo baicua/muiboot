@@ -8,6 +8,7 @@ import java.util.List;
 import com.muiboot.shiro.common.exception.BusinessException;
 import com.muiboot.shiro.common.service.impl.BaseService;
 import com.muiboot.shiro.common.util.MD5Utils;
+import com.muiboot.shiro.common.util.ShiroUtil;
 import com.muiboot.shiro.system.dao.UserMapper;
 import com.muiboot.shiro.system.domain.SysGroup;
 import com.muiboot.shiro.system.domain.User;

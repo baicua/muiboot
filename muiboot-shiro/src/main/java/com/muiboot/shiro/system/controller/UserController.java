@@ -3,6 +3,7 @@ package com.muiboot.shiro.system.controller;
 import java.util.List;
 import java.util.Map;
 
+import com.muiboot.shiro.common.util.ShiroUtil;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,6 +57,12 @@ public class UserController extends BaseController {
 	@ResponseBody
 	public Map<String, Object> userList(QueryRequest request, User user) {
 		PageHelper.startPage(request.getPage(), request.getLimit());
+		if (null==user.getOrganId()){
+			boolean allPermit=ShiroUtil.getSubject().isPermitted("user:all");//有全局权限
+			if(!allPermit){
+				user.setOrganId(ShiroUtil.getCurrentUser().getOrganId());
+			}
+		}
 		List<User> list = this.userService.findUserWithDept(user);
 		PageInfo<User> pageInfo = new PageInfo<>(list);
 		return getDataTable(pageInfo);
