@@ -77,7 +77,7 @@
                 try{
                     $MB.layerGet({url:ctx + "group/getGroup",data:{"groupId": $id}},function (data) {
                         if(!data||!data.msg||data.code != 0){
-                            layer.msg('请求数据失败,您选择的组织机构不存在');
+                            layer.msg('请求数据失败,您选择的组织机构不存在',{skin: 'mb-warn'});
                             return false;
                         }
                         loadModel(data.msg,"修改组织机构",ctx + "group/update");

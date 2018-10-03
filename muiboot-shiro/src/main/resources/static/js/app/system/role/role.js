@@ -133,7 +133,7 @@
                 });
             } catch (e) {
                 layer.close(openIndex);
-                layer.msg('请求数据异常：' + e.message);
+                layer.msg('请求数据异常：' + e.message,{skin: 'mb-warn'});
             }
         };
         function grant(checkStatus) {
@@ -178,7 +178,7 @@
                 });
             } catch (e) {
                 layer.close(openIndex);
-                layer.msg('请求数据异常：' + e.message);
+                layer.msg('请求数据异常：' + e.message,{skin: 'mb-warn'});
             }
         }
         function loadusers() {
@@ -264,13 +264,13 @@
                 try {
                     $MB.layerGet({url: ctx + "role/getRole", data: {"roleId": roleId}}, function (data) {
                         if (!data || !data.msg || data.code != 0) {
-                            layer.msg('请求数据失败,您选择的角色不存在');
+                            layer.msg('请求数据失败,您选择的角色不存在',{skin: 'mb-warn'});
                             return false;
                         }
                         loadModel(data.msg, "修改角色", ctx + "role/update");
                     });
                 } catch (e) {
-                    layer.msg('请求数据异常：' + e.message);
+                    layer.msg('请求数据异常：' + e.message,{skin: 'mb-warn'});
                 }
             },
             del: function (checkStatus) {

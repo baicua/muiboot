@@ -98,7 +98,7 @@
                         loadModel(data.msg,"菜单修改",ctx + "menu/update");
                     });
                 }catch(e) {
-                    layer.msg('请求数据异常：'+e.message);
+                    layer.msg('请求数据异常：' + e.message,{skin: 'mb-warn'});
                 }
             },
             delMenu:function(menuId,name){
@@ -159,7 +159,7 @@
                             menuMethod.resetTree('#menuTree');
                             callback();
                         } else {
-                            layer.msg(r.msg);
+                            layer.msg(r.msg,{skin: 'mb-warn'});
                             subBtn.removeAttr("sub");
                         }
                     });
