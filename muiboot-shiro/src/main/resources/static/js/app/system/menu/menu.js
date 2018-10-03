@@ -131,7 +131,7 @@
             refresh:function (menuId) {
                 $MB.layerGet({url:ctx+"toolkit/compent/menu/menuInfo.html",cache:true},function(text){
                     var $compent=$("<code></code>").html(text);
-                    $MB.layerGet({url:ctx+"menu/getMenuDetail",data:{menuId:menuId}},function(data){
+                    $MB.layerGet({url:ctx+"menu/getMenuDetail",data:{menuId:menuId},cache:true},function(data){
                         laytpl($compent.find("#layui-table-menu").html()).render($.extend({},data.msg.menu), function(html){
                             $("#menuInfoPanle").html(html);
                             dict.render();
