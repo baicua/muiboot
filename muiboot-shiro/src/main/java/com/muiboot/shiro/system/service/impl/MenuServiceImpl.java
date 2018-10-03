@@ -1,11 +1,13 @@
 package com.muiboot.shiro.system.service.impl;
 
 import java.util.*;
+import java.util.concurrent.*;
 
 import com.muiboot.shiro.common.exception.BusinessException;
 import com.muiboot.shiro.common.layer.LayerTree;
 import com.muiboot.shiro.common.service.impl.BaseService;
 import com.muiboot.shiro.common.util.ShiroUtil;
+import com.muiboot.shiro.common.util.exec.ExecutorsUtil;
 import com.muiboot.shiro.system.dao.MenuMapper;
 import com.muiboot.shiro.system.domain.Menu;
 import com.muiboot.shiro.system.domain.Role;
@@ -40,6 +42,8 @@ public class MenuServiceImpl extends BaseService<Menu> implements MenuService {
 
 	@Autowired
 	private RoleService roleService;
+
+	ExecutorService exeService= ExecutorsUtil.getInstance().getMultilThreadExecutor();
 
 	@Override
 	public List<Menu> findUserPermissions(String userName) {
@@ -185,11 +189,41 @@ public class MenuServiceImpl extends BaseService<Menu> implements MenuService {
 	}
 
 	@Override
-	@Transactional(propagation = Propagation.REQUIRED, readOnly = true, rollbackFor = Exception.class)
 	public Map findMenuDetail(Long menuId) {
-		Menu menu = this.findById(menuId);
-		List<Menu> permissions=this.findAllPermissions(menu);
-		List<RoleWithMenu> roles=this.roleService.findByMenuId(menu.getMenuId());
+		Future<Menu> menuFuture=exeService.submit(new Callable<Menu>() {
+			@Override
+			public Menu call() throws Exception {
+				return findById(menuId);
+			}
+		});
+		Future<List<Menu>> permissionsuFuture=exeService.submit(new Callable<List<Menu>>() {
+			@Override
+			public List<Menu> call() throws Exception {
+				Menu menuParam = new Menu();
+				menuParam.setMenuId(menuId);
+				return findAllPermissions(menuParam);
+			}
+		});
+		Future<List<RoleWithMenu>> rolesuFuture=exeService.submit(new Callable<List<RoleWithMenu>>() {
+			@Override
+			public List<RoleWithMenu> call() throws Exception {
+				return roleService.findByMenuId(menuId);
+			}
+		});
+		Menu menu= null;
+		List<Menu> permissions=null;
+		List<RoleWithMenu> roles=null;
+		try {
+			menu = menuFuture.get(3, TimeUnit.SECONDS);
+			permissions=permissionsuFuture.get(3, TimeUnit.SECONDS);
+			roles=rolesuFuture.get(3, TimeUnit.SECONDS);
+		} catch (InterruptedException e) {
+			throw new BusinessException("查询异常中断！");
+		} catch (ExecutionException e) {
+			throw new BusinessException("查询处理异常！");
+		} catch (TimeoutException e) {
+			throw new BusinessException("查询数据超时！");
+		}
 		Map res =new HashMap();
 		res.put("menu",menu);
 		res.put("roles",roles);
