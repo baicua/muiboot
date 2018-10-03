@@ -76,7 +76,7 @@
                 });
             }catch (e){
                 layer.close(openIndex);
-                layer.msg('请求数据异常：'+e.message);
+                layer.msg('请求数据异常：'+e.message,{skin: 'mb-warn'});
             }
         };
         return {
@@ -92,7 +92,7 @@
                 try{
                     $MB.layerGet({url:ctx + "menu/getMenu",data:{"menuId": menuId}},function (data) {
                         if(!data||!data.msg||data.code != 0){
-                            layer.msg('请求数据失败,您选择的菜单不存在');
+                            layer.msg('请求数据失败,您选择的菜单不存在',{skin: 'mb-warn'});
                             return false;
                         }
                         loadModel(data.msg,"菜单修改",ctx + "menu/update");

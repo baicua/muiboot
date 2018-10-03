@@ -135,7 +135,7 @@ var $MB = (function() {
                         }
                     });
                 }else {
-                    layer.msg('请求失败！');
+                    layer.msg('请求失败！',{skin: 'mb-warn'});
                 }
             }
         });

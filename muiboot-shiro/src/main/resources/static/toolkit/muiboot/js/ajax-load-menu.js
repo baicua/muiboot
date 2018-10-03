@@ -24,7 +24,7 @@
                 }
                 element.init();
             } else {
-                layer.msg('获取菜单失败！', {icon: 0});
+                layer.msg('获取菜单失败！',{skin: 'mb-warn'});
             }
         });
     }

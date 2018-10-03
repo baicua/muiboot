@@ -14,7 +14,7 @@
                     var lis = [];
                     $MB.layerGet({url:"/log/list",data:{"page": page,"limit":limit}},function (data) {
                         if(!data||!data.data||data.code != 0){
-                            layer.msg('加载失败');
+                            layer.msg('加载失败',{skin: 'mb-warn'});
                             return false;
                         }else {
                             var length=data.data&&data.data&&data.data.length;

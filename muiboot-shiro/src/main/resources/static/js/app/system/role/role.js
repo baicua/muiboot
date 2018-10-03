@@ -310,7 +310,7 @@
                             layer.msg(r.msg);
                             callback();
                         } else {
-                            layer.msg(r.msg);
+                            layer.msg(r.msg,{skin: 'mb-warn'});
                             subBtn.removeAttr("sub");
                         }
                     });

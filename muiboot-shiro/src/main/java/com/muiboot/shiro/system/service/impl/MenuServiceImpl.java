@@ -43,6 +43,15 @@ public class MenuServiceImpl extends BaseService<Menu> implements MenuService {
 
 	@Override
 	public List<Menu> findUserPermissions(String userName) {
+		if (StringUtils.isBlank(userName)){
+			throw new BusinessException("用户名不能为空！");
+		}
+		if (User.SUPPER_USER.equals(userName)){
+			Example example = new Example(Menu.class);
+			example.createCriteria().andIsNotNull("perms").andNotEqualTo("perms","");
+			example.orderBy("orderNum");
+			return menuMapper.selectByExample(example);
+		}
 		return this.menuMapper.findUserPermissions(userName);
 	}
 

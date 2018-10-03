@@ -116,7 +116,7 @@
                 });
             } catch (e) {
                 layer.close(openIndex);
-                layer.msg('请求数据异常：' + e.message);
+                layer.msg('请求数据异常：' + e.message,{skin: 'mb-warn'});
             }
         };
         return {
@@ -132,13 +132,13 @@
                 try {
                     $MB.layerGet({url: ctx + "user/getUser", data: {"userId": userId}}, function (data) {
                         if (!data || !data.msg || data.code != 0) {
-                            layer.msg('请求数据失败,您选择的用户不存在');
+                            layer.msg('请求数据失败,您选择的用户不存在',{skin: 'mb-warn'});
                             return false;
                         }
                         loadModel(data.msg, "修改用户", ctx + "user/update");
                     });
                 } catch (e) {
-                    layer.msg('请求数据异常：' + e.message);
+                    layer.msg('请求数据异常：' + e.message,{skin: 'mb-warn'});
                 }
             },
             del: function (checkStatus) {
@@ -178,7 +178,7 @@
                             layer.msg(r.msg);
                             callback();
                         } else {
-                            layer.msg(r.msg);
+                            layer.msg(r.msg,{skin: 'mb-warn'});
                             subBtn.removeAttr("sub");
                         }
                     });
