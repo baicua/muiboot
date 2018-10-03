@@ -94,7 +94,7 @@ public class RoleServiceImpl extends BaseService<Role> implements RoleService {
 			menus.add(rm);
 			//this.roleMenuMapper.insert(rm);
 		}
-		roleMenuMapper.insertList(menus);
+		roleMenuMapper.insertByBatch(menus);
 	}
 
 	@Override

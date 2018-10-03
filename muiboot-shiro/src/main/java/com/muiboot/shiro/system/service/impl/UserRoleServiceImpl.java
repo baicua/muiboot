@@ -39,7 +39,7 @@ public class UserRoleServiceImpl extends BaseService<UserRole> implements UserRo
 
 	@Override
 	public void insertList(List<UserRole> userRoles) {
-		userRoleMapper.insertList(userRoles);
+		userRoleMapper.insertByBatch(userRoles);
 	}
 
 }

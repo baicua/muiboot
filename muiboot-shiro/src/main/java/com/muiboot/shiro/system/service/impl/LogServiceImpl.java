@@ -83,7 +83,7 @@ public class LogServiceImpl extends BaseService<SysLog> implements LogService {
 					CollectionUtils.addAll(copy,scheduledList.iterator());
 					scheduledList.clear();
 					hasSubmit.compareAndSet(false,true);
-					logMapper.insertList(copy);
+					logMapper.insertByBatch(copy);
 				}
 			},3000, TimeUnit.MILLISECONDS);
 		}
