@@ -57,6 +57,7 @@ public class Menu extends BaseModel implements Serializable {
 	private Date createTime;
 
 	@Column(name = "MODIFY_TIME")
+	@ExportConfig(value = "修改时间", convert = "c:com.muiboot.shiro.common.util.poi.convert.TimeConvert")
 	private Date modifyTime;
 
 	/**

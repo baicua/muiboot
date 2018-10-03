@@ -1,5 +1,6 @@
 package com.muiboot.shiro.system.domain;
 
+import com.muiboot.shiro.common.annotation.ExportConfig;
 import com.muiboot.shiro.common.domain.BaseModel;
 
 import java.io.Serializable;
@@ -13,18 +14,21 @@ public class SysGroup extends BaseModel implements Serializable {
      */
     @Id
     @Column(name = "GROUP_ID")
+    @ExportConfig(value = "机构编号")
     private Long groupId;
 
     /**
      * 上级机构ID
      */
     @Column(name = "PARENT_ID")
+    @ExportConfig(value = "上级机构")
     private Long parentId;
 
     /**
      * 机构名称
      */
     @Column(name = "GROUP_NAME")
+    @ExportConfig(value = "机构名称")
     private String groupName;
 
     /**
@@ -37,48 +41,56 @@ public class SysGroup extends BaseModel implements Serializable {
      * 创建时间
      */
     @Column(name = "CREATE_TIME")
+    @ExportConfig(value = "创建时间",convert = "c:com.muiboot.shiro.common.util.poi.convert.TimeConvert")
     private Date createTime;
 
     /**
      * 机构类型
      */
     @Column(name = "GROUP_TYPE")
+    @ExportConfig(value = "机构类型", convert = "s:1=机关,2=部门")
     private String groupType;
 
     /**
      * 机构全称
      */
     @Column(name = "GROUP_FULL_NAME")
+    @ExportConfig(value = "机构全称")
     private String groupFullName;
 
     /**
      * 部门描述
      */
     @Column(name = "DESCRIPTION")
+    @ExportConfig(value = "机构描述")
     private String description;
 
     /**
      * 有效性，有效：禁用否，无效：禁用是
      */
     @Column(name = "VALID")
+    @ExportConfig(value = "机构状态", convert = "s:0=禁用,1=启用")
     private String valid;
 
     /**
      * 电话号码
      */
     @Column(name = "TEL")
+    @ExportConfig(value = "电话号码")
     private String tel;
 
     /**
      * 电子邮箱
      */
     @Column(name = "EMAIL")
+    @ExportConfig(value = "电子邮箱")
     private String email;
 
     /**
      * 行政区划
      */
     @Column(name = "AREA_CODE")
+    @ExportConfig(value = "行政区划")
     private String areaCode;
 
     /**

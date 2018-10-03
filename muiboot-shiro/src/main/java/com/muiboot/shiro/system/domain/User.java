@@ -88,7 +88,7 @@ public class User extends BaseModel implements Serializable{
 	private Date lastLoginTime;
 
 	@Column(name = "SSEX")
-	@ExportConfig(value = "性别", convert = "s:0=男,1=女,2=保密")
+	@ExportConfig(value = "性别", convert = "s:1=男,2=女")
 	private String ssex;
 
 	@Column(name = "THEME")
