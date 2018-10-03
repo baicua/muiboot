@@ -177,8 +177,8 @@ public class DictServiceImpl extends BaseService<SysDic> implements DictService 
 		if (null!=maps){
 			res = new LinkedHashMap();
 			for (Map map:maps){
-				if (null!=map.get("k")){
-					res.put(map.get("k"),map.get("v"));
+				if (null!=map.get("K")){
+					res.put(map.get("K"),map.get("V"));
 				}
 			}
 		}
@@ -242,11 +242,11 @@ public class DictServiceImpl extends BaseService<SysDic> implements DictService 
 	private void buildMapTrees(List<LayerTree<Map>> trees, List<Map> maps,SysDic dic) {
 		for (Map map : maps) {
 			LayerTree<Map> tree = new LayerTree<>();
-			tree.setId(String.valueOf(map.get("k")));
-			tree.setParentId(String.valueOf(map.get("p")));
-			tree.setName(String.valueOf(map.get("v")));
+			tree.setId(String.valueOf(map.get("K")));
+			tree.setParentId(String.valueOf(map.get("P")));
+			tree.setName(String.valueOf(map.get("V")));
 			if("1".equals(dic.getShowIcon())){
-				Object icon=map.get("i");
+				Object icon=map.get("I");
 				if (null==icon){
 					tree.setIcon("layui-icon layui-icon-group");
 				}else {
