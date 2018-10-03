@@ -204,6 +204,7 @@
                     put(r.msg);
                     try {
                         init();
+                        form.render();
                     }catch(e) {
                         console.error(e.message);
                         return false;
