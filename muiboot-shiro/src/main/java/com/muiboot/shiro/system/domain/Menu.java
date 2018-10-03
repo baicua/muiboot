@@ -11,7 +11,7 @@ import javax.persistence.Table;
 import com.muiboot.shiro.common.annotation.ExportConfig;
 import com.muiboot.shiro.common.domain.BaseModel;
 
-@Table(name = "T_MENU")
+@Table(name = "M_MENU")
 public class Menu extends BaseModel implements Serializable {
 
 	private static final long serialVersionUID = 7187628714679791771L;

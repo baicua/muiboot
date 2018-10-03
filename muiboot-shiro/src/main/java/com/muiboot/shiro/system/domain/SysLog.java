@@ -11,7 +11,7 @@ import javax.persistence.Transient;
 
 import com.muiboot.shiro.common.annotation.ExportConfig;
 
-@Table(name = "T_LOG")
+@Table(name = "M_LOG")
 public class SysLog implements Serializable {
 
 	private static final long serialVersionUID = -8878596941954995444L;

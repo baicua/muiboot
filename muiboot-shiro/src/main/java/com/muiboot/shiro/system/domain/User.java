@@ -12,7 +12,7 @@ import javax.persistence.Transient;
 import com.muiboot.shiro.common.annotation.ExportConfig;
 import com.muiboot.shiro.common.domain.BaseModel;
 
-@Table(name = "T_USER")
+@Table(name = "M_USER")
 public class User extends BaseModel implements Serializable{
 
 	private static final long serialVersionUID = -4852732617765810959L;

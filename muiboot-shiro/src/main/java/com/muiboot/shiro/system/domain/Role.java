@@ -11,7 +11,7 @@ import javax.persistence.Table;
 import com.muiboot.shiro.common.annotation.ExportConfig;
 import com.muiboot.shiro.common.domain.BaseModel;
 
-@Table(name = "T_ROLE")
+@Table(name = "M_ROLE")
 public class Role extends BaseModel implements Serializable {
 
 	private static final long serialVersionUID = -1714476694755654924L;

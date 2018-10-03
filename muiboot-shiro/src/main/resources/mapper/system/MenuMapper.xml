@@ -18,11 +18,11 @@
   </resultMap>
   
   <select id="findUserPermissions" resultMap="menu">
-  	select m.PERMS from T_ROLE r
-        left join T_USER_ROLE ur on(r.ROLE_ID = ur.ROLE_ID) 
-        left join T_USER u on(u.USER_ID = ur.USER_ID)
-        left join T_ROLE_MENU rm on(rm.ROLE_ID = r.ROLE_ID) 
-        left join T_MENU m on(m.MENU_ID = rm.MENU_ID )
+  	select m.PERMS from M_ROLE r
+        left join M_USER_ROLE ur on(r.ROLE_ID = ur.ROLE_ID)
+        left join M_USER u on(u.USER_ID = ur.USER_ID)
+        left join M_ROLE_MENU rm on(rm.ROLE_ID = r.ROLE_ID)
+        left join M_MENU m on(m.MENU_ID = rm.MENU_ID )
         where 1=1
       <if test="userName != null and userName != ''">
           AND u.USERNAME = #{userName}
@@ -31,24 +31,24 @@
   </select>
   
   <select id="findUserMenus" resultMap="menu">
-      select m.* from T_MENU m
+      select m.* from M_MENU m
       where m.TYPE = 0 and m.MENU_ID in
-      (select distinct rm.MENU_ID from T_ROLE_MENU rm
-      left join T_ROLE r on(rm.ROLE_ID = r.ROLE_ID)
-      left join T_USER_ROLE ur on(ur.ROLE_ID = r.ROLE_ID)
-      left join T_USER u on (u.USER_ID = ur.USER_ID)
+      (select distinct rm.MENU_ID from M_ROLE_MENU rm
+      left join M_ROLE r on(rm.ROLE_ID = r.ROLE_ID)
+      left join M_USER_ROLE ur on(ur.ROLE_ID = r.ROLE_ID)
+      left join M_USER u on (u.USER_ID = ur.USER_ID)
       where 1=1
       <if test="userName != null and userName != ''">
           AND u.USERNAME = #{userName}
       </if>)order by m.ORDER_NUM
   </select>
     <select id="findUserAuths" resultMap="menu">
-        select m.* from T_MENU m
+        select m.* from M_MENU m
         where m.MENU_ID in
-        (select distinct rm.MENU_ID from T_ROLE_MENU rm
-        left join T_ROLE r on(rm.ROLE_ID = r.ROLE_ID)
-        left join T_USER_ROLE ur on(ur.ROLE_ID = r.ROLE_ID)
-        left join T_USER u on (u.USER_ID = ur.USER_ID)
+        (select distinct rm.MENU_ID from M_ROLE_MENU rm
+        left join M_ROLE r on(rm.ROLE_ID = r.ROLE_ID)
+        left join M_USER_ROLE ur on(ur.ROLE_ID = r.ROLE_ID)
+        left join M_USER u on (u.USER_ID = ur.USER_ID)
         where 1=1
         <if test="userName != null and userName != ''">
             AND u.USERNAME = #{userName}
@@ -57,15 +57,15 @@
     </select>
 
     <select id="findByRole" resultMap="menu">
-  	select m.* from T_MENU m
-  	    left join T_ROLE_MENU rm on(rm.MENU_ID = m.MENU_ID)
-  	    left join T_ROLE r on(rm.ROLE_ID = r.ROLE_ID)
+  	select m.* from M_MENU m
+  	    left join M_ROLE_MENU rm on(rm.MENU_ID = m.MENU_ID)
+  	    left join M_ROLE r on(rm.ROLE_ID = r.ROLE_ID)
         where r.ROLE_ID = #{roleId}
     </select>
   
    <update id="changeToTop" parameterType="java.util.List">
-  	update T_MENU set PARENT_ID = 0 where MENU_ID in ( select a.MENU_ID from (
-  	(select MENU_ID from T_MENU where PARENT_ID in
+  	update M_MENU set PARENT_ID = 0 where MENU_ID in ( select a.MENU_ID from (
+  	(select MENU_ID from M_MENU where PARENT_ID in
   	<foreach collection="list" item="menuId" index="index" open="(" close=")" separator=",">
   		#{menuId}
   	</foreach>
