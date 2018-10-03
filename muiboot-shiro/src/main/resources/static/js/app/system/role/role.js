@@ -53,6 +53,18 @@
         });
         return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
     });
+    form.on('submit(search-user)', function($data){
+        var organId=$("#role-organId").val();
+        var realName=$("#role-realName").val();
+        var data = {};data.organId=organId;data.realName=realName;
+        table.reload('lay-user-grout', {
+            where: $.extend({},data)//设定异步数据接口的额外参数，任意设
+            ,page: {
+                curr: 1 //重新从第 1 页开始
+            }
+        });
+        return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+    });
     $("#addBtn").on("click", function (r) {
         method.add();
     });
@@ -144,7 +156,7 @@
                             title: "用户授权("+roleNames.join("、")+")",
                             type: 1,
                             skin: 'layui-layer-rim', //加上边框
-                            area: ['640px', '400px'], //宽高
+                            area: ['640px', '480px'], //宽高
                             content: html,
                             btn: ['保存', '关闭'],
                             btnAlign: 'c',
@@ -176,10 +188,10 @@
                 , url: '/user/list' //数据接口
                 , page: true //开启分页
                 , size: 'sm'
-                , height: 'full'
+                , height: '260px'
                 , skin: "line"
                 , cols: [[
-                    {type: 'checkbox',checked:function (d) {debugger;
+                    {type: 'checkbox',checked:function (d) {
                         var checkeds=$("#user-select").find("input[name='userIds']:checked");
                         if(checkeds.length>0){
                             for (var i in checkeds){
