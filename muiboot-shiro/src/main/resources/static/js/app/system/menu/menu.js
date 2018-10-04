@@ -1,49 +1,9 @@
-;$(document).ready(function() {
+;layui.use(['element', 'laytpl','form',"dict","tree"], function () {
     "use strict";
-    //initTreeTable();
     var element,form,laytpl,dict;
-    setTimeout(function(){
-        layui.use(['element', 'laytpl','form',"dict","tree"], function () {
-            element = layui.element,form = layui.form,laytpl = layui.laytpl,dict=layui.dict;
-            dict.load("DIC_MENU_TYPE,DIC_MENU_DATA,DIC_MENU_TREE");
-            element.init();
-            menuMethod.resetTree('#menuTree',true);
-            form.render();
-        });
-    },100);
-    $("#addBtn").on("click",function (r) {
-        menuMethod.add($("#menuInfoPanle table").attr("data-name-menu"));
-    });
-    $("#updBtn").on("click",function (r) {
-        menuMethod.update($("#menuInfoPanle table").attr("data-name-menu"));
-    });
-    $("#expBtn").on("click",function (r) {
-        menuMethod.expMenu();
-    });
-    $("#delBtn").on("click",function (r) {
-        menuMethod.delMenu($("#menuInfoPanle table").attr("data-name-menu"),"菜单");
-    });
-    $("#menuButtonPanle").on("click","i[function='del']",function (r) {
-        var menuid=$(this).attr("permissionid");
-        if(!menuid){
-            layer.msg('获取按钮信息失败');
-            return;
-        }
-        menuMethod.delMenu(menuid,"按钮权限");
-
-    });
-    $("#menuButtonPanle").on("click","a",function (r) {
-        var menuid=$(this).attr("permissionid");
-        if(!menuid){
-            layer.msg('获取按钮信息失败');
-            return;
-        }
-        menuMethod.update(menuid);
-
-    });
-    $("#menuAuthPanle").on("click","a",function (r) {
-        layer.msg('还未开发相应功能');
-    });
+    element = layui.element,form = layui.form,laytpl = layui.laytpl,dict=layui.dict;
+    dict.load("DIC_MENU_TYPE,DIC_MENU_DATA,DIC_MENU_TREE");
+    element.init();
     var menuMethod =(function() {
         var menuModel ='<fieldset class="layui-elem-field layui-anim layui-anim-up"><legend>-----</legend><form class="layui-form" action=""><div class="layui-row"><div class="layui-col-md6 layui-col-xs12"><label class="layui-form-label" lable-verify="required">菜单名称:</label><div class="layui-input-block"><input type="text" name="menuName" value="{{d.menuName||\"\"}}" lay-verify="required" placeholder="请输入菜单名称"  class="layui-input"><input type="text" name="menuId" value="{{d.menuId||\"\"}}" hidden></div></div><div class="layui-col-md6 layui-col-xs12"><label class="layui-form-label" lable-verify="required">菜单类型:</label><div class="layui-input-block"><input type="radio" lay-verify="radio" name="type" value="0" title="菜单" {{#if(d.type == 0){ }}checked{{#}}}><input type="radio" lay-verify="radio" name="type" value="1" title="按钮" {{#if(d.type == 1){ }}checked{{#}}}></div></div></div><div class="layui-row"><div class="layui-col-md6 layui-col-xs12"><label class="layui-form-label">上级菜单:</label><div class="layui-input-block"><input type="text" dic-map="DIC_MENU_TREE" name="parentId" value="{{d.parentId||\"\"}}"  placeholder="请输入上级菜单"  class="layui-input dic-tree"></div></div><div class="layui-col-md6 layui-col-xs12"><label class="layui-form-label">菜单图标:</label><div class="layui-input-block"><input type="text" name="icon" value="{{d.icon||\"\"}}" placeholder="请输入菜单图标"  class="layui-input"></div></div></div><div class="layui-row"><div class="layui-col-md6 layui-col-xs12"><label class="layui-form-label">权限描述:</label><div class="layui-input-block"><input type="text" name="perms" value="{{d.perms||\"\"}}" placeholder="请输入权限描述"  class="layui-input"></div></div><div class="layui-col-md6 layui-col-xs12"><label class="layui-form-label">菜单地址:</label><div class="layui-input-block"><input type="text" name="url" value="{{d.url||\"\"}}" placeholder="请输入菜单地址"  class="layui-input"></div></div></div><div class="layui-row"><div class="layui-col-md6 layui-col-xs12"><label class="layui-form-label">菜单排序:</label><div class="layui-input-block"><input type="text" name="orderNum" value="{{d.orderNum||\"\"}}" placeholder="请输入菜单排序"  class="layui-input"></div></div><div class="layui-col-md6 layui-col-xs12"><div class="layui-input-block"></div></div></div></form></fieldset>';
         var loadModel=function(data,title,url){
@@ -169,7 +129,7 @@
             resetTree:function(id,noloading){
                 $MB.layerGet({url:ctx+"menu/tree", cache:true,noloading:noloading},function (data) {
                     var nodes=$.extend([], data.msg.children);
-                   $(id).empty();
+                    $(id).empty();
                     layui.tree({
                         elem: id
                         ,nodes:nodes
@@ -183,4 +143,39 @@
             }
         }
     })(jQuery);
+    menuMethod.resetTree('#menuTree',true);
+    //form.render();
+    $("#addBtn").on("click",function (r) {
+        menuMethod.add($("#menuInfoPanle table").attr("data-name-menu"));
+    });
+    $("#updBtn").on("click",function (r) {
+        menuMethod.update($("#menuInfoPanle table").attr("data-name-menu"));
+    });
+    $("#expBtn").on("click",function (r) {
+        menuMethod.expMenu();
+    });
+    $("#delBtn").on("click",function (r) {
+        menuMethod.delMenu($("#menuInfoPanle table").attr("data-name-menu"),"菜单");
+    });
+    $("#menuButtonPanle").on("click","i[function='del']",function (r) {
+        var menuid=$(this).attr("permissionid");
+        if(!menuid){
+            layer.msg('获取按钮信息失败');
+            return;
+        }
+        menuMethod.delMenu(menuid,"按钮权限");
+
+    });
+    $("#menuButtonPanle").on("click","a",function (r) {
+        var menuid=$(this).attr("permissionid");
+        if(!menuid){
+            layer.msg('获取按钮信息失败');
+            return;
+        }
+        menuMethod.update(menuid);
+
+    });
+    $("#menuAuthPanle").on("click","a",function (r) {
+        layer.msg('还未开发相应功能');
+    });
 });

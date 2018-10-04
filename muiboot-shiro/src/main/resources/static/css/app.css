@@ -82,11 +82,11 @@ input.layui-form-danger[type=radio] + div.layui-form-radio>i{
   padding: 0 0px;
 }
 .mb-banner .breadcrumb>a,.mb-banner .breadcrumb>a>i{
-  font-size: 12px;
+  font-size: 14px;
 }
 .mb-banner.layui-card-header{
-  height: 20px;
-  line-height: 20px;
+  height: 25px;
+  line-height: 25px;
   padding: 0 5px;
   border-bottom: 1.5px solid #f2f2f2;
 }

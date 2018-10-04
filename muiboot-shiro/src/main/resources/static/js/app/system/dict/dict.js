@@ -1,30 +1,11 @@
 ;$(document).ready(function() {
     "use strict";
-    //initTreeTable();
     var element,form,laytpl,dict;
     layui.use(['element', 'laytpl','form','dict'], function () {
         element = layui.element,form = layui.form,laytpl = layui.laytpl,dict=layui.dict;
         element.init();
         dict.load("DIC_DIC_TYPE,DIC_YESORNO,DIC_VALID,DIC_CATEGORY_TREE,DIC_CATEGORY_TABLE");
         form.render();
-    });
-    setTimeout(function(){
-        method.resetTree(true);
-    },100);
-    $("#addBtn").on("click",function (r) {
-        method.add($("#dicInfoPanle table").attr("data-name-dic"));
-    });
-    $("#updBtn").on("click",function (r) {
-        method.update($("#dicInfoPanle table").attr("data-name-dic"));
-    });
-    $("#expBtn").on("click",function (r) {
-        method.exp();
-    });
-    $("#search_input_span").on("click",function (r) {
-        method.resetTree();
-    });
-    $("#delBtn").on("click",function (r) {
-        method.del($("#dicInfoPanle table").attr("data-name-dic"),"字典");
     });
     var method =(function() {
         var menuModel = "";
@@ -172,18 +153,34 @@
                 var data = {dicName:dicName};
                 $MB.layerGet({url:ctx+"dict/tree",data:data,cache:false,noloading:noloading},function (data) {
                     var nodes=$.extend([], data.msg.children);
-                   $("#dicTree").empty();
+                    $("#dicTree").empty();
                     layui.tree({
                         elem: '#dicTree'
                         ,nodes:nodes
                         ,click: function(node){
                             method.refresh(node.id);
                             if($MB.isMobile())
-                            $("body .layui-body").animate({scrollTop: $("#dicInfoPanle").parents(".site-tips").offset().top }, {duration: 500,easing: "swing"});
+                                $("body .layui-body").animate({scrollTop: $("#dicInfoPanle").parents(".site-tips").offset().top }, {duration: 500,easing: "swing"});
                         }
                     });
                 });
             }
         }
     })(jQuery);
+    method.resetTree(true);
+    $("#addBtn").on("click",function (r) {
+        method.add($("#dicInfoPanle table").attr("data-name-dic"));
+    });
+    $("#updBtn").on("click",function (r) {
+        method.update($("#dicInfoPanle table").attr("data-name-dic"));
+    });
+    $("#expBtn").on("click",function (r) {
+        method.exp();
+    });
+    $("#search_input_span").on("click",function (r) {
+        method.resetTree();
+    });
+    $("#delBtn").on("click",function (r) {
+        method.del($("#dicInfoPanle table").attr("data-name-dic"),"字典");
+    });
 });
