@@ -7,7 +7,7 @@
             element = layui.element,form = layui.form,laytpl = layui.laytpl,dict=layui.dict;
             dict.load("DIC_MENU_TYPE,DIC_MENU_DATA,DIC_MENU_TREE");
             element.init();
-            menuMethod.resetTree('#menuTree');
+            menuMethod.resetTree('#menuTree',true);
             form.render();
         });
     },100);
@@ -166,8 +166,8 @@
                     return false;
                 });
             },
-            resetTree:function(id){
-                $MB.layerGet({url:ctx+"menu/tree", cache:true},function (data) {
+            resetTree:function(id,noloading){
+                $MB.layerGet({url:ctx+"menu/tree", cache:true,noloading:noloading},function (data) {
                     var nodes=$.extend([], data.msg.children);
                    $(id).empty();
                     layui.tree({
