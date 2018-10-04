@@ -155,6 +155,7 @@ a.btnStyle.btnregister:hover {
 	color: #ffffff;
 	padding-bottom: 22px;
 	font-family: "΢ź";
+    text-align: center;
 }
 .ui-form-item {
 	margin-bottom: 10px;
@@ -227,7 +228,7 @@ a.btn-register:hover {
 	text-align: center;
 }
 .login-center {
-	background: url(../images/login-center-bg.png) center center no-repeat;
+	background: url(../images/login-center-bg.jpg) center center no-repeat;
 	width: 1190px;
 	height: 140px;
 	margin: 20px auto 0px auto;

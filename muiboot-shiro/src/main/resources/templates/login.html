@@ -30,11 +30,12 @@
 <body>
 <div class="wrapper" style="background-color: white;">
     <div class="login-top">
-        <div style="height: 60px;background-color: white;">
-            <div style=";margin-left: 80px;">
-                <img data-th-src="@{cache/images/log_1.png}"/>
+        <div style="background-color: white;height: 30px;">
+            <div style=";margin-left: 20px;float:left; margin-top: 9px;color: #0C0C0C">
+                <!--<img data-th-src="@{cache/images/log_1.png}"/>-->
+                <!--<h1>MUIBOOT权限管理系统</h1>-->
             </div>
-            <div style="float:right;margin-top: -34px;width: 360px;font-size: 12px;">
+            <div style="float:right;font-size: 12px;margin-right:10px;margin-top: 32px;">
                 <span>返回首页</span>
                 <span>|</span>
                 <span>登录帮助</span>
@@ -48,7 +49,7 @@
                     <!--在点击注册时出现样式login-topStyle3登录框，而login-topStyle2则消失-->
                     <form class="login-form col s12">
                     <div class="login-topStyle3" id="loginStyle" style="margin-top: 75px;">
-                        <h3>用户平台登录</h3>
+                        <h3>权限管理系统</h3>
                         <!--输入错误提示信息，默认是隐藏的，把display:none，变成block可看到-->
                         <div class="error-information" style="display:none;">您输入的密码不正确，请重新输入</div>
                         <div class="ui-form-item loginUsername">
@@ -68,7 +69,7 @@
             </div>
         </div>
     </div>
-    <div class="loginCen" style="margin-top: 55px;">
+    <div class="loginCen" style="margin-top: 30px;">
         <div class="login-center">
             <div class="loginCenter-moudle">
                 <div class="loginCenter-moudleLeft" style="margin-right: 60px;"> &nbsp;</div>
@@ -101,7 +102,9 @@
             </div>
         </div>
     </div>
-    <div class="footer"> <span class="footerText">Copyright © 1995-2018 www.baicu.com</span> </div>
+    <div class="footer">
+        <span class="footerText">Copyright © 1995-2018 www.baicu.com</span>
+    </div>
 </div>
 </body>
 <script th:inline="javascript">
