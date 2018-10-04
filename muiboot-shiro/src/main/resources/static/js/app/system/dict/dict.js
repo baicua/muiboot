@@ -9,7 +9,7 @@
         form.render();
     });
     setTimeout(function(){
-        method.resetTree();
+        method.resetTree(true);
     },100);
     $("#addBtn").on("click",function (r) {
         method.add($("#dicInfoPanle table").attr("data-name-dic"));
@@ -167,10 +167,10 @@
                     return false;
                 });
             },
-            resetTree:function(){
+            resetTree:function(noloading){
                 var dicName =$("#search_input_dic").val();
                 var data = {dicName:dicName};
-                $MB.layerGet({url:ctx+"dict/tree",data:data,cache:false},function (data) {
+                $MB.layerGet({url:ctx+"dict/tree",data:data,cache:false,noloading:noloading},function (data) {
                     var nodes=$.extend([], data.msg.children);
                    $("#dicTree").empty();
                     layui.tree({

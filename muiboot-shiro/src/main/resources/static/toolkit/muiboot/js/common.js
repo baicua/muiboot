@@ -110,7 +110,7 @@ var $MB = (function() {
             async:params.async,
             cache:params.cache,
             beforeSend: function () {
-                if(!$MB.getLoading(1)){
+                if((!params.noloading)&&!$MB.getLoading(1)){
                     $MB.setLoading(layer.load(3,{shade: [0.01,'#fff']}));
                 }
             },

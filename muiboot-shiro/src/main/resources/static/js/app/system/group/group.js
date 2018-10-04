@@ -6,7 +6,7 @@
     dict.load("DIC_GROUP_TYPE,DIC_ORGAN_TREE,DIC_DISABLE,DIC_ORGAN_TABLE");
     form.render();
     setTimeout(function(){
-        method.resetTree();
+        method.resetTree(true);
     },100);
     $("#addBtn").on("click",function (r) {
         method.add("");
@@ -134,7 +134,7 @@
                     $MB.layerPost({url: url, data: layero.find("form").serialize()}, function (r) {
                         if (r.code == 0) {
                             layer.msg(r.msg);
-                            method.resetTree();
+                            method.resetTree(false);
                             callback();
                         } else {
                             layer.msg(r.msg,{skin: 'mb-warn'});
@@ -144,10 +144,10 @@
                     return false;
                 });
             },
-            resetTree:function(){
+            resetTree:function(noloading){
                 var groupName =$("#search_input").val();
                 var data = {groupName:groupName};
-                $MB.layerGet({url:ctx+"group/tree",data:data},function (data) {
+                $MB.layerGet({url:ctx+"group/tree",data:data,noloading:noloading},function (data) {
                     var nodes=$.extend([], data.msg.children);
                     if(nodes.length>0&&nodes[0].children.length>0){
                         nodes[0].spread=true;
