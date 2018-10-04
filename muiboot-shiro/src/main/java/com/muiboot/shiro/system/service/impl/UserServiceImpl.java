@@ -8,7 +8,7 @@ import java.util.List;
 import com.muiboot.shiro.common.exception.BusinessException;
 import com.muiboot.shiro.common.service.impl.BaseService;
 import com.muiboot.shiro.common.util.MD5Utils;
-import com.muiboot.shiro.common.util.ShiroUtil;
+import com.muiboot.shiro.system.controller.SysConstant;
 import com.muiboot.shiro.system.dao.UserMapper;
 import com.muiboot.shiro.system.domain.SysGroup;
 import com.muiboot.shiro.system.domain.User;
@@ -101,7 +101,11 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
 		user.setTheme(User.DEFAULT_THEME);
 		user.setAvatar(User.DEFAULT_AVATAR);
 		if (StringUtils.isBlank(user.getPassword())){
-			user.setPassword("111111");
+			if (StringUtils.isNotBlank(user.getMobile())){
+				user.setPassword(user.getMobile());
+			}else {
+				user.setPassword(SysConstant.INIT_USER_PWD);
+			}
 		}
 		user.setPassword(MD5Utils.encrypt(user.getUsername(),user.getPassword()));
 		User u=this.findByName(user.getUsername());
@@ -109,6 +113,9 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
 			throw new BusinessException(String.format("用户名【%s】已经存在！",u.getUsername()));
 		}
 		this.save(user);
+		if (roles==null){
+			roles=new Long[]{SysConstant.BASE_ROLE_KEY};
+		}
 		setUserRoles(user, roles);
 	}
 
