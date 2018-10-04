@@ -93,9 +93,13 @@
                     ,btn: ['确定', '取消']
                     ,yes: function(index){
                         layer.close(index);
-                        $MB.layerPost({url:"/dict/delete",data:{"ids": dicId},cache:false},function (data) {
-                            layer.msg(data.msg);
-                            method.resetTree();
+                        $MB.layerPost({url:"/dict/delete",data:{"ids": dicId},cache:false},function (r) {
+                            if (r.code == 0) {
+                                layer.msg(r.msg);
+                                method.resetTree();
+                            } else {
+                                layer.msg(r.msg,{skin: 'mb-warn'});
+                            }
                         });
                     }
                 });

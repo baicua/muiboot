@@ -3,7 +3,9 @@ package com.muiboot.shiro.system.controller;
 import java.util.List;
 import java.util.Map;
 
+import com.muiboot.shiro.common.exception.BusinessException;
 import com.muiboot.shiro.common.util.ShiroUtil;
+import com.muiboot.shiro.system.domain.UserWithRole;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,7 @@ import com.muiboot.shiro.common.util.FileUtils;
 import com.muiboot.shiro.common.util.MD5Utils;
 import com.muiboot.shiro.system.domain.User;
 import com.muiboot.shiro.system.service.UserService;
+import tk.mybatis.mapper.entity.Example;
 
 @Controller
 public class UserController extends BaseController {
@@ -65,6 +68,24 @@ public class UserController extends BaseController {
 		}
 		List<User> list = this.userService.findUserWithDept(user);
 		PageInfo<User> pageInfo = new PageInfo<>(list);
+		return getDataTable(pageInfo);
+	}
+
+	@RequestMapping("user/user-role")
+	@ResponseBody
+	public Map<String, Object> userList(QueryRequest request, UserWithRole userRole) {
+		if (userRole.getRoleId()==null){
+			return null;
+		}
+		if (null==userRole.getOrganId()){
+			boolean allPermit=ShiroUtil.getSubject().isPermitted("user:all");//有全局权限
+			if(!allPermit){
+				userRole.setOrganId(ShiroUtil.getCurrentUser().getOrganId());
+			}
+		}
+		PageHelper.startPage(request.getPage(), request.getLimit());
+		List<UserWithRole> list = this.userService.findUserByRole(userRole);
+		PageInfo<UserWithRole> pageInfo = new PageInfo<>(list);
 		return getDataTable(pageInfo);
 	}
 

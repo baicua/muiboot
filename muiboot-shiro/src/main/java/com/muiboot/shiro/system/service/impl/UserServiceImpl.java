@@ -202,4 +202,9 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
 		this.updateNotNull(user);
 	}
 
+	@Override
+	public List<UserWithRole> findUserByRole(UserWithRole userRole) {
+		return this.userMapper.findUserByRole(userRole);
+	}
+
 }

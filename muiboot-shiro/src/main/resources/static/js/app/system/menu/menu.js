@@ -71,10 +71,14 @@
                     ,btn: ['确定', '取消']
                     ,yes: function(index){
                         layer.close(index);
-                        $MB.layerPost({url:ctx + "menu/delete",data:{"ids": menuId},cache:false},function (data) {
-                            layer.msg(data.msg);
-                            menuMethod.resetTree('#menuTree');
-                            menuMethod.refresh($("#menuInfoPanle table").attr("data-name-menu"));
+                        $MB.layerPost({url:ctx + "menu/delete",data:{"ids": menuId},cache:false},function (r) {
+                            if (r.code == 0) {
+                                layer.msg(r.msg);
+                                menuMethod.resetTree('#menuTree');
+                                menuMethod.refresh($("#menuInfoPanle table").attr("data-name-menu"));
+                            } else {
+                                layer.msg(r.msg,{skin: 'mb-warn'});
+                            }
                         });
                     }
                 });

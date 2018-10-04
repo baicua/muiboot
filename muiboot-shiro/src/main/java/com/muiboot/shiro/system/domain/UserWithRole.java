@@ -6,16 +6,16 @@ public class UserWithRole extends User{
 	
 	private static final long serialVersionUID = -5680235862276163462L;
 	
-	private Long RoleId;
+	private Long roleId;
 	
 	private List<Long> roleIds;
 
 	public Long getRoleId() {
-		return RoleId;
+		return roleId;
 	}
 
 	public void setRoleId(Long roleId) {
-		RoleId = roleId;
+		this.roleId = roleId;
 	}
 
 	public List<Long> getRoleIds() {

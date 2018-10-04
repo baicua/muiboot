@@ -15,7 +15,11 @@
         ,cols: [[
             {type:'checkbox'}
             ,{field: 'roleId', title: 'roleId'}
-            ,{field:'roleKey', title: '角色编号'}
+            ,{field:'roleKey', title: '角色编号',
+                templet: function (d) {
+                return '<a href="javascript:;" title="查看角色所有权限用户" class="layui-table-link role-cat" data-roleId="'+ d.roleId+'" >'+ d.roleKey + '</a>';
+                 }
+            }
             ,{field:'roleName', title: '角色名'}
             ,{field:'roleLevel', title: '角色级别',
                 templet: function (d) {
@@ -28,6 +32,11 @@
         ]],
         done: function (res, curr, count) {
             dict.render($('.layui-table [dic-map]'));
+            $('.role-cat').on('click',function (e) {
+                var $this=$(this);
+                var roleId = $this.attr('data-roleId');
+                method.cat(roleId);
+            })
         }
     });
     form.on('submit(search)', function($data){
@@ -181,6 +190,46 @@
                 layer.msg('请求数据异常：' + e.message,{skin: 'mb-warn'});
             }
         }
+        function cat(roleId) {
+            if (!roleId) {
+                layer.msg('查看角色权限信息失败！');
+                return false;
+            }
+            layer.open({
+                title: "用户列表",
+                type: 1,
+                skin: 'layui-layer-rim', //加上边框
+                area: ['640px', '400px'], //宽高
+                content: '<div class="layui-row"><table class="layui-hide" id="role-user-list"></table> </div>',
+                success: function (layero, index) {
+                    table.render({
+                        id: 'lay-role-user'
+                        , elem: '#role-user-list'
+                        , url: '/user/user-role' //数据接口
+                        , page: true //开启分页
+                        , size: 'sm'
+                        , height: '300px'
+                        , skin: "line"
+                        , cols: [[
+                            {field: 'userId', title: 'userId', hide: true}
+                            , {field: 'username', title: '用户名'}
+                            , {field: 'realName', title: '真实名'}
+                            , {
+                                field: 'organId', title: '所属机关', templet: function (d) {
+                                    return '<span class="dic-text" dic-map="DIC_ORGAN_TABLE">' + d.organId + '</span>';
+                                }
+                            }
+                            , {field: 'groupName', title: '所属部门'}
+                            , {field: 'mobile', title: '手机号'}
+                        ]],
+                        where: {roleId:roleId},
+                        done: function (res, curr, count) {
+                            dict.render($('.layui-table [dic-map]'));
+                        }
+                    });
+                }
+            });
+        }
         function loadusers() {
             table.render({
                 id: 'lay-user-grout'
@@ -291,9 +340,13 @@
                             url: "/role/delete",
                             data: {"ids": roleArr.join(",")},
                             cache: false
-                        }, function (data) {
-                            layer.msg(data.msg);
-                            table.reload('lay-role-list', {page: {curr: 1}});
+                        }, function (r) {
+                            if (r.code == 0) {
+                                layer.msg(r.msg);
+                                table.reload('lay-role-list', {page: {curr: 1}});
+                            } else {
+                                layer.msg(r.msg,{skin: 'mb-warn'});
+                            }
                         });
                     }
                 });
@@ -319,6 +372,9 @@
             },
             grant:function (checkStatus) {
                 grant(checkStatus);
+            },
+            cat:function (roleId) {
+                cat(roleId);
             }
         }
     })(jQuery);
