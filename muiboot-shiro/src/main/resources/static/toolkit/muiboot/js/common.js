@@ -111,7 +111,7 @@ var $MB = (function() {
             cache:params.cache,
             beforeSend: function () {
                 if(!$MB.getLoading(1)){
-                    $MB.setLoading(layer.load(0,{shade: [0.01,'#fff']}));
+                    $MB.setLoading(layer.load(3,{shade: [0.01,'#fff']}));
                 }
             },
             success: function (data) {
