@@ -1,18 +1,15 @@
-;$(document).ready(function() {
+;layui.use(['element', 'laytpl','form','dict'], function () {
     "use strict";
-    //initTreeTable();
     var element,form,laytpl,dict;
-    layui.use(['element', 'laytpl','form','dict'], function () {
-        element = layui.element,form = layui.form,laytpl = layui.laytpl,dict=layui.dict;
-        element.init();
-        dict.load("DIC_GROUP_TYPE,DIC_ORGAN_TREE,DIC_DISABLE,DIC_ORGAN_TABLE");
-        form.render();
-    });
+    element = layui.element,form = layui.form,laytpl = layui.laytpl,dict=layui.dict;
+    element.init();
+    dict.load("DIC_GROUP_TYPE,DIC_ORGAN_TREE,DIC_DISABLE,DIC_ORGAN_TABLE");
+    form.render();
     setTimeout(function(){
         method.resetTree();
     },100);
     $("#addBtn").on("click",function (r) {
-        method.add($("#InfoPanle table").attr("data-name-id"));
+        method.add("");
     });
     $("#updBtn").on("click",function (r) {
         method.update($("#InfoPanle table").attr("data-name-id"));
