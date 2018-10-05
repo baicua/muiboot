@@ -58,9 +58,14 @@ public class SysController extends BaseController {
     }
     @RequestMapping("user")
     @RequiresPermissions("user:list")
-    public String index(Model model) {
+    public String user(Model model) {
         User user = super.getCurrentUser();
         model.addAttribute("user", user);
         return "system/user/user";
+    }
+    @RequestMapping("role")
+    @RequiresPermissions("role:list")
+    public String role() {
+        return "system/role/role";
     }
 }

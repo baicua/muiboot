@@ -27,12 +27,6 @@ public class RoleController extends BaseController {
 	@Autowired
 	private RoleService roleService;
 
-	@RequestMapping("role")
-	@RequiresPermissions("role:list")
-	public String index() {
-		return "system/role/role";
-	}
-
 	@RequestMapping("role/list")
 	@ResponseBody
 	public Map<String, Object> roleList(QueryRequest request, Role role) {
