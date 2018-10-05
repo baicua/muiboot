@@ -183,4 +183,35 @@ public class RoleServiceImpl extends BaseService<Role> implements RoleService {
 		}
 	}
 
+	@Override
+	public void grantUser(Long roleId, Long userId) {
+		if (null==roleId||null==userId){
+			throw new BusinessException("授权失败，角色或者用户不能为空！");
+		}
+		UserRole userRole = new UserRole();
+		userRole.setRoleId(roleId);
+		userRole.setUserId(userId);
+		List roleUsers=userRoleService.findByEntity(userRole);
+		if (CollectionUtils.isNotEmpty(roleUsers)){
+			throw new BusinessException("授权失败，该用户已授权选择的角色！");
+		}
+		userRoleService.save(userRole);
+		//UserRole userRole = new UserRole();
+	}
+
+	@Override
+	public void revokeUser(Long roleId, Long userId) {
+		if (null==roleId||null==userId){
+			throw new BusinessException("权限回收失败，角色或者用户不能为空！");
+		}
+		UserRole userRole = new UserRole();
+		userRole.setRoleId(roleId);
+		userRole.setUserId(userId);
+		int hit=userRoleService.delete(userRole);
+		if (hit==0){
+			throw new BusinessException("权限回收失败，没有找到需要删除的权限！");
+		}
+	}
+
+
 }

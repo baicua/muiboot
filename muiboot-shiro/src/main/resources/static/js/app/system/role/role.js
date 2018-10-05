@@ -327,7 +327,7 @@
                                 if(!$('#search-select-user-btn').data('flag')){
                                     checked="checked";
                                 }
-                                return '<input type="checkbox"  lay-skin="primary" value="'+d.userId+'" '+checked+'/>';
+                                return '<input type="checkbox" lay-filter="user-grant"  lay-skin="primary" value="'+d.userId+'" '+checked+'/>';
                             }
                         }
                     ]],
@@ -353,11 +353,60 @@
                     $('#search-select-user-btn').data("flag",false);
                     table.reload('lay-role-users-list', {
                         url: '/user/user-role'
-                        ,where: {roleId:roleId},page: {curr: 1}
+                        ,where: {roleId:roleId,organId:'',realName:''},page: {curr: 1}
                     });
-                })
+                });
+                //监听授权
+                form.on('checkbox(user-grant)', function(obj){
+                    if(obj.elem.checked){//授权
+                        layer.msg('你确定要授予该用户选择的角色吗？', {
+                            time: 0, btn: ['确定', '取消']
+                            , yes: function (index) {
+                                layer.close(index);
+                                $MB.layerPost({
+                                    url: "/role/grantUser",
+                                    data: {"roleId":roleId,"userId":obj.value},
+                                    cache: false
+                                }, function (r) {
+                                    if (r.code == 0) {
+                                        layer.msg(r.msg);
+                                        $("#search-select-user-btn").click();
+                                    } else {
+                                        layer.msg(r.msg,{skin: 'mb-warn'});
+                                        $("#search-select-user-btn").click();
+                                    }
+                                });
+                            }
+                            ,btn2:function (index) {$("#search-role-user-btn").click();}
+                        });
+                    }else {//取消授权
+                        layer.msg('你确定要回收该用户选择的角色吗？', {
+                            time: 0, btn: ['确定', '取消']
+                            , yes: function (index) {
+                                layer.close(index);
+                                $MB.layerPost({
+                                    url: "/role/revokeUser",
+                                    data: {"roleId":roleId,"userId":obj.value},
+                                    cache: false
+                                }, function (r) {
+                                    if (r.code == 0) {
+                                        layer.msg(r.msg);
+                                        $("#search-select-user-btn").click();
+                                    } else {
+                                        layer.msg(r.msg,{skin: 'mb-warn'});
+                                        $("#search-select-user-btn").click();
+                                    }
+                                });
+                            }
+                            ,btn2:function (index) {layer.close(index);$("#search-select-user-btn").click();}
+                        });
+                    }
+                });
             }else {//新增角色
+                //监听授权
+                form.on('checkbox(user-grant)', function(obj){
 
+                });
             }
         }
         return {

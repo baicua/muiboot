@@ -10,6 +10,7 @@ import com.muiboot.shiro.common.util.FileUtils;
 import com.muiboot.shiro.system.domain.Role;
 import com.muiboot.shiro.system.service.RoleService;
 import org.apache.commons.lang.StringUtils;
+import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,7 +36,20 @@ public class RoleController extends BaseController {
 		PageInfo<Role> pageInfo = new PageInfo<>(list);
 		return getDataTable(pageInfo);
 	}
-	
+	@RequestMapping("role/grantUser")
+	@RequiresPermissions("role:add")
+	@ResponseBody
+	public ResponseBo grantUser(Long roleId,Long userId) {
+		roleService.grantUser(roleId,userId);
+		return ResponseBo.ok("授权成功！");
+	}
+	@RequestMapping("role/revokeUser")
+	@RequiresPermissions("role:add")
+	@ResponseBody
+	public ResponseBo revokeUser(Long roleId,Long userId) {
+		roleService.revokeUser(roleId,userId);
+		return ResponseBo.ok("权限回收成功！");
+	}
 	@RequestMapping("role/excel")
 	@ResponseBody
 	public ResponseBo roleExcel(Role role) {

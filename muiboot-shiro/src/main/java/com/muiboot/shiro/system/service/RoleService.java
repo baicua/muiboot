@@ -30,4 +30,9 @@ public interface RoleService extends IService<Role> {
 	 * @param roleIds
 	 */
     void grant(Long[] userIds, Long[] roleIds);
+
+
+	void grantUser(Long roleId, Long userId);
+
+	void revokeUser(Long roleId, Long userId);
 }
