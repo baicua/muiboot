@@ -109,7 +109,7 @@
                         title: '<i class="layui-icon layui-icon-app"></i>&nbsp; '+title,
                         type: 1,
                         skin: 'layui-layer-rim', //加上边框
-                        area: ['640px', '400px'], //宽高
+                        area: ['640px', '480px'], //宽高
                         content: html,
                         btn: ['保存', '关闭'],
                         btnAlign: 'c',
@@ -120,6 +120,7 @@
                             layero.addClass("layui-form");
                             dict.render();
                             layero.find(".layui-layer-btn0").attr("lay-filter", "form-verify").attr("lay-submit", "");
+                            loadRoleUsers(data.roleId);
                             method.onsubmit(layero.find(".layui-layer-btn0"), layero, url, function () {
                                 table.reload('lay-role-list', {page: {curr: 1}});
                             });
@@ -299,6 +300,65 @@
                 $("#select-num").text(checkeds.length);
                 form.render('checkbox');
             });
+        }
+        function loadRoleUsers(roleId) {
+            if(roleId){//修改角色
+                table.render({
+                    id: 'lay-role-users-list'
+                    , elem: '#role-users-list'
+                    , url: '/user/user-role' //数据接口
+                    , page: true //开启分页
+                    , size: 'sm'
+                    , height: '235px'
+                    , skin: "line"
+                    , cols: [[
+                        {field: 'userId', title: 'userId', hide: true}
+                        , {field: 'username', title: '用户名'}
+                        , {field: 'realName', title: '真实名'}
+                        , {
+                            field: 'organId', title: '所属机关', templet: function (d) {
+                                return '<span class="dic-text" dic-map="DIC_ORGAN_TABLE">' + d.organId + '</span>';
+                            }
+                        }
+                        , {field: 'groupName', title: '所属部门'}
+                        , {title: '授权'
+                            , templet: function (d) {
+                                var checked="";
+                                if(!$('#search-select-user-btn').data('flag')){
+                                    checked="checked";
+                                }
+                                return '<input type="checkbox"  lay-skin="primary" value="'+d.userId+'" '+checked+'/>';
+                            }
+                        }
+                    ]],
+                    where: {roleId:roleId},
+                    done: function (res, curr, count) {
+                        if(!$('#search-select-user-btn').data('flag')){
+                            $("#role-users-count").text(count);
+                        }
+                        dict.render($('.layui-table [dic-map]'));
+                    }
+                });
+                $("#search-role-user-btn").on("click",function (e) {
+                    $('#search-select-user-btn').data("flag",true);
+                    var organId=$("#role-organId").val();
+                    var realName=$("#role-realName").val();
+                    var data = {};data.organId=organId;data.realName=realName;
+                    table.reload('lay-role-users-list', {
+                        url: '/user/list'//查询全部用户
+                        ,where: $.extend({},data),page: {curr: 1}
+                    });
+                });
+                $("#search-select-user-btn").on("click",function (e) {
+                    $('#search-select-user-btn').data("flag",false);
+                    table.reload('lay-role-users-list', {
+                        url: '/user/user-role'
+                        ,where: {roleId:roleId},page: {curr: 1}
+                    });
+                })
+            }else {//新增角色
+
+            }
         }
         return {
             add: function () {
