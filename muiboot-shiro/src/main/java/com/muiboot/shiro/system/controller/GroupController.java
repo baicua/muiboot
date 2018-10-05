@@ -25,9 +25,9 @@ public class GroupController extends BaseController{
 
 	@RequestMapping("group/tree")
 	@ResponseBody
-	public ResponseBo getGroupTree() {
+	public ResponseBo getGroupTree(String groupName) {
 		try {
-			LayerTree<SysGroup> tree = this.groupService.getGroupTree();
+			LayerTree<SysGroup> tree = this.groupService.getGroupTree(groupName);
 			return ResponseBo.ok(tree);
 		} catch (Exception e) {
 			e.printStackTrace();

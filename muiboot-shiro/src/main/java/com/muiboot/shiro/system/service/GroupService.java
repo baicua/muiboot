@@ -9,7 +9,7 @@ import com.muiboot.shiro.system.domain.SysGroup;
 
 public interface GroupService extends IService<SysGroup> {
 
-	LayerTree<SysGroup> getGroupTree();
+	LayerTree<SysGroup> getGroupTree(String groupName);
 
 	List<SysGroup> findAllGroups(SysGroup group);
 
