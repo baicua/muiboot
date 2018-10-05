@@ -162,11 +162,14 @@ a.btnStyle.btnregister:hover {
 	font-size: 12px;
 	line-height: 18px;
 }
+.ui-form-item .icon{
+	position: absolute;color: #737272;margin-top: 7px;font-size: 17px;margin-left: 3px;
+}
 .ui-form-item.loginUsername input[name="username"], .ui-form-item.loginPassword input[type="password"] {
 	width: 213px;
 	border: none;
 	border: 1px solid #ffffff;
-	padding: 8px 0px 8px 18px;
+	padding: 8px 0px 8px 20px;
 	
 }
 .ui-form-item.loginPassword {

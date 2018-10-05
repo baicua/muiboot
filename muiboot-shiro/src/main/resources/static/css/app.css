@@ -10,14 +10,14 @@ html {
 }
 ::-webkit-scrollbar-track
 {
-  border-radius: 1px;
+  /*border-radius: 1px;*/
 }
 ::-webkit-scrollbar-thumb
 {
-  border-radius: 1px;
+  /*border-radius: 1px;*/
   background: rgba(0,0,0,.1);
 }
-::-webkit-scrollbar{width:8px;background:#f5f5f5;border-radius:4px}::-webkit-scrollbar-track,::-webkit-scrollbar-thumb{border-radius:4px}::-webkit-scrollbar-thumb{min-height:20px;background-clip:content-box;box-shadow:0 0 0 5px #e0e0e0 inset}::-webkit-scrollbar-corner{background:transparent}.hotelInfoBox::-webkit-scrollbar{width:8px;background:#eee;border-radius:5px}::-webkit-scrollbar-track,::-webkit-scrollbar-thumb{border-radius:5px}::-webkit-scrollbar-thumb{min-height:20px;background-clip:content-box;box-shadow:0 0 0 5px rgba(0, 0, 0, .1) inset}::-webkit-scrollbar-corner{background:transparent}.city_mdd_depa,.city_mdd_dest,.city_mdd_hotel{display:none}.scenic_list::-webkit-scrollbar{width:8px;background-color:rgba(155,155,155,0.1);border-radius:5px}.scenic_list::-webkit-scrollbar-track,::-webkit-scrollbar-thumb{border-radius:5px}.scenic_list::-webkit-scrollbar-thumb{min-height:20px;background-clip:content-box;box-shadow:0 0 0 5px rgba(0,0,0,.1) inset}.scenic_list::-webkit-scrollbar-corner{background:transparent}
+::-webkit-scrollbar{width:2px;background:#f5f5f5;/*border-radius:4px*/}::-webkit-scrollbar-track,::-webkit-scrollbar-thumb{border-radius:4px}::-webkit-scrollbar-thumb{min-height:20px;background-clip:content-box;box-shadow:0 0 0 5px #e0e0e0 inset}::-webkit-scrollbar-corner{background:transparent}.hotelInfoBox::-webkit-scrollbar{width:8px;background:#eee;border-radius:5px}::-webkit-scrollbar-track,::-webkit-scrollbar-thumb{border-radius:5px}::-webkit-scrollbar-thumb{min-height:20px;background-clip:content-box;box-shadow:0 0 0 5px rgba(0, 0, 0, .1) inset}::-webkit-scrollbar-corner{background:transparent}.city_mdd_depa,.city_mdd_dest,.city_mdd_hotel{display:none}.scenic_list::-webkit-scrollbar{width:8px;background-color:rgba(155,155,155,0.1);border-radius:5px}.scenic_list::-webkit-scrollbar-track,::-webkit-scrollbar-thumb{border-radius:5px}.scenic_list::-webkit-scrollbar-thumb{min-height:20px;background-clip:content-box;box-shadow:0 0 0 5px rgba(0,0,0,.1) inset}.scenic_list::-webkit-scrollbar-corner{background:transparent}
 .layui-layout-admin .layui-footer{
   height:24px;
   line-height:24px;
