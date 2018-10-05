@@ -10,7 +10,6 @@ import com.muiboot.shiro.common.util.FileUtils;
 import com.muiboot.shiro.system.domain.Role;
 import com.muiboot.shiro.system.service.RoleService;
 import org.apache.commons.lang.StringUtils;
-import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
