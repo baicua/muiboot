@@ -163,11 +163,10 @@ a.btnStyle.btnregister:hover {
 	line-height: 18px;
 }
 .ui-form-item.loginUsername input[name="username"], .ui-form-item.loginPassword input[type="password"] {
-	width: 100%;
+	width: 213px;
 	border: none;
-	
 	border: 1px solid #ffffff;
-	padding: 8px 0px 8px 5px;
+	padding: 8px 0px 8px 18px;
 	
 }
 .ui-form-item.loginPassword {

@@ -106,7 +106,7 @@
                 laytpl(menuModel).render(data, function (html) {
                     //页面层
                     openIndex = layer.open({
-                        title: title,
+                        title: '<i class="layui-icon layui-icon-app"></i>&nbsp; '+title,
                         type: 1,
                         skin: 'layui-layer-rim', //加上边框
                         area: ['640px', '400px'], //宽高
@@ -162,7 +162,7 @@
                     laytpl(text).render({roleIds:roleArr.join(",")}, function (html) {
                         //页面层
                         openIndex = layer.open({
-                            title: "用户授权("+roleNames.join("、")+")",
+                            title: '<i class="layui-icon layui-icon-app"></i>&nbsp; '+"用户授权("+roleNames.join("、")+")",
                             type: 1,
                             skin: 'layui-layer-rim', //加上边框
                             area: ['640px', '480px'], //宽高
@@ -196,7 +196,7 @@
                 return false;
             }
             layer.open({
-                title: "用户列表",
+                title: '<i class="layui-icon layui-icon-app"></i>&nbsp; '+"用户列表",
                 type: 1,
                 skin: 'layui-layer-rim', //加上边框
                 area: ['640px', '400px'], //宽高

@@ -34,7 +34,7 @@
                 laytpl(model).render(data, function(html){
                     //页面层
                     openIndex=layer.open({
-                        title:title,
+                        title:'<i class="layui-icon layui-icon-app"></i>&nbsp; '+title,
                         type: 1,
                         skin: 'layui-layer-rim', //加上边框
                         area: ['640px', '350px'], //宽高
