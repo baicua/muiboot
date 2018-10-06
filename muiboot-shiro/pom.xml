@@ -54,7 +54,7 @@
 
 			</plugin>
 
-			<plugin>
+<!--			<plugin>
 				<groupId>org.mybatis.generator</groupId>
 				<artifactId>mybatis-generator-maven-plugin</artifactId>
 				<version>1.3.5</version>
@@ -84,7 +84,43 @@
 					<overwrite>true</overwrite>
 					<configurationFile>src/main/resources/config/mybatis-generator.xml</configurationFile>
 				</configuration>
+			</plugin>-->
+
+			<!--css/js压缩-->
+			<plugin>
+				<groupId>net.alchim31.maven</groupId>
+				<artifactId>yuicompressor-maven-plugin</artifactId>
+				<version>1.5.1</version>
+				<executions>
+					<execution>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>compress</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<encoding>UTF-8</encoding>
+					<jswarn>false</jswarn>
+					<nosuffix>true</nosuffix>
+					<linebreakpos>-1</linebreakpos>
+					<sourceDirectory>src/main/resources/static</sourceDirectory>
+					<outputDirectory>target/classes/static</outputDirectory>
+					<force>true</force>
+					<includes>
+						<include>cache/css/**.css</include>
+						<include>css/**.css</include>
+						<include>js/**/**.js</include>
+						<include>toolkit/**/**.css</include>
+						<include>toolkit/**/**.js</include>
+					</includes>
+					<excludes>
+						<exclude>css/jquery.slider.css</exclude>
+						<exclude>js/jquery.slider.min.js</exclude>
+					</excludes>
+				</configuration>
 			</plugin>
+
 		</plugins>
 	</build>
 </project>
