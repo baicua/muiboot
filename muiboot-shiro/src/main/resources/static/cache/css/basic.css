@@ -223,11 +223,10 @@ a.btn-register {
 a.btn-register:hover {
 	background-color: #3ea1e3;
 }
-/*¼ʽ*/
-/*¼ҳģʽʼ*/
 .loginCen {
 	width: 100%;
 	text-align: center;
+	margin-top: 30px;
 }
 .login-center {
 	background: url(../images/login-center-bg.jpg) center center no-repeat;
@@ -245,8 +244,8 @@ a.btn-register:hover {
 .loginCenter-moudleLeft {
 	float: left;
 	margin-top: 29px;
-	margin-right: 28px;
 	font-weight: bold;
+    margin-right: 60px;
 }
 .loginCenter-moudleLeft span {
 	display: block;
@@ -264,7 +263,7 @@ a.btn-register:hover {
 .loginCenter-moudleRight {
 	overflow: hidden;
 	float: left;
-	width: 992px;
+	width: 1067px;
 	height: 140px;
 }
 .loginCenter-moudleRight a.loginCenter-mStyle {
@@ -272,6 +271,7 @@ a.btn-register:hover {
 	position: relative;
 	top: 50%;
 	margin-top: -35px;
+	display:block;
 }
 .loginCenter-moudleRight a.loginCenter-mStyle.loginCenter-moudle1 {
 	width: 312px;
@@ -337,6 +337,49 @@ a.btn-register:hover {
 .loginCenter-moudleRight a.loginCenter-mStyle.loginCenter-moudle3 {
 	float: left;
 }
+/*登录页图标*/
+.login-icon{
+	background-image: url("../images/login_icon.png");
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	width: 65px;
+	height: 65px;
+	z-index: 1;
+}
+.login-icon.usb-dark{
+	background-repeat:no-repeat;
+	background-position:0px 0px;
+}
+.login-icon.usb-dark:hover{
+	background-repeat:no-repeat;
+	background-position:0px -65px;
+}
+.login-icon.usb-light{
+	background-repeat:no-repeat;
+	background-position:0px 0px;
+}
+.login-icon.usb-light:hover{
+	background-repeat:no-repeat;
+	background-position:0px -65px;
+}
+.login-icon.list-light{
+	background-repeat:no-repeat;
+	background-position:-66px 0px;
+}
+.login-icon.list-light:hover{
+	background-repeat:no-repeat;
+	background-position:-66px -65px;
+}
+.login-icon.computer-light{
+	background-repeat:no-repeat;
+	background-position:-131px 0px;
+}
+.login-icon.computer-light:hover{
+	background-repeat:no-repeat;
+	background-position:-131px -65px;
+}
+
 /*ʾϢʽ*/
 .error-information {
 	color: #d02e50;
