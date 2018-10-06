@@ -269,3 +269,29 @@ input.layui-form-danger[type=radio] + div.layui-form-radio>i{
 .layui-form-switch{
  margin-top: 0px;
 }
+/*输入框样式美化*/
+/* 输入框添加蓝色边框效果，阴影边框效果  */
+
+.layui-input:focus,
+.layui-textarea:focus {
+  border-color: rgba(91, 192, 222, 0.8) !important;
+  -webkit-box-shadow: 0 0 5px rgba(91, 192, 222, .5);
+  -moz-box-shadow: 0 0 5px rgba(91, 192, 222, .5);
+  box-shadow: 0 0 5px rgba(91, 192, 222, .5);
+}
+
+.layui-input:hover,
+.layui-textarea:hover {
+  border-color: rgba(91, 192, 222, 0.8) !important;
+  -webkit-box-shadow: 0 0 5px rgba(91, 192, 222, .5);
+  -moz-box-shadow: 0 0 5px rgba(91, 192, 222, .5);
+  box-shadow: 0 0 5px rgba(91, 192, 222, .5);
+}
+
+/* 表单验证失败红色边框效果，阴影效果 */
+.layui-form-danger, .layui-form-danger:focus, .layui-form-danger:hover{
+  border-color: rgba(255,87,34, .8) !important;
+  -webkit-box-shadow: 0 0 5px rgba(255,87,34, .5);
+  -moz-box-shadow: 0 0 5px rgba(255,87,34, .5);
+  box-shadow: 0 0 5px rgba(255,87,34, .5);
+}

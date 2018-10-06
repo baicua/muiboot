@@ -166,7 +166,7 @@ a.btnStyle.btnregister:hover {
 	position: absolute;color: #737272;margin-top: 7px;font-size: 17px;margin-left: 3px;
 }
 .ui-form-item.loginUsername input[name="username"], .ui-form-item.loginPassword input[type="password"] {
-	width: 213px;
+	width: 207px;
 	border: none;
 	border: 1px solid #ffffff;
 	padding: 8px 0px 8px 20px;
@@ -194,14 +194,21 @@ a.btnStyle.btnregister:hover {
 span.login_error {
 	font-size: 14px;
 	line-height: 22px;
-    color: #8b1014;
 	display: none;
+	width: 100%;
+	font-family: PingFangSC-Regular;
+	font-size: 12px;
+	color: #ED3232;
+	background: #f6dfdf;
+	border: 1px solid rgba(237,50,50,0.3);
+	border-radius: 3px;
+	text-align: center;
 }
 .invalid span.login_error{
 	display: block;
 }
 a.btn-Login, a.btn-register {
-	width: 228px;
+	width: 230px;
 	font-size: 14px;
 	line-height: 22px;
 	text-align: center;
