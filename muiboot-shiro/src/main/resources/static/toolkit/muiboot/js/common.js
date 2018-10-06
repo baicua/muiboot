@@ -11,9 +11,11 @@ var $MB = (function() {
         data:""
     };
     var layer;
-    layui.use('layer', function () {
-        layer = layui.layer;
-    });
+    (function() {
+        layui.use('layer', function(args){
+            layer=layui.layer;//必须预先加载layer
+        });
+    }());
     function isXsScreen() {
         var width=document.body.clientWidth;
         if(width&&width<992){
