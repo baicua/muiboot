@@ -1,4 +1,4 @@
-;layui.use(['dict','table','treeTable'], function(){
+;layui.use(['dict','table','treeTable','layer'], function(){
     "use strict";
     var table, dict, form, laytpl, layer;
     table = layui.table, dict = layui.dict, form = layui.form, laytpl = layui.laytpl, layer = layui.layer;

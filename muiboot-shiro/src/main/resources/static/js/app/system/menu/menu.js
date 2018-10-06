@@ -1,4 +1,4 @@
-;layui.use(['element', 'laytpl','form',"dict","tree"], function () {
+;layui.use(['element', 'laytpl','form',"dict","tree",'layer'], function () {
     "use strict";
     var element,form,laytpl,dict;
     element = layui.element,form = layui.form,laytpl = layui.laytpl,dict=layui.dict;

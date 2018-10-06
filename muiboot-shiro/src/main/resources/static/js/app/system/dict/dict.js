@@ -1,12 +1,10 @@
-;$(document).ready(function() {
+;layui.use(['element', 'laytpl','form','dict','layer'], function () {
     "use strict";
     var element,form,laytpl,dict;
-    layui.use(['element', 'laytpl','form','dict'], function () {
-        element = layui.element,form = layui.form,laytpl = layui.laytpl,dict=layui.dict;
-        element.init();
-        dict.load("DIC_DIC_TYPE,DIC_YESORNO,DIC_VALID,DIC_CATEGORY_TREE,DIC_CATEGORY_TABLE");
-        form.render();
-    });
+    element = layui.element,form = layui.form,laytpl = layui.laytpl,dict=layui.dict;
+    element.init();
+    dict.load("DIC_DIC_TYPE,DIC_YESORNO,DIC_VALID,DIC_CATEGORY_TREE,DIC_CATEGORY_TABLE");
+    form.render();
     var method =(function() {
         var menuModel = "";
         $MB.layerGet({url:ctx+"model/dic/add.html",cache:true},function(text){

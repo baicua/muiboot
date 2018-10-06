@@ -10,12 +10,6 @@ var $MB = (function() {
         contentType: "application/x-www-form-urlencoded",
         data:""
     };
-    var layer;
-    (function() {
-        layui.use('layer', function(args){
-            layer=layui.layer;//必须预先加载layer
-        });
-    }());
     function isXsScreen() {
         var width=document.body.clientWidth;
         if(width&&width<992){
@@ -113,7 +107,7 @@ var $MB = (function() {
             cache:params.cache,
             beforeSend: function () {
                 if((!params.noloading)&&!$MB.getLoading(1)){
-                    $MB.setLoading(layer.load(3,{shade: [0.01,'#fff']}));
+                    $MB.setLoading(layui.layer.load(3,{shade: [0.01,'#fff']}));
                 }
             },
             success: function (data) {
@@ -122,14 +116,14 @@ var $MB = (function() {
             complete: function () {
                 var loading = $MB.getLoading(0);
                 if (loading){
-                    layer.close(loading);
+                    layui.layer.close(loading);
                     $MB.setLoading("");
                 }
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
                 console.info("error: " + XMLHttpRequest.responseText);
                 if(XMLHttpRequest.status===303){
-                    layer.msg('当前未登录或登录超时，是否返回重新登录？', {
+                    layui.layer.msg('当前未登录或登录超时，是否返回重新登录？', {
                         time: 0 //不自动关闭
                         ,btn: ['确定', '取消']
                         ,yes: function(index){
@@ -137,7 +131,7 @@ var $MB = (function() {
                         }
                     });
                 }else {
-                    layer.msg('请求失败！',{skin: 'mb-warn'});
+                    layui.layer.msg('请求失败！',{skin: 'mb-warn'});
                 }
             }
         });
