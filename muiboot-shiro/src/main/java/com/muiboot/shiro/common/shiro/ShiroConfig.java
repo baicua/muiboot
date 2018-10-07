@@ -48,6 +48,7 @@ public class ShiroConfig {
 		LinkedHashMap<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
 		Map<String, Filter> filters = shiroFilterFactoryBean.getFilters();
 		filters.put("user", new ShiroUserFilter());
+		filters.put("doc", new DocFilter());
 		shiroFilterFactoryBean.setFilters(filters);
 		filterChainDefinitionMap.put("/css/**", "anon");
 		filterChainDefinitionMap.put("/js/**", "anon");
@@ -56,7 +57,7 @@ public class ShiroConfig {
 		filterChainDefinitionMap.put("/druid/**", "anon");
 		filterChainDefinitionMap.put("/gifCode", "anon");
 		filterChainDefinitionMap.put("/toolkit/**", "anon");
-		filterChainDefinitionMap.put("/doc/**", "anon");
+		filterChainDefinitionMap.put("/doc/**", "doc");
         filterChainDefinitionMap.put("/error/**", "anon");
 		filterChainDefinitionMap.put("/logout", "logout");
 		filterChainDefinitionMap.put("/", "anon");
