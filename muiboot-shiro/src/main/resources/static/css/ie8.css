@@ -1,0 +1,6 @@
+﻿@charset "utf-8";
+/* CSS Document */
+/*登陆页BTN*/
+a.btn-Login, a.btn-register {
+	width: 235px;
+}
