@@ -145,7 +145,23 @@ background:url(../images/icon01.png) repeat-x;
 .user span{display:inline-block;padding-right:10px; background:url(../images/user.png) no-repeat 15px 10px; line-height:30px; font-size:14px;color:#b8ceda; padding-left:20px; padding-left:35px;}
 .user b{display:inline-block;width:20px;height:18px; background:url(../images/msg.png);text-align:center; font-weight:normal; color:#fff;font-size:14px;margin-right:13px; margin-top:7px; line-height:18px;}
 .user i{display:inline-block;margin-right:5px;font-style:normal;line-height:30px; font-size:14px;color:#b8ceda;}
-
+/*错误页显示*/
+.error404 {
+    background: url(../images/404.png) no-repeat;
+    width: 490px;
+    margin-top: 75px;
+    padding-top: 65px;
+    margin: 0px auto;
+}
+.error404 h2 {
+    font-size: 22px;
+    padding-left: 154px;
+}
+.error404 p {
+    padding-left: 154px;
+    line-height: 35px;
+    color: #717678;
+}
 /*left.html*/
 .lefttop{background:url(../images/lefttop.gif) repeat-x;height:40px;color:#fff;font-size:14px;line-height:40px;    float: left;
     width: 186px;}

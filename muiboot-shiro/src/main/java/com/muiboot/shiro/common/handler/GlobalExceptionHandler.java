@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
@@ -37,7 +39,8 @@ public class GlobalExceptionHandler {
 	}
 	@ExceptionHandler(value = AuthorizationException.class)
 	@ResponseBody
-	public ResponseBo handleAuthorizationException() {
+	public ResponseBo handleAuthorizationException(AuthorizationException ex, HttpServletResponse res) throws IOException {
+		res.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,"暂无权限，请联系管理员！");
 		return ResponseBo.error("暂无权限，请联系管理员！");
 	}
 

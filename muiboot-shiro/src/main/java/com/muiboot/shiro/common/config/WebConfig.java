@@ -26,7 +26,7 @@ public class WebConfig {
 		filterRegistrationBean.setEnabled(true);
 		filterRegistrationBean.addUrlPatterns("/*");
 		Map<String, String> initParameters = new HashMap<>();
-		initParameters.put("excludes", "/favicon.ico,/img/*,/js/*,/css/*,/cache/*,/toolkit/*");
+		initParameters.put("excludes", "/favicon.ico,/img/*,/js/*,/css/*,/toolkit/*");
 		initParameters.put("isIncludeRichText", "true");
 		filterRegistrationBean.setInitParameters(initParameters);
 		return filterRegistrationBean;

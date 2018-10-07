@@ -13,6 +13,10 @@
                 var $maincontent=$("#main-content");
                 var data = r.msg;
                 $navigation.remove("ul");
+                if(!data||!data.children||data.children.length<1){//没有任何权限
+                    $maincontent.load("/error/no_auth.html");
+                    return false;
+                }
                 $navigation.append(forTree(data.children));
                 var forward = $maincontent.attr("forward");
                 if(!!forward){

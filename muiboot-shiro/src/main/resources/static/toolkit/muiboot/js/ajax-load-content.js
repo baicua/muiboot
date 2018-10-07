@@ -76,7 +76,7 @@
                     }else if(XMLHttpRequest.status===404){
                         $contentArea.load("/error/error.html");
                     }else if(XMLHttpRequest.status===500){
-                        $contentArea.load("/error/error.html");
+                        $contentArea.load("/error/500.html");
                     }else if(XMLHttpRequest.status===503){
                         $contentArea.load("/error/error.html");
                     }else {
