@@ -42,7 +42,6 @@
     });
     form.on('submit(search)', function ($data) {
         var data = $data.field;
-        delete data["ignore-form"];
         table.reload('lay-user-list', {
             where: $.extend({}, data)//设定异步数据接口的额外参数，任意设
             , page: {

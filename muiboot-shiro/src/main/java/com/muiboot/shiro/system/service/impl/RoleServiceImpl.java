@@ -52,7 +52,13 @@ public class RoleServiceImpl extends BaseService<Role> implements RoleService {
 			Example example = new Example(Role.class);
 			Example.Criteria criteria=example.createCriteria();
 			if (StringUtils.isNotBlank(role.getRoleName())) {
-				criteria.andCondition("role_name=", role.getRoleName());
+				criteria.andLike("roleName","%"+role.getRoleName()+"%");
+			}
+			if (StringUtils.isNotBlank(role.getRoleKey())) {
+				criteria.andLike("roleKey","%"+role.getRoleKey()+"%");
+			}
+			if (null!=role.getRoleLevel()) {
+				criteria.andEqualTo("roleLevel",role.getRoleLevel());
 			}
 			criteria.andCondition("role_level*group_id=role_level*", user.getOrganId());
 			example.setOrderByClause("create_time");

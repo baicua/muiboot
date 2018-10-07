@@ -30,7 +30,8 @@
             ,{field:'createTime',  title: '创建时间'}
             ,{field:'modifyTime',  title: '修改时间'}
         ]],
-        done: function (res, curr, count) {
+        where: {roleLevel:""}
+        ,done: function (res, curr, count) {
             dict.render($('.layui-table [dic-map]'));
             $('.role-cat').on('click',function (e) {
                 var $this=$(this);
@@ -39,26 +40,13 @@
             })
         }
     });
-    form.on('submit(search)', function($data){
+    form.on('submit(search-role)', function($data){
         var data = $data.field;
-        delete data["ignore-form"];
         table.reload('lay-role-list', {
-            where: $.extend({},data)//设定异步数据接口的额外参数，任意设
-            ,page: {
+            where: $.extend({}, data)//设定异步数据接口的额外参数，任意设
+            , page: {
                 curr: 1 //重新从第 1 页开始
             }
-        });
-        return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
-    });
-    form.on('submit(reset)', function(data){
-        form.val("search-form", {
-            "organId": ""
-            ,"ignore-form": ""
-            ,"deptId": ""
-            ,"valid": ""
-            ,"username": ""
-            ,"realName":  ""
-            ,"mobile": ""
         });
         return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
     });
@@ -71,6 +59,14 @@
             ,page: {
                 curr: 1 //重新从第 1 页开始
             }
+        });
+        return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+    });
+    form.on('submit(reset-role)', function (data) {
+        form.val("search-form", {
+            "roleKey": ""
+            , "roleName": ""
+            , "roleLevel": ""
         });
         return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
     });
