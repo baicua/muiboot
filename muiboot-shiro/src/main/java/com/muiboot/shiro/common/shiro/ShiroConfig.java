@@ -56,6 +56,7 @@ public class ShiroConfig {
 		filterChainDefinitionMap.put("/druid/**", "anon");
 		filterChainDefinitionMap.put("/gifCode", "anon");
 		filterChainDefinitionMap.put("/toolkit/**", "anon");
+		filterChainDefinitionMap.put("/doc/**", "anon");
         filterChainDefinitionMap.put("/error/**", "anon");
 		filterChainDefinitionMap.put("/logout", "logout");
 		filterChainDefinitionMap.put("/", "anon");
