@@ -65,7 +65,7 @@ ul li {
 	width: 100%;
 }
 .login-topBg {
-	background: url(../img/login_img.jpg) center center no-repeat #fff;
+	background: url(../img/login_img.png) #265dac no-repeat center;
 	height: 480px;
 	min-width: 1190px;
 }
@@ -97,7 +97,7 @@ ul li {
 .login-top-right{
 	float:right;font-size: 12px;margin-right:10px;margin-top: 32px;
 }
-.login-top-right a,.login-top-right a:hover{ text-decoration:none; color:#333}
+.login-top-right a,.login-top-right a:hover{ text-decoration:none; color: white;}
 span.login_text_right_language {
 	padding-right: 2px;
 	padding-left: 15px;
@@ -230,27 +230,28 @@ span.login_error {
 	display: block;
 }
 a.btn-Login, a.btn-register {
-	width: 230px;
-	font-size: 14px;
-	line-height: 22px;
-	text-align: center;
-	padding: 8px 0px;
-	margin: 10px 0px 0px 0px;
-	cursor: pointer;
+	 width: 230px;
+	 font-size: 14px;
+	 line-height: 22px;
+	 text-align: center;
+	 padding: 8px 0px;
+	 margin: 10px 0px 0px 0px;
+	 cursor: pointer;
+	 box-shadow: 1px 1px 5px 1px #fefefe;
+ }
+a.btn-Login.loading {
+	box-shadow: 0px 0px 10px 5px #caddc7;
 }
 a.btn-Login {
 	color: #3598db;
 	background-color: #ffffff;
 }
-a.btn-Login:hover {
-	opacity: 0.8;
-}
-a.btn-register {
+a.btn-register,a.btn-Login {
 	color: #ffffff;
 	background-color: #3598db;
 }
-a.btn-register:hover {
-	background-color: #3ea1e3;
+a.btn-register:hover,a.btn-Login:hover {
+	box-shadow: 0px 0px 10px 5px #fefefe;
 }
 .loginCen {
 	width: 100%;

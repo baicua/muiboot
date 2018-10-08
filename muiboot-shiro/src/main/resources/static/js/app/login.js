@@ -29,6 +29,7 @@ function login() {
      $MB.n_warning("请输入验证码！");
      return;
      }*/
+    $loginButton.addClass("loading");
     $loginButton.html("").append('正在登录...');
     $.ajax({
         type: "post",
@@ -49,6 +50,7 @@ function login() {
                 $(".login_error").html(r.msg);
                 $(".login-form").addClass("invalid");
                 $loginButton.html("立即登录");
+                $loginButton.removeClass("loading");
             }
         }
     });
