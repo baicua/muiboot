@@ -93,13 +93,13 @@
     });
     var method = (function () {
         var menuModel = null;
-        $MB.layerGet({url: ctx + "model/role/add.html", cache: true}, function (text) {
-            menuModel = text;
+        $.getJSON(ctx+"json/sys/role.html",function(text){
+            menuModel=text;
         });
         var loadModel = function (data, title, url) {
             var openIndex = 0;
             try {
-                laytpl(menuModel).render(data, function (html) {
+                laytpl(menuModel.roleAdd).render(data, function (html) {
                     //页面层
                     openIndex = layer.open({
                         title: '<i class="layui-icon layui-icon-app"></i>&nbsp; '+title,
@@ -155,8 +155,8 @@
             }
             var openIndex = 0;
             try {
-                $MB.layerGet({url: ctx + "model/role/grant.html", cache: true}, function (text) {
-                    laytpl(text).render({roleIds:roleArr.join(",")}, function (html) {
+                $.getJSON(ctx+"json/sys/role.html",function(text){
+                    laytpl(text.roleGrant).render({roleIds:roleArr.join(",")}, function (html) {
                         //页面层
                         openIndex = layer.open({
                             title: '<i class="layui-icon layui-icon-app"></i>&nbsp; '+"用户授权("+roleNames.join("、")+")",

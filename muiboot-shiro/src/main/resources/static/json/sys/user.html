@@ -1,0 +1,67 @@
+{
+"userAdd":
+"
+<fieldset class='layui-elem-field layui-anim layui-anim-up'>
+    <legend>-----</legend>
+    <form class='layui-form' action=''>
+        <div class='layui-row'>
+            <div class='layui-col-md6 layui-col-xs12'>
+                <label class='layui-form-label' lable-verify='required'><span>真实名:</span></label>
+                <div class='layui-input-block'>
+                    <input type='text' lay-verify='required' name='realName' value=\"{{d.realName||''}}\" placeholder='请输入真实名' class='layui-input'>
+                    <input type='text' name='userId'value=\"{{d.userId||''}}\" hidden>
+                </div>
+            </div>
+            <div class='layui-col-md6 layui-col-xs12'>
+                <label class='layui-form-label' lable-verify='required'><span>用户名:</span></label>
+                <div class='layui-input-block'>
+                    <input lay-verify='required' name='username'  value=\"{{d.username||''}}\" placeholder='请输入用户名' class='layui-input '></input>
+                </div>
+            </div>
+        </div>
+        <div class='layui-row'>
+            <div class='layui-col-md6 layui-col-xs12'>
+                <label class='layui-form-label' lable-verify='required'><span>所属部门:</span></label>
+                <div class='layui-input-block'>
+                    <input type='text' lay-verify='required' name='groupId' dic-map='DIC_DEPT_TREE' value=\"{{d.groupId||''}}\"placeholder='请选择所属部门' class='layui-input dic-tree'>
+                </div>
+            </div>
+            <div class='layui-col-md6 layui-col-xs12'>
+                <label class='layui-form-label'>备注:</label>
+                <div class='layui-input-block'>
+                    <input type='text' name='description' value=\"{{d.description||''}}\"placeholder='请输入备注' class='layui-input'>
+                </div>
+            </div>
+        </div>
+        <div class='layui-row'>
+            <div class='layui-col-md6 layui-col-xs12'>
+                <label class='layui-form-label' >联系电话:</label>
+                <div class='layui-input-block'>
+                    <input type='text'  name='mobile' value=\"{{d.mobile||''}}\"placeholder='请输入联系电话' class='layui-input'>
+                </div>
+            </div>
+            <div class='layui-col-md6 layui-col-xs12'>
+                <label class='layui-form-label' >电子邮箱:</label>
+                <div class='layui-input-block'>
+                    <input  name='email'  value=\"{{d.email||''}}\"placeholder='请选择字典类型' class='layui-input '></input>
+                </div>
+            </div>
+        </div>
+        <div class='layui-row'>
+            <div class='layui-col-md6 layui-col-xs12'>
+                <label class='layui-form-label'>性别:</label>
+                <div class='layui-input-block'>
+                    <input type='checkbox'  name='ssex' lay-skin='switch' lay-text='男|女' value='1' {{d.ssex=='1'?'checked':''}}>
+                </div>
+            </div>
+            <div class='layui-col-md6 layui-col-xs12'>
+                <label class='layui-form-label' lable-verify='required'><span>状态:</span></label>
+                <div class='layui-input-block'>
+                    <input type='checkbox'  name='status' lay-skin='switch' lay-text='启用|禁用' value='1' {{d.status=='1'?'checked':''}}>
+                </div>
+            </div>
+        </div>
+    </form>
+</fieldset>
+"
+}

@@ -83,13 +83,13 @@
     });
     var method = (function () {
         var menuModel = null;
-        $MB.layerGet({url: ctx + "model/user/add.html", cache: true}, function (text) {
-            menuModel = text;
+        $.getJSON(ctx+"json/sys/user.html",function(text){
+            menuModel=text;
         });
         var loadModel = function (data, title, url) {
             var openIndex = 0;
             try {
-                laytpl(menuModel).render(data, function (html) {
+                laytpl(menuModel.userAdd).render(data, function (html) {
                     //页面层
                     openIndex = layer.open({
                         title: '<i class="layui-icon layui-icon-app"></i>&nbsp; '+title,

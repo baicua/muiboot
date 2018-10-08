@@ -93,17 +93,17 @@
                 });
             },
             refresh:function (menuId) {
-                $MB.layerGet({url:ctx+"toolkit/compent/menu/menuInfo.html",cache:true},function(text){
-                    var $compent=$("<code></code>").html(text);
+                $.getJSON(ctx+"json/sys/menu.html",function(text){
+                    //var $compent=$("<code></code>").html(text);
                     $MB.layerGet({url:ctx+"menu/getMenuDetail",data:{menuId:menuId},cache:true},function(data){
-                        laytpl($compent.find("#layui-table-menu").html()).render($.extend({},data.msg.menu), function(html){
+                        laytpl(text.table).render($.extend({},data.msg.menu), function(html){
                             $("#menuInfoPanle").html(html);
                             dict.render();
                         });
-                        laytpl($compent.find("#layui-breadcrumb-permission").html()).render($.extend({},data.msg.permissions), function(html){
+                        laytpl(text.permission).render($.extend({},data.msg.permissions), function(html){
                             $("#menuButtonPanle").html(html);
                         });
-                        laytpl($compent.find("#layui-breadcrumb-role").html()).render($.extend({},data.msg.roles), function(html){
+                        laytpl(text.role).render($.extend({},data.msg.roles), function(html){
                             $("#menuAuthPanle").html(html);
                         });
                         element.init();

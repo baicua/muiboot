@@ -1,0 +1,102 @@
+{
+"dicAdd":
+"
+<fieldset class='layui-elem-field layui-anim layui-anim-up'>
+    <legend>-----</legend>
+    <form class='layui-form' action=''>
+        <div class='layui-row'>
+            <div class='layui-col-md6 layui-col-xs12'>
+                <label class='layui-form-label'>上级字典:</label>
+                <div class='layui-input-block'>
+                    <input type='text' name='parentId' dic-map='DIC_CATEGORY_TREE' value=\"{{d.parentId||''}}\"placeholder='请选择上级字典' class='layui-input dic-tree'>
+                    <input type='text' name='dicId'value=\"{{d.dicId||''}}\" hidden>
+                </div>
+            </div>
+            <div class='layui-col-md6 layui-col-xs12'>
+                <label class='layui-form-label' lable-verify='required'>字典编号:</label>
+                <div class='layui-input-block'>
+                    <input type='text' lay-verify='required' name='dicKey' value=\"{{d.dicKey||''}}\"placeholder='请输入字典编号' class='layui-input'>
+                </div>
+            </div>
+        </div>
+        <div class='layui-row'>
+            <div class='layui-col-md6 layui-col-xs12'>
+                <label class='layui-form-label' lable-verify='required'>字典名称:</label>
+                <div class='layui-input-block'>
+                    <input type='text' lay-verify='required' name='dicName' value=\"{{d.dicName||''}}\"placeholder='请输入字典名称' class='layui-input'>
+                </div>
+            </div>
+            <div class='layui-col-md6 layui-col-xs12'>
+                <label class='layui-form-label' lable-verify='required'>字典类型:</label>
+                <div class='layui-input-block'>
+                    <select lay-verify='required' lay-filter='dicType' name='dicType' dic-map='DIC_DIC_TYPE' dic-value=\"{{d.dicType||''}}\"placeholder='请选择字典类型' class='layui-input dic-map'></select>
+                </div>
+            </div>
+        </div>
+        <div class='layui-row'>
+            <div class='layui-col-md6 layui-col-xs12'>
+                <label class='layui-form-label'>显示图标:</label>
+                <div class='layui-input-block'>
+                    <input type='checkbox'name='showIcon' lay-skin='switch' lay-text='是|否' value='1' {{d.showIcon=='1'?'checked':''}}>
+                </div>
+            </div>
+            <div class='layui-col-md6 layui-col-xs12'>
+                <label class='layui-form-label' >是否有效:</label>
+                <div class='layui-input-block'>
+                    <input type='checkbox'  name='valid' lay-skin='switch' lay-text='有效|无效' value='1' {{d.valid=='1'?'checked':''}}>
+                </div>
+            </div>
+        </div>
+        <div class=\"layui-row {{d.dicType=='SIMPLE'||d.dicType=='URLDIC'?'':'hidden'}}\">
+            <div class='layui-col-md12 layui-col-xs12'>
+                <label class='layui-form-label' lable-verify='required'>字典内容:</label>
+                <div class='layui-input-block'>
+                    <textarea  type='text'  lay-verify=\"{{d.dicType=='SIMPLE'?'required':''}}\" name='content' placeholder='请输入字典内容' class='layui-textarea'>{{ d.content||''}}</textarea>
+                </div>
+            </div>
+        </div>
+        <div class=\"layui-row {{d.dicType=='SQLDIC'||d.dicType=='TREEDIC'?'':'hidden'}}\">
+            <div class='layui-col-md12 layui-col-xs12'>
+                <label class='layui-form-label' lable-verify='required'>字典SQL:</label>
+                <div class='layui-input-block'>
+                    <textarea type='text' name='sqlContent' lay-verify=\"{{d.dicType!='SIMPLE'?'required':''}}\" placeholder='请输入字典SQL' class='layui-textarea' >{{ d.sqlContent||''}}</textarea>
+                </div>
+            </div>
+        </div>
+    </form>
+</fieldset>
+"
+,"dicInfo":
+"
+<table class='layui-table layui-anim layui-anim-up' lay-size='sm' data-name-dic='{{ d.dicId }}'>
+    <colgroup><col width='150'><col width='200'><col width='150'><col width='200'></colgroup>
+    <tbody>
+    <tr><th>上级字典</th><td><span class='dic-text' dic-map='DIC_CATEGORY_TABLE'>{{ d.parentId||'/'}}</span></td><th>字典编号</th><td>{{ d.dicKey||'/'}}</td></tr>
+    <tr><th>字典名称</th><td>{{ d.dicName||'/' }}</td><th>字典类型</th><td><span class='dic-text' dic-map='DIC_DIC_TYPE'>{{ d.dicType||'/' }}</span></td></tr>
+    <tr><th>显示图标</th><td><span class='dic-text' dic-map='DIC_YESORNO'>{{ d.showIcon}}</span></td><th>是否有效</th><td><span class='dic-text' dic-map='DIC_VALID'>{{ d.valid}}</span></td></tr>
+    <tr><th>字典内容</th><td colspan='3'>{{d.content||d.sqlContent||'/'}}</td></tr>
+    </tbody>
+</table>
+"
+,"dicList":
+"
+{{# if (d.children){ }}
+<ul class='layui-box layui-tree'></ul>
+{{# }else{ }}
+<table class='layui-table layui-anim layui-anim-up' lay-size='sm'>
+    <colgroup><col width='150'><col width='200'><col width='150'><col width='200'></colgroup>
+    <thead><tr><th>字典KEY</th><th>字典VALUE</th><th>字典KEY</th><th>字典VALUE</th></tr></thead>
+    <tbody>
+    {{#  var index=0 }}
+    {{#  layui.each(d, function(key, value){ }}
+    {{# if (index%2==0){ }}<tr>{{# }; }}
+        <td>{{ key}}</td><td>{{value }}</td>
+        {{# if (index%2==1){ }}</tr>{{# }; }}
+    {{#  index+=1 }}
+    {{#  }); }}
+    {{# if (index>0&&index%2==0){ }}</tr>{{# }; }}
+    </tbody>
+</table>
+{{# }; }}
+"
+}

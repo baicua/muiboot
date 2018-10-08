@@ -1,9 +1,0 @@
-<table class="layui-table layui-anim layui-anim-up" lay-size="sm" data-name-dic="{{ d.dicId }}">
-    <colgroup><col width="150"><col width="200"><col width="150"><col width="200"></colgroup>
-    <tbody>
-    <tr><th>上级字典</th><td><span class="dic-text" dic-map="DIC_CATEGORY_TABLE">{{ d.parentId||'/'}}</span></td><th>字典编号</th><td>{{ d.dicKey||'/'}}</td></tr>
-    <tr><th>字典名称</th><td>{{ d.dicName||'/' }}</td><th>字典类型</th><td><span class="dic-text" dic-map="DIC_DIC_TYPE">{{ d.dicType||'/' }}</span></td></tr>
-    <tr><th>显示图标</th><td><span class="dic-text" dic-map="DIC_YESORNO">{{ d.showIcon}}</span></td><th>是否有效</th><td><span class="dic-text" dic-map="DIC_VALID">{{ d.valid}}</span></td></tr>
-    <tr><th>字典内容</th><td colspan="3">{{d.content||d.sqlContent||'/'}}</td></tr>
-    </tbody>
-</table>

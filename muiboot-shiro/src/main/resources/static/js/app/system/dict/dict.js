@@ -6,52 +6,50 @@
     dict.load("DIC_DIC_TYPE,DIC_YESORNO,DIC_VALID,DIC_CATEGORY_TREE,DIC_CATEGORY_TABLE");
     form.render();
     var method =(function() {
-        var menuModel = "";
-        $MB.layerGet({url:ctx+"model/dic/add.html",cache:true},function(text){
-            menuModel=text;
-        });
         var loadModel=function(data,title,url){
             var openIndex=0;
             try{
-                laytpl(menuModel).render(data, function(html){
-                    //页面层
-                    openIndex=layer.open({
-                        title:'<i class="layui-icon layui-icon-app"></i>&nbsp; '+title,
-                        type: 1,
-                        skin: 'layui-layer-rim', //加上边框
-                        area: ['640px', '400px'], //宽高
-                        content: html,
-                        btn: ['保存', '关闭'],
-                        btnAlign: 'c',
-                        yes: function(index, layero){
-                            return false;
-                        },
-                        success:function (layero,index) {
-                            layero.addClass("layui-form");
-                            dict.render();
-                            layero.find(".layui-layer-btn0").attr("lay-filter","form-verify").attr("lay-submit","");
-                            method.onsubmit(layero.find(".layui-layer-btn0"),layero,url,function () {
-                                method.refresh($("#dicInfoPanle table").attr("data-name-dic"));
-                            });
-                            form.on('select(dicType)', function(data){
-                                var sel = data.value;
-                                if("SIMPLE"===sel){
-                                    layero.find("[name='content']").attr("lay-verify","required").parents(".layui-row").show(300);
-                                    layero.find("[name='sqlContent']").removeAttr("lay-verify").parents(".layui-row").hide(200);
-                                }else if("SQLDIC"===sel){
-                                    layero.find("[name='content']").removeAttr("lay-verify").parents(".layui-row").hide(200);
-                                    layero.find("[name='sqlContent']").attr("lay-verify","required").parents(".layui-row").show(300);
-                                }else if("TREEDIC"===sel){
-                                    layero.find("[name='content']").removeAttr("lay-verify").parents(".layui-row").hide(200);
-                                    layero.find("[name='sqlContent']").attr("lay-verify","required").parents(".layui-row").show(300);
-                                }else {
-                                    layero.find("[name='content']").attr("lay-verify","required").parents(".layui-row").show(300);
-                                    layero.find("[name='sqlContent']").removeAttr("lay-verify").parents(".layui-row").hide(200);
-                                }
-                            });
-                            $MB.verify(form);
-                            form.render();
-                        }
+                $.getJSON(ctx+"json/sys/dic.html",function(text){
+                    laytpl(text.dicAdd).render(data, function(html){
+                        //页面层
+                        openIndex=layer.open({
+                            title:'<i class="layui-icon layui-icon-app"></i>&nbsp; '+title,
+                            type: 1,
+                            skin: 'layui-layer-rim', //加上边框
+                            area: ['640px', '400px'], //宽高
+                            content: html,
+                            btn: ['保存', '关闭'],
+                            btnAlign: 'c',
+                            yes: function(index, layero){
+                                return false;
+                            },
+                            success:function (layero,index) {
+                                layero.addClass("layui-form");
+                                dict.render();
+                                layero.find(".layui-layer-btn0").attr("lay-filter","form-verify").attr("lay-submit","");
+                                method.onsubmit(layero.find(".layui-layer-btn0"),layero,url,function () {
+                                    method.refresh($("#dicInfoPanle table").attr("data-name-dic"));
+                                });
+                                form.on('select(dicType)', function(data){
+                                    var sel = data.value;
+                                    if("SIMPLE"===sel){
+                                        layero.find("[name='content']").attr("lay-verify","required").parents(".layui-row").show(300);
+                                        layero.find("[name='sqlContent']").removeAttr("lay-verify").parents(".layui-row").hide(200);
+                                    }else if("SQLDIC"===sel){
+                                        layero.find("[name='content']").removeAttr("lay-verify").parents(".layui-row").hide(200);
+                                        layero.find("[name='sqlContent']").attr("lay-verify","required").parents(".layui-row").show(300);
+                                    }else if("TREEDIC"===sel){
+                                        layero.find("[name='content']").removeAttr("lay-verify").parents(".layui-row").hide(200);
+                                        layero.find("[name='sqlContent']").attr("lay-verify","required").parents(".layui-row").show(300);
+                                    }else {
+                                        layero.find("[name='content']").attr("lay-verify","required").parents(".layui-row").show(300);
+                                        layero.find("[name='sqlContent']").removeAttr("lay-verify").parents(".layui-row").hide(200);
+                                    }
+                                });
+                                $MB.verify(form);
+                                form.render();
+                            }
+                        });
                     });
                 });
             }catch (e){
@@ -112,13 +110,12 @@
                 });
             },
             refresh:function (dicId) {
-                $MB.layerGet({url:ctx+"model/dic.html",cache:true},function(text){
-                    var $compent=$("<code></code>").html(text);
+                $.getJSON(ctx+"json/sys/dic.html",function(text){
                     $MB.layerGet({url:ctx+"dict/getDicDetail",data:{dicId:dicId}},function(data){
-                        laytpl($compent.find("#layui-table-dic-info").html()).render($.extend({},data.msg.info), function(html){
+                        laytpl(text.dicInfo).render($.extend({},data.msg.info), function(html){
                             $("#dicInfoPanle").html(html);
                         });
-                        laytpl($compent.find("#layui-table-dic-list").html()).render($.extend({},data.msg.list), function(html){
+                        laytpl(text.dicList).render($.extend({},data.msg.list), function(html){
                             $("#dicListPanle").html(html);
                             if(data.msg.list&&data.msg.list.children){
                                 var nodes=$.extend([], data.msg.list.children);

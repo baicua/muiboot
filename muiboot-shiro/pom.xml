@@ -108,16 +108,39 @@
 					<outputDirectory>target/classes/static</outputDirectory>
 					<force>true</force>
 					<includes>
-						<include>cache/css/**.css</include>
-						<include>css/**.css</include>
-						<include>js/**/**.js</include>
-						<include>toolkit/**/**.css</include>
-						<include>toolkit/**/**.js</include>
+						<include>css/*.css</include>
+						<include>js/**/*.js</include>
+						<include>toolkit/**/*.css</include>
+						<include>toolkit/**/*.js</include>
 					</includes>
 					<excludes>
 						<exclude>css/jquery.slider.css</exclude>
 						<exclude>js/jquery.slider.min.js</exclude>
 					</excludes>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>com.tunyk.mvn.plugins.htmlcompressor</groupId>
+				<artifactId>htmlcompressor-maven-plugin</artifactId>
+				<version>1.3</version>
+				<executions>
+					<execution>
+						<phase>prepare-package</phase>
+						<goals><goal>html</goal></goals>
+					</execution>
+				</executions>
+				<configuration>
+					<goalPrefix>htmlcompressor</goalPrefix>
+					<enabled>true</enabled>
+					<removeComments>true</removeComments>
+					<encoding>utf-8</encoding>
+					<srcFolder>src/main/resources/static/json</srcFolder>
+					<targetFolder>target/classes/static/json</targetFolder>
+					<javascriptHtmlSprite>false</javascriptHtmlSprite>
+					<!--<generateStatistics>false</generateStatistics>-->
+					<fileExt>
+						<fileExt>html</fileExt>
+					</fileExt>
 				</configuration>
 			</plugin>
 
