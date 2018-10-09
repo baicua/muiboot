@@ -1,6 +1,4 @@
 ;window.onload = function (){
-    var topBg=document.getElementById("topBg");
-    addClass(topBg, "hp");
     var input = document.getElementsByTagName("input");
     var loginForm = document.getElementById("login-form");
     for(var i = 0; i < input.length; i++) {
