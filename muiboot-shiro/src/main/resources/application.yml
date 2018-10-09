@@ -2,6 +2,18 @@ server:
   port: 8080
   tomcat:
     uri-encoding: utf-8
+  compression:
+    enabled: true
+    min-response-size: 1024
+    mime-types:
+    - image/png
+    - image/jpeg
+    - image/jpg
+    - text/html
+    - application/javascript
+    - text/css
+    - application/octet-stream
+    - application/json
 spring:
   resources:
     chain:
