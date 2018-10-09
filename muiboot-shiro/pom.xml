@@ -130,12 +130,11 @@
 					</execution>
 				</executions>
 				<configuration>
-					<goalPrefix>htmlcompressor</goalPrefix>
 					<enabled>true</enabled>
 					<removeComments>true</removeComments>
 					<encoding>utf-8</encoding>
-					<srcFolder>src/main/resources/static/json</srcFolder>
-					<targetFolder>target/classes/static/json</targetFolder>
+					<srcFolder>src/main/resources/</srcFolder>
+					<targetFolder>target/classes/</targetFolder>
 					<javascriptHtmlSprite>false</javascriptHtmlSprite>
 					<!--<generateStatistics>false</generateStatistics>-->
 					<fileExt>
