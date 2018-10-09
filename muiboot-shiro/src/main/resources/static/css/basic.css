@@ -47,13 +47,6 @@ textarea:focus,
 ul li {
 	list-style-type: none;
 }
-/*样式定义*/
-.sinlin {
-	display: inline-block !important;
-}
-.bgcolor {
-	background-color: #ffffff !important;
-}
 .wrapper {
 	background-color: #f5f5f5;
 	width: 100%;
@@ -98,43 +91,11 @@ ul li {
 	float:right;font-size: 12px;margin-right:10px;margin-top: 32px;
 }
 .login-top-right a,.login-top-right a:hover{ text-decoration:none; color: white;}
-span.login_text_right_language {
-	padding-right: 2px;
-	padding-left: 15px;
-	color: #ffffff;
-	font-size: 14px;
-	cursor: pointer;
-}
-span.login_text_right_language img {
-	vertical-align: middle;
-	margin-left: 5px;
-	display: inline-block;
-}
 .login-topStyle {
 	color: #ffffff;
 	width: 1190px;
 	position: relative;
 	margin: 0px auto;
-}
-.login-topStyle1 {
-	display: inline-block;
-	padding-top: 90px;
-	padding-left: 172px;
-}
-span.loginStyle1 {
-	font-size: 16px;
-	line-height: 24px;
-	display: block;
-	font-family: "΢ź";
-}
-span.loginStyle2 {
-	display: inline-block;
-	font-size: 72px;
-	font-family: "΢ź";
-}
-.login-topStyle2 {
-	text-align: center;
-	padding: 34px 0px;
 }
 a.btnStyle {
 	font-size: 20px;
@@ -143,23 +104,6 @@ a.btnStyle {
 	border-radius: 5px;
 	display: inline-block;
 }
-a.btnStyle.btnLogin {
-	background-color: #3598db;
-	padding: 10px 0px;
-	margin-right: 120px;
-}
-a.btnStyle.btnLogin:hover {
-	background-color: #3ea1e3;
-}
-a.btnStyle.btnregister {
-	border: 1px solid #ffffff;
-	padding: 8px 0px;
-	color: #ffffff;
-}
-a.btnStyle.btnregister:hover {
-	background-color: rgba(255,255,255,0.3);
-}
-/*¼ʽʼ*/
 .login-topStyle3 {
 	background: url(../img/login_bg_white.png) center center repeat;
 	width: 228px;
@@ -269,7 +213,7 @@ a.btn-register:hover,a.btn-Login:hover {
 	padding: 0px 0px 0px 40px;
 	overflow: hidden;
 	height: 140px;
-	font-family: ΢ź;
+	font-family:"微软雅黑"
 }
 .loginCenter-moudleLeft {
 	float: left;
@@ -335,11 +279,11 @@ a.btn-register:hover,a.btn-Login:hover {
 	display: block;
 	color: #767676;
 	text-align: left;
-		font-family: ΢ź;
+	font-family:"微软雅黑"
 }
 .loginCenter-moudleRight a span.moudle-text .moudle-text2 {
 	font-size: 14px;
-		font-family: ΢ź;
+	font-family:"微软雅黑";
 	line-height: 18px;
 	color: #969696;
 }
@@ -416,8 +360,6 @@ a.btn-register:hover,a.btn-Login:hover {
 	font-size: 12px;
 	padding-bottom: 3px;
 }
-/*¼ҳģʽ*/
-/*¼ҳʽ*/
 /*footerʽ*/
 .footer {
 	height: 60px;
