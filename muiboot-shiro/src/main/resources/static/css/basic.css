@@ -58,9 +58,12 @@ ul li {
 	width: 100%;
 }
 .login-topBg {
-	background: url(../img/login_img.png) #265dac no-repeat center;
+	background: url(../img/login_img_compress.jpg) #265dac no-repeat center;
 	height: 480px;
 	min-width: 1190px;
+}
+.login-topBg.hp {
+	background: url(../img/login_img.png) #265dac no-repeat center;
 }
 .login-topBg1 {
 	

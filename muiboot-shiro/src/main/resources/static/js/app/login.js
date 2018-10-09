@@ -1,6 +1,8 @@
 ;window.onload = function (){
+    var topBg=document.getElementById("topBg");
+    addClass(topBg, "hp");
     var input = document.getElementsByTagName("input");
-    var loginForm = document.getElementsByClassName("login-form")[0];
+    var loginForm = document.getElementById("login-form");
     for(var i = 0; i < input.length; i++) {
         input[i].onclick = function () {
             removeClass(loginForm,"invalid");
@@ -9,11 +11,11 @@
 };
 function login() {
     var $loginButton =document.getElementById("loginButton");
-    var $usename =document.getElementsByName("username")[0];
-    var $password =document.getElementsByName("password")[0];
-    var $rememberMe =document.getElementsByName("rememberme")[0];
-    var loginError = document.getElementsByClassName("login_error")[0];
-    var loginForm = document.getElementsByClassName("login-form")[0];
+    var $usename =document.getElementById("username");
+    var $password =document.getElementById("password");
+    var $rememberMe =document.getElementById("rememberme");
+    var loginError = document.getElementById("login_error");
+    var loginForm = document.getElementById("login-form");
     if ($usename.value == "") {
         loginError.innerHTML="请输入用户名！";
         addClass(loginForm,"invalid");
