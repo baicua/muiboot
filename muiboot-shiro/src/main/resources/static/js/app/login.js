@@ -100,7 +100,6 @@ function ajax(options){
         //ie6及其以下版本浏览器
         xhr=ActiveXObject('Microsoft.XMLHTTP');
     }
-
     //接收-第三步
     xhr.onreadystatechange=function(){
         if(xhr.readyState==4){
@@ -118,6 +117,7 @@ function ajax(options){
         xhr.open('GET',options.url+'?'+params,true);
         xhr.send(null);
     }else if(options.type=='POST'){
+        xhr.setRequestHeader("If-Modified-Since","0");//防止缓存
         xhr.open('POST',options.url,true);
         //设置表单提交时的内容类型
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
