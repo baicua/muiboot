@@ -7,7 +7,10 @@ import org.apache.ibatis.annotations.Options;
 import java.util.List;
 
 /**
- * Created by 75631 on 2018/10/3.
+ * <p>Description: 批量插入方法，支持ORACLE,MYSQL</p>
+ *
+ * @author jin
+ * @version 1.0 2018/10/10
  */
 public interface InsertByBatchMapper<T>  {
     @Options(

@@ -7,7 +7,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
+/**
+ * <p>Description: layerTree结构数据封装</p>
+ *
+ * @author jin
+ * @version 1.0 2018/10/10
+ */
 public class LayerTree<T> implements Serializable{
 	/**
 	 * 节点ID

@@ -12,7 +12,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-
+/**
+ * <p>Description: 全局异常处理</p>
+ *
+ * @author jin
+ * @version 1.0 2018/10/10
+ */
 @ControllerAdvice
 public class GlobalExceptionHandler {
 	private static final LogUtil log = LogUtil.getLoger(GlobalExceptionHandler.class);

@@ -4,7 +4,12 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.SessionListener;
-
+/**
+ * <p>Description: shirosession监听</p>
+ *
+ * @author jin
+ * @version 1.0 2018/10/10
+ */
 public class ShiroSessionListener implements SessionListener{
 
 	private final AtomicInteger sessionCount = new AtomicInteger(0);
