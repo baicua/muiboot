@@ -125,8 +125,9 @@ function ajax(options){
         xhr.open('GET',options.url+'?'+params,true);
         xhr.send(null);
     }else if(options.type=='POST'){
+        xhr.open('POST',options.url+"?t="+new Date().getTime(),true);
         xhr.setRequestHeader("If-Modified-Since","0");//防止缓存
-        xhr.open('POST',options.url,true);
+        xhr.setRequestHeader("Cache-Control","no-cache");//防止缓存
         //设置表单提交时的内容类型
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         xhr.send(params);
