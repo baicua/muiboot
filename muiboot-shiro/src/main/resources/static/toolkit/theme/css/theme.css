@@ -23,6 +23,7 @@ html {
 .mb-header{
     background:url(../images/topbg.gif) repeat-x;
     height: 50px;
+    background-position: 0px -34px;
 }
 .mb-layout-admin> .mb-body{
     top: 50px;
@@ -140,7 +141,7 @@ background:url(../images/icon01.png) repeat-x;
     background:url(../images/icon06.png) repeat-x;
 }
 /*top.html*/
-.topleft{height:50px;background:url(../images/topleft.jpg) no-repeat;float:left; width:300px;}
+.topleft{height:50px;background:url(../images/topleft.jpg) no-repeat -64px -31px;float:left; width:300px;}
 .topleft a{
     color: white;
     height: 50px;
@@ -155,7 +156,7 @@ background:url(../images/icon01.png) repeat-x;
     height: 50px;
     display: inline-block;
 }
-.topright{height:50px;background:url(../images/topright.jpg) no-repeat right;float:right;}
+.topright{height:50px;background:url(../images/topright.jpg) no-repeat right;float:right;    background-position: 0px -34px;}
 .nav{float:left;}
 .nav li{float:left;width:87px;height:50px; text-align:center;}
 .nav li a{display:block;width:87px;height:50px;-moz-transition: none; transition: background-color 0.3s linear; -moz-transition: background-color 0.3s linear; -webkit-transition: background-color 0.3s linear; -o-transition: background-color 0.3s linear; }
@@ -171,7 +172,7 @@ background:url(../images/icon01.png) repeat-x;
 .topright ul li a{font-size:13px; color:#e9f2f7;}
 .topright ul li a:hover{color:#fff;}
 .topright ul li span{margin-top:2px;float:left;padding-right:3px;}
-.user{height:24px;margin-top: 2px;background:url(../images/ub1.png) repeat-x;clear:both;float:right; margin-right:12px;border-radius:30px; behavior:url(js/pie.htc); white-space:nowrap;position:relative;}
+.user{height:24px;margin-top: 2px;background:url(../images/ub1.png) repeat-x;clear:both;float:right;border-radius:30px; white-space:nowrap;position:relative;}
 .user span{display:inline-block;padding-right:10px; background:url(../images/user.png) no-repeat 15px 6px; line-height:24px; font-size:14px;color:#b8ceda; padding-left:20px; padding-left:35px;}
 .user b{display:inline-block;width:20px;height:18px; background:url(../images/msg.png);text-align:center; font-weight:normal; color:#fff;font-size:14px;margin-right:13px; margin-top:7px; line-height:18px;}
 .user i{display:inline-block;margin-right:5px;font-style:normal;line-height:24px; font-size:14px;color:#b8ceda;}
