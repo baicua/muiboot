@@ -27,7 +27,11 @@ import org.springframework.context.annotation.DependsOn;
 import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
 
 import javax.servlet.Filter;
-
+/**
+* <p>Description: Shiro配置</p>
+* @version 1.0 2018/10/12
+* @author jin
+*/
 @Configuration
 public class ShiroConfig {
 

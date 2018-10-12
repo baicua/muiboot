@@ -1,5 +1,9 @@
 package com.muiboot.shiro.common.util.poi.pojo;
-
+/**
+* <p>Description: 导出配置</p>
+* @version 1.0 2018/10/12
+* @author jin
+*/
 public class ExportItem {
 
 	private String field; // 属性名

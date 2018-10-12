@@ -3,13 +3,10 @@ package com.muiboot.shiro.common.util.exec;
 import java.util.concurrent.*;
 
 /**
- * <p>Title: </p>
- * <p>Description: </p>
- * <p>Company: www.lvmama.com</p>
- *
- * @author jin
- * @version 1.0 2018/7/3
- */
+* <p>Description: 线程池处理</p>
+* @version 1.0 2018/10/12
+* @author jin
+*/
 public class ExecutorsUtil {
     private final static int MAX_MULTIL_POOL_SIZE = 5;
     private final static int MAX_SCHEDULED_POOL_SIZE = 10;

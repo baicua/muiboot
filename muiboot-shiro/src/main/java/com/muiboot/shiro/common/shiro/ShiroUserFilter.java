@@ -11,8 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Created by 75631 on 2018/8/26.
- */
+* <p>Description: 请求超时，返回ERROR</p>
+* @version 1.0 2018/10/12
+* @author jin
+*/
 public class ShiroUserFilter extends UserFilter {
     @Override
     protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {

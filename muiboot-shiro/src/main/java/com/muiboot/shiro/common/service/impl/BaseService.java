@@ -11,7 +11,11 @@ import org.springframework.transaction.annotation.Transactional;
 import com.muiboot.shiro.common.service.IService;
 import tk.mybatis.mapper.common.Mapper;
 import tk.mybatis.mapper.entity.Example;
-
+/**
+* <p>Description: service基类</p>
+* @version 1.0 2018/10/12
+* @author jin
+*/
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
 public abstract class BaseService<T> implements IService<T> {
 	protected  final Logger logger = LoggerFactory.getLogger(this.getClass());

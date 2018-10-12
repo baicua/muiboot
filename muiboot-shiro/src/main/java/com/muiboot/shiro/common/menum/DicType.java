@@ -1,8 +1,10 @@
 package com.muiboot.shiro.common.menum;
 
 /**
- * Created by 75631 on 2018/8/29.
- */
+* <p>Description: 字典类型枚举</p>
+* @version 1.0 2018/10/12
+* @author jin
+*/
 public enum DicType {
     SIMPLE,SQLDIC,URLDIC,TREEDIC
 }

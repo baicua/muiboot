@@ -9,13 +9,10 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 /**
- * <p>
- * Gif验证码类
- * </p>
- *
- * @author: wuhongjun
- * @version:1.0
- */
+* <p>Description: 验证码工具</p>
+* @version 1.0 2018/10/12
+* @author jin
+*/
 public class GifCaptcha extends Captcha {
 	public GifCaptcha() {
 	}

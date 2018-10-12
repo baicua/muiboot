@@ -1,12 +1,10 @@
 package com.muiboot.shiro.common.util.vcode;
 
 /**
- * <p>
- * </p>
- *
- * @author: wuhongjun
- * @version:1.0
- */
+* <p>Description: 验证码绘制</p>
+* @version 1.0 2018/10/12
+* @author jin
+*/
 public class Quant {
 	protected static final int netsize = 256; /* number of colours used */
 

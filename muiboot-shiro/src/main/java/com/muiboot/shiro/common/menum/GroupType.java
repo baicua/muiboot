@@ -1,8 +1,10 @@
 package com.muiboot.shiro.common.menum;
 
 /**
- * Created by 75631 on 2018/8/29.
- */
+* <p>Description: 机构类型枚举</p>
+* @version 1.0 2018/10/12
+* @author jin
+*/
 public enum GroupType {
     ORGAN("1"),DEPT("2");
     private String type;

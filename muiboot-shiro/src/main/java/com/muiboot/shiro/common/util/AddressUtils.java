@@ -11,6 +11,11 @@ import java.net.URL;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+/**
+* <p>Description: ip解析工具</p>
+* @version 1.0 2018/10/12
+* @author jin
+*/
 public class AddressUtils {
 
 	private static String getAddresses(String content, String encodingString) throws UnsupportedEncodingException {

@@ -11,13 +11,10 @@ import java.io.OutputStream;
 import javax.imageio.ImageIO;
 
 /**
- * <p>
- * png格式验证码
- * </p>
- *
- * @author: wuhongjun
- * @version:1.0
- */
+* <p>Description: png验证码</p>
+* @version 1.0 2018/10/12
+* @author jin
+*/
 public class SpecCaptcha extends Captcha {
 	public SpecCaptcha() {
 	}

@@ -4,9 +4,10 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 /**
- * @author: wuhongjun
- * @version:1.0
- */
+* <p>Description: 编码工具</p>
+* @version 1.0 2018/10/12
+* @author jin
+*/
 public class Encoder {
 	private static final int EOF = -1;
 

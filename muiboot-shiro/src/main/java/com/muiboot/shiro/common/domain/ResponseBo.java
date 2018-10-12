@@ -1,7 +1,11 @@
 package com.muiboot.shiro.common.domain;
 
 import java.util.HashMap;
-
+/**
+* <p>Description: Response封装</p>
+* @version 1.0 2018/10/12
+* @author jin
+*/
 public class ResponseBo extends HashMap<String, Object> {
 
 	private static final long serialVersionUID = -8713837118340960775L;

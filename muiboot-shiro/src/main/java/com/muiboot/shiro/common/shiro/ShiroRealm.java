@@ -29,12 +29,11 @@ import org.springframework.context.annotation.Lazy;
 
 /**
  * 自定义实现 ShiroRealm，包含认证和授权两大模块
- * @author MrBird
  */
 public class ShiroRealm extends AuthorizingRealm {
 
 	@Autowired
-	@Lazy
+	@Lazy//必须懒加载，否则缓存失效
 	private UserService userService;
 	@Autowired
 	@Lazy
