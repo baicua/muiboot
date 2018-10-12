@@ -11,7 +11,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-
+/**
+* <p>Description: XSS拦截</p>
+* @version 1.0 2018/10/12
+* @author jin
+*/
 @Configuration
 public class WebConfig {
 
