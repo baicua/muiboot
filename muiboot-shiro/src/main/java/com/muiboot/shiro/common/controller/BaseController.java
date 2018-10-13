@@ -14,6 +14,7 @@ import com.github.pagehelper.PageInfo;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
@@ -26,6 +27,7 @@ import javax.servlet.http.HttpServletResponse;
 * @version 1.0 2018/10/12
 * @author jin
 */
+@Controller
 public  abstract class BaseController {
 	protected  final Logger logger = LoggerFactory.getLogger(this.getClass());
 	@ModelAttribute
