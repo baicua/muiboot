@@ -3,6 +3,7 @@ package com.muiboot.shiro.common.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.muiboot.shiro.system.controller.SysConstant;
 import com.muiboot.shiro.system.domain.User;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -13,6 +14,11 @@ import com.github.pagehelper.PageInfo;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 
 /**
@@ -22,7 +28,10 @@ import org.slf4j.LoggerFactory;
 */
 public  abstract class BaseController {
 	protected  final Logger logger = LoggerFactory.getLogger(this.getClass());
-	protected static final long MAX_AGE =60*60*24*7;//缓存7天
+	@ModelAttribute
+	public void initBinder(Model model, HttpServletRequest request, HttpServletResponse response){
+		response.setHeader("Cache-Control", "max-age="+ SysConstant.DATA_MAX_AGE);
+	}
 
 	protected Map<String, Object> getDataTable(PageInfo<?> pageInfo) {
 		Map<String, Object> rspData = new HashMap<>();

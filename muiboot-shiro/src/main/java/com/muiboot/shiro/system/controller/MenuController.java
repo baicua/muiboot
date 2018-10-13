@@ -33,21 +33,18 @@ public class MenuController extends BaseController {
 	@RequestMapping("menu/getMenu")
 	@ResponseBody
 	public ResponseBo getMenu(HttpServletResponse response, Long menuId) throws Exception {
-		response.setHeader("Cache-Control", "max-age=5");//缓存5秒
 		return ResponseBo.ok(this.menuService.findById(menuId));
 	}
 
 	@RequestMapping("menu/getMenuDetail")
 	@ResponseBody
 	public ResponseBo getMenuDetail(HttpServletResponse response, Long menuId) throws Exception {
-		response.setHeader("Cache-Control", "max-age=5");//缓存5秒
 		return ResponseBo.ok(this.menuService.findMenuDetail(menuId));
 	}
 
 	@RequestMapping("menu/tree")
 	@ResponseBody
 	public ResponseBo getMenuTree(HttpServletResponse response)  throws Exception{
-		response.setHeader("Cache-Control", "max-age=5");//缓存5秒
 		return ResponseBo.ok(this.menuService.getMenuTree());
 	}
 

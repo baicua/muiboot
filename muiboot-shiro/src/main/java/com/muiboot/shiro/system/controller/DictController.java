@@ -35,7 +35,6 @@ public class DictController extends BaseController {
 	@RequestMapping("dict/tree")
 	@ResponseBody
 	public ResponseBo getDictTree(HttpServletResponse response,String dicName)  throws Exception{
-		response.setHeader("Cache-Control", "max-age=5");//缓存5秒
 		return ResponseBo.ok(this.dictService.getDictTree(dicName));
 	}
 
@@ -57,21 +56,18 @@ public class DictController extends BaseController {
 	@RequestMapping("dict/getDicDetail")
 	@ResponseBody
 	public ResponseBo getDicDetail(HttpServletResponse response, Long dicId) throws Exception {
-		response.setHeader("Cache-Control", "max-age=5");//缓存5秒
 		return ResponseBo.ok(this.dictService.findDicDetail(dicId));
 	}
 
 	@RequestMapping("dict/getDic")
 	@ResponseBody
 	public ResponseBo getDic(HttpServletResponse response, Long dicId) throws Exception {
-		response.setHeader("Cache-Control", "max-age=5");//缓存5秒
 		return ResponseBo.ok(this.dictService.selectByKey(dicId));
 	}
 
 	@RequestMapping("dict/loadDics")
 	@ResponseBody
 	public ResponseBo loadDics(HttpServletResponse response, String[] dicKeys) throws Exception {
-		response.setHeader("Cache-Control", "max-age=5");//缓存5秒
 		return ResponseBo.ok(this.dictService.loadDics(dicKeys));
 	}
 	@Log("删除字典")

@@ -1,6 +1,7 @@
 package com.muiboot.shiro.route;
 
 import com.muiboot.shiro.common.controller.BaseController;
+import com.muiboot.shiro.system.controller.SysConstant;
 import com.muiboot.shiro.system.domain.User;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
@@ -21,8 +22,9 @@ import javax.servlet.http.HttpServletResponse;
 public class SysController extends BaseController {
     //预处理信息，设置页面缓存时间
     @ModelAttribute
+    @Override
     public void initBinder(Model model, HttpServletRequest request, HttpServletResponse response){
-        //response.setHeader("Cache-Control", "max-age="+MAX_AGE);
+        response.setHeader("Cache-Control", "max-age="+ SysConstant.PAGE_MAX_AGE);
     }
     @RequestMapping("sys/{forward}")
     public String sys(@PathVariable(name = "forward") String forward,Model model) {
