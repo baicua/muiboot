@@ -147,14 +147,15 @@ background:url(../images/icon01.png) repeat-x;
     height: 50px;
     position: absolute;
     font: 22px/52px 微软雅黑;
-    display: inline-flex;
+    margin-left:60px;
 }
 .topleft a i{
-    margin-left: 10px;
     background: url(../images/logo.png) no-repeat;
     width: 50px;
     height: 50px;
     display: inline-block;
+    position: absolute;
+    margin-left: -50px;
 }
 .topright{height:50px;background:url(../images/topright.jpg) no-repeat right;float:right;    background-position: 0px -34px;}
 .nav{float:left;}
