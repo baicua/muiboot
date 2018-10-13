@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.concurrent.TimeUnit;
 
 /**
 * <p>Description: 菜单跳转</p>
@@ -24,7 +25,9 @@ public class SysController extends BaseController {
     @ModelAttribute
     @Override
     public void initBinder(Model model, HttpServletRequest request, HttpServletResponse response){
-        response.setHeader("Cache-Control", "max-age="+ SysConstant.PAGE_MAX_AGE);
+        //response.setHeader("Cache-Control", "max-age="+ SysConstant.PAGE_MAX_AGE);
+        //项目启动后5天后过期
+        response.setDateHeader("Expires",SysConstant.START_TIME + TimeUnit.DAYS.toMillis(5));
     }
     @RequestMapping("sys/{forward}")
     public String sys(@PathVariable(name = "forward") String forward,Model model) {
