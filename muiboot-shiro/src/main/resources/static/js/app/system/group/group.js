@@ -24,14 +24,10 @@
         method.del($("#InfoPanle table").attr("data-name-id"),"部门");
     });
     var method =(function() {
-        var model;
-        $.getJSON(ctx+"json/sys/group.html",function(text){
-            model=text;
-        });
         function loadModel(data,title,url){
             var openIndex=0;
             try{
-                laytpl(model.groupAdd).render(data, function(html){
+                laytpl($("#groupAdd").html()).render(data, function(html){
                     //页面层
                     openIndex=layer.open({
                         title:'<i class="layui-icon layui-icon-app"></i>&nbsp; '+title,
@@ -114,17 +110,15 @@
                 });
             },
             refresh:function ($id) {
-                $.getJSON(ctx+"json/sys/group.html",function(text){
-                    $MB.layerGet({url:ctx+"group/getGroupDetail",data:{groupId:$id}},function(data){
-                        laytpl(text.groupInfo).render($.extend({},data.msg.info), function(html){
-                            $("#InfoPanle").html(html);
-                        });
-                        laytpl("<div></div>").render($.extend({},data.msg.list), function(html){
-                            $("#ListPanle").html(html);
-                        });
-                        dict.render();
-                        element.init();
+                $MB.layerGet({url:ctx+"group/getGroupDetail",data:{groupId:$id}},function(data){
+                    laytpl($("#groupInfo").html()).render($.extend({},data.msg.info), function(html){
+                        $("#InfoPanle").html(html);
                     });
+                    laytpl("<div></div>").render($.extend({},data.msg.list), function(html){
+                        $("#ListPanle").html(html);
+                    });
+                    dict.render();
+                    element.init();
                 });
             },
             onsubmit:function (subBtn,layero,url,callback) {

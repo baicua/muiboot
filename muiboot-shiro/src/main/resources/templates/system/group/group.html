@@ -47,6 +47,97 @@
             </div>
         </div>
     </div>
+    <!--模板-->
+    <script id="groupAdd" type="text/html">
+        <fieldset class="layui-elem-field layui-anim layui-anim-up">
+            <legend>-----</legend>
+            <form class="layui-form" action="">
+                <div class="layui-row">
+                    <div class="layui-col-md6 layui-col-xs12">
+                        <label class="layui-form-label">上级机构:</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="parentId" dic-map="DIC_ORGAN_TREE" value="{{d.parentId||''}}"placeholder="请选择上级机构" class="layui-input dic-tree">
+                            <input type="text" name="groupId"value="{{d.groupId||''}}" hidden>
+                        </div>
+                    </div>
+                    <div class="layui-col-md6 layui-col-xs12">
+                        <label class="layui-form-label" lable-verify="required">机构类型:</label>
+                        <div class="layui-input-block">
+                            <select lay-verify="required" name="groupType" dic-map="DIC_GROUP_TYPE" dic-value="{{d.groupType}}" placeholder="请选择机构类型" class="layui-input dic-map"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-row">
+                    <div class="layui-col-md6 layui-col-xs12">
+                        <label class="layui-form-label" lable-verify="required">机构简称:</label>
+                        <div class="layui-input-block">
+                            <input type="text" lay-verify="required" name="groupName" value="{{d.groupName||''}}"placeholder="请输入机构简称" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-col-md6 layui-col-xs12">
+                        <label class="layui-form-label">机构全称:</label>
+                        <div class="layui-input-block">
+                            <input type="text"  name="groupFullName" value="{{d.groupFullName||''}}"placeholder="请输入机构全称" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-row">
+                    <div class="layui-col-md6 layui-col-xs12">
+                        <label class="layui-form-label">联系电话:</label>
+                        <div class="layui-input-block">
+                            <input type="text"  name="tel" value="{{d.tel||''}}"placeholder="请输入联系电话" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-col-md6 layui-col-xs12">
+                        <label class="layui-form-label" >联系邮箱:</label>
+                        <div class="layui-input-block">
+                            <input type="text"  name="email" value="{{d.email||''}}"placeholder="请输入联系邮箱" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-row">
+                    <div class="layui-col-md6 layui-col-xs12">
+                        <label class="layui-form-label">行政区划:</label>
+                        <div class="layui-input-block">
+                            <input type="text"  name="areaCode" value="{{d.areaCode||''}}"placeholder="请选择行政区划" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-col-md6 layui-col-xs12">
+                        <label class="layui-form-label" >联系地址:</label>
+                        <div class="layui-input-block">
+                            <input type="text"  placeholder="请输入联系地址" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-row">
+                    <div class="layui-col-md6 layui-col-xs12">
+                        <label class="layui-form-label">状态:</label>
+                        <div class="layui-input-block">
+                            <input type="checkbox"  name="valid" lay-skin="switch" lay-text="启用|禁用" value="1" {{d.valid=='1'?'checked':''}}>
+                        </div>
+                    </div>
+                    <div class="layui-col-md6 layui-col-xs12">
+                        <label class="layui-form-label" >机构描述:</label>
+                        <div class="layui-input-block">
+                            <input type="text"  name="description" value="{{d.description||''}}"placeholder="请输入机构描述" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </fieldset>
+    </script>
+    <script id="groupInfo" type="text/html">
+        <table class="layui-table layui-anim layui-anim-up" lay-size="sm" data-name-id="{{ d.groupId }}">
+            <colgroup><col width="150"><col width="200"><col width="150"><col width="200"></colgroup>
+            <tbody>
+            <tr><th>机构ID</th><td>{{ d.groupId||'/'}}</td><th>机构类型</th><td><span class="dic-text" dic-map="DIC_GROUP_TYPE">{{ d.groupType}}</span></td></tr>
+            <tr><th>机构简称</th><td>{{ d.groupName||'/' }}</td><th>机构全称</th><td>{{ d.groupFullName||'/' }}</td></tr>
+            <tr><th>上级机构</th><td><span class="dic-text" dic-map="DIC_ORGAN_TABLE">{{ d.parentId||'/' }}</span></td><th>行政区划</th><td>{{ d.areaCode||'/' }}</td></tr>
+            <tr><th>联系电话</th><td>{{ d.tel||'/' }}</td><th>联系邮箱</th><td>{{ d.email||'/' }}</td></tr>
+            <tr><th>状态</th><td><span class="dic-text" dic-map="DIC_DISABLE">{{ d.valid}}</span></td><th>机构描述</th><td>{{ d.description||'/' }}</td></tr>
+            </tbody>
+        </table>
+    </script>
     <script data-th-src="@{/js/app/system/group/group.js}"></script>
 </div>
 </body>

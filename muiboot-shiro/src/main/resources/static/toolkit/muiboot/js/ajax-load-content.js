@@ -37,15 +37,15 @@
                 success: function (r) {
                     try {
                         var $r = $("<code></code>").html(r);//包装数据
-                        var scripts = $r.find("div.ajax-content script");
-                        $r.find("script").remove();
+                       // var scripts = $r.find("div.ajax-content script");
+                        //$r.find("script").remove();
                         var content=$r.find("div.ajax-content");
                         if(content.length>0){
                             $contentArea.empty().html(content.html());
                         }else {
                             $contentArea.empty().html($r.html());
                         }
-                        if(!!scripts&&scripts.length>0){
+/*                        if(!!scripts&&scripts.length>0){
                             scripts.each(function(index,script){
                                 if($MB.isMobile()&&script.attributes[1]){
                                     $MB.getScript(script.attributes[1].value,true);
@@ -53,9 +53,8 @@
                                     $MB.getScript(script.src,true);
                                 }
                             });
-                        }
+                        }*/
                         content=null;
-                        scripts=null;
                         $r=null;
                     }catch (e) {
                         console.error("error:"+e.message+";url:"+url);

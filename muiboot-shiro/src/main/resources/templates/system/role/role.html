@@ -53,6 +53,127 @@
     <div class="layui-row">
         <table class="layui-hide" id="roleList"></table>
     </div>
+    <!--模板-->
+    <script id="roleAdd" type="text/html">
+        <form class="layui-form" action="" >
+            <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+                <ul class="layui-tab-title">
+                    <li class="layui-this">基本信息</li>
+                    <li>权限信息</li>
+                    <li>权限用户</li>
+                </ul>
+                <div class="layui-tab-content mb-tab-body">
+                    <div class="layui-tab-item layui-show">
+                        <div class="layui-row">
+                            <div class="layui-col-md12 layui-col-xs12">
+                                <label class="layui-form-label" lable-verify="required">角色编号:</label>
+                                <div class="layui-input-block">
+                                    <input type="text" lay-verify="required" name="roleKey" value="{{d.roleKey||''}}"placeholder="请输入角色编号" class="layui-input">
+                                    <input type="text" name="roleId" value="{{d.roleId||''}}" hidden>
+                                </div>
+                            </div>
+                            <div class="layui-col-md12 layui-col-xs12">
+                                <label class="layui-form-label" lable-verify="required">角色名称:</label>
+                                <div class="layui-input-block">
+                                    <input lay-verify="required" name="roleName"  value="{{d.roleName||''}}"placeholder="请输入角色名称" class="layui-input "></input>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-row">
+                            <div class="layui-col-md12 layui-col-xs12">
+                                <label class="layui-form-label" lable-verify="required">角色级别:</label>
+                                <div class="layui-input-block">
+                                    <input type="checkbox"name="roleLevel" lay-skin="switch" lay-text="本局|全局" value="1" {{d.roleLevel=='1'?'checked':''}}>
+                                </div>
+                            </div>
+                            <div class="layui-col-md12 layui-col-xs12">
+                                <label class="layui-form-label">备注:</label>
+                                <div class="layui-input-block">
+                                    <textarea  name="remark" value="{{d.remark||''}}"placeholder="请输入备注" class="layui-textarea">{{d.remark||''}}</textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-tab-item ">
+                        <ul id="authTree" class="layui-box layui-tree mb-tree-table"></ul>
+                    </div>
+                    <div class="layui-tab-item ">
+                        <div class="layui-row">
+                            <div class="layui-row">
+                                <div class="layui-col-md5 layui-col-xs12">
+                                    <label class="layui-form-label">所属机关:</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" id="role-organId" dic-map="DIC_ORGAN_TREE" placeholder="请选择所属机关" class="layui-input dic-tree">
+                                    </div>
+                                </div>
+                                <div class="layui-col-md5 layui-col-xs12">
+                                    <label class="layui-form-label">真实名:</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" id="role-realName"  placeholder="请输入真实名" class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-col-md2 layui-col-xs12 center">
+                                    <button type="button"  id="search-role-user-btn" class="mb-btn mb-btn-form mb-btn-search">查询</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-row">
+                            <table class="layui-hide" id="search-users-list" ></table>
+                        </div>
+                        <div class="layui-row">
+                            <button type="button" id="search-select-user-btn" class="layui-btn layui-btn-xs">已选用户<span class="layui-badge" id="role-users-count">0</span></button>
+                            <table class="layui-hide" id="role-users-list" ></table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </script>
+    <script id="roleGrant" type="text/html">
+        <form class="layui-form" action="" >
+            <input type="hidden" name="roleIds" id="roleIds" value="{{d.roleIds||''}}"  class="layui-input "/>
+            <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+                <ul class="layui-tab-title">
+                    <li class="layui-this">用户列表</li>
+                    <li>已选用户<span class="layui-badge" id="select-num">0</span></li>
+                </ul>
+                <div class="layui-tab-content mb-tab-body">
+                    <div class="layui-tab-item layui-show">
+                        <div class="layui-row">
+                            <div class="layui-row">
+                                <div class="layui-col-md5 layui-col-xs12">
+                                    <label class="layui-form-label">所属机关:</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" id="role-organId" dic-map="DIC_ORGAN_TREE" placeholder="请选择所属机关" class="layui-input dic-tree">
+                                    </div>
+                                </div>
+                                <div class="layui-col-md5 layui-col-xs12">
+                                    <label class="layui-form-label">真实名:</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" id="role-realName"  placeholder="请输入真实名" class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-col-md2 layui-col-xs12 center">
+                                    <button type="button" lay-submit lay-filter="search-user" class="mb-btn mb-btn-form mb-btn-search">查询</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-row">
+                            <table class="layui-hide" id="users-grout-list" lay-filter="users"></table>
+                        </div>
+                    </div>
+                    <div class="layui-tab-item ">
+                        <div class="layui-card">
+                            <div class="layui-card-body">
+                                <div class="layui-row mb-card-select" id="user-select">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </script>
     <script data-th-src="@{/js/app/system/role/role.js}" />
 </div>
 </body>

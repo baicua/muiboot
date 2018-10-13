@@ -93,21 +93,18 @@
                 });
             },
             refresh:function (menuId) {
-                $.getJSON(ctx+"json/sys/menu.html",function(text){
-                    //var $compent=$("<code></code>").html(text);
-                    $MB.layerGet({url:ctx+"menu/getMenuDetail",data:{menuId:menuId},cache:true},function(data){
-                        laytpl(text.table).render($.extend({},data.msg.menu), function(html){
-                            $("#menuInfoPanle").html(html);
-                            dict.render();
-                        });
-                        laytpl(text.permission).render($.extend({},data.msg.permissions), function(html){
-                            $("#menuButtonPanle").html(html);
-                        });
-                        laytpl(text.role).render($.extend({},data.msg.roles), function(html){
-                            $("#menuAuthPanle").html(html);
-                        });
-                        element.init();
+                $MB.layerGet({url:ctx+"menu/getMenuDetail",data:{menuId:menuId},cache:true},function(data){
+                    laytpl($("#table").html()).render($.extend({},data.msg.menu), function(html){
+                        $("#menuInfoPanle").html(html);
+                        dict.render();
                     });
+                    laytpl($("#permission").html()).render($.extend({},data.msg.permissions), function(html){
+                        $("#menuButtonPanle").html(html);
+                    });
+                    laytpl($("#role").html()).render($.extend({},data.msg.roles), function(html){
+                        $("#menuAuthPanle").html(html);
+                    });
+                    element.init();
                 });
             },
             onsubmit:function (subBtn,layero,url,callback) {
