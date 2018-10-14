@@ -3,8 +3,10 @@ package com.muiboot.shiro.common.controller;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.muiboot.shiro.system.controller.SysConstant;
+import com.muiboot.shiro.system.common.PropertiesUtil;
+import com.muiboot.shiro.system.common.SysConstant;
 import com.muiboot.shiro.system.domain.User;
+import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.session.Session;
@@ -32,7 +34,7 @@ public  abstract class BaseController {
 	protected  final Logger logger = LoggerFactory.getLogger(this.getClass());
 	@ModelAttribute
 	public void initBinder(Model model, HttpServletRequest request, HttpServletResponse response){
-		response.setHeader("Cache-Control", "max-age="+ SysConstant.DATA_MAX_AGE);
+		response.setHeader("Cache-Control", "max-age="+ StringUtils.defaultIfBlank(PropertiesUtil.get(SysConstant.DATA_MAX_AGE),"3"));
 	}
 
 	protected Map<String, Object> getDataTable(PageInfo<?> pageInfo) {

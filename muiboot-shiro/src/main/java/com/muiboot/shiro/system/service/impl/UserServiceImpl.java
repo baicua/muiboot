@@ -8,7 +8,8 @@ import java.util.List;
 import com.muiboot.shiro.common.exception.BusinessException;
 import com.muiboot.shiro.common.service.impl.BaseService;
 import com.muiboot.shiro.common.util.MD5Utils;
-import com.muiboot.shiro.system.controller.SysConstant;
+import com.muiboot.shiro.system.common.PropertiesUtil;
+import com.muiboot.shiro.system.common.SysConstant;
 import com.muiboot.shiro.system.dao.UserMapper;
 import com.muiboot.shiro.system.domain.SysGroup;
 import com.muiboot.shiro.system.domain.User;
@@ -18,6 +19,7 @@ import com.muiboot.shiro.system.service.GroupService;
 import com.muiboot.shiro.system.service.UserRoleService;
 import com.muiboot.shiro.system.service.UserService;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.math.NumberUtils;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -104,7 +106,7 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
 			if (StringUtils.isNotBlank(user.getMobile())){
 				user.setPassword(user.getMobile());
 			}else {
-				user.setPassword(SysConstant.INIT_USER_PWD);
+				user.setPassword(StringUtils.defaultIfBlank(PropertiesUtil.get(SysConstant.INIT_USER_PWD),"111111"));
 			}
 		}
 		user.setPassword(MD5Utils.encrypt(user.getUsername(),user.getPassword()));
@@ -114,7 +116,11 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
 		}
 		this.save(user);
 		if (roles==null){
-			roles=new Long[]{SysConstant.BASE_ROLE_KEY};
+			Long baseRole = NumberUtils.toLong(PropertiesUtil.get(SysConstant.BASE_ROLE_KEY),0);
+			if (0==baseRole.longValue()){
+				throw new BusinessException("基础角色不存在，无法添加用户，请下配置基础角色！");
+			}
+			roles=new Long[]{baseRole};
 		}
 		setUserRoles(user, roles);
 	}

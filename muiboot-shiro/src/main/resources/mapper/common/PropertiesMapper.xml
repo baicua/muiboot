@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.muiboot.shiro.system.dao.PropertiesMapper">
+  <resultMap id="BaseResultMap" type="com.muiboot.shiro.system.domain.Properties">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="PROP_ID" jdbcType="BIGINT" property="propId" />
+    <result column="PROP_KEY" jdbcType="VARCHAR" property="propKey" />
+    <result column="PROP_VALUE" jdbcType="VARCHAR" property="propValue" />
+    <result column="PROP_MEMO" jdbcType="VARCHAR" property="propMemo" />
+  </resultMap>
+</mapper>

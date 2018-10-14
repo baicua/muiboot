@@ -158,10 +158,10 @@ public class RoleServiceImpl extends BaseService<Role> implements RoleService {
 		if (roleold==null){
 			throw new BusinessException("角色不存在");
 		}
-		if (!ShiroUtil.getCurrentUser().getOrganId().equals(roleold.getGroupId())){
+		if (!ShiroUtil.getCurrentUser().getOrganId().equals(roleold.getGroupId())&&!User.SUPPER_USER.equals(ShiroUtil.getCurrentUser().getUsername())){
 			throw new BusinessException("只能修改本局创建角色，该角色无法修改");
 		}
-		role.setGroupId(ShiroUtil.getCurrentUser().getOrganId());
+		//role.setGroupId(ShiroUtil.getCurrentUser().getOrganId());
 		this.updateNotNull(role);
 		Example example = new Example(RoleMenu.class);
 		example.createCriteria().andCondition("role_id=", role.getRoleId());
