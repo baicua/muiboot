@@ -1,4 +1,4 @@
-layui.use(['menu','layer'], function(args) {
+layui.use(['menu','layer','laytpl','dict','form'], function(args) {
     "use strict";
     //1.如果是移动端，添加触屏关闭菜单事件
     if ($MB.isMobile() || $MB.isXsScreen()) {
@@ -51,11 +51,34 @@ layui.use(['menu','layer'], function(args) {
     layui.menu.loadmenu(userName);
 
     //5.绑定个人资料修改事件
+    var tipsIndex=0;
     $('.topright .user').hover(function () {
-            layer.tips('点击修改个人资料和密码', '.topright .user', {
+        tipsIndex=layer.tips('点击修改个人资料和密码', '.topright .user', {
                 tips: [3, '#3595CC']
             });
         }, function () {
-            layer.close(layer.index);
-        })
+            layer.close(tipsIndex);
+        });
+    });
+    $('.topright').on('click',".user",function () {
+        $MB.layerGet({url: ctx + "user/getUser", data: {"userId": userId}}, function (data) {
+            if (!data || !data.msg || data.code != 0) {
+                layer.msg('请求数据失败,您选择的用户不存在',{skin: 'mb-warn'});
+                return false;
+            }
+            layui.laytpl($("#userProfile").html()).render(data.msg, function (html) {
+                layer.open({
+                    title: '<i class="layui-icon layui-icon-app"></i>&nbsp; 个人资料',
+                    type: 1,
+                    skin: 'layui-layer-rim', //加上边框
+                    area: ['480px', '400px'], //宽高
+                    content: html,
+                    success: function (layero, index) {
+                        layero.addClass("layui-form");
+                        layui.dict.render();
+                        layui.form.render();
+                    }
+                });
+            });
+        });
     });

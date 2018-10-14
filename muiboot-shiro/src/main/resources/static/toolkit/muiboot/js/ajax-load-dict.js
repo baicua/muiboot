@@ -121,7 +121,7 @@
     }
     function renderDicTree($this) {
         var id="dic-tree"+loadedCount,key = $this.attr("dic-map"),value=$this.val(),map =key&&get(key)||"";
-        var verify=$this.attr("lay-verify"),placeholder=$this.attr("placeholder");
+        var verify=$this.attr("lay-verify"),placeholder=$this.attr("placeholder"),disabled=$this.attr("disabled");
         var isInit = $this.hasClass("dic-finish");
         if(!!map&&map.children){
             var $input,$ul,$cancel,_input,_ul,_cancel;
@@ -132,7 +132,8 @@
             }else {
                 _input=['<input name="ignore-form" type="text" '
                     ,(!verify?"":"lay-verify="+verify)
-                    ,'readonly'
+                    ,'readonly',
+                    disabled?"disabled":""
                     ,(!placeholder?"":"placeholder="+placeholder)
                     ,' class="layui-input dic-tree-input">'].join(" ");
                 _ul =$('<ul id="'+id+'" class="layui-box layui-tree dic-tree-ul"></ul>');

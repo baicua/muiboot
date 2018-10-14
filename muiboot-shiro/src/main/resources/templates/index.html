@@ -22,7 +22,7 @@
     <link rel="stylesheet" data-th-href="@{/css/dic.css}">
     <link rel="stylesheet" data-th-href="@{/css/app.css}" media="all"/>
     <link rel="stylesheet" data-th-href="@{/toolkit/theme/css/theme.css}" media="all"/>
-    <script data-th-inline="javascript">var ctx = [[@{/}]],userName = [[${user.username}]];</script>
+    <script data-th-inline="javascript">var ctx = [[@{/}]],userName = [[${user.username}]],userId = [[${user.userId}]];</script>
 </head>
 <body class="layui-layout-body">
 <div class="layui-layout mb-layout-admin">
@@ -40,8 +40,6 @@
 <div data-th-replace="common/common"></div>
 <script data-th-src="@{/js/app/index.js}"></script>
 <script data-th-src="@{/toolkit/muiboot/js/ajax-load-content.js}"></script>
-
-</body>
 <!--[if lt IE 8]>
 <script data-th-inline="javascript">
     layer.msg('本系统不支持IE7以下浏览器访问，推荐使用IE8+ / Chrome / Firefox / Edge 等高级浏览器访问本系统', {
@@ -52,5 +50,103 @@
     }).resize();
 </script>
 <![endif]-->
-<!--<script data-th-src="@{js/app/index.js}"></script>-->
+<!--模板-->
+<script id="userProfile" type="text/html">
+    <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+        <ul class="layui-tab-title">
+            <li class="layui-this">基本信息</li>
+            <li>密码修改</li>
+        </ul>
+        <div class="layui-tab-content mb-tab-body">
+            <div class="layui-tab-item layui-show">
+                <form class="layui-form" action="">
+                    <div class="layui-row">
+                        <div class="layui-col-md12 layui-col-xs12">
+                            <label class="layui-form-label" ><span>真实名:</span></label>
+                            <div class="layui-input-block">
+                                <input type="text" lay-verify="required" name="realName" value="{{d.realName||''}}"placeholder="请输入真实名" class="layui-input">
+                                <input type="text" name="userId"value="{{d.userId||''}}" hidden>
+                            </div>
+                        </div>
+                        <div class="layui-col-md12 layui-col-xs12">
+                            <label class="layui-form-label" ><span>用户名:</span></label>
+                            <div class="layui-input-block">
+                                <input lay-verify="required" disabled name="username"  value="{{d.username||''}}"placeholder="请输入用户名" class="layui-input "></input>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-row">
+                        <div class="layui-col-md12 layui-col-xs12">
+                            <label class="layui-form-label"><span>所属部门:</span></label>
+                            <div class="layui-input-block">
+                                <input type="text" lay-verify="required" disabled name="groupId" dic-map="DIC_DEPT_TREE" value="{{d.groupId||''}}"placeholder="请选择所属部门" class="layui-input dic-tree">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-row">
+                        <div class="layui-col-md12 layui-col-xs12">
+                            <label class="layui-form-label" >联系电话:</label>
+                            <div class="layui-input-block">
+                                <input type="text"  name="mobile" value="{{d.mobile||''}}"placeholder="请输入联系电话" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-col-md12 layui-col-xs12">
+                            <label class="layui-form-label" >电子邮箱:</label>
+                            <div class="layui-input-block">
+                                <input  name="email"  value="{{d.email||''}}"placeholder="请输入电子邮箱" class="layui-input "></input>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-row">
+                        <div class="layui-col-md12 layui-col-xs12">
+                            <label class="layui-form-label">性别:</label>
+                            <div class="layui-input-block">
+                                <input type="checkbox"  name="ssex" lay-skin="switch" lay-text="男|女" value="1" {{d.ssex=='1'?'checked':''}}>
+                            </div>
+                        </div>
+                        <div class="layui-col-md12 layui-col-xs12">
+                            <label class="layui-form-label">备注:</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="description" value="{{d.description||''}}"placeholder="请输入备注" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-row">
+                        <div class="layui-col-md12 layui-col-xs12 center">
+                            <button type="button" lay-submit lay-filter="profileSave" class="mb-btn mb-btn-form mb-btn-search">保存</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="layui-tab-item">
+                <div class="layui-row">
+                    <div class="layui-col-md12 layui-col-xs12">
+                        <label class="layui-form-label">旧密码:</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="description" value="{{d.description||''}}"placeholder="请输入旧密码" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-col-md12 layui-col-xs12">
+                        <label class="layui-form-label">新密码:</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="description" value="{{d.description||''}}"placeholder="请输入新密码" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-col-md12 layui-col-xs12">
+                        <label class="layui-form-label">确认新密码:</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="description" value="{{d.description||''}}"placeholder="请再次输入新密码" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-row">
+                    <div class="layui-col-md12 layui-col-xs12 center">
+                        <button type="button" id="passwordSave" class="mb-btn mb-btn-form mb-btn-search">保存</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+</body>
 </html>
