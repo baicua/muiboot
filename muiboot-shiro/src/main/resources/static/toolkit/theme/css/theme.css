@@ -173,7 +173,7 @@ background:url(../images/icon01.png) repeat-x;
 .topright ul li a{font-size:13px; color:#e9f2f7;}
 .topright ul li a:hover{color:#fff;}
 .topright ul li span{margin-top:2px;float:left;padding-right:3px;}
-.user{height:24px;margin-top: 2px;background:url(../images/ub1.png) repeat-x;clear:both;float:right;border-radius:30px; white-space:nowrap;position:relative;}
+.user{height:24px;margin-top: 2px;cursor:pointer;background:url(../images/ub1.png) repeat-x;clear:both;float:right;border-radius:30px; white-space:nowrap;position:relative;}
 .user span{display:inline-block;padding-right:10px; background:url(../images/user.png) no-repeat 15px 6px; line-height:24px; font-size:14px;color:#b8ceda; padding-left:20px; padding-left:35px;}
 .user b{display:inline-block;width:20px;height:18px; background:url(../images/msg.png);text-align:center; font-weight:normal; color:#fff;font-size:14px;margin-right:13px; margin-top:7px; line-height:18px;}
 .user i{display:inline-block;margin-right:5px;font-style:normal;line-height:24px; font-size:14px;color:#b8ceda;}
