@@ -47,7 +47,7 @@ public class User extends BaseModel implements Serializable{
 	@ExportConfig(value = "登录名")
 	private String username;
 
-	/*真实名*/
+	/*用户名*/
 	@Column(name = "REAL_NAME")
 	@ExportConfig(value = "用户名")
 	private String realName;
