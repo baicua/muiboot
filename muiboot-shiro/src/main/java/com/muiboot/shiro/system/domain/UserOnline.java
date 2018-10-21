@@ -11,7 +11,7 @@ public class UserOnline implements Serializable{
     private String id;
     // 用户id
     private String userId;
-    // 用户名称
+    // 登录名
     private String username;
 	// 用户主机地址
     private String host;

@@ -203,8 +203,8 @@
                         , skin: "line"
                         , cols: [[
                             {field: 'userId', title: 'userId', hide: true}
-                            , {field: 'username', title: '用户名'}
-                            , {field: 'realName', title: '真实名'}
+                            , {field: 'username', title: '登录名'}
+                            , {field: 'realName', title: '用户名'}
                             , {
                                 field: 'organId', title: '所属机关', templet: function (d) {
                                     return '<span class="dic-text" dic-map="DIC_ORGAN_TABLE">' + d.organId + '</span>';
@@ -243,8 +243,8 @@
                         return false;
                     }}
                     , {field: 'userId', title: 'userId', hide: true}
-                    , {field: 'username', title: '用户名'}
-                    , {field: 'realName', title: '真实名'}
+                    , {field: 'username', title: '登录名'}
+                    , {field: 'realName', title: '用户名'}
                     , {field: 'groupName', title: '所属部门'}
                     , {field: 'mobile', title: '手机号'}
                 ]],
@@ -303,8 +303,8 @@
                     , skin: "line"
                     , cols: [[
                         {field: 'userId', title: 'userId', hide: true}
-                        , {field: 'username', title: '用户名'}
-                        , {field: 'realName', title: '真实名'}
+                        , {field: 'username', title: '登录名'}
+                        , {field: 'realName', title: '用户名'}
                         , {
                             field: 'organId', title: '所属机关', templet: function (d) {
                                 return '<span class="dic-text" dic-map="DIC_ORGAN_TABLE">' + d.organId + '</span>';

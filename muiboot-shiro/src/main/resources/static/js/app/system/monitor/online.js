@@ -11,7 +11,7 @@
         ,skin:"line"
         ,cols: [[
             {field: 'id', title: 'ID'}
-            ,{field:'username', title: '用户名'}
+            ,{field:'username', title: '登录名'}
             ,{field:'startTimestamp',  title: '登录时间'}
             ,{field:'lastAccessTime',  title: '最后访问时间'}
             ,{field:'host', title: 'IP地址'}
