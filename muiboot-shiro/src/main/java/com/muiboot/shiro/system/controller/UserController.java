@@ -197,17 +197,35 @@ public class UserController extends BaseController {
 		String encrypt = MD5Utils.encrypt(user.getUsername().toLowerCase(), password);
 		return user.getPassword().equals(encrypt);
 	}
-
-	@RequestMapping("user/updatePassword")
+	@Log("修改密码")
+	@RequestMapping("user/updatePwd")
 	@ResponseBody
-	public ResponseBo updatePassword(String newPassword) {
-		try {
-			this.userService.updatePassword(newPassword);
-			return ResponseBo.ok("更改密码成功！");
-		} catch (Exception e) {
-			e.printStackTrace();
-			return ResponseBo.error("更改密码失败，请联系网站管理员！");
+	public ResponseBo updatePwd(String password,String newPassword,String confirmPassword) {
+		if (!newPassword.equals(confirmPassword)){
+			return ResponseBo.error("两次密码输入不一致，请重新输入！");
 		}
+		User user = ShiroUtil.getCurrentUser();
+		String oldPassword = MD5Utils.encrypt(user.getUsername().toLowerCase(), password);
+		if (!oldPassword.equals(user.getPassword())){
+			return ResponseBo.error("密码验证失败，请重新输入！");
+		}
+		this.userService.updatePassword(newPassword);
+		return ResponseBo.ok("更改密码成功！");
+	}
+
+	@Log("修改个人信息")
+	@RequestMapping("user/updateProfile")
+	@ResponseBody
+	public ResponseBo updateProfile(User user) {
+		User sessionUser = ShiroUtil.getCurrentUser();
+		if (!sessionUser.getUserId().equals(user.getUserId())){
+			return ResponseBo.error("只能修改登录用户的个人信息！");
+		}
+		if (StringUtils.isBlank(user.getSsex())){
+			user.setSsex(User.SEX_FEMALE);
+		}
+		userService.updateUserProfile(user);
+		return ResponseBo.ok("修改个人信息成功！");
 	}
 
 	@RequestMapping("user/profile")
@@ -226,44 +244,4 @@ public class UserController extends BaseController {
 		return "system/user/profile";
 	}
 
-	@RequestMapping("user/getUserProfile")
-	@ResponseBody
-	public ResponseBo getUserProfile(Long userId) {
-		try {
-			User user = new User();
-			user.setUserId(userId);
-			return ResponseBo.ok(this.userService.findUserProfile(user));
-		} catch (Exception e) {
-			e.printStackTrace();
-			return ResponseBo.error("获取用户信息失败，请联系网站管理员！");
-		}
-	}
-
-	@RequestMapping("user/updateUserProfile")
-	@ResponseBody
-	public ResponseBo updateUserProfile(User user) {
-		try {
-			this.userService.updateUserProfile(user);
-			return ResponseBo.ok("更新个人信息成功！");
-		} catch (Exception e) {
-			e.printStackTrace();
-			return ResponseBo.error("获取用户信息失败，请联系网站管理员！");
-		}
-	}
-
-	@RequestMapping("user/changeAvatar")
-	@ResponseBody
-	public ResponseBo changeAvatar(String imgName) {
-		try {
-			String[] img = imgName.split("/");
-			String realImgName = img[img.length-1];
-			User user = getCurrentUser();
-			user.setAvatar(realImgName);
-			this.userService.updateNotNull(user);
-			return ResponseBo.ok("更新头像成功！");
-		} catch (Exception e) {
-			e.printStackTrace();
-			return ResponseBo.error("更新头像失败，请联系网站管理员！");
-		}
-	}
 }

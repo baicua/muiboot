@@ -74,8 +74,29 @@ layui.use(['menu','layer','laytpl','dict','form'], function(args) {
                     area: ['480px', '400px'], //宽高
                     content: html,
                     success: function (layero, index) {
-                        layero.addClass("layui-form");
                         layui.dict.render();
+                        layui.form.on('submit(updateProfile)', function ($data) {
+                            var data = $data.field;
+                            $MB.layerPost({url: "/user/updateProfile", data:data}, function (r) {
+                                if (r.code == 0) {
+                                    layui.layer.msg(r.msg);
+                                } else {
+                                    layui.layer.msg(r.msg,{skin: 'mb-warn'});
+                                }
+                            });
+                            return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+                        });
+                        layui.form.on('submit(updatePwd)', function ($data) {
+                            var data = $data.field;
+                            $MB.layerPost({url: "/user/updatePwd", data:data}, function (r) {
+                                if (r.code == 0) {
+                                    layui.layer.msg(r.msg);
+                                } else {
+                                    layui.layer.msg(r.msg,{skin: 'mb-warn'});
+                                }
+                            });
+                            return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+                        });
                         layui.form.render();
                     }
                 });

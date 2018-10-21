@@ -203,8 +203,7 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
 	public void updateUserProfile(User user) {
 		user.setUsername(null);
 		user.setPassword(null);
-		if (user.getGroupId() == null)
-			user.setGroupId(0L);
+		user.setStatus(null);
 		this.updateNotNull(user);
 	}
 
