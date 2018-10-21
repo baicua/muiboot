@@ -70,10 +70,10 @@
                 try {
                     $MB.layerGet({url: ctx + "prop/getProp", data: {"propId": propId}}, function (data) {
                         if (!data || !data.msg || data.code != 0) {
-                            layer.msg('请求数据失败,您选择的用户不存在',{skin: 'mb-warn'});
+                            layer.msg('请求数据失败,您选择的配置不存在',{skin: 'mb-warn'});
                             return false;
                         }
-                        loadModel(data.msg, "修改用户", ctx + "prop/update");
+                        loadModel(data.msg, "修改配置", ctx + "prop/update");
                     });
                 } catch (e) {
                     layer.msg('请求数据异常：' + e.message,{skin: 'mb-warn'});

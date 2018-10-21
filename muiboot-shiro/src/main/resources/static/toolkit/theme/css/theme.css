@@ -24,6 +24,9 @@ html {
     background:url(../images/topbg.gif) repeat-x;
     height: 50px;
     background-position: 0px -34px;
+    -moz-box-shadow: 0 0 8px #000;/*firefox*/
+    -webkit-box-shadow: 0 0 8px #000;/*safari或chrome*/
+    box-shadow: 0 0 8px #000;/*opera或ie9*/
 }
 .mb-layout-admin> .mb-body{
     top: 50px;
