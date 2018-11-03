@@ -27,6 +27,7 @@ html {
     -moz-box-shadow: 0 0 8px #000;/*firefox*/
     -webkit-box-shadow: 0 0 8px #000;/*safari或chrome*/
     box-shadow: 0 0 8px #000;/*opera或ie9*/
+    border-bottom: 1px solid #FF9800;
 }
 .mb-layout-admin> .mb-body{
     top: 50px;
@@ -59,8 +60,8 @@ html {
     z-index: 1001;
     transition: all .3s;
     -webkit-transition: all .3s;
-    background-color: #3f97c9 !important;
-    top: 90px;
+    background-color: #fff !important;
+    top: 52px;
     width: 186px;
     bottom: 0px;
     background: url(../images/leftline.gif) repeat-y right;
@@ -68,11 +69,11 @@ html {
     overflow-x: hidden;
 }
 .mb-layout-admin .mb-side-menu ul.layui-nav{
-    background-color: #3f97c9;
+    background-color: #fff;
 }
-.mb-layout-admin .mb-side-menu ul.layui-nav-tree>li{
+/*.mb-layout-admin .mb-side-menu ul.layui-nav-tree>li{
     border-top: 1px #117591 solid;
-}
+}*/
 .mb-layout-admin .mb-footer {
     position: fixed;
     left: 186px;
@@ -83,15 +84,52 @@ html {
     background-color: #eee;
     text-align: center;
 }
+.mb-side-menu .layui-nav-tree,.mb-side-menu .layui-nav-itemed>a,.mb-side-menu .layui-nav-tree .layui-nav-item a{
+    color: #03A9F4;
+}
+.mb-side-menu .layui-nav-itemed>a{
+    color: #03A9F4 !important;
+    background-color: #f8f8f8;
+}
+.mb-side-menu .layui-nav-tree .layui-nav-more {
+    border-color:  #03A9F4 transparent transparent;
+    border-top-color: #03A9F4;
+}
+.mb-side-menu .layui-nav .layui-nav-mored,.mb-side-menu  .layui-nav-itemed>a .layui-nav-more {
+    border-color: transparent transparent #03A9F4;
+}
 .mb-side-menu .layui-side-scroll{
     width: 204px;
 }
 .mb-side-menu .layui-nav-tree{
-    width: 186px;
+    width: 183px;
 }
 .mb-side-menu .layui-nav-tree .layui-nav-child dd.layui-this, .mb-side-menu .layui-nav-tree .layui-nav-child dd.layui-this a,.mb-side-menu .layui-nav-tree .layui-this,.mb-side-menu .layui-nav-tree .layui-this>a,.mb-side-menu .layui-nav-tree .layui-this>a:hover ,.mb-side-menu .layui-nav-tree a:hover{
-    background: url(../images/libg.png) repeat-x;
-    color: #fff;
+    /*background: url(../images/libg.png) repeat-x;*/
+    background-color: #f8f8f8;
+    color: #FF9800;
+}
+.mb-side-menu .layui-nav-tree .layui-nav-child dd.layui-this, .mb-side-menu .layui-nav-tree .layui-nav-child dd.layui-this a,.mb-side-menu .layui-nav-tree .layui-this,.mb-side-menu .layui-nav-tree .layui-this>a{
+    border: solid #FF9800;
+    border-width:0 2px 0 0;
+    background-color: #fff;
+    font-weight: bold;
+}
+.mb-side-menu .layui-nav-tree .layui-nav-bar{
+    background-color: #FF9800;
+    width: 0px !important;
+}
+.mb-side-menu .layui-nav-itemed>.layui-nav-child{
+    background-color:#f8f8f8 !important;
+}
+.mb-side-menu .layui-nav-itemed>.layui-nav-child a >*{
+    font-size: 12px;
+}
+.mb-side-menu .layui-nav-tree .layui-nav-item.layui-nav-itemed {
+    border-left: 2px solid #ff9800;
+}
+.mb-side-menu .layui-nav-itemed>.layui-nav-child a{
+    padding-left:32px;
 }
 .mb-side-menu .layui-nav-tree .layui-nav-child .layui-this >a>i.focus {
     -webkit-transition: all .2s;
@@ -101,7 +139,7 @@ html {
     margin-top: -7px;
     right: 0px;
     border-style: solid;
-    border-color: transparent #fff transparent transparent;
+    border-color: transparent #FF9800 transparent transparent;
 }
 @media screen and (max-width:992px) {
     .mb-layout-admin .mb-body, .mb-layout-admin .mb-footer{

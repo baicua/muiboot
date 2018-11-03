@@ -158,11 +158,10 @@
 /*列表详情页*/
 /*引用块样式*/
 .mb-elem-quote{
-    padding: 14px 0px 14px 10px;
+    padding: 14px 0px 14px 0px;
     font-size: 18px;
     line-height: 0px;
     color: #23262e;
-    border-left: 2px solid #808080;
     border-radius: 0 2px 2px 0;
 }
 
@@ -230,6 +229,8 @@
 /*表格样式修改*/
 .layui-table, .layui-table-view {
     margin: 2px 0;
+    border-top: 2px solid #1e9fff;
+    box-shadow: 0 1px 0px rgba(0, 0, 0, 0.2), 0 1px 1px rgba(0, 0, 0, 0.25);
 }
 
 /*树形表格*/
