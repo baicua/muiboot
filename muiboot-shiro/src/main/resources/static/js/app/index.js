@@ -2,9 +2,9 @@ layui.use(['menu','layer','laytpl','dict','form'], function(args) {
     "use strict";
     //1.如果是移动端，添加触屏关闭菜单事件
     if ($MB.isMobile() || $MB.isXsScreen()) {
-        $(".layui-layout.layui-layout-admin").addClass("shrink");
+        $(".layui-layout.mb-layout-admin").addClass("shrink");
         $("body").on("touchend", ".layui-body", function (e) {
-            $(".layui-layout.layui-layout-admin").addClass("shrink");
+            $(".layui-layout.mb-layout-admin").addClass("shrink");
         });
     }
     //2.hash监听事件
@@ -31,12 +31,12 @@ layui.use(['menu','layer','laytpl','dict','form'], function(args) {
         });
     }
     //3.菜单栏打开关闭点击监听
-    $(document).on("click", '.layadmin-flexible', function () {
-        if ($(".layui-layout-admin").hasClass("shrink")) {
-            $(".layui-layout-admin").removeClass("shrink");
+    $(".mb-banner").on("click", 'a.flexible', function () {
+        if ($(".mb-layout-admin").hasClass("shrink")) {
+            $(".mb-layout-admin").removeClass("shrink");
             $('.layui-side-scroll li>a,.layui-side-scroll dd>a').unbind("mouseenter").unbind("mouseleave");
         } else {
-            $(".layui-layout-admin").addClass("shrink");
+            $(".mb-layout-admin").addClass("shrink");
             $('.shrink .layui-side-scroll li>a,.shrink .layui-side-scroll dd>a').hover(function (r) {
                 layer.tips($(this).text(), $(this));
             }, function (r) {
@@ -45,7 +45,7 @@ layui.use(['menu','layer','laytpl','dict','form'], function(args) {
         }
     });
     if ($MB.isMobile()) {
-        $(".layui-layout.layui-layout-admin").addClass("shrink")
+        $(".layui-layout.mb-layout-admin").addClass("shrink")
     }
     //4.加载菜单
     layui.menu.loadmenu(userName);
