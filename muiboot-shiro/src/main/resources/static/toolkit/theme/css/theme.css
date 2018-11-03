@@ -106,7 +106,8 @@ html {
 }
 .mb-side-menu ul.layui-nav-tree>li{
     border-width: 0 0 1px 0;
-    border-style: groove;
+    border-style: solid;
+    border-color: #eeeeee;
 }
 .mb-side-menu .layui-nav-tree .layui-nav-child dd.layui-this, .mb-side-menu .layui-nav-tree .layui-nav-child dd.layui-this a,.mb-side-menu .layui-nav-tree .layui-this,.mb-side-menu .layui-nav-tree .layui-this>a,.mb-side-menu .layui-nav-tree .layui-this>a:hover ,.mb-side-menu .layui-nav-tree a:hover{
     /*background: url(../images/libg.png) repeat-x;*/
