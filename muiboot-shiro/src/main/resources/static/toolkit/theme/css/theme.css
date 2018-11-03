@@ -85,10 +85,10 @@ html {
     text-align: center;
 }
 .mb-side-menu .layui-nav-tree,.mb-side-menu .layui-nav-itemed>a,.mb-side-menu .layui-nav-tree .layui-nav-item a{
-    color: #03A9F4;
+    color: #000000;
 }
 .mb-side-menu .layui-nav-itemed>a{
-    color: #03A9F4 !important;
+    color: #000000 !important;
     background-color: #f8f8f8;
 }
 .mb-side-menu .layui-nav-tree .layui-nav-more {
@@ -109,7 +109,7 @@ html {
     background-color: #f8f8f8;
     color: #FF9800;
 }
-.mb-side-menu .layui-nav-tree .layui-nav-child dd.layui-this, .mb-side-menu .layui-nav-tree .layui-nav-child dd.layui-this a,.mb-side-menu .layui-nav-tree .layui-this,.mb-side-menu .layui-nav-tree .layui-this>a{
+.mb-side-menu .layui-nav-tree .layui-nav-child dd.layui-this, .mb-side-menu .layui-nav-tree .layui-nav-child dd.layui-this a,.mb-side-menu .layui-nav-tree .layui-this{
     border: solid #FF9800;
     border-width:0 2px 0 0;
     background-color: #fff;
