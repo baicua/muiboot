@@ -158,13 +158,24 @@
 /*列表详情页*/
 /*引用块样式*/
 .mb-elem-quote{
-    padding: 14px 0px 14px 0px;
-    font-size: 18px;
-    line-height: 0px;
-    color: #23262e;
-    border-radius: 0 2px 2px 0;
+     padding: 14px 0px 14px 20px;
+     font-size: 18px;
+     line-height: 0px;
+     color: #23262e;
+     border-radius: 0 2px 2px 0;
+ }
+.mb-elem-quote:before{
+    content: "";
+    display: block;
+    width: 15px;
+    position: absolute;
+    z-index: 1;
+    left: 0px;
+    top: 15px;
+    border: 1px solid;
+    border-width: 1px 0 0 0;
+    color: #ff9800;
 }
-
 
 /*轮播样式*/
 .layui-fluid .layui-card .layui-card-body{

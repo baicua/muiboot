@@ -3,7 +3,7 @@ layui.use(['menu','layer','laytpl','dict','form'], function(args) {
     //1.如果是移动端，添加触屏关闭菜单事件
     if ($MB.isMobile() || $MB.isXsScreen()) {
         $(".layui-layout.mb-layout-admin").addClass("shrink");
-        $("body").on("touchend", ".layui-body", function (e) {
+        $("body").on("touchend", ".mb-body", function (e) {
             $(".layui-layout.mb-layout-admin").addClass("shrink");
         });
     }
@@ -44,9 +44,6 @@ layui.use(['menu','layer','laytpl','dict','form'], function(args) {
             });
         }
     });
-    if ($MB.isMobile()) {
-        $(".layui-layout.mb-layout-admin").addClass("shrink")
-    }
     //4.加载菜单
     layui.menu.loadmenu(userName);
 

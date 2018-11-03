@@ -190,8 +190,8 @@ html {
 }
 @media screen and (max-width: 992px) {
     .mb-layout-admin .mb-side-menu {
-        transform: translate3d(-186px, 0, 0);
-        -webkit-transform: translate3d(-186px, 0, 0);
+        transform: translate3d(0, 0, 0);
+        -webkit-transform: translate3d(0, 0, 0);
         width: 186px;
     }
 }
@@ -203,7 +203,7 @@ html {
     }
 }
 @media screen and (max-width:992px) {
-    .mb-layout-admin .lefttop,.mb-layout-admin .topleft,.mb-layout-admin .topright{
+    .mb-layout-admin .lefttop,.mb-layout-admin .topleft{
         display:none;
     }
 }
