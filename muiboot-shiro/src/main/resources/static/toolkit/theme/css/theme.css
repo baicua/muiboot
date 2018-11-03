@@ -104,6 +104,10 @@ html {
 .mb-side-menu .layui-nav-tree{
     width: 183px;
 }
+.mb-side-menu ul.layui-nav-tree>li{
+    border-width: 0 0 1px 0;
+    border-style: groove;
+}
 .mb-side-menu .layui-nav-tree .layui-nav-child dd.layui-this, .mb-side-menu .layui-nav-tree .layui-nav-child dd.layui-this a,.mb-side-menu .layui-nav-tree .layui-this,.mb-side-menu .layui-nav-tree .layui-this>a,.mb-side-menu .layui-nav-tree .layui-this>a:hover ,.mb-side-menu .layui-nav-tree a:hover{
     /*background: url(../images/libg.png) repeat-x;*/
     background-color: #f8f8f8;
@@ -129,7 +133,31 @@ html {
     border-left: 2px solid #ff9800;
 }
 .mb-side-menu .layui-nav-itemed>.layui-nav-child a{
-    padding-left:32px;
+    padding-left:35px;
+}
+.mb-side-menu .layui-nav-itemed>.layui-nav-child:before{
+    content: "";
+    display: block;
+    position: absolute;
+    z-index: 1;
+    left: 25px;
+    top: 0;
+    bottom: 0;
+    border: 1px dotted;
+    border-width: 0 0 0 1px;
+    color: #1e9fff;
+}
+.mb-side-menu .layui-nav-itemed>.layui-nav-child a:before{
+    content: "";
+    display: block;
+    width: 6px;
+    position: absolute;
+    z-index: 1;
+    left: 27px;
+    top: 19px;
+    border: 1px dotted;
+    border-width: 1px 0 0 0;
+    color: #1e9fff;
 }
 .mb-side-menu .layui-nav-tree .layui-nav-child .layui-this >a>i.focus {
     -webkit-transition: all .2s;

@@ -230,7 +230,6 @@
 .layui-table, .layui-table-view {
     margin: 2px 0;
     border-top: 2px solid #1e9fff;
-    box-shadow: 0 1px 0px rgba(0, 0, 0, 0.2), 0 1px 1px rgba(0, 0, 0, 0.25);
 }
 
 /*树形表格*/
