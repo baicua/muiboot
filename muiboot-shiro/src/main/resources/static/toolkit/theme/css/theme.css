@@ -114,11 +114,13 @@ html {
     background-color: #f8f8f8;
     color: #FF9800;
 }
-.mb-side-menu .layui-nav-tree .layui-nav-child dd.layui-this, .mb-side-menu .layui-nav-tree .layui-nav-child dd.layui-this a,.mb-side-menu .layui-nav-tree .layui-this{
+.mb-side-menu .layui-nav-tree .layui-nav-child dd.layui-this a{
     border: solid #FF9800;
     border-width:0 2px 0 0;
     background-color: #fff;
     font-weight: bold;
+    webkit-box-shadow: -1px 0px 3px 0px #FF9800 inset ;
+    box-shadow:  -1px 0px 3px 0px #FF9800 inset ;
 }
 .mb-side-menu .layui-nav-tree .layui-nav-bar{
     background-color: #FF9800;

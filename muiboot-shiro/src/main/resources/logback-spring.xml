@@ -4,7 +4,7 @@
 
     <contextName>muiboot</contextName>
 
-    <property name="log.path" value="log" />
+    <property name="log.path" value="/muiboot/log" />
     <property name="log.maxHistory" value="15" />
     <property name="log.pattern" value="%d{HH:mm:ss.SSS} %contextName [%thread] %-5level %logger{36} - %msg%n" />
 
