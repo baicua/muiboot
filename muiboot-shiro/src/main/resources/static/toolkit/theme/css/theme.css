@@ -28,6 +28,7 @@ html {
     -webkit-box-shadow: 0 0 8px #000;/*safari或chrome*/
     box-shadow: 0 0 8px #000;/*opera或ie9*/
     border-bottom: 1px solid #FF9800;
+    behavior: url(./toolkit/theme/css/PIE.htc);
 }
 .mb-layout-admin> .mb-body{
     top: 50px;

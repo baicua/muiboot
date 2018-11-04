@@ -296,6 +296,10 @@
 .mb-tree-table li ul{
     margin-left: 35px;
 }
+.mb-tree-table li ul div.layui-form-checkbox>span{
+    color: #1e9fff;
+    font-size: 12px;
+}
 .mb-tree-table .layui-form-checkbox i{
     color: #fff;
     padding-left: 2px;
