@@ -9,6 +9,7 @@ layui.use(['menu','layer','laytpl','dict','form'], function(args) {
     }
     //2.hash监听事件
     if (!$MB.hasHistoryApi()) {
+        $(".mb-header .topleft>a").attr("href","#home");
         window.onhashchange = function (e) {
             var hash = window.location.hash;
             if (!hash)return;
