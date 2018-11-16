@@ -2,7 +2,7 @@ package com.muiboot.shiro.system.service;
 
 import java.util.List;
 
-import com.muiboot.shiro.common.service.IService;
+import com.muiboot.core.common.service.IService;
 import com.muiboot.shiro.system.domain.Role;
 import com.muiboot.shiro.system.domain.RoleWithMenu;
 

@@ -3,7 +3,7 @@ package com.muiboot.shiro.common.xss;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 
-import com.muiboot.shiro.common.util.JsoupUtil;
+import com.muiboot.core.common.util.JsoupUtil;
 import org.apache.commons.lang.StringUtils;
 
 /**

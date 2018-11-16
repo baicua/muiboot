@@ -3,8 +3,8 @@ package com.muiboot.shiro.system.service;
 import java.util.List;
 import java.util.Map;
 
-import com.muiboot.shiro.common.layer.LayerTree;
-import com.muiboot.shiro.common.service.IService;
+import com.muiboot.core.common.layer.LayerTree;
+import com.muiboot.core.common.service.IService;
 import com.muiboot.shiro.system.domain.Menu;
 import com.muiboot.shiro.system.domain.Role;
 

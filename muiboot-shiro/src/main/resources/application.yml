@@ -105,7 +105,7 @@ mybatis:
 
 #mappers 多个接口时逗号隔开
 mapper:
-  mappers: com.muiboot.shiro.common.config.MyMapper
+  mappers: com.muiboot.core.common.mapper.MyMapper
   not-empty: false
   identity: MYSQL
 

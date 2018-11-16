@@ -2,8 +2,8 @@ package com.muiboot.shiro.system.controller;
 
 
 
-import com.muiboot.shiro.common.domain.ResponseBo;
-import com.muiboot.shiro.common.util.FileUtils;
+import com.muiboot.core.common.domain.ResponseBo;
+import com.muiboot.core.common.util.FileUtils;
 import com.muiboot.shiro.system.domain.SysDic;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;

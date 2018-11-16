@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import com.muiboot.shiro.common.util.AddressUtils;
+import com.muiboot.core.common.util.AddressUtils;
 import com.muiboot.shiro.system.domain.UserOnline;
 import com.muiboot.shiro.system.service.SessionService;
 

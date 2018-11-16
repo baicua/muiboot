@@ -1,6 +1,6 @@
 package com.muiboot.shiro.system.service.impl;
 
-import com.muiboot.shiro.common.service.impl.BaseService;
+import com.muiboot.core.common.service.impl.BaseService;
 import com.muiboot.shiro.system.domain.Properties;
 import com.muiboot.shiro.system.service.PropertiesService;
 import org.springframework.stereotype.Service;

@@ -15,9 +15,16 @@
 
 	<name>muiboot-shiro</name>
 	<description>权限管理模块</description>
-
+	<properties>
+		<muiboot-core.version>0.0.1-SNAPSHOT</muiboot-core.version>
+	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>com.muiboot.core</groupId>
+			<artifactId>muiboot-core</artifactId>
+			<version>${muiboot-core.version}</version>
+		</dependency>
 	</dependencies>
 	
 	<repositories>

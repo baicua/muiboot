@@ -1,7 +1,7 @@
 package com.muiboot.shiro.common.handler;
 
-import com.muiboot.shiro.common.domain.ResponseBo;
-import com.muiboot.shiro.common.exception.BusinessException;
+import com.muiboot.core.common.domain.ResponseBo;
+import com.muiboot.core.common.exception.BusinessException;
 import com.muiboot.shiro.common.util.LogUtil;
 import org.apache.shiro.authz.AuthorizationException;
 import org.apache.shiro.session.ExpiredSessionException;

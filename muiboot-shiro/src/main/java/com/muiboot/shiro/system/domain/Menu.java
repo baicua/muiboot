@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import com.muiboot.shiro.common.annotation.ExportConfig;
-import com.muiboot.shiro.common.domain.BaseModel;
+import com.muiboot.core.common.domain.BaseModel;
 
 @Table(name = "M_MENU")
 public class Menu extends BaseModel implements Serializable {

@@ -5,9 +5,9 @@ import java.util.Map;
 
 import com.muiboot.shiro.common.annotation.Log;
 import com.muiboot.shiro.common.controller.BaseController;
-import com.muiboot.shiro.common.domain.ResponseBo;
-import com.muiboot.shiro.common.layer.LayerTree;
-import com.muiboot.shiro.common.util.FileUtils;
+import com.muiboot.core.common.domain.ResponseBo;
+import com.muiboot.core.common.layer.LayerTree;
+import com.muiboot.core.common.util.FileUtils;
 import com.muiboot.shiro.system.domain.SysGroup;
 import com.muiboot.shiro.system.service.GroupService;
 import org.apache.commons.lang.StringUtils;

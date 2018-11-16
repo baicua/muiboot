@@ -1,6 +1,6 @@
 package com.muiboot.shiro.system.service;
 
-import com.muiboot.shiro.common.service.IService;
+import com.muiboot.core.common.service.IService;
 import com.muiboot.shiro.system.domain.UserRole;
 
 import java.util.List;

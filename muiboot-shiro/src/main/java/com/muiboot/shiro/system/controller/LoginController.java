@@ -2,11 +2,11 @@ package com.muiboot.shiro.system.controller;
 
 import com.muiboot.shiro.common.annotation.Log;
 import com.muiboot.shiro.common.controller.BaseController;
-import com.muiboot.shiro.common.domain.ResponseBo;
-import com.muiboot.shiro.common.util.MD5Utils;
-import com.muiboot.shiro.common.util.exec.ExecutorsUtil;
-import com.muiboot.shiro.common.util.vcode.Captcha;
-import com.muiboot.shiro.common.util.vcode.GifCaptcha;
+import com.muiboot.core.common.domain.ResponseBo;
+import com.muiboot.core.common.util.MD5Utils;
+import com.muiboot.core.common.util.exec.ExecutorsUtil;
+import com.muiboot.core.common.util.vcode.Captcha;
+import com.muiboot.core.common.util.vcode.GifCaptcha;
 import com.muiboot.shiro.system.domain.User;
 import com.muiboot.shiro.system.service.UserService;
 import org.apache.commons.lang.StringUtils;

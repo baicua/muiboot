@@ -4,9 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.muiboot.shiro.common.domain.ResponseBo;
-import com.muiboot.shiro.common.layer.LayerTree;
-import com.muiboot.shiro.common.util.FileUtils;
+import com.muiboot.core.common.domain.ResponseBo;
+import com.muiboot.core.common.layer.LayerTree;
+import com.muiboot.core.common.util.FileUtils;
 import com.muiboot.shiro.system.domain.Role;
 import com.muiboot.shiro.system.domain.RoleWithMenu;
 import com.muiboot.shiro.system.service.RoleService;

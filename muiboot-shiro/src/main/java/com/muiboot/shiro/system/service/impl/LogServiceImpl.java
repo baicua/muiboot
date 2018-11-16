@@ -8,8 +8,8 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import com.muiboot.shiro.common.service.impl.BaseService;
-import com.muiboot.shiro.common.util.exec.ExecutorsUtil;
+import com.muiboot.core.common.service.impl.BaseService;
+import com.muiboot.core.common.util.exec.ExecutorsUtil;
 import com.muiboot.shiro.system.dao.LogMapper;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;

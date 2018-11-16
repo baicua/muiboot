@@ -1,7 +1,7 @@
 package com.muiboot.shiro.system.domain;
 
 import com.muiboot.shiro.common.annotation.ExportConfig;
-import com.muiboot.shiro.common.domain.BaseModel;
+import com.muiboot.core.common.domain.BaseModel;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
