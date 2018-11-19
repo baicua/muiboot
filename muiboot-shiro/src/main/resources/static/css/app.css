@@ -8,7 +8,6 @@
   margin-bottom: 10px;
   padding: 15px;
   line-height: 22px;
-  border-left: 2px solid #808080;
   background-color: #f2f2f2;
 }
 .ajax-content{
@@ -70,32 +69,6 @@ input.layui-form-danger[type=radio] + div.layui-form-radio>i{
   line-height: 25px;
   padding: 0 5px;
   border-bottom: 1.5px solid #f2f2f2;
-}
-.layui-layout-body .shrink. layui-logo {
-  width: 60px;
-  background-image: url(res/logo.png);
-}
-.shrink .layui-footer,.shrink .layui-body{
-  left: 60px;
-}
-.shrink .layui-side{
-  width: 60px;
-}
-.shrink .layui-logo{
-  width: 60px;
-}
-.shrink .layui-side .layui-side-scroll a span,.layui-nav .layui-icon-spread-left,.shrink .layui-nav .layui-icon-shrink-right{
-  display: none;
-}
-.shrink .layui-nav .layui-icon-spread-left{
-  display: block;
-}
-.shrink .layui-side-scroll li>a,.shrink .layui-side-scroll dd>a{
-  width: 40px;
-  padding-right: 0px;
-}
-.shrink  .layui-layout-left {
-  left: 60px;
 }
 
 @media screen and (max-width:992px) {

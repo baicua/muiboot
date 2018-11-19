@@ -158,14 +158,24 @@
 /*列表详情页*/
 /*引用块样式*/
 .mb-elem-quote{
-    padding: 14px 0px 14px 10px;
-    font-size: 18px;
-    line-height: 0px;
-    color: #23262e;
-    border-left: 2px solid #808080;
-    border-radius: 0 2px 2px 0;
-}
-
+     padding: 14px 0px 14px 5px;
+     font-size: 18px;
+     line-height: 0px;
+     color: #23262e;
+     border-radius: 0 2px 2px 0;
+ }
+/*.mb-elem-quote:before{
+    content: "";
+    display: block;
+    width: 15px;
+    position: absolute;
+    z-index: 1;
+    left: 0px;
+    top: 15px;
+    border: 1px solid;
+    border-width: 1px 0 0 0;
+    color: #ff9800;
+}*/
 
 /*轮播样式*/
 .layui-fluid .layui-card .layui-card-body{
@@ -230,6 +240,7 @@
 /*表格样式修改*/
 .layui-table, .layui-table-view {
     margin: 2px 0;
+    border-top: 2px solid #1e9fff;
 }
 
 /*树形表格*/
@@ -284,6 +295,10 @@
 }
 .mb-tree-table li ul{
     margin-left: 35px;
+}
+.mb-tree-table li ul div.layui-form-checkbox>span{
+    color: #1e9fff;
+    font-size: 12px;
 }
 .mb-tree-table .layui-form-checkbox i{
     color: #fff;
