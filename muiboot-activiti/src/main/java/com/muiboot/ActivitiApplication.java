@@ -7,18 +7,15 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 
 @EnableCaching
 @SpringBootApplication
 @MapperScan("com.muiboot.**.dao")
+@ComponentScan("org.activiti.engine")
 @EnableTransactionManagement
-@EnableAutoConfiguration(exclude={
-		org.springframework.boot.autoconfigure.security.SecurityAutoConfiguration.class,
-		org.activiti.spring.boot.SecurityAutoConfiguration.class
-
-})
 public class ActivitiApplication {
 	protected static  Logger logger = LoggerFactory.getLogger(ActivitiApplication.class);
 	public static void main(String[] args) {
