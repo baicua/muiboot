@@ -7,12 +7,13 @@ import org.activiti.engine.task.Task;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
 @Service
-@Transactional
+@Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
 public class FlowServiceImpl implements IFlowService {
 	@Autowired
 	private RuntimeService runtimeService;

@@ -94,7 +94,8 @@ spring:
       maxFileSize: 100Mb
       maxRequestSize: 1000Mb
   activiti:
-      check-process-definitions: false
+    check-process-definitions: false
+
 
 mybatis:
   config-location: classpath:config/mybatis-config.xml

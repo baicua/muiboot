@@ -11,15 +11,19 @@ import org.activiti.engine.runtime.ProcessInstanceQuery;
 import org.activiti.engine.task.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
 public class InstanceServiceImpl implements InstanceService {
-  @Autowired
+  @Resource
   private RuntimeService runtimeService;
-  @Autowired
+  @Resource
   private TaskService taskService;
   
   @Override
