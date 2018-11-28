@@ -32,7 +32,7 @@ import java.util.Map;
  * 流程模型控制器
  */
 @Controller
-@RequestMapping(value = "/workflow/")
+@RequestMapping(value = "/workflow/model")
 public class ModelController extends BaseController {
 
   @Autowired
@@ -40,12 +40,12 @@ public class ModelController extends BaseController {
   @Autowired
   private ModelService modelService;
 
-  @RequestMapping(value = "models", method = RequestMethod.GET)
+  @RequestMapping(value = "", method = RequestMethod.GET)
   public String getModels() {
-    return "act/models";
+    return "act/model";
   }
 
-  @RequestMapping("model/list")
+  @RequestMapping("list")
   @ResponseBody
   public Map<String, Object> modelList(QueryRequest request) {
     PageHelper.startPage(request.getPage(), request.getLimit());
@@ -58,7 +58,7 @@ public class ModelController extends BaseController {
   /**
    * 创建模型
    */
-  @RequestMapping(value = "model/create", method = RequestMethod.POST)
+  @RequestMapping(value = "create", method = RequestMethod.POST)
   @ResponseBody
   public ResponseBo create(String name, String key, String description, HttpServletRequest request, HttpServletResponse response) {
     try {
@@ -74,7 +74,7 @@ public class ModelController extends BaseController {
   /* *//**
    * 编辑模型
    */
-  @RequestMapping(value = "model/edit")
+  @RequestMapping(value = "edit")
   public void edit(String modelId, HttpServletRequest request, HttpServletResponse response) {
     try {
       response.sendRedirect(request.getContextPath() + "/modeler.html?modelId=" + modelId);
@@ -86,10 +86,16 @@ public class ModelController extends BaseController {
   /**
    * 根据Model部署流程
    */
-  @RequestMapping(value = "model/deploy", method = RequestMethod.POST)
+  @RequestMapping(value = "deploy", method = RequestMethod.POST)
+  @ResponseBody
   public ResponseBo deploy(@RequestParam("modelId") String modelId) {
+    try {
       modelService.deployModel(modelId);
       return ResponseBo.ok("部署成功");
+    } catch (Exception e) {
+      logger.error(e.toString(), e);
+      return ResponseBo.error(e.getMessage());
+    }
   }
  
 
@@ -101,7 +107,7 @@ public class ModelController extends BaseController {
    * @param type
    *          导出文件类型(bpmn\json)
    */
-  @RequestMapping(value = "model/export/{modelId}/{type}")
+  @RequestMapping(value = "export/{modelId}/{type}")
   public void export(@PathVariable("modelId") String modelId, @PathVariable("type") String type, HttpServletResponse response) {
     try {
       Model modelData = repositoryService.getModel(modelId);
@@ -144,8 +150,9 @@ public class ModelController extends BaseController {
     }
 
   }
-  @RequestMapping(value = "model/del", method = RequestMethod.GET)
-  public ResponseBo del(@RequestParam("id") String[] modelIds) {
+  @RequestMapping(value = "model/del", method = RequestMethod.POST)
+  @ResponseBody
+  public ResponseBo del(@RequestParam("ids") String[] modelIds) {
     try {
       for (int i = 0; i < modelIds.length; i++) {
         repositoryService.deleteModel(modelIds[i]);
@@ -155,7 +162,7 @@ public class ModelController extends BaseController {
       logger.error(e.toString(), e);
       return ResponseBo.error("删除失败");
     }
-    return ResponseBo.ok("部署成功");
+    return ResponseBo.ok("删除成功");
   }
 
 }

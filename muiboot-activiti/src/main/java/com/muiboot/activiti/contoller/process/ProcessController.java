@@ -2,7 +2,7 @@ package com.muiboot.activiti.contoller.process;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.muiboot.activiti.model.process.ProcessDefinitionVo;
+import com.muiboot.activiti.model.process.ProcessDefinitionDeploy;
 import com.muiboot.activiti.service.process.ProcessService;
 import com.muiboot.core.common.domain.QueryRequest;
 import com.muiboot.core.common.web.BaseController;
@@ -25,7 +25,7 @@ import java.util.zip.ZipInputStream;
  * 流程定义管理
  */
 @Controller
-@RequestMapping(value = "/workflow/process/")
+@RequestMapping(value = "/workflow/process")
 public class ProcessController extends BaseController {
 
   @Autowired
@@ -33,12 +33,17 @@ public class ProcessController extends BaseController {
   @Autowired
   private ProcessService processService;
 
+  @RequestMapping(value = "", method = RequestMethod.GET)
+  public String process() {
+    return "act/process";
+  }
+
   @RequestMapping("list")
   @ResponseBody
   public Map<String, Object> processList(QueryRequest request) {
     PageHelper.startPage(request.getPage(), request.getLimit());
-    List<ProcessDefinitionVo> list = processService.findByPage(request);
-    PageInfo<ProcessDefinitionVo> pageInfo = new PageInfo<>(list);
+    List<ProcessDefinitionDeploy> list = processService.findByPage(request);
+    PageInfo<ProcessDefinitionDeploy> pageInfo = new PageInfo<>(list);
     return getDataTable(pageInfo);
   }
 

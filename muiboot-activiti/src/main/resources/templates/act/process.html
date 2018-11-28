@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.w3.org/1999/xhtml">
+<head data-th-include="common/head"></head>
+<body class="layui-layout-body layui-table-body">
+<div data-th-include="common/common"></div>
+<hr>
+<div class="layui-container ajax-content" lay-filter="ajax-content">
+    <div class="layui-row">
+        <div class="layui-col-md3 layui-col-xs3">
+            <div class="mb-elem-quote">流程列表</div>
+        </div>
+        <div class="layui-col-md9 layui-col-xs9">
+            <div class="mb-btn-group">
+                <button title="新增" type="button" id="addBtn"  class="mb-btn" shiro:hasPermission="user:add"><i class="layui-icon"></i>新增</button>
+                <button title="修改" type="button" id="updBtn" class="mb-btn" shiro:hasPermission="user:update"><i class="layui-icon"></i>修改</button>
+                <button title="部署" type="button" id="deployBtn" class="mb-btn" shiro:hasPermission="user:deploy"><i class="layui-icon layui-icon-upload-circle"></i>部署</button>
+                <button title="删除" type="button" id="delBtn" class="mb-btn" shiro:hasPermission="user:delete"><i class="layui-icon"></i>删除</button>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <table class="layui-hide" id="processList"></table>
+    </div>
+    <script data-th-src="@{/js/act/process.js}" ></script>
+</div>
+</body>
+</html>

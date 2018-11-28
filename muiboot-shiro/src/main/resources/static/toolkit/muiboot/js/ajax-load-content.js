@@ -29,6 +29,7 @@
             updateBreadcrumbs($menu);
             $.ajax({
                 url: url,
+                dataType: "html",
                 beforeSend:function (r) {
                     if(!$MB.getLoading(1)){
                         $MB.setLoading(layer.load(3,{shade: [0.01,'#fff']}));
@@ -36,15 +37,13 @@
                 },
                 success: function (r) {
                     try {
-                        var $r = $("<code></code>").html(r);//包装数据
+                        //r.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, "")
+                        //var content=$("<div>").append(r).find("div[lay-filter='ajax-content']");
+                        var content=$(r).siblings("div[lay-filter='ajax-content']");//包装数据
+                        $contentArea.empty().html(content.html());
                        // var scripts = $r.find("div.ajax-content script");
                         //$r.find("script").remove();
-                        var content=$r.find("div.ajax-content");
-                        if(content.length>0){
-                            $contentArea.empty().html(content.html());
-                        }else {
-                            $contentArea.empty().html($r.html());
-                        }
+                        //var content=$r.find("div.ajax-content");
 /*                        if(!!scripts&&scripts.length>0){
                             scripts.each(function(index,script){
                                 if($MB.isMobile()&&script.attributes[1]){
@@ -55,7 +54,6 @@
                             });
                         }*/
                         content=null;
-                        $r=null;
                     }catch (e) {
                         console.error("error:"+e.message+";url:"+url);
                         return true;

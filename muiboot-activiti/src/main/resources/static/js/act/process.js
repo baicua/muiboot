@@ -4,9 +4,9 @@
     table = layui.table, form = layui.form, laytpl = layui.laytpl, layer = layui.layer;
     form.render();
     table.render({
-        id: 'lay-model-list'
-        , elem: '#modelList'
-        , url: '/workflow/model/list' //数据接口
+        id: 'lay-process-list'
+        , elem: '#processList'
+        , url: '/workflow/process/list' //数据接口
         , page: true //开启分页
         , size: 'sm'
         , height: 'full'
@@ -18,8 +18,7 @@
             , {field: 'name', title: '流程名称'}
             , {field: 'version', title: '版本(对应部署版本号)'}
             , {field: 'deploymentId', title: '部署编号'}
-            , {field: 'createTime', title: '创建时间'}
-            , {field: 'lastUpdateTime', title: '更新时间'}
+            , {field: 'deploymentTime', title: '部署时间'}
         ]]
     });
     $("#addBtn").on("click", function (r) {

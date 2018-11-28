@@ -15,6 +15,7 @@ import org.activiti.engine.RepositoryService;
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.Model;
 import org.activiti.engine.repository.ModelQuery;
+import org.activiti.engine.repository.ProcessDefinition;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -39,10 +40,10 @@ public class ModelServiceImpl implements ModelService {
     if (null!=page){
       PageHelper.clearPage();
       page.setTotal(modelQuery.count());
-      page.addAll(modelQuery.orderByCreateTime().desc().listPage((request.getPage() -1)* request.getLimit(), request.getLimit()));
+      page.addAll(modelQuery.orderByLastUpdateTime().desc().listPage((request.getPage() -1)* request.getLimit(), request.getLimit()));
       return page;
     }else {
-      return modelQuery.orderByCreateTime().desc().listPage((request.getPage() -1)* request.getLimit(), request.getLimit());
+      return modelQuery.orderByLastUpdateTime().desc().listPage((request.getPage() -1)* request.getLimit(), request.getLimit());
     }
    
   }
@@ -57,6 +58,10 @@ public class ModelServiceImpl implements ModelService {
       bpmnBytes = new BpmnXMLConverter().convertToXML(model);
       String processName = modelData.getName() + ".bpmn20.xml";
       Deployment deployment = repositoryService.createDeployment().name(modelData.getName()).addString(processName, new String(bpmnBytes, "UTF-8")).deploy();
+      ProcessDefinition processDefinition=repositoryService.createProcessDefinitionQuery().deploymentId(deployment.getId()).singleResult();
+      modelData.setDeploymentId(deployment.getId());
+      modelData.setVersion(processDefinition.getVersion());
+      repositoryService.saveModel(modelData);
     } catch (Exception e) {
       throw new BusinessException("流程模型部署失败",e.getCause());
     }  
