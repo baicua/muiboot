@@ -10,8 +10,8 @@ public class QueryRequest implements Serializable {
 
 	private static final long serialVersionUID = -4869594085374385813L;
 
-	private int limit;
-	private int page;
+	private int limit=10;
+	private int page=1;
 
 	public int getLimit() {
 		return limit;
