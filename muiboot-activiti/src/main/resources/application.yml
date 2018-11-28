@@ -121,6 +121,4 @@ pagehelper:
   params: count=countSql
 
 logging:
-  level:
-    com:
-      muiboot: debug
+  level: debug

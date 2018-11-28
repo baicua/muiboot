@@ -2,6 +2,8 @@ package com.muiboot.activiti.service.model.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.muiboot.activiti.service.model.ModelService;
 import com.muiboot.core.common.domain.QueryRequest;
 import com.muiboot.core.common.exception.BusinessException;
@@ -33,9 +35,15 @@ public class ModelServiceImpl implements ModelService {
   @Override
   public List<Model> findByPage(QueryRequest request){
     ModelQuery modelQuery = repositoryService.createModelQuery();
-    List<Model> list = new ArrayList<Model>();
-    list = modelQuery.orderByCreateTime().desc().listPage((request.getPage() -1)* request.getLimit(), request.getLimit());
-   return list;
+    Page<Model> page = PageHelper.getLocalPage();
+    if (null!=page){
+      PageHelper.clearPage();
+      page.setTotal(modelQuery.count());
+      page.addAll(modelQuery.orderByCreateTime().desc().listPage((request.getPage() -1)* request.getLimit(), request.getLimit()));
+      return page;
+    }else {
+      return modelQuery.orderByCreateTime().desc().listPage((request.getPage() -1)* request.getLimit(), request.getLimit());
+    }
    
   }
 

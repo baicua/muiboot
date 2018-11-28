@@ -1,0 +1,18 @@
+<!-- 头部区域（可配合layui已有的水平导航） -->
+<div class="topleft">
+    <a href="home" title="系统首页"><i></i>MUIBOOT权限管理系统</a>
+</div>
+<div class="topright">
+    <ul>
+        <li><a href="/doc/help/index.html" target="_blank">帮助</a></li>
+        <li><a href="/doc/about/index.html" target="_blank">关于</a></li>
+        <li><a href="javascript:void(0)" id="header-set">设置</a></li>
+        <li><a data-th-href="@{/logout}">退出</a></li>
+    </ul>
+    <div class="user">
+        <span>[[${user.realName}]]</span>
+        <i>[[${user.groupName}]]</i>
+<!--        <i>消息</i>
+        <b>5</b>-->
+    </div>
+</div>

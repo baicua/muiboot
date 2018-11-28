@@ -32,7 +32,7 @@ import java.util.Map;
  * 流程模型控制器
  */
 @Controller
-@RequestMapping(value = "/workflow/model/")
+@RequestMapping(value = "/workflow/")
 public class ModelController extends BaseController {
 
   @Autowired
@@ -40,7 +40,12 @@ public class ModelController extends BaseController {
   @Autowired
   private ModelService modelService;
 
-  @RequestMapping("list")
+  @RequestMapping(value = "models", method = RequestMethod.GET)
+  public String getModels() {
+    return "act/models";
+  }
+
+  @RequestMapping("model/list")
   @ResponseBody
   public Map<String, Object> modelList(QueryRequest request) {
     PageHelper.startPage(request.getPage(), request.getLimit());
@@ -53,22 +58,23 @@ public class ModelController extends BaseController {
   /**
    * 创建模型
    */
-  @RequestMapping(value = "create", method = RequestMethod.POST)
-  public void create(String name, String key, String description, HttpServletRequest request, HttpServletResponse response) {
-   
+  @RequestMapping(value = "model/create", method = RequestMethod.POST)
+  @ResponseBody
+  public ResponseBo create(String name, String key, String description, HttpServletRequest request, HttpServletResponse response) {
     try {
       String modelId = modelService.createModel(name, key, description);
-      response.sendRedirect(request.getContextPath() + "/modeler.html?modelId=" + modelId);
+      //response.sendRedirect(request.getContextPath() + "/modeler.html?modelId=" + modelId);
+      return ResponseBo.ok(modelId);
     } catch (Exception e) {
       logger.error("创建模型失败", e);
     }
-
+    return ResponseBo.error("创建模型失败");
   }
 
   /* *//**
    * 编辑模型
    */
-  @RequestMapping(value = "edit")
+  @RequestMapping(value = "model/edit")
   public void edit(String modelId, HttpServletRequest request, HttpServletResponse response) {
     try {
       response.sendRedirect(request.getContextPath() + "/modeler.html?modelId=" + modelId);
@@ -80,7 +86,7 @@ public class ModelController extends BaseController {
   /**
    * 根据Model部署流程
    */
-  @RequestMapping(value = "deploy", method = RequestMethod.POST)
+  @RequestMapping(value = "model/deploy", method = RequestMethod.POST)
   public ResponseBo deploy(@RequestParam("modelId") String modelId) {
       modelService.deployModel(modelId);
       return ResponseBo.ok("部署成功");
@@ -95,7 +101,7 @@ public class ModelController extends BaseController {
    * @param type
    *          导出文件类型(bpmn\json)
    */
-  @RequestMapping(value = "export/{modelId}/{type}")
+  @RequestMapping(value = "model/export/{modelId}/{type}")
   public void export(@PathVariable("modelId") String modelId, @PathVariable("type") String type, HttpServletResponse response) {
     try {
       Model modelData = repositoryService.getModel(modelId);
@@ -138,7 +144,7 @@ public class ModelController extends BaseController {
     }
 
   }
-  @RequestMapping(value = "del", method = RequestMethod.GET)
+  @RequestMapping(value = "model/del", method = RequestMethod.GET)
   public ResponseBo del(@RequestParam("id") String[] modelIds) {
     try {
       for (int i = 0; i < modelIds.length; i++) {
