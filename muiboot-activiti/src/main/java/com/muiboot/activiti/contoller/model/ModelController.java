@@ -58,7 +58,7 @@ public class ModelController extends BaseController {
    
     try {
       String modelId = modelService.createModel(name, key, description);
-      response.sendRedirect(request.getContextPath() + "/act-process-editor/modeler.html?modelId=" + modelId);
+      response.sendRedirect(request.getContextPath() + "/modeler.html?modelId=" + modelId);
     } catch (Exception e) {
       logger.error("创建模型失败", e);
     }
@@ -71,7 +71,7 @@ public class ModelController extends BaseController {
   @RequestMapping(value = "edit")
   public void edit(String modelId, HttpServletRequest request, HttpServletResponse response) {
     try {
-      response.sendRedirect(request.getContextPath() + "/act-process-editor/modeler.html?modelId=" + modelId);
+      response.sendRedirect(request.getContextPath() + "/modeler.html?modelId=" + modelId);
     } catch (Exception e) {
       logger.error(e.toString(), e);
     }

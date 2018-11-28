@@ -23,6 +23,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableAutoConfiguration(exclude={
 		JpaRepositoriesAutoConfiguration.class//禁止springboot自动加载持久化bean
 		,org.springframework.boot.autoconfigure.security.SecurityAutoConfiguration.class
+		,org.activiti.spring.boot.SecurityAutoConfiguration.class
 })
 public class ActivitiApplication {
 	protected static  Logger logger = LoggerFactory.getLogger(ActivitiApplication.class);
@@ -30,5 +31,4 @@ public class ActivitiApplication {
 		SpringApplication.run(ActivitiApplication.class, args);
 		logger.info("MUIBOOT-ACTIVITI启动完毕#########################");
 	}
-
 }

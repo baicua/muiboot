@@ -95,6 +95,7 @@ spring:
       maxRequestSize: 1000Mb
   activiti:
     check-process-definitions: false
+    jpa-enabled: false
 
 
 mybatis:
