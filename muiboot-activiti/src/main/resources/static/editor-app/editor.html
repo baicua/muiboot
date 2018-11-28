@@ -14,7 +14,8 @@
         	</button>
   		  </div>
         </div>
-        <div class="btn-group pull-right" ng-show="!secondaryItems.length">
+	  <!--去掉关闭-->
+        <!--<div class="btn-group pull-right" ng-show="!secondaryItems.length">
 	        <div class="btn-toolbar pull-right" ng-controller="ToolbarController">
         	<button title="{{item.title | translate}}" ng-repeat="item in secondaryItems" ng-switch on="item.type" class="btn btn-inverse" ng-class="{'separator': item.type == 'separator'}"
                 ng-disabled="item.type == 'separator'" ng-click="toolbarSecondaryButtonClicked($index)" id="{{item.id}}">
@@ -22,7 +23,7 @@
 	            <div ng-switch-when="separator" ng-class="item.cssClass"></div>
         	</button>
   		  </div>
-        </div>
+        </div>-->
   </div>
   <div class="full">
       <div class="row row-no-gutter">

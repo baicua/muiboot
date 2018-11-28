@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.muiboot.activiti.model.process.ProcessDefinitionDeploy;
 import com.muiboot.activiti.service.process.ProcessService;
 import com.muiboot.core.common.domain.QueryRequest;
+import com.muiboot.core.common.domain.ResponseBo;
 import com.muiboot.core.common.web.BaseController;
 import org.activiti.engine.RepositoryService;
 import org.activiti.engine.repository.Deployment;
@@ -52,16 +53,20 @@ public class ProcessController extends BaseController {
    *
    *          流程部署ID
    */
-  @RequestMapping(value = "del", method = RequestMethod.GET)
+  @RequestMapping(value = "del", method = RequestMethod.POST)
   @ResponseBody
-  public void del(@RequestParam("id") String[] processDefinitionIds) {
-    for(int i=0;i<processDefinitionIds.length;i++){
-    ProcessDefinition pd = repositoryService.createProcessDefinitionQuery().processDefinitionId(processDefinitionIds[i]).singleResult();
-    repositoryService.deleteDeployment(pd.getDeploymentId(), true);
+  public ResponseBo del(@RequestParam("ids") String[] deploymentIds) {
+    try {
+      for (int i = 0; i < deploymentIds.length; i++) {
+        repositoryService.deleteDeployment(deploymentIds[i]);
+      }
+      ResponseBo.ok("删除成功");
+    }catch (Exception e) {
+      logger.error(e.toString(), e);
+      return ResponseBo.error("删除失败:"+e.getMessage());
     }
-
+    return ResponseBo.ok("删除成功");
   }
-
   @RequestMapping(value = "uploadModel")
   @ResponseBody
   public void uploadModel(@RequestParam(value = "modelFile", required = false) MultipartFile file) {

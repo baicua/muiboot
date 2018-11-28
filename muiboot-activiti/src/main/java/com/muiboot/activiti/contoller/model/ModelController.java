@@ -160,7 +160,7 @@ public class ModelController extends BaseController {
       ResponseBo.ok("删除成功");
     }catch (Exception e) {
       logger.error(e.toString(), e);
-      return ResponseBo.error("删除失败");
+      return ResponseBo.error("删除失败:"+e.getMessage());
     }
     return ResponseBo.ok("删除成功");
   }
