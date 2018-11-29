@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.muiboot.shiro.zhsoft.dao.DeviceMapper">
+  <resultMap id="BaseResultMap" type="com.muiboot.shiro.zhsoft.domain.Device">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="DEVICE_ID" jdbcType="INTEGER" property="deviceId" />
+    <result column="DEVICE_NUM" jdbcType="VARCHAR" property="deviceNum" />
+    <result column="DEVICE_NAME" jdbcType="VARCHAR" property="deviceName" />
+    <result column="DEVICE_ORGAN" jdbcType="VARCHAR" property="deviceOrgan" />
+    <result column="DEVICE_NEXT_DATE" jdbcType="TIMESTAMP" property="deviceNextDate" />
+    <result column="DEVICE_ZL" jdbcType="VARCHAR" property="deviceZl" />
+  </resultMap>
+</mapper>
