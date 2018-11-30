@@ -1,7 +1,13 @@
 server:
-  port: 8080
+  port: 443
   tomcat:
     uri-encoding: utf-8
+  #你生成的证书名字
+  ssl:
+    key-store: classpath:config/a.jks
+  #密钥库密码
+    key-store-password: a9v11iy5
+    keyStoreType: JKS
   compression:
     enabled: true
     min-response-size: 1024

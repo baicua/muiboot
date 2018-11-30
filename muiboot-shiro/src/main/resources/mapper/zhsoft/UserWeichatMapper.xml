@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.muiboot.shiro.zhsoft.dao.UserWeichatMapper">
+  <resultMap id="BaseResultMap" type="com.muiboot.shiro.zhsoft.domain.UserWeichat">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="USER_ID" jdbcType="BIGINT" property="userId" />
+    <result column="OPEN_ID" jdbcType="VARCHAR" property="openId" />
+    <result column="BIND_DATE" jdbcType="TIMESTAMP" property="bindDate" />
+    <result column="UNBIND_DATE" jdbcType="TIMESTAMP" property="unbindDate" />
+    <result column="STATUS" jdbcType="VARCHAR" property="status" />
+  </resultMap>
+</mapper>
