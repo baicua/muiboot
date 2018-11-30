@@ -53,6 +53,7 @@ public class ShiroConfig {
 		Map<String, Filter> filters = shiroFilterFactoryBean.getFilters();
 		filters.put("user", new ShiroUserFilter());
 		filters.put("doc", new DocFilter());
+		filters.put("api", apiFilter());
 		shiroFilterFactoryBean.setFilters(filters);
 		filterChainDefinitionMap.put("/css/**", "anon");
 		filterChainDefinitionMap.put("/js/**", "anon");
@@ -64,6 +65,10 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/error/**", "anon");
 		filterChainDefinitionMap.put("/logout", "logout");
 		filterChainDefinitionMap.put("/", "anon");
+
+		filterChainDefinitionMap.put("/api/token", "anon");
+		filterChainDefinitionMap.put("/api/bind", "anon");
+		filterChainDefinitionMap.put("/api/**", "api");
 		filterChainDefinitionMap.put("/**", "user");
 
 		shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
@@ -90,7 +95,12 @@ public class ShiroConfig {
     public ShiroRealm shiroRealm(){  
        ShiroRealm shiroRealm = new ShiroRealm();  
        return shiroRealm;  
-    }  
+    }
+
+	@Bean
+	public WeiChatFilter apiFilter() {
+		return new WeiChatFilter();
+	}
 	
 	public SimpleCookie rememberMeCookie() {
 		SimpleCookie cookie = new SimpleCookie("rememberMe");
