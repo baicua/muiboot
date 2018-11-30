@@ -1,4 +1,4 @@
-package com.muiboot.shiro.common.util;
+package com.muiboot.core.common.util;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;

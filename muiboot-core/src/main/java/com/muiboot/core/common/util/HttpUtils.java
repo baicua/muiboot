@@ -1,5 +1,8 @@
 package com.muiboot.core.common.util;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.IOException;
@@ -9,6 +12,8 @@ import java.io.PrintWriter;
 import java.net.URL;
 import java.net.URLConnection;
 import java.security.cert.X509Certificate;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
@@ -28,6 +33,8 @@ public class HttpUtils {
 	 *            请求参数，请求参数应该是 name1=value1&name2=value2 的形式。
 	 * @return 所代表远程资源的响应结果
 	 */
+	private static ObjectMapper mapper=new ObjectMapper();
+
 	public static String sendGet(String url, String param) {
 		StringBuilder result = new StringBuilder();
 		BufferedReader in = null;
@@ -145,6 +152,19 @@ public class HttpUtils {
 			e.printStackTrace();
 		}
 		return result.toString();
+	}
+
+	public static Map https(String url, String param){
+		String res = sendSSLPost(url,param);
+		Map returnMap=null;
+		try {
+			returnMap= mapper.readValue(res, Map.class);
+		} catch (IOException e) {
+			returnMap=new HashMap();
+			e.printStackTrace();
+		}finally {
+			return returnMap;
+		}
 	}
 
 	private static class TrustAnyTrustManager implements X509TrustManager {
