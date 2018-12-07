@@ -1,10 +1,10 @@
 package com.muiboot.core.common.xss;
 
-import com.muiboot.core.common.util.JsoupUtil;
-import org.apache.commons.lang.StringUtils;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
+
+import com.muiboot.core.common.util.JsoupUtil;
+import org.apache.commons.lang.StringUtils;
 
 /**
  * Jsoup过滤http请求，防止Xss攻击
