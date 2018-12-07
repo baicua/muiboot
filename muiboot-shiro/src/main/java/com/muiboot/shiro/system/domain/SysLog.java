@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import com.muiboot.shiro.common.annotation.ExportConfig;
+import com.muiboot.core.common.annotation.ExportConfig;
 
 @Table(name = "M_LOG")
 public class SysLog implements Serializable {

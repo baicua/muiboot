@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 
 
-import com.muiboot.shiro.common.annotation.Log;
+import com.muiboot.core.common.annotation.Log;
 import com.muiboot.shiro.common.controller.BaseController;
 import com.muiboot.shiro.system.service.DictService;
 

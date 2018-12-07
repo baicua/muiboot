@@ -1,23 +1,16 @@
 package com.muiboot.shiro.system.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.muiboot.core.common.domain.ResponseBo;
-import com.muiboot.core.common.layer.LayerTree;
 import com.muiboot.core.common.util.FileUtils;
-import com.muiboot.shiro.system.domain.Role;
-import com.muiboot.shiro.system.domain.RoleWithMenu;
-import com.muiboot.shiro.system.service.RoleService;
-import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.muiboot.shiro.common.annotation.Log;
+import com.muiboot.core.common.annotation.Log;
 import com.muiboot.shiro.common.controller.BaseController;
 import com.muiboot.shiro.system.domain.Menu;
 import com.muiboot.shiro.system.service.MenuService;

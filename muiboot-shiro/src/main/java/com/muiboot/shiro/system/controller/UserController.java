@@ -3,7 +3,6 @@ package com.muiboot.shiro.system.controller;
 import java.util.List;
 import java.util.Map;
 
-import com.muiboot.core.common.exception.BusinessException;
 import com.muiboot.shiro.common.util.ShiroUtil;
 import com.muiboot.shiro.system.domain.UserWithRole;
 import org.apache.commons.lang.StringUtils;
@@ -17,7 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
-import com.muiboot.shiro.common.annotation.Log;
+import com.muiboot.core.common.annotation.Log;
 import com.muiboot.shiro.common.controller.BaseController;
 import com.muiboot.core.common.domain.QueryRequest;
 import com.muiboot.core.common.domain.ResponseBo;
@@ -25,7 +24,6 @@ import com.muiboot.core.common.util.FileUtils;
 import com.muiboot.core.common.util.MD5Utils;
 import com.muiboot.shiro.system.domain.User;
 import com.muiboot.shiro.system.service.UserService;
-import tk.mybatis.mapper.entity.Example;
 
 @Controller
 public class UserController extends BaseController {

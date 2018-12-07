@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.muiboot.shiro.common.xss.XssFilter;
+import com.muiboot.core.common.xss.XssFilter;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;

@@ -8,7 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.muiboot.shiro.common.annotation.ExportConfig;
+import com.muiboot.core.common.annotation.ExportConfig;
 import com.muiboot.core.common.domain.BaseModel;
 
 @Table(name = "M_MENU")

@@ -1,6 +1,6 @@
 package com.muiboot.shiro.system.controller;
 
-import com.muiboot.shiro.common.annotation.Log;
+import com.muiboot.core.common.annotation.Log;
 import com.muiboot.shiro.common.controller.BaseController;
 import com.muiboot.core.common.domain.ResponseBo;
 import com.muiboot.core.common.util.MD5Utils;
@@ -12,7 +12,6 @@ import com.muiboot.shiro.system.service.UserService;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.session.Session;
-import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,7 +23,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 /**
  * <p>Title: </p>

@@ -10,7 +10,7 @@ import com.muiboot.core.common.util.AddressUtils;
 import com.muiboot.core.common.util.HttpContextUtils;
 import com.muiboot.core.common.util.IPUtils;
 import com.muiboot.core.common.util.exec.ExecutorsUtil;
-import com.muiboot.shiro.common.annotation.Log;
+import com.muiboot.core.common.annotation.Log;
 import com.muiboot.shiro.common.util.*;
 import com.muiboot.shiro.system.domain.SysLog;
 import com.muiboot.shiro.system.domain.User;
@@ -44,7 +44,7 @@ public class LogAspect {
 	private static final LogUtil log = LogUtil.getLoger(LogAspect.class);
 
 	ExecutorService exeService= ExecutorsUtil.getInstance().getMultilThreadExecutor();
-	@Pointcut("@annotation(com.muiboot.shiro.common.annotation.Log)")
+	@Pointcut("@annotation(com.muiboot.core.common.annotation.Log)")
 	public void pointcut() {
 	}
 

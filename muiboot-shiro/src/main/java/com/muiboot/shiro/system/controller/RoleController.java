@@ -3,7 +3,7 @@ package com.muiboot.shiro.system.controller;
 import java.util.List;
 import java.util.Map;
 
-import com.muiboot.shiro.common.annotation.Log;
+import com.muiboot.core.common.annotation.Log;
 import com.muiboot.core.common.domain.QueryRequest;
 import com.muiboot.core.common.domain.ResponseBo;
 import com.muiboot.core.common.util.FileUtils;
