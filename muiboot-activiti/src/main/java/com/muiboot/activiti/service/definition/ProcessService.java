@@ -1,6 +1,6 @@
-package com.muiboot.activiti.service.process;
+package com.muiboot.activiti.service.definition;
 import com.muiboot.activiti.model.process.ProcessDefinitionDeploy;
-import com.muiboot.core.common.domain.QueryRequest;
+import com.muiboot.core.domain.QueryRequest;
 
 import javax.xml.stream.XMLStreamException;
 import java.io.UnsupportedEncodingException;

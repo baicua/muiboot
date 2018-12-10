@@ -1,4 +1,4 @@
-package com.muiboot.activiti.active.runtime.declar;
+package com.muiboot.activiti.service.runtime;
 
 import com.muiboot.activiti.active.operation.arg.param.CompleteParam;
 import com.muiboot.activiti.active.operation.arg.param.StartParam;
@@ -9,7 +9,7 @@ import org.activiti.engine.runtime.ProcessInstance;
  *
  * @version 1.0 2018/11/29
  */
-public interface FlowDeclar {
+public interface RuntimeService {
 
     ProcessInstance start(StartParam param);
 

@@ -1,27 +1,29 @@
 package com.muiboot.activiti.active.operation.arg.param;
 
 import com.muiboot.activiti.active.group.User;
-import com.muiboot.activiti.active.operation.arg.Variable;
 import com.muiboot.activiti.active.validation.Assert;
 import org.apache.commons.lang3.StringUtils;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * <p>Description: </p>
  *
  * @version 1.0 2018/11/29
  */
-public class StartParam<T extends Variable> implements Assert{
-    protected String flowId;
+public class StartParam implements Assert{
+    protected String flowKey;
     protected String businessKey;
-    protected T variable;
+    protected Map variable;
     protected User user;
-    protected String opinion;
-    public String getFlowId() {
-        return flowId;
+    protected String opinion="";
+    public String getFlowKey() {
+        return flowKey;
     }
 
-    public void setFlowId(String flowId) {
-        this.flowId = flowId;
+    public void setFlowKey(String flowKey) {
+        this.flowKey = flowKey;
     }
 
     public String getBusinessKey() {
@@ -32,11 +34,11 @@ public class StartParam<T extends Variable> implements Assert{
         this.businessKey = businessKey;
     }
 
-    public T getVariable() {
+    public Map getVariable() {
         return variable;
     }
 
-    public void setVariable(T variable) {
+    public void setVariable(Map variable) {
         this.variable = variable;
     }
 
@@ -58,19 +60,14 @@ public class StartParam<T extends Variable> implements Assert{
 
     @Override
     public void notNull(String msg) {
-        if (StringUtils.isBlank(flowId)||StringUtils.isBlank(businessKey)||null==user){
+        if (StringUtils.isBlank(flowKey)||StringUtils.isBlank(businessKey)||null==user){
             throw new IllegalArgumentException(msg);
         }
-        variable.notNull(msg);
     }
 
     public void notNull() {
-        if (StringUtils.isBlank(flowId)||StringUtils.isBlank(businessKey)||null==user){
-            throw new IllegalArgumentException("[Assertion failed] -  flowId and businessKey and user must be not null");
+        if (StringUtils.isBlank(flowKey)||StringUtils.isBlank(businessKey)||null==user){
+            throw new IllegalArgumentException("[Assertion failed] -  flowKey and businessKey and user must be not null");
         }
-        if (variable==null){
-            throw new IllegalArgumentException("[Assertion failed] -  variable must be not null");
-        }
-        variable.notNull("[Assertion failed] -  variable must be not null");
     }
 }

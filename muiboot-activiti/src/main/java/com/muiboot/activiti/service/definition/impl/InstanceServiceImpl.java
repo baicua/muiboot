@@ -1,15 +1,14 @@
-package com.muiboot.activiti.service.instance.impl;
+package com.muiboot.activiti.service.definition.impl;
 
 import com.muiboot.activiti.model.online.TaskVo;
 import com.muiboot.activiti.model.process.ProcessInstanceVo;
-import com.muiboot.activiti.service.instance.InstanceService;
-import com.muiboot.core.common.domain.QueryRequest;
+import com.muiboot.activiti.service.definition.InstanceService;
+import com.muiboot.core.domain.QueryRequest;
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.runtime.ProcessInstanceQuery;
 import org.activiti.engine.task.Task;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;

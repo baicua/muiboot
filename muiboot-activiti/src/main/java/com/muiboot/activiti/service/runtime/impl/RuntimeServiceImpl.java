@@ -1,13 +1,11 @@
-package com.muiboot.activiti.active.runtime.service;
+package com.muiboot.activiti.service.runtime.impl;
 
 import com.muiboot.activiti.active.operation.arg.param.CompleteParam;
 import com.muiboot.activiti.active.operation.arg.param.StartParam;
-import com.muiboot.activiti.active.runtime.declar.FlowDeclar;
+import com.muiboot.activiti.service.runtime.RuntimeService;
 import org.activiti.engine.IdentityService;
-import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
 import org.activiti.engine.runtime.ProcessInstance;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,9 +17,9 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional
-public class FlowService implements FlowDeclar {
+public class RuntimeServiceImpl implements RuntimeService {
     @Autowired
-    private RuntimeService runtimeService;
+    private org.activiti.engine.RuntimeService runtimeService;
 
     @Autowired
     private TaskService taskService;
@@ -34,7 +32,9 @@ public class FlowService implements FlowDeclar {
         param.notNull();
         identityService.setAuthenticatedUserId(param.getUser().getUserId());
         ProcessInstance processInstance = runtimeService.startProcessInstanceByKey(
-                param.getFlowId(),param.getBusinessKey(),param.getVariable().toMap());
+                param.getFlowKey(),param.getBusinessKey(),param.getVariable());
+        identityService.setAuthenticatedUserId(param.getUser().getUserId());
+        taskService.addComment(null, processInstance.getProcessInstanceId(),"OPINION", param.getOpinion());
         return processInstance;
     }
 
@@ -49,7 +49,7 @@ public class FlowService implements FlowDeclar {
     public void resolveTask(CompleteParam param) {
         param.notNull();
         identityService.setAuthenticatedUserId(param.getUser().getUserId());
-        taskService.resolveTask(param.getTaskId(),param.getVariable().toMap());
+        taskService.resolveTask(param.getTaskId(),param.getVariable());
         this.addComment(param);
     }
 
@@ -65,24 +65,11 @@ public class FlowService implements FlowDeclar {
     public void complete(CompleteParam param) {
         param.notNull();
         identityService.setAuthenticatedUserId(param.getUser().getUserId());
-        taskService.complete(param.getTaskId(),param.getVariable().toMap());
+        taskService.complete(param.getTaskId(),param.getVariable());
         this.addComment(param);
     }
 
     private void addComment(CompleteParam param) {
-        this.addComment(param,null);
+        taskService.addComment(param.getTaskId(), param.getProcessDefinitionId(),"OPINION", param.getOpinion());
     }
-
-    private void addComment(CompleteParam param,String processInstanceId) {
-        if (StringUtils.isNotBlank(param.getOpinion())){
-            if (StringUtils.isNotBlank(processInstanceId)){
-                taskService.addComment(null, processInstanceId,"MEMO", param.getOpinion());
-            }else {
-                if (StringUtils.isNotBlank(param.getTaskId())){
-                    taskService.addComment(param.getTaskId(), null,"OPINION", param.getOpinion());
-                }
-            }
-        }
-    }
-
 }

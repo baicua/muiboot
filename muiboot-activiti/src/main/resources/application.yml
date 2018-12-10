@@ -109,7 +109,7 @@ mybatis:
 
 #mappers 多个接口时逗号隔开
 mapper:
-  mappers: com.muiboot.core.common.mapper.MyMapper
+  mappers: com.muiboot.core.mapper.MyMapper
   not-empty: false
   identity: MYSQL
 

@@ -1,12 +1,12 @@
-package com.muiboot.activiti.service.model.impl;
+package com.muiboot.activiti.service.definition.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.muiboot.activiti.service.model.ModelService;
-import com.muiboot.core.common.domain.QueryRequest;
-import com.muiboot.core.common.exception.BusinessException;
+import com.muiboot.activiti.service.definition.ModelService;
+import com.muiboot.core.domain.QueryRequest;
+import com.muiboot.core.exception.BusinessException;
 import org.activiti.bpmn.converter.BpmnXMLConverter;
 import org.activiti.bpmn.model.BpmnModel;
 import org.activiti.editor.constants.ModelDataJsonConstants;
@@ -18,13 +18,11 @@ import org.activiti.engine.repository.ModelQuery;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service

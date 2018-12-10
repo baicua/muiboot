@@ -1,13 +1,13 @@
-package com.muiboot.activiti.service.process.impl;
+package com.muiboot.activiti.service.definition.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.muiboot.activiti.model.process.ProcessDefinitionDeploy;
-import com.muiboot.activiti.service.process.ProcessService;
+import com.muiboot.activiti.service.definition.ProcessService;
 import com.muiboot.activiti.util.ActivitiUtil;
-import com.muiboot.core.common.domain.QueryRequest;
+import com.muiboot.core.domain.QueryRequest;
 import org.activiti.bpmn.converter.BpmnXMLConverter;
 import org.activiti.bpmn.model.BpmnModel;
 import org.activiti.editor.constants.ModelDataJsonConstants;
