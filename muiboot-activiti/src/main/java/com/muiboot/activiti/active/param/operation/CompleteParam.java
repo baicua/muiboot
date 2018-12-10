@@ -1,4 +1,4 @@
-package com.muiboot.activiti.active.operation.arg.param;
+package com.muiboot.activiti.active.param.operation;
 
 import com.muiboot.activiti.active.group.User;
 import com.muiboot.activiti.active.validation.Assert;

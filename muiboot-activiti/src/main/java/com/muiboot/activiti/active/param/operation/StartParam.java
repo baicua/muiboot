@@ -1,10 +1,9 @@
-package com.muiboot.activiti.active.operation.arg.param;
+package com.muiboot.activiti.active.param.operation;
 
 import com.muiboot.activiti.active.group.User;
 import com.muiboot.activiti.active.validation.Assert;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**

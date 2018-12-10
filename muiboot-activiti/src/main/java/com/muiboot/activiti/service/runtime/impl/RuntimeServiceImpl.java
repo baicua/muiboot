@@ -1,7 +1,9 @@
 package com.muiboot.activiti.service.runtime.impl;
 
-import com.muiboot.activiti.active.operation.arg.param.CompleteParam;
-import com.muiboot.activiti.active.operation.arg.param.StartParam;
+import com.muiboot.activiti.active.declaration.BusinessTask;
+import com.muiboot.activiti.active.param.operation.CompleteParam;
+import com.muiboot.activiti.active.param.operation.StartParam;
+import com.muiboot.activiti.active.param.query.BusinessParam;
 import com.muiboot.activiti.service.runtime.RuntimeService;
 import org.activiti.engine.IdentityService;
 import org.activiti.engine.TaskService;
@@ -9,6 +11,8 @@ import org.activiti.engine.runtime.ProcessInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * <p>Description: </p>
@@ -67,6 +71,11 @@ public class RuntimeServiceImpl implements RuntimeService {
         identityService.setAuthenticatedUserId(param.getUser().getUserId());
         taskService.complete(param.getTaskId(),param.getVariable());
         this.addComment(param);
+    }
+
+    @Override
+    public List<BusinessTask> getBusinessTasks(BusinessParam param) {
+        return null;
     }
 
     private void addComment(CompleteParam param) {

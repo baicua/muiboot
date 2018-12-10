@@ -1,8 +1,12 @@
 package com.muiboot.activiti.service.runtime;
 
-import com.muiboot.activiti.active.operation.arg.param.CompleteParam;
-import com.muiboot.activiti.active.operation.arg.param.StartParam;
+import com.muiboot.activiti.active.declaration.BusinessTask;
+import com.muiboot.activiti.active.param.operation.CompleteParam;
+import com.muiboot.activiti.active.param.operation.StartParam;
+import com.muiboot.activiti.active.param.query.BusinessParam;
 import org.activiti.engine.runtime.ProcessInstance;
+
+import java.util.List;
 
 /**
  * <p>Description: </p>
@@ -20,5 +24,7 @@ public interface RuntimeService {
     void delegateTask(CompleteParam param);
 
     void complete(CompleteParam param);
+
+    List<BusinessTask> getBusinessTasks(BusinessParam param);
 
 }

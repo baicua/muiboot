@@ -1,5 +1,7 @@
 package com.muiboot.activiti.service.history.impl;
 
+import com.muiboot.activiti.active.declaration.BusinessTask;
+import com.muiboot.activiti.active.param.query.BusinessParam;
 import com.muiboot.activiti.service.history.HistoryService;
 import org.activiti.engine.TaskService;
 import org.activiti.engine.task.Comment;
@@ -27,5 +29,10 @@ public class HistoryServiceImpl implements HistoryService {
     @Override
     public List<Comment> getProInstanceComments(String proInstanceId) {
         return taskService.getProcessInstanceComments(proInstanceId,"OPINION");
+    }
+
+    @Override
+    public List<BusinessTask> getBusinessTasks(BusinessParam param) {
+        return null;
     }
 }
