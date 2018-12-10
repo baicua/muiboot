@@ -1,5 +1,5 @@
 package com.muiboot.shiro.common.shiro;;
-import com.muiboot.core.common.util.ServletUtil;
+import com.muiboot.core.util.ServletUtil;
 import org.apache.shiro.web.filter.authc.UserFilter;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;

@@ -3,7 +3,7 @@ package com.muiboot.shiro.system.service.impl;
 import java.util.Arrays;
 import java.util.List;
 
-import com.muiboot.core.common.service.impl.BaseService;
+import com.muiboot.core.service.impl.BaseService;
 import com.muiboot.shiro.system.domain.RoleMenu;
 import com.muiboot.shiro.system.service.RoleMenuServie;
 import org.springframework.stereotype.Service;

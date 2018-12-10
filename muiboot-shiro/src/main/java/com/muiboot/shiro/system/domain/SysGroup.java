@@ -1,7 +1,7 @@
 package com.muiboot.shiro.system.domain;
 
-import com.muiboot.core.common.annotation.ExportConfig;
-import com.muiboot.core.common.domain.BaseModel;
+import com.muiboot.core.annotation.ExportConfig;
+import com.muiboot.core.domain.BaseModel;
 
 import java.io.Serializable;
 import java.util.Date;

@@ -1,6 +1,6 @@
 package com.muiboot.shiro.system.service;
 
-import com.muiboot.core.common.service.IService;
+import com.muiboot.core.service.IService;
 import com.muiboot.shiro.system.domain.RoleMenu;
 
 public interface RoleMenuServie extends IService<RoleMenu> {

@@ -3,7 +3,7 @@ package com.muiboot.shiro.system.service.impl;
 import java.util.*;
 
 import com.muiboot.shiro.common.menum.GroupType;
-import com.muiboot.core.common.service.impl.BaseService;
+import com.muiboot.core.service.impl.BaseService;
 import com.muiboot.shiro.system.dao.SysGroupMapper;
 import com.muiboot.shiro.system.domain.SysGroup;
 import org.apache.commons.collections.CollectionUtils;
@@ -13,8 +13,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.muiboot.core.common.layer.LayerTree;
-import com.muiboot.core.common.util.TreeUtils;
+import com.muiboot.core.layer.LayerTree;
+import com.muiboot.core.util.TreeUtils;
 import com.muiboot.shiro.system.service.GroupService;
 import tk.mybatis.mapper.entity.Example;
 

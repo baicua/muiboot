@@ -1,6 +1,6 @@
 package com.muiboot.shiro.system.service.impl;
 
-import com.muiboot.core.common.service.impl.BaseService;
+import com.muiboot.core.service.impl.BaseService;
 import com.muiboot.shiro.system.domain.SysDic;
 import com.muiboot.shiro.system.service.DicCacheService;
 import com.muiboot.shiro.system.service.DictService;

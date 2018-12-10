@@ -3,10 +3,10 @@ package com.muiboot.shiro.system.controller;
 import java.util.List;
 import java.util.Map;
 
-import com.muiboot.core.common.annotation.Log;
-import com.muiboot.core.common.domain.QueryRequest;
-import com.muiboot.core.common.domain.ResponseBo;
-import com.muiboot.core.common.util.FileUtils;
+import com.muiboot.core.annotation.Log;
+import com.muiboot.core.domain.QueryRequest;
+import com.muiboot.core.domain.ResponseBo;
+import com.muiboot.core.util.FileUtils;
 import com.muiboot.shiro.system.domain.Role;
 import com.muiboot.shiro.system.service.RoleService;
 import org.apache.commons.lang.StringUtils;

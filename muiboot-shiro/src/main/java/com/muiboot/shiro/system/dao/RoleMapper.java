@@ -2,7 +2,7 @@ package com.muiboot.shiro.system.dao;
 
 import java.util.List;
 
-import com.muiboot.core.common.mapper.MyMapper;
+import com.muiboot.core.mapper.MyMapper;
 import com.muiboot.shiro.system.domain.Role;
 import com.muiboot.shiro.system.domain.RoleWithMenu;
 

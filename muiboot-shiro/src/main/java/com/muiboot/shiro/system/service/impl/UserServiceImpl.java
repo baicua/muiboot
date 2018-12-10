@@ -5,9 +5,9 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import com.muiboot.core.common.exception.BusinessException;
-import com.muiboot.core.common.service.impl.BaseService;
-import com.muiboot.core.common.util.MD5Utils;
+import com.muiboot.core.exception.BusinessException;
+import com.muiboot.core.service.impl.BaseService;
+import com.muiboot.core.util.MD5Utils;
 import com.muiboot.shiro.system.common.PropertiesUtil;
 import com.muiboot.shiro.system.common.SysConstant;
 import com.muiboot.shiro.system.dao.UserMapper;

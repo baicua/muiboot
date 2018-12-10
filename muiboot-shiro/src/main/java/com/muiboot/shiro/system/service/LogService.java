@@ -2,7 +2,7 @@ package com.muiboot.shiro.system.service;
 
 import java.util.List;
 
-import com.muiboot.core.common.service.IService;
+import com.muiboot.core.service.IService;
 import com.muiboot.shiro.system.domain.SysLog;
 
 public interface LogService extends IService<SysLog> {

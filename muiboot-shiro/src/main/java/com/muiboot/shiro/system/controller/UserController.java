@@ -16,12 +16,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
-import com.muiboot.core.common.annotation.Log;
+import com.muiboot.core.annotation.Log;
 import com.muiboot.shiro.common.controller.BaseController;
-import com.muiboot.core.common.domain.QueryRequest;
-import com.muiboot.core.common.domain.ResponseBo;
-import com.muiboot.core.common.util.FileUtils;
-import com.muiboot.core.common.util.MD5Utils;
+import com.muiboot.core.domain.QueryRequest;
+import com.muiboot.core.domain.ResponseBo;
+import com.muiboot.core.util.FileUtils;
+import com.muiboot.core.util.MD5Utils;
 import com.muiboot.shiro.system.domain.User;
 import com.muiboot.shiro.system.service.UserService;
 

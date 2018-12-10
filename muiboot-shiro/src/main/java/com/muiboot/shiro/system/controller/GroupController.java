@@ -3,11 +3,11 @@ package com.muiboot.shiro.system.controller;
 import java.util.List;
 import java.util.Map;
 
-import com.muiboot.core.common.annotation.Log;
+import com.muiboot.core.annotation.Log;
 import com.muiboot.shiro.common.controller.BaseController;
-import com.muiboot.core.common.domain.ResponseBo;
-import com.muiboot.core.common.layer.LayerTree;
-import com.muiboot.core.common.util.FileUtils;
+import com.muiboot.core.domain.ResponseBo;
+import com.muiboot.core.layer.LayerTree;
+import com.muiboot.core.util.FileUtils;
 import com.muiboot.shiro.system.domain.SysGroup;
 import com.muiboot.shiro.system.service.GroupService;
 import org.apache.commons.lang.StringUtils;
