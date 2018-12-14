@@ -1,9 +1,10 @@
 package com.muiboot.activiti.service.runtime;
 
-import com.muiboot.activiti.active.declaration.BusinessTask;
+import com.muiboot.activiti.dao.BusinessTaskMapper;
 import com.muiboot.activiti.active.param.operation.CompleteParam;
 import com.muiboot.activiti.active.param.operation.StartParam;
 import com.muiboot.activiti.active.param.query.BusinessParam;
+import com.muiboot.activiti.entity.RuTask;
 import org.activiti.engine.runtime.ProcessInstance;
 
 import java.util.List;
@@ -25,6 +26,5 @@ public interface RuntimeService {
 
     void complete(CompleteParam param);
 
-    List<BusinessTask> getBusinessTasks(BusinessParam param);
-
+    List<RuTask> getBusinessTasks(BusinessParam param, BusinessTaskMapper mapper);
 }

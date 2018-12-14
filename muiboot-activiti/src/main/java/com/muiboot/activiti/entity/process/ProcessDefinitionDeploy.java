@@ -1,4 +1,4 @@
-package com.muiboot.activiti.model.process;
+package com.muiboot.activiti.entity.process;
 
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.ProcessDefinition;

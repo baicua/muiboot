@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.muiboot.activiti.dao.BusinessTaskMapper">
+  <!-- TASK RESULTMAP -->
+  
+  <resultMap id="businessTask" type="com.muiboot.activiti.entity.BusinessTask">
+    <id column="ID_" jdbcType="VARCHAR" property="id" />
+    <result column="REV_" jdbcType="INTEGER" property="rev" />
+    <result column="EXECUTION_ID_" jdbcType="VARCHAR" property="executionId" />
+    <result column="PROC_INST_ID_" jdbcType="VARCHAR" property="procInstId" />
+    <result column="PROC_DEF_ID_" jdbcType="VARCHAR" property="procDefId" />
+    <result column="NAME_" jdbcType="VARCHAR" property="name" />
+    <result column="PARENT_TASK_ID_" jdbcType="VARCHAR" property="parentTaskId" />
+    <result column="DESCRIPTION_" jdbcType="VARCHAR" property="description" />
+    <result column="TASK_DEF_KEY_" jdbcType="VARCHAR" property="taskDefKey" />
+    <result column="OWNER_" jdbcType="VARCHAR" property="owner" />
+    <result column="ASSIGNEE_" jdbcType="VARCHAR" property="assignee" />
+    <result column="DELEGATION_" jdbcType="VARCHAR" property="delegation" />
+    <result column="PRIORITY_" jdbcType="INTEGER" property="priority" />
+    <result column="CREATE_TIME_" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="DUE_DATE_" jdbcType="TIMESTAMP" property="dueDate" />
+    <result column="CATEGORY_" jdbcType="VARCHAR" property="category" />
+    <result column="SUSPENSION_STATE_" jdbcType="INTEGER" property="suspensionState" />
+    <result column="TENANT_ID_" jdbcType="VARCHAR" property="tenantId" />
+    <result column="FORM_KEY_" jdbcType="VARCHAR" property="formKey" />
+
+    <!--HisTask-->
+    <result column="START_TIME_" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="CLAIM_TIME_" jdbcType="TIMESTAMP" property="claimTime" />
+    <result column="END_TIME_" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="DURATION_" jdbcType="BIGINT" property="duration" />
+    <result column="DELETE_REASON_" jdbcType="VARCHAR" property="deleteReason" />
+  </resultMap>
+
+  <select id="getBusinessTasks" resultMap="businessTask" parameterType="com.muiboot.activiti.active.param.query.BusinessParam">
+    SELECT *FROM ACT_RU_TASK
+  </select>
+
+  <select id="getHisBusinessTasks" resultMap="businessTask" parameterType="com.muiboot.activiti.active.param.query.BusinessParam">
+    SELECT *FROM ACT_HI_TASKINST
+  </select>
+</mapper>

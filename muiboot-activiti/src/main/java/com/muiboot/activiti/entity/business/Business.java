@@ -1,4 +1,4 @@
-package com.muiboot.activiti.active.declaration;
+package com.muiboot.activiti.entity.business;
 
 /**
  * <p>Description: </p>

@@ -1,9 +1,10 @@
 package com.muiboot.activiti.service.runtime.impl;
 
-import com.muiboot.activiti.active.declaration.BusinessTask;
 import com.muiboot.activiti.active.param.operation.CompleteParam;
 import com.muiboot.activiti.active.param.operation.StartParam;
 import com.muiboot.activiti.active.param.query.BusinessParam;
+import com.muiboot.activiti.dao.BusinessTaskMapper;
+import com.muiboot.activiti.entity.RuTask;
 import com.muiboot.activiti.service.runtime.RuntimeService;
 import org.activiti.engine.IdentityService;
 import org.activiti.engine.TaskService;
@@ -30,7 +31,6 @@ public class RuntimeServiceImpl implements RuntimeService {
 
     @Autowired
     private IdentityService identityService;
-
     @Override
     public ProcessInstance start(StartParam param) {
         param.notNull();
@@ -73,9 +73,8 @@ public class RuntimeServiceImpl implements RuntimeService {
         this.addComment(param);
     }
 
-    @Override
-    public List<BusinessTask> getBusinessTasks(BusinessParam param) {
-        return null;
+    public List<RuTask> getBusinessTasks(BusinessParam param, BusinessTaskMapper mapper){
+        return mapper.getBusinessTasks(param);
     }
 
     private void addComment(CompleteParam param) {

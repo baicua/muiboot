@@ -1,11 +1,10 @@
 package com.muiboot.activiti.util;
 
-import com.muiboot.activiti.model.process.ProcessDefinitionDeploy;
-import com.muiboot.activiti.model.process.ProcessDefinitionDeployImpl;
+import com.muiboot.activiti.entity.process.ProcessDefinitionDeploy;
+import com.muiboot.activiti.entity.process.ProcessDefinitionDeployImpl;
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.collections.ListUtils;
 
 import java.util.ArrayList;
 import java.util.List;

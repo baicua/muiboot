@@ -101,7 +101,7 @@ spring:
 mybatis:
   config-location: classpath:config/mybatis-config.xml
   # type-aliases扫描路径
-  type-aliases-package: com.muiboot.activti.domain
+  type-aliases-package: com.muiboot.activti.entity
   # mapper xml实现扫描路径
   mapper-locations: classpath:mapper/**/*.xml
   property:

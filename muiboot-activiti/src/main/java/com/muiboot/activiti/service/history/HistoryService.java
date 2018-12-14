@@ -1,7 +1,9 @@
 package com.muiboot.activiti.service.history;
 
-import com.muiboot.activiti.active.declaration.BusinessTask;
+import com.muiboot.activiti.dao.BusinessTaskMapper;
+import com.muiboot.activiti.entity.BusinessTask;
 import com.muiboot.activiti.active.param.query.BusinessParam;
+import com.muiboot.activiti.entity.HisTask;
 import org.activiti.engine.task.Comment;
 
 import java.util.List;
@@ -17,5 +19,6 @@ public interface HistoryService {
 
     List<Comment> getProInstanceComments(String proInstanceId);
 
-    List<BusinessTask> getBusinessTasks(BusinessParam param);
+    List<HisTask> getBusinessTasks(BusinessParam param, BusinessTaskMapper mapper);
+
 }

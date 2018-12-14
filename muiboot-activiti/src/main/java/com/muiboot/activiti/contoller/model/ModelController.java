@@ -4,7 +4,12 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.muiboot.activiti.dao.BusinessTaskMapper;
+import com.muiboot.activiti.entity.HisTask;
+import com.muiboot.activiti.entity.RuTask;
 import com.muiboot.activiti.service.definition.ModelService;
+import com.muiboot.activiti.service.history.HistoryService;
+import com.muiboot.activiti.service.runtime.RuntimeService;
 import com.muiboot.core.domain.QueryRequest;
 import com.muiboot.core.domain.ResponseBo;
 import com.muiboot.core.web.BaseController;
@@ -37,8 +42,18 @@ public class ModelController extends BaseController {
   @Autowired
   private ModelService modelService;
 
+  @Autowired
+  private RuntimeService runtimeService;
+
+  @Autowired
+  private HistoryService historyService;
+  @Autowired
+  private BusinessTaskMapper mapper;
+
   @RequestMapping(value = "", method = RequestMethod.GET)
   public String getModels() {
+    List<RuTask> ruTasks=runtimeService.getBusinessTasks(null,mapper);
+    List<HisTask> hisTasks=historyService.getBusinessTasks(null,mapper);
     return "act/model";
   }
 

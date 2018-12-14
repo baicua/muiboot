@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.muiboot.activiti.model.process.ProcessDefinitionDeploy;
+import com.muiboot.activiti.entity.process.ProcessDefinitionDeploy;
 import com.muiboot.activiti.service.definition.ProcessService;
 import com.muiboot.activiti.util.ActivitiUtil;
 import com.muiboot.core.domain.QueryRequest;

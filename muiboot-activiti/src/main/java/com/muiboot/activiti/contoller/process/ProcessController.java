@@ -2,7 +2,7 @@ package com.muiboot.activiti.contoller.process;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.muiboot.activiti.model.process.ProcessDefinitionDeploy;
+import com.muiboot.activiti.entity.process.ProcessDefinitionDeploy;
 import com.muiboot.activiti.service.definition.ProcessService;
 import com.muiboot.core.domain.QueryRequest;
 import com.muiboot.core.domain.ResponseBo;

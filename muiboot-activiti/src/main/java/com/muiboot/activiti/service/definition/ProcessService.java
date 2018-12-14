@@ -1,5 +1,5 @@
 package com.muiboot.activiti.service.definition;
-import com.muiboot.activiti.model.process.ProcessDefinitionDeploy;
+import com.muiboot.activiti.entity.process.ProcessDefinitionDeploy;
 import com.muiboot.core.domain.QueryRequest;
 
 import javax.xml.stream.XMLStreamException;
