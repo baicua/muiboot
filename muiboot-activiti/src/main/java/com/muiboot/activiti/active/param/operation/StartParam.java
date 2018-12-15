@@ -65,7 +65,7 @@ public class StartParam implements Assert{
     }
 
     public void notNull() {
-        if (StringUtils.isBlank(flowKey)||StringUtils.isBlank(businessKey)||null==user){
+        if (StringUtils.isBlank(flowKey)||StringUtils.isBlank(businessKey)||null==user||StringUtils.isBlank(user.getUserId())){
             throw new IllegalArgumentException("[Assertion failed] -  flowKey and businessKey and user must be not null");
         }
     }
