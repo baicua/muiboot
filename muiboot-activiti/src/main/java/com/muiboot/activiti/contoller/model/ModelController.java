@@ -4,13 +4,10 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.muiboot.activiti.active.group.User;
 import com.muiboot.activiti.active.group.UserEntity;
 import com.muiboot.activiti.active.param.operation.CompleteParam;
 import com.muiboot.activiti.active.param.operation.StartParam;
 import com.muiboot.activiti.dao.BusinessTaskMapper;
-import com.muiboot.activiti.entity.HisTask;
-import com.muiboot.activiti.entity.RuTask;
 import com.muiboot.activiti.service.definition.ModelService;
 import com.muiboot.activiti.service.history.HistoryService;
 import com.muiboot.activiti.service.runtime.RuntimeService;
@@ -80,7 +77,7 @@ public class ModelController extends BaseController {
   public ResponseBo start() {
     StartParam startParam = new StartParam();
     startParam.setBusinessKey("Business_001");
-    startParam.setFlowKey("LICENSES_APPROVAL");
+    startParam.setProcessDefinitionKey("LICENSES_APPROVAL");
     startParam.setOpinion("备注1111111");
     UserEntity user=new UserEntity();
     user.setDeptId("ddddddd");

@@ -7,11 +7,7 @@ import com.muiboot.activiti.dao.BusinessTaskMapper;
 import com.muiboot.activiti.entity.RuTask;
 import com.muiboot.activiti.service.runtime.RuntimeService;
 import com.muiboot.activiti.util.AuthenticationUtil;
-import org.activiti.engine.IdentityService;
 import org.activiti.engine.TaskService;
-import org.activiti.engine.impl.identity.Authentication;
-import org.activiti.engine.impl.persistence.entity.ExecutionEntity;
-import org.activiti.engine.impl.pvm.process.ActivityImpl;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,7 +33,7 @@ public class RuntimeServiceImpl implements RuntimeService {
         param.notNull();
         AuthenticationUtil.setAuthenticatedUser(param.getUser());
         ProcessInstance processInstance = runtimeService.startProcessInstanceByKey(
-                param.getFlowKey(),param.getBusinessKey(),param.getVariable());
+                param.getProcessDefinitionKey(),param.getBusinessKey(),param.getVariable());
         taskService.addComment(null, processInstance.getProcessInstanceId(),"OPINION", param.getOpinion());
         return processInstance;
     }

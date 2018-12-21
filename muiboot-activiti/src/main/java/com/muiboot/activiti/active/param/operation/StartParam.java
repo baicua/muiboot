@@ -1,10 +1,7 @@
 package com.muiboot.activiti.active.param.operation;
 
-import com.muiboot.activiti.active.group.User;
 import com.muiboot.activiti.active.validation.Assert;
 import org.apache.commons.lang3.StringUtils;
-
-import java.util.Map;
 
 /**
  * <p>Description: </p>
@@ -12,15 +9,15 @@ import java.util.Map;
  * @version 1.0 2018/11/29
  */
 public class StartParam extends Param implements Assert{
-    protected String flowKey;
+    protected String processDefinitionKey;
     protected String businessKey;
 
-    public String getFlowKey() {
-        return flowKey;
+    public String getProcessDefinitionKey() {
+        return processDefinitionKey;
     }
 
-    public void setFlowKey(String flowKey) {
-        this.flowKey = flowKey;
+    public void setProcessDefinitionKey(String processDefinitionKey) {
+        this.processDefinitionKey = processDefinitionKey;
     }
 
     public String getBusinessKey() {
@@ -33,14 +30,14 @@ public class StartParam extends Param implements Assert{
 
     @Override
     public void notNull(String msg) {
-        if (StringUtils.isBlank(flowKey)||StringUtils.isBlank(businessKey)||null==user){
+        if (StringUtils.isBlank(processDefinitionKey)||StringUtils.isBlank(businessKey)||null==user){
             throw new IllegalArgumentException(msg);
         }
     }
 
     public void notNull() {
-        if (StringUtils.isBlank(flowKey)||StringUtils.isBlank(businessKey)||null==user||StringUtils.isBlank(user.getUserId())){
-            throw new IllegalArgumentException("[Assertion failed] -  flowKey and businessKey and user must be not null");
+        if (StringUtils.isBlank(processDefinitionKey)||StringUtils.isBlank(businessKey)||null==user||StringUtils.isBlank(user.getUserId())){
+            throw new IllegalArgumentException("[Assertion failed] -  processDefinitionKey and businessKey and user must be not null");
         }
     }
 }
