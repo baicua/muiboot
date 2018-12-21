@@ -6,8 +6,12 @@ import com.muiboot.activiti.active.param.query.BusinessParam;
 import com.muiboot.activiti.dao.BusinessTaskMapper;
 import com.muiboot.activiti.entity.RuTask;
 import com.muiboot.activiti.service.runtime.RuntimeService;
+import com.muiboot.activiti.util.AuthenticationUtil;
 import org.activiti.engine.IdentityService;
 import org.activiti.engine.TaskService;
+import org.activiti.engine.impl.identity.Authentication;
+import org.activiti.engine.impl.persistence.entity.ExecutionEntity;
+import org.activiti.engine.impl.pvm.process.ActivityImpl;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,16 +32,12 @@ public class RuntimeServiceImpl implements RuntimeService {
 
     @Autowired
     private TaskService taskService;
-
-    @Autowired
-    private IdentityService identityService;
     @Override
     public ProcessInstance start(StartParam param) {
         param.notNull();
-        identityService.setAuthenticatedUserId(param.getUser().getUserId());
+        AuthenticationUtil.setAuthenticatedUser(param.getUser());
         ProcessInstance processInstance = runtimeService.startProcessInstanceByKey(
                 param.getFlowKey(),param.getBusinessKey(),param.getVariable());
-        identityService.setAuthenticatedUserId(param.getUser().getUserId());
         taskService.addComment(null, processInstance.getProcessInstanceId(),"OPINION", param.getOpinion());
         return processInstance;
     }
@@ -45,32 +45,32 @@ public class RuntimeServiceImpl implements RuntimeService {
     @Override
     public void claim(CompleteParam param) {
         param.notNull();
-        identityService.setAuthenticatedUserId(param.getUser().getUserId());
+        AuthenticationUtil.setAuthenticatedUser(param.getUser());
         taskService.claim(param.getTaskId(), param.getUser().getUserId());
     }
 
     @Override
     public void resolveTask(CompleteParam param) {
         param.notNull();
-        identityService.setAuthenticatedUserId(param.getUser().getUserId());
-        taskService.resolveTask(param.getTaskId(),param.getVariable());
+        AuthenticationUtil.setAuthenticatedUser(param.getUser());
         this.addComment(param);
+        taskService.resolveTask(param.getTaskId(),param.getVariable());
     }
 
     @Override
     public void delegateTask(CompleteParam param) {
         param.notNull();
-        identityService.setAuthenticatedUserId(param.getUser().getUserId());
-        taskService.delegateTask(param.getTaskId(),param.getUser().getUserId());
+        AuthenticationUtil.setAuthenticatedUser(param.getUser());
         this.addComment(param);
+        taskService.delegateTask(param.getTaskId(),param.getUser().getUserId());
     }
 
     @Override
     public void complete(CompleteParam param) {
         param.notNull();
-        identityService.setAuthenticatedUserId(param.getUser().getUserId());
-        taskService.complete(param.getTaskId(),param.getVariable());
+        AuthenticationUtil.setAuthenticatedUser(param.getUser());
         this.addComment(param);
+        taskService.complete(param.getTaskId(),param.getVariable());
     }
 
     public List<RuTask> getBusinessTasks(BusinessParam param, BusinessTaskMapper mapper){

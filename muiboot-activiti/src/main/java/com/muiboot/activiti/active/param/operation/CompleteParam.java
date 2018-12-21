@@ -11,16 +11,10 @@ import java.util.Map;
  *
  * @version 1.0 2018/11/29
  */
-public  class CompleteParam implements Assert {
+public  class CompleteParam extends Param implements Assert {
     protected String processDefinitionId;
 
     protected String taskId;
-
-    protected Map variable;
-
-    protected User user;
-
-    protected String opinion="";
 
     public String getProcessDefinitionId() {
         return processDefinitionId;
@@ -36,30 +30,6 @@ public  class CompleteParam implements Assert {
 
     public void setTaskId(String taskId) {
         this.taskId = taskId;
-    }
-
-    public Map getVariable() {
-        return variable;
-    }
-
-    public void setVariable(Map variable) {
-        this.variable = variable;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public String getOpinion() {
-        return opinion;
-    }
-
-    public void setOpinion(String opinion) {
-        this.opinion = opinion;
     }
 
     @Override

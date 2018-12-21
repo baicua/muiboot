@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.muiboot.activiti.dao.RuShipMapper">
+  <resultMap id="BaseResultMap" type="com.muiboot.activiti.entity.RuShip">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="ORGAN_ID" jdbcType="VARCHAR" property="organId" />
+    <result column="DEPT_ID" jdbcType="VARCHAR" property="deptId" />
+    <result column="CATEGORY" jdbcType="VARCHAR" property="category" />
+  </resultMap>
+</mapper>

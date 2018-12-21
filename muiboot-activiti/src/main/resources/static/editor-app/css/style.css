@@ -39,7 +39,7 @@
 }
 
 .editor-toolbar > .btn-group {
-	margin: 12px 15px 0px 0px;
+	margin: 2px 0px 0px 0px;
 }
 
 .editor-toolbar  > .btn-group.pull-right {
@@ -230,7 +230,7 @@ div.propertySection {
 .selected-item-title {
     font-size: 25px;
     font-weight: bold;
-    padding: 8px 0 8px 8px;
+    padding: 0px 0 0px 8px;
     border-bottom: 1px solid #a4acb9;
     cursor: pointer;
 }

@@ -57,7 +57,7 @@
                             layer.close(w);
                             table.reload('lay-model-list', {page: {curr: 1}});
                             var full_index=layer.open({
-                                title: '<i class="layui-icon layui-icon-app"></i>&nbsp; 模型编辑',
+                                title: false,
                                 type: 2,
                                 content: "/modeler.html?modelId="+msg,
                                 area: ['320px', '195px'],
@@ -76,7 +76,7 @@
                 }
                 var modelId = checkStatus.data[0].id;
                 var full_index=layer.open({
-                    title: '<i class="layui-icon layui-icon-app"></i>&nbsp; 模型编辑',
+                    title: false,
                     type: 2,
                     content: "/modeler.html?modelId="+modelId,
                     area: ['320px', '195px'],

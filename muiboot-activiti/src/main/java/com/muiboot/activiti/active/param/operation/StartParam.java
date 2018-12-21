@@ -11,12 +11,10 @@ import java.util.Map;
  *
  * @version 1.0 2018/11/29
  */
-public class StartParam implements Assert{
+public class StartParam extends Param implements Assert{
     protected String flowKey;
     protected String businessKey;
-    protected Map variable;
-    protected User user;
-    protected String opinion="";
+
     public String getFlowKey() {
         return flowKey;
     }
@@ -31,30 +29,6 @@ public class StartParam implements Assert{
 
     public void setBusinessKey(String businessKey) {
         this.businessKey = businessKey;
-    }
-
-    public Map getVariable() {
-        return variable;
-    }
-
-    public void setVariable(Map variable) {
-        this.variable = variable;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public String getOpinion() {
-        return opinion;
-    }
-
-    public void setOpinion(String opinion) {
-        this.opinion = opinion;
     }
 
     @Override

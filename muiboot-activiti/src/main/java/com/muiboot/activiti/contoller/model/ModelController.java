@@ -4,6 +4,10 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.muiboot.activiti.active.group.User;
+import com.muiboot.activiti.active.group.UserEntity;
+import com.muiboot.activiti.active.param.operation.CompleteParam;
+import com.muiboot.activiti.active.param.operation.StartParam;
 import com.muiboot.activiti.dao.BusinessTaskMapper;
 import com.muiboot.activiti.entity.HisTask;
 import com.muiboot.activiti.entity.RuTask;
@@ -18,6 +22,7 @@ import org.activiti.bpmn.model.BpmnModel;
 import org.activiti.editor.language.json.converter.BpmnJsonConverter;
 import org.activiti.engine.RepositoryService;
 import org.activiti.engine.repository.Model;
+import org.activiti.engine.runtime.ProcessInstance;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,6 +32,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayInputStream;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -49,11 +55,49 @@ public class ModelController extends BaseController {
   private HistoryService historyService;
   @Autowired
   private BusinessTaskMapper mapper;
-
+  @RequestMapping(value = "complete", method = RequestMethod.GET)
+  @ResponseBody
+  public ResponseBo complete() {
+    CompleteParam param = new CompleteParam();
+    param.setOpinion("我是备注啊啊啊啊啊");
+    param.setTaskId("37533");
+    param.setProcessDefinitionId("37525");
+    UserEntity user=new UserEntity();
+    user.setDeptId("ddddddd");
+    user.setOrganId("ooooooooo");
+    user.setUserId("uuuuuu");
+    param.setUser(user);
+    Map map=new HashMap();
+    //map.put("OP","222222");
+    map.put("uploader","sssssssssss");
+    map.put("nextLine","11");
+    param.setVariable(map);
+    runtimeService.complete(param);
+    return ResponseBo.ok();
+  }
+  @RequestMapping(value = "start", method = RequestMethod.GET)
+  @ResponseBody
+  public ResponseBo start() {
+    StartParam startParam = new StartParam();
+    startParam.setBusinessKey("Business_001");
+    startParam.setFlowKey("LICENSES_APPROVAL");
+    startParam.setOpinion("备注1111111");
+    UserEntity user=new UserEntity();
+    user.setDeptId("ddddddd");
+    user.setOrganId("ooooooooo");
+    user.setUserId("uuuuuu");
+    startParam.setUser(user);
+    Map map=new HashMap();
+    //map.put("OP","222222");
+    map.put("reger","sssssssssss");
+    map.put("starter","sssssssssss");
+    map.put("nextLine",startParam.getNextLine());
+    startParam.setVariable(map);
+    ProcessInstance pi=runtimeService.start(startParam);
+    return ResponseBo.ok(pi);
+  }
   @RequestMapping(value = "", method = RequestMethod.GET)
   public String getModels() {
-    List<RuTask> ruTasks=runtimeService.getBusinessTasks(null,mapper);
-    List<HisTask> hisTasks=historyService.getBusinessTasks(null,mapper);
     return "act/model";
   }
 

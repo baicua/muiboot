@@ -4,18 +4,29 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.muiboot.activiti.listener.TaskShipListener;
 import com.muiboot.activiti.service.definition.ModelService;
 import com.muiboot.core.domain.QueryRequest;
 import com.muiboot.core.exception.BusinessException;
 import org.activiti.bpmn.converter.BpmnXMLConverter;
+import org.activiti.bpmn.converter.util.BpmnXMLUtil;
 import org.activiti.bpmn.model.BpmnModel;
 import org.activiti.editor.constants.ModelDataJsonConstants;
 import org.activiti.editor.language.json.converter.BpmnJsonConverter;
 import org.activiti.engine.RepositoryService;
+import org.activiti.engine.delegate.TaskListener;
+import org.activiti.engine.impl.bpmn.parser.handler.UserTaskParseHandler;
+import org.activiti.engine.impl.persistence.entity.DeploymentEntity;
+import org.activiti.engine.impl.persistence.entity.ProcessDefinitionEntity;
+import org.activiti.engine.impl.pvm.process.ActivityImpl;
+import org.activiti.engine.impl.pvm.process.ProcessDefinitionImpl;
+import org.activiti.engine.impl.task.TaskDefinition;
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.Model;
 import org.activiti.engine.repository.ModelQuery;
 import org.activiti.engine.repository.ProcessDefinition;
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,13 +34,18 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
 public class ModelServiceImpl implements ModelService {
   @Autowired
   private RepositoryService repositoryService;
+
+  @Autowired
+  private TaskShipListener taskShipListener;
 
   @Override
   public List<Model> findByPage(QueryRequest request){
@@ -55,8 +71,16 @@ public class ModelServiceImpl implements ModelService {
       BpmnModel model = new BpmnJsonConverter().convertToBpmnModel(modelNode);
       bpmnBytes = new BpmnXMLConverter().convertToXML(model);
       String processName = modelData.getName() + ".bpmn20.xml";
-      Deployment deployment = repositoryService.createDeployment().name(modelData.getName()).addString(processName, new String(bpmnBytes, "UTF-8")).deploy();
-      ProcessDefinition processDefinition=repositoryService.createProcessDefinitionQuery().deploymentId(deployment.getId()).singleResult();
+      DeploymentEntity deployment = (DeploymentEntity) repositoryService.createDeployment().name(modelData.getName()).addString(processName, new String(bpmnBytes, "UTF-8")).deploy();
+      //ProcessDefinitionEntity processDefinition= (ProcessDefinitionEntity) repositoryService.createProcessDefinitionQuery().deploymentId(deployment.getId()).singleResult();
+      ProcessDefinitionEntity processDefinition= deployment.getDeployedArtifacts(ProcessDefinitionEntity.class).get(0);
+      Map<String, TaskDefinition> taskDefinitions=processDefinition.getTaskDefinitions();
+      if (MapUtils.isNotEmpty(taskDefinitions)){
+        for (Map.Entry<String, TaskDefinition> entry : taskDefinitions.entrySet()){
+          TaskDefinition taskDefinition=entry.getValue();
+          taskDefinition.addTaskListener(TaskListener.EVENTNAME_ALL_EVENTS,taskShipListener);
+        }
+      }
       modelData.setDeploymentId(deployment.getId());
       modelData.setVersion(processDefinition.getVersion());
       repositoryService.saveModel(modelData);
