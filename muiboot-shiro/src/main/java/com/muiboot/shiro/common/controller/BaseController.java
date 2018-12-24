@@ -32,10 +32,6 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 public  abstract class BaseController {
 	protected  final Logger logger = LoggerFactory.getLogger(this.getClass());
-	@ModelAttribute
-	public void initBinder(Model model, HttpServletRequest request, HttpServletResponse response){
-		response.setHeader("Cache-Control", "max-age="+ StringUtils.defaultIfBlank(PropertiesUtil.get(SysConstant.DATA_MAX_AGE),"3"));
-	}
 
 	protected Map<String, Object> getDataTable(PageInfo<?> pageInfo) {
 		Map<String, Object> rspData = new HashMap<>();

@@ -25,7 +25,6 @@ import java.util.concurrent.TimeUnit;
 public class SysController extends BaseController {
     //预处理信息，设置页面缓存时间
     @ModelAttribute
-    @Override
     public void initBinder(Model model, HttpServletRequest request, HttpServletResponse response){
         //response.setHeader("Cache-Control", "max-age="+ SysConstant.PAGE_MAX_AGE);
         //项目启动后5天后过期
