@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.muiboot.shiro.system.dao.SysDicMapper">
-  <resultMap id="BaseResultMap" type="com.muiboot.shiro.system.domain.SysDic">
+  <resultMap id="BaseResultMap" type="com.muiboot.shiro.system.entity.SysDic">
     <!--
       WARNING - @mbg.generated
     -->

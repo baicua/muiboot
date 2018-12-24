@@ -1,4 +1,4 @@
-package com.muiboot.shiro.system.domain;
+package com.muiboot.shiro.system.entity;
 
 import java.io.Serializable;
 import java.util.Date;

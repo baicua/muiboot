@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.muiboot.core.service.impl.BaseService;
 import com.muiboot.shiro.system.dao.UserRoleMapper;
-import com.muiboot.shiro.system.domain.UserRole;
+import com.muiboot.shiro.system.entity.UserRole;
 import com.muiboot.shiro.system.service.UserRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -3,8 +3,8 @@ package com.muiboot.shiro.system.service;
 import java.util.List;
 
 import com.muiboot.core.service.IService;
-import com.muiboot.shiro.system.domain.Role;
-import com.muiboot.shiro.system.domain.RoleWithMenu;
+import com.muiboot.shiro.system.entity.Role;
+import com.muiboot.shiro.system.entity.RoleWithMenu;
 
 public interface RoleService extends IService<Role> {
 

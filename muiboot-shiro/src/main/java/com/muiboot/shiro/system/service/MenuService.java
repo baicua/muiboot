@@ -5,8 +5,8 @@ import java.util.Map;
 
 import com.muiboot.core.domain.LayerTree;
 import com.muiboot.core.service.IService;
-import com.muiboot.shiro.system.domain.Menu;
-import com.muiboot.shiro.system.domain.Role;
+import com.muiboot.shiro.system.entity.Menu;
+import com.muiboot.shiro.system.entity.Role;
 
 public interface MenuService extends IService<Menu> {
 

@@ -16,7 +16,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
 import com.muiboot.shiro.common.controller.BaseController;
-import com.muiboot.shiro.system.domain.SysLog;
+import com.muiboot.shiro.system.entity.SysLog;
 import com.muiboot.shiro.system.service.LogService;
 /**
  * <p>Title: </p>

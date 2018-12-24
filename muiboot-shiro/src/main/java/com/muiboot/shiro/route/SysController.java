@@ -3,7 +3,7 @@ package com.muiboot.shiro.route;
 import com.muiboot.shiro.common.controller.BaseController;
 import com.muiboot.shiro.system.common.PropertiesUtil;
 import com.muiboot.shiro.system.common.SysConstant;
-import com.muiboot.shiro.system.domain.User;
+import com.muiboot.shiro.system.entity.User;
 import org.apache.commons.lang.math.NumberUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;

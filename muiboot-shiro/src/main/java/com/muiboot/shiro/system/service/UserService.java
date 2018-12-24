@@ -3,8 +3,8 @@ package com.muiboot.shiro.system.service;
 import java.util.List;
 
 import com.muiboot.core.service.IService;
-import com.muiboot.shiro.system.domain.User;
-import com.muiboot.shiro.system.domain.UserWithRole;
+import com.muiboot.shiro.system.entity.User;
+import com.muiboot.shiro.system.entity.UserWithRole;
 
 public interface UserService extends IService<User> {
 

@@ -4,9 +4,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.muiboot.shiro.system.domain.Menu;
-import com.muiboot.shiro.system.domain.Role;
-import com.muiboot.shiro.system.domain.User;
+import com.muiboot.shiro.system.entity.Menu;
+import com.muiboot.shiro.system.entity.Role;
+import com.muiboot.shiro.system.entity.User;
 import com.muiboot.shiro.system.service.RoleService;
 import com.muiboot.shiro.system.service.UserService;
 import org.apache.shiro.SecurityUtils;

@@ -7,7 +7,7 @@ import com.muiboot.shiro.common.controller.BaseController;
 import com.muiboot.core.domain.QueryRequest;
 import com.muiboot.core.domain.ResponseBo;
 import com.muiboot.shiro.system.common.PropertiesUtil;
-import com.muiboot.shiro.system.domain.Properties;
+import com.muiboot.shiro.system.entity.Properties;
 import com.muiboot.shiro.system.service.PropertiesService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;

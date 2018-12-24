@@ -2,7 +2,7 @@ package com.muiboot.shiro.system.service;
 
 import java.util.List;
 
-import com.muiboot.shiro.system.domain.UserOnline;
+import com.muiboot.shiro.system.entity.UserOnline;
 
 public interface SessionService {
 

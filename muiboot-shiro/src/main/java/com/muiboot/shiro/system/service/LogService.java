@@ -3,7 +3,7 @@ package com.muiboot.shiro.system.service;
 import java.util.List;
 
 import com.muiboot.core.service.IService;
-import com.muiboot.shiro.system.domain.SysLog;
+import com.muiboot.shiro.system.entity.SysLog;
 
 public interface LogService extends IService<SysLog> {
 	

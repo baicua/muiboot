@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.muiboot.shiro.system.domain.SysLog;
+import com.muiboot.shiro.system.entity.SysLog;
 import com.muiboot.shiro.system.service.LogService;
 import tk.mybatis.mapper.entity.Example;
 import tk.mybatis.mapper.entity.Example.Criteria;

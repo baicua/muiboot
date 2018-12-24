@@ -1,4 +1,4 @@
-package com.muiboot.shiro.system.domain;
+package com.muiboot.shiro.system.entity;
 
 import com.muiboot.core.domain.BaseModel;
 

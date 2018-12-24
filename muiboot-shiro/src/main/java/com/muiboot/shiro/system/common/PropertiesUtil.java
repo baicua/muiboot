@@ -1,6 +1,6 @@
 package com.muiboot.shiro.system.common;
 
-import com.muiboot.shiro.system.domain.Properties;
+import com.muiboot.shiro.system.entity.Properties;
 import com.muiboot.shiro.system.service.PropertiesService;
 import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;

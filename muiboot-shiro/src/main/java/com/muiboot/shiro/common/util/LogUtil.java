@@ -1,11 +1,7 @@
 package com.muiboot.shiro.common.util;
-import com.alibaba.druid.support.json.JSONUtils;
-import com.muiboot.shiro.system.domain.User;
 import org.codehaus.groovy.runtime.StackTraceUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by 75631 on 2018/8/29.

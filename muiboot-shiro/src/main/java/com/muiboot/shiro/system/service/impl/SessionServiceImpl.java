@@ -2,7 +2,7 @@ package com.muiboot.shiro.system.service.impl;
 
 import java.util.*;
 
-import com.muiboot.shiro.system.domain.User;
+import com.muiboot.shiro.system.entity.User;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.mgt.eis.SessionDAO;
 import org.apache.shiro.subject.SimplePrincipalCollection;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import com.muiboot.shiro.system.domain.UserOnline;
+import com.muiboot.shiro.system.entity.UserOnline;
 import com.muiboot.shiro.system.service.SessionService;
 
 /**

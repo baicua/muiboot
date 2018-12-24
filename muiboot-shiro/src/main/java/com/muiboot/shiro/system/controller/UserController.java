@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.muiboot.shiro.common.util.ShiroUtil;
-import com.muiboot.shiro.system.domain.UserWithRole;
+import com.muiboot.shiro.system.entity.UserWithRole;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ import com.muiboot.core.domain.QueryRequest;
 import com.muiboot.core.domain.ResponseBo;
 import com.muiboot.core.util.FileUtils;
 import com.muiboot.core.util.MD5Utils;
-import com.muiboot.shiro.system.domain.User;
+import com.muiboot.shiro.system.entity.User;
 import com.muiboot.shiro.system.service.UserService;
 
 @Controller

@@ -5,7 +5,7 @@ import java.util.Map;
 
 import com.muiboot.core.domain.LayerTree;
 import com.muiboot.core.service.IService;
-import com.muiboot.shiro.system.domain.SysGroup;
+import com.muiboot.shiro.system.entity.SysGroup;
 
 public interface GroupService extends IService<SysGroup> {
 

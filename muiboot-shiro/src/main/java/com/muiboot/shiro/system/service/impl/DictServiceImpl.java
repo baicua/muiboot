@@ -7,7 +7,7 @@ import com.muiboot.core.service.impl.BaseService;
 import com.muiboot.shiro.common.util.LogUtil;
 import com.muiboot.core.util.TreeUtils;
 import com.muiboot.shiro.system.dao.SysDicMapper;
-import com.muiboot.shiro.system.domain.SysDic;
+import com.muiboot.shiro.system.entity.SysDic;
 import com.muiboot.shiro.system.service.DicCacheService;
 import com.muiboot.shiro.system.service.DictService;
 import org.apache.commons.collections.CollectionUtils;

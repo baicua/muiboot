@@ -1,7 +1,7 @@
 package com.muiboot.shiro.system.service.impl;
 
 import com.muiboot.core.service.impl.BaseService;
-import com.muiboot.shiro.system.domain.SysDic;
+import com.muiboot.shiro.system.entity.SysDic;
 import com.muiboot.shiro.system.service.DicCacheService;
 import com.muiboot.shiro.system.service.DictService;
 import org.apache.commons.collections.CollectionUtils;

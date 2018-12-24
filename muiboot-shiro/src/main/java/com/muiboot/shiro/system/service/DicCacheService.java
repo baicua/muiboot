@@ -1,7 +1,7 @@
 package com.muiboot.shiro.system.service;
 
 import com.muiboot.core.service.IService;
-import com.muiboot.shiro.system.domain.SysDic;
+import com.muiboot.shiro.system.entity.SysDic;
 
 import java.util.Map;
 

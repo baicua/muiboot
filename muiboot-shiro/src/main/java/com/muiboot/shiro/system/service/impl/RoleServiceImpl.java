@@ -8,7 +8,7 @@ import java.util.List;
 import com.muiboot.core.exception.BusinessException;
 import com.muiboot.core.service.impl.BaseService;
 import com.muiboot.shiro.common.util.ShiroUtil;
-import com.muiboot.shiro.system.domain.*;
+import com.muiboot.shiro.system.entity.*;
 import com.muiboot.shiro.system.service.RoleService;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;

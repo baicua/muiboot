@@ -7,7 +7,7 @@ import com.muiboot.core.util.MD5Utils;
 import com.muiboot.core.util.exec.ExecutorsUtil;
 import com.muiboot.core.util.vcode.Captcha;
 import com.muiboot.core.util.vcode.GifCaptcha;
-import com.muiboot.shiro.system.domain.User;
+import com.muiboot.shiro.system.entity.User;
 import com.muiboot.shiro.system.service.UserService;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.authc.*;

@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.muiboot.core.service.impl.BaseService;
-import com.muiboot.shiro.system.domain.RoleMenu;
+import com.muiboot.shiro.system.entity.RoleMenu;
 import com.muiboot.shiro.system.service.RoleMenuServie;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;

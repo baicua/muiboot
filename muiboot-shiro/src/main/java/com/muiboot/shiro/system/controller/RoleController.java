@@ -7,7 +7,7 @@ import com.muiboot.core.annotation.Log;
 import com.muiboot.core.domain.QueryRequest;
 import com.muiboot.core.domain.ResponseBo;
 import com.muiboot.core.util.FileUtils;
-import com.muiboot.shiro.system.domain.Role;
+import com.muiboot.shiro.system.entity.Role;
 import com.muiboot.shiro.system.service.RoleService;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;

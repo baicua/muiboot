@@ -1,8 +1,7 @@
 package com.muiboot.shiro.common.util;
 
-import com.muiboot.shiro.system.domain.User;
+import com.muiboot.shiro.system.entity.User;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 

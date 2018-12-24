@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.muiboot.core.annotation.Log;
 import com.muiboot.shiro.common.controller.BaseController;
-import com.muiboot.shiro.system.domain.Menu;
+import com.muiboot.shiro.system.entity.Menu;
 import com.muiboot.shiro.system.service.MenuService;
 
 import javax.servlet.http.HttpServletResponse;

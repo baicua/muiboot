@@ -5,7 +5,7 @@ import java.util.*;
 import com.muiboot.shiro.common.menum.GroupType;
 import com.muiboot.core.service.impl.BaseService;
 import com.muiboot.shiro.system.dao.SysGroupMapper;
-import com.muiboot.shiro.system.domain.SysGroup;
+import com.muiboot.shiro.system.entity.SysGroup;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
