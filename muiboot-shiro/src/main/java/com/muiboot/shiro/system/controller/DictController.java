@@ -2,7 +2,7 @@ package com.muiboot.shiro.system.controller;
 
 
 
-import com.muiboot.core.domain.ResponseBo;
+import com.muiboot.core.entity.ResponseBo;
 import com.muiboot.core.util.FileUtils;
 import com.muiboot.shiro.system.entity.SysDic;
 import org.apache.shiro.authz.annotation.RequiresPermissions;

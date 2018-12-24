@@ -1,6 +1,6 @@
 package com.muiboot.shiro.common.handler;
 
-import com.muiboot.core.domain.ResponseBo;
+import com.muiboot.core.entity.ResponseBo;
 import com.muiboot.core.exception.BusinessException;
 import com.muiboot.shiro.common.util.LogUtil;
 import org.apache.shiro.authz.AuthorizationException;

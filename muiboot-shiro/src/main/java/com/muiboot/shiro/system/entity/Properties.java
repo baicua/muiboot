@@ -1,6 +1,6 @@
 package com.muiboot.shiro.system.entity;
 
-import com.muiboot.core.domain.BaseModel;
+import com.muiboot.core.entity.BaseModel;
 
 import javax.persistence.*;
 import java.io.Serializable;

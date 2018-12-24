@@ -18,8 +18,8 @@ import com.github.pagehelper.PageInfo;
 
 import com.muiboot.core.annotation.Log;
 import com.muiboot.shiro.common.controller.BaseController;
-import com.muiboot.core.domain.QueryRequest;
-import com.muiboot.core.domain.ResponseBo;
+import com.muiboot.core.entity.QueryRequest;
+import com.muiboot.core.entity.ResponseBo;
 import com.muiboot.core.util.FileUtils;
 import com.muiboot.core.util.MD5Utils;
 import com.muiboot.shiro.system.entity.User;

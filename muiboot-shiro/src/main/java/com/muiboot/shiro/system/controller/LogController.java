@@ -3,8 +3,8 @@ package com.muiboot.shiro.system.controller;
 import java.util.List;
 import java.util.Map;
 
-import com.muiboot.core.domain.QueryRequest;
-import com.muiboot.core.domain.ResponseBo;
+import com.muiboot.core.entity.QueryRequest;
+import com.muiboot.core.entity.ResponseBo;
 import com.muiboot.core.util.FileUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;

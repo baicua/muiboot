@@ -2,7 +2,7 @@ package com.muiboot.shiro.system.controller;
 
 import com.muiboot.core.annotation.Log;
 import com.muiboot.shiro.common.controller.BaseController;
-import com.muiboot.core.domain.ResponseBo;
+import com.muiboot.core.entity.ResponseBo;
 import com.muiboot.core.util.MD5Utils;
 import com.muiboot.core.util.exec.ExecutorsUtil;
 import com.muiboot.core.util.vcode.Captcha;

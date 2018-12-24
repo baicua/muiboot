@@ -10,7 +10,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import com.muiboot.core.annotation.ExportConfig;
-import com.muiboot.core.domain.BaseModel;
+import com.muiboot.core.entity.BaseModel;
 
 @Table(name = "M_USER")
 public class User extends BaseModel implements Serializable{

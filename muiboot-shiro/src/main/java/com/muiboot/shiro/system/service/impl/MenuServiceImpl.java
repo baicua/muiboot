@@ -4,7 +4,7 @@ import java.util.*;
 import java.util.concurrent.*;
 
 import com.muiboot.core.exception.BusinessException;
-import com.muiboot.core.domain.LayerTree;
+import com.muiboot.core.entity.LayerTree;
 import com.muiboot.core.service.impl.BaseService;
 import com.muiboot.shiro.common.util.ShiroUtil;
 import com.muiboot.core.util.exec.ExecutorsUtil;
