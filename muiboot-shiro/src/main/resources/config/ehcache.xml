@@ -10,16 +10,16 @@
         diskPersistent="false"
         diskExpiryThreadIntervalSeconds="120" />
     <cache
-            name="dicCache"
-            maxEntriesLocalHeap="2000"
-            eternal="false"
-            timeToIdleSeconds="3600"
-            timeToLiveSeconds="0"
-            overflowToDisk="true"
-            statistics="true"/>
+        name="DIC_CACHE"
+        maxEntriesLocalHeap="2000"
+        eternal="false"
+        timeToIdleSeconds="3600"
+        timeToLiveSeconds="0"
+        overflowToDisk="true"
+        statistics="true"/>
      <!-- 登录记录缓存缓存永不过期或者自动清除 -->
     <cache 
-        name="sessionCache"
+        name="SESSION_CACHE"
         maxElementsInMemory="2000"
         maxEntriesLocalHeap="2000"
         eternal="true"
@@ -27,12 +27,12 @@
         overflowToDisk="true"
         statistics="true" />
     <cache
-            name="CACHE_GENERATE_KEY"
-            maxElementsInMemory="2000"
-            maxEntriesLocalHeap="2000"
-            eternal="true"
-            timeToLiveSeconds="3600"
-            overflowToDisk="true"
-            statistics="true" />
+        name="CACHE_GENERATE_KEY"
+        maxElementsInMemory="2000"
+        maxEntriesLocalHeap="2000"
+        eternal="true"
+        timeToLiveSeconds="3600"
+        overflowToDisk="true"
+        statistics="true" />
 </ehcache>
 

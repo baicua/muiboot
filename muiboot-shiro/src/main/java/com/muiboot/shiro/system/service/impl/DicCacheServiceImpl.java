@@ -24,7 +24,7 @@ public class DicCacheServiceImpl extends BaseService<SysDic> implements DicCache
     @Autowired
     private DictService dictService;
     @Override
-    @Cacheable(value="dicCache",key="'ALLDIC'")
+    @Cacheable(value="DIC_CACHE",key="'ALLDIC'")
     public Map<String,Object> getAllDicMap() {
         List<SysDic> dics=dictService.getAllDics();
         Map<String,Object> res=null;

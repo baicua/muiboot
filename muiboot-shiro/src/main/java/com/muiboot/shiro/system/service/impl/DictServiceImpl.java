@@ -130,7 +130,7 @@ public class DictServiceImpl extends BaseService<SysDic> implements DictService 
 
 	@Override
 	@Transactional
-	@CacheEvict(value="dicCache",key="'ALLDIC'")
+	@CacheEvict(value="DIC_CACHE",key="'ALLDIC'")
 	public void add(SysDic dic) {
 		dic.setCreateDate(new Date());
 		dic.setUpdateDate(new Date());
@@ -190,7 +190,7 @@ public class DictServiceImpl extends BaseService<SysDic> implements DictService 
 	}
 
 	@Override
-	@CacheEvict(value="dicCache",key="'ALLDIC'")
+	@CacheEvict(value="DIC_CACHE",key="'ALLDIC'")
 	public void updateDicNotNull(SysDic dict) {
 		this.updateNotNull(dict);
 	}
@@ -272,7 +272,7 @@ public class DictServiceImpl extends BaseService<SysDic> implements DictService 
 	}
 	@Override
 	@Transactional
-	@CacheEvict(value="dicCache",key="'ALLDIC'")
+	@CacheEvict(value="DIC_CACHE",key="'ALLDIC'")
 	public void deleteDicts(String dictIds) {
 		List<String> list = Arrays.asList(dictIds.split(","));
 		this.batchDelete(list, "dicId", SysDic.class);

@@ -134,7 +134,7 @@ public class MenuServiceImpl extends BaseService<Menu> implements MenuService {
 	}
 
 	@Override
-	@Cacheable(value="sessionCache",key="#userName")
+	@Cacheable(value="SESSION_CACHE",key="#userName")
 	public LayerTree<Menu> getUserMenu(String userName) {
 		List<LayerTree<Menu>> trees = new ArrayList<>();
 		List<Menu> menus = this.findUserMenus(userName);

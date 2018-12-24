@@ -134,7 +134,7 @@ public class ShiroConfig {
 	public SessionDAO sessionDAO() {
 		EnterpriseCacheSessionDAO sessionDAO = new EnterpriseCacheSessionDAO();
 		sessionDAO.setCacheManager(getEhCacheManager());
-		sessionDAO.setActiveSessionsCacheName("sessionCache");
+		sessionDAO.setActiveSessionsCacheName("SESSION_CACHE");
 		return sessionDAO;
 	}
 
