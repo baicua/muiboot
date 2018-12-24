@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.muiboot.core.layer.LayerTree;
+import com.muiboot.core.domain.LayerTree;
 import com.muiboot.core.util.TreeUtils;
 import com.muiboot.shiro.system.service.GroupService;
 import tk.mybatis.mapper.entity.Example;
