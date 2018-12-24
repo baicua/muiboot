@@ -1,4 +1,4 @@
-package com.muiboot.core.domain;
+package com.muiboot.core.entity;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.muiboot.core.domain;
+package com.muiboot.core.entity;
 
 import com.alibaba.fastjson.JSON;
 import org.apache.commons.collections.map.HashedMap;

@@ -1,4 +1,4 @@
-package com.muiboot.core.domain;
+package com.muiboot.core.entity;
 import java.io.Serializable;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;

@@ -1,6 +1,6 @@
 package com.muiboot.core.util;
 
-import com.muiboot.core.domain.ResponseBo;
+import com.muiboot.core.entity.ResponseBo;
 
 import java.io.*;
 import java.util.*;
