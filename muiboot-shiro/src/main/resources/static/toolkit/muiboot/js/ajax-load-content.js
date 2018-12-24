@@ -103,7 +103,7 @@
                     breadcrumbMenu.name.unshift($.trim($(this).text()));
                 });
                 var breadcrumnArray=new Array();
-                breadcrumnArray.push('<a href="/sys"><i class="layui-icon layui-icon-home"></i> 首页</a>');
+                breadcrumnArray.push('<a href="/sys">首页</a>');
                 for (var i = 0; i < breadcrumbMenu.name.length; i++) {
                     breadcrumnArray.push('<span lay-separator="">/</span>');
                     breadcrumnArray.push('<a href="javascript:;" menu-id="');

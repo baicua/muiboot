@@ -184,7 +184,7 @@ html {
     display: none;
 }
 .shrink .mb-banner .layui-icon-spread-left,.mb-banner .layui-icon-shrink-right{
-    display: block;
+    display: inline;
 }
 @media screen and (max-width:992px) {
     .mb-layout-admin .mb-body, .mb-layout-admin .mb-footer{

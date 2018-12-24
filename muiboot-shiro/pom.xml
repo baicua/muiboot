@@ -24,6 +24,7 @@
 			<groupId>com.muiboot.core</groupId>
 			<artifactId>muiboot-core</artifactId>
 			<version>${muiboot-core.version}</version>
+			<optional>true</optional>
 		</dependency>
 	</dependencies>
 	
