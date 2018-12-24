@@ -8,6 +8,7 @@ import org.activiti.engine.TaskService;
 import org.activiti.engine.task.Comment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -18,7 +19,7 @@ import java.util.List;
  * @version 1.0 2018/12/10
  */
 @Service
-@Transactional
+@Transactional(propagation = Propagation.NOT_SUPPORTED, readOnly = true, rollbackFor = Exception.class)
 public class HistoryServiceImpl implements HistoryService {
     @Autowired
     private TaskService taskService;

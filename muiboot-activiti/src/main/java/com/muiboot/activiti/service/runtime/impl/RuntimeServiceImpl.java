@@ -11,6 +11,7 @@ import org.activiti.engine.TaskService;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -21,7 +22,7 @@ import java.util.List;
  * @version 1.0 2018/11/29
  */
 @Service
-@Transactional
+@Transactional(propagation = Propagation.SUPPORTS, readOnly = false, rollbackFor = Exception.class)
 public class RuntimeServiceImpl implements RuntimeService {
     @Autowired
     private org.activiti.engine.RuntimeService runtimeService;
@@ -68,7 +69,8 @@ public class RuntimeServiceImpl implements RuntimeService {
         this.addComment(param);
         taskService.complete(param.getTaskId(),param.getVariable());
     }
-
+    @Override
+    @Transactional(propagation = Propagation.NOT_SUPPORTED, readOnly = true, rollbackFor = Exception.class)
     public List<RuTask> getBusinessTasks(BusinessParam param, BusinessTaskMapper mapper){
         return mapper.getBusinessTasks(param);
     }
