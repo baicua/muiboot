@@ -1,6 +1,7 @@
 package com.muiboot.core.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -12,6 +13,8 @@ public interface IService<T> {
 	T selectByKey(Object key);
 
 	int save(T entity);
+
+	int save(T entity, Map<String,Object> param);
 
 	int delete(Object key);
 
