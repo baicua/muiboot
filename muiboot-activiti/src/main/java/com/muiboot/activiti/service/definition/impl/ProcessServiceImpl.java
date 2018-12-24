@@ -7,7 +7,7 @@ import com.github.pagehelper.PageHelper;
 import com.muiboot.activiti.entity.process.ProcessDefinitionDeploy;
 import com.muiboot.activiti.service.definition.ProcessService;
 import com.muiboot.activiti.util.ActivitiUtil;
-import com.muiboot.core.domain.QueryRequest;
+import com.muiboot.core.entity.QueryRequest;
 import org.activiti.bpmn.converter.BpmnXMLConverter;
 import org.activiti.bpmn.model.BpmnModel;
 import org.activiti.editor.constants.ModelDataJsonConstants;

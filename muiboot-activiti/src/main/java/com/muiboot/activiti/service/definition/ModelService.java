@@ -1,6 +1,6 @@
 package com.muiboot.activiti.service.definition;
 
-import com.muiboot.core.domain.QueryRequest;
+import com.muiboot.core.entity.QueryRequest;
 import org.activiti.engine.repository.Model;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
