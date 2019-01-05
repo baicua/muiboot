@@ -4,9 +4,9 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>com.muiboot</groupId>
-		<artifactId>muiboot-pom</artifactId>
-		<relativePath>../muiboot-pom/pom.xml</relativePath>
-		<version>1.0</version>
+		<artifactId>muiboot</artifactId>
+		<relativePath>../pom.xml</relativePath>
+		<version>1.0-SNAPSHOT</version>
 	</parent>
 	<groupId>com.muiboot.activiti</groupId>
 	<artifactId>muiboot-activiti</artifactId>
@@ -25,6 +25,12 @@
 	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>com.muiboot</groupId>
+			<artifactId>muiboot-pom</artifactId>
+			<version>1.0</version>
+			<optional>true</optional>
+		</dependency>
 		<dependency>
 			<groupId>com.muiboot.core</groupId>
 			<artifactId>muiboot-core</artifactId>
