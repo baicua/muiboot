@@ -20,6 +20,7 @@ import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.servlet.SimpleCookie;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
@@ -60,6 +61,9 @@ public class ShiroConfig {
 		filterChainDefinitionMap.put("/druid/**", "anon");
 		filterChainDefinitionMap.put("/gifCode", "anon");
 		filterChainDefinitionMap.put("/toolkit/**", "anon");
+		filterChainDefinitionMap.put("/rest/**", "anon");
+		filterChainDefinitionMap.put("/services/**", "anon");
+		filterChainDefinitionMap.put("/favicon.ico", "anon");
 		filterChainDefinitionMap.put("/doc/**", "doc");
         filterChainDefinitionMap.put("/error/**", "anon");
 		filterChainDefinitionMap.put("/logout", "logout");
@@ -82,6 +86,7 @@ public class ShiroConfig {
     }  
 	
 	@Bean(name = "lifecycleBeanPostProcessor")
+	@ConditionalOnMissingBean(LifecycleBeanPostProcessor.class)
     public LifecycleBeanPostProcessor lifecycleBeanPostProcessor() {
         return new LifecycleBeanPostProcessor();
     }
@@ -111,6 +116,7 @@ public class ShiroConfig {
 	}
 	
 	@Bean
+	@ConditionalOnMissingBean(DefaultAdvisorAutoProxyCreator.class)
     @DependsOn({"lifecycleBeanPostProcessor"})
     public DefaultAdvisorAutoProxyCreator advisorAutoProxyCreator() {
         DefaultAdvisorAutoProxyCreator advisorAutoProxyCreator = new DefaultAdvisorAutoProxyCreator();

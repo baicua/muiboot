@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableCaching
 @SpringBootApplication
 @EnableTransactionManagement
+@MapperScan("com.muiboot.**.dao")
 public class ShiroApplication {
 	protected static  Logger logger = LoggerFactory.getLogger(ShiroApplication.class);
 	public static void main(String[] args) {

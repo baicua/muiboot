@@ -34,7 +34,8 @@ public class LogUtil{
         }
         Throwable throwable=ex.getCause()==null?ex:ex.getCause();
         log.error("threadId:{},user:{},url:{},message:{},Exception:{},,Caused:{},errorMessage:{}",threadId,userId,url,message,ex.getClass(),throwable.getClass(),throwable.getMessage());
-        StackTraceUtils.printSanitizedStackTrace(ex);
+        //StackTraceUtils.printSanitizedStackTrace(ex);
+        ex.printStackTrace();
     }
     public void info(String message,String url){
         long threadId=Thread.currentThread().getId();

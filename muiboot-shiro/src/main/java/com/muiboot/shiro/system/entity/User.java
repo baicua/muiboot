@@ -8,11 +8,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSeeAlso;
 
 import com.muiboot.core.annotation.ExportConfig;
 import com.muiboot.core.entity.BaseModel;
 
 @Table(name = "M_USER")
+@XmlRootElement(name="User")
 public class User extends BaseModel implements Serializable{
 
 	private static final long serialVersionUID = -4852732617765810959L;
