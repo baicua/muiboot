@@ -1,13 +1,14 @@
 server:
-  port: 443
+  port: 8080
   tomcat:
     uri-encoding: utf-8
+    max-threads: 500
   #你生成的证书名字
-  ssl:
-    key-store: classpath:config/a.jks
+  #ssl:
+    #key-store: classpath:config/a.jks
   #密钥库密码
-    key-store-password: a9v11iy5
-    keyStoreType: JKS
+    #key-store-password: a9v11iy5
+    #keyStoreType: JKS
   compression:
     enabled: true
     min-response-size: 1024
@@ -123,6 +124,5 @@ pagehelper:
   params: count=countSql
 
 logging:
-  level:
-    com:
-      muiboot: debug
+  level: error
+  config: classpath:logback-spring.xml

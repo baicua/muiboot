@@ -44,8 +44,12 @@
             <onMismatch>DENY</onMismatch>
         </filter>
     </appender>
+    <logger name="dao" level="INFO">
+        <!--daoFILE为实际定义的appender-->
+        <appender-ref ref="file_info" />
+    </logger>
 
-    <root level="debug">
+    <root level="info">
         <appender-ref ref="console" />
     </root>
 

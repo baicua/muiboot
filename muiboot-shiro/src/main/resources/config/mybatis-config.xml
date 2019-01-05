@@ -7,6 +7,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<!--解决插入null的时候报错问题-->
 		<setting name="jdbcTypeForNull" value="NULL"/>
 		<!-- 打印查询语句 -->
-		<setting name="logImpl" value="STDOUT_LOGGING" />
+		<!--<setting name="logImpl" value="STDOUT_LOGGING" />-->
+		<setting name="logPrefix" value="dao."/>
 	</settings>
 </configuration>
