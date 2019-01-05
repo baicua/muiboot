@@ -5,12 +5,14 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 
 import javax.persistence.Transient;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * <p>Description: 实体基类</p>
  *
  * @version 1.0 2018/9/18
  */
+@XmlRootElement(name="BaseModel")
 public abstract class BaseModel implements Serializable{
 
     /**
