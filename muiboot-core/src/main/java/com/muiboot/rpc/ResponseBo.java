@@ -11,29 +11,33 @@ public class ResponseBo<T> extends ResponseEntity<T> implements Serializable {
     private String msg;
     private int threads;
     public ResponseBo() {
-        super( HttpStatus.OK);
+        this( HttpStatus.OK);
     }
 
     public ResponseBo(T t) {
-        super(t, HttpStatus.OK);
+        this(t, HttpStatus.OK);
     }
     public ResponseBo(HttpStatus status) {
-        super(status);
+        this(null,status);
+    }
+    public ResponseBo(T t,HttpStatus status) {
+        this(t,status,null);
     }
     public ResponseBo(HttpStatus status,String msg) {
-        super(status);
+        this(null,status,msg);
+    }
+    public ResponseBo(T t,HttpStatus status,String msg) {
+        super(t,status);
         this.msg=msg;
     }
 
     public static ResponseBo error(String msg) {
-        ResponseBo bo = new ResponseBo(HttpStatus.INTERNAL_SERVER_ERROR);
-        bo.msg=msg;
+        ResponseBo bo = new ResponseBo(HttpStatus.INTERNAL_SERVER_ERROR,msg);
         return bo;
     }
 
     public static ResponseBo limit(String msg) {
-        ResponseBo bo = new ResponseBo(HttpStatus.TOO_MANY_REQUESTS);
-        bo.msg=msg;
+        ResponseBo bo = new ResponseBo(HttpStatus.TOO_MANY_REQUESTS,msg);
         return bo;
     }
 

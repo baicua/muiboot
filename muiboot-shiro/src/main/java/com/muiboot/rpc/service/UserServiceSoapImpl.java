@@ -44,7 +44,9 @@ public class UserServiceSoapImpl extends AbstractService implements UserServiceS
             bo= ResponseBo.ok(user);
         } catch (RpcException e) {
             bo=ResponseBo.limit(e.getMessage());
-        }finally {
+        }catch (Exception e){
+            bo=ResponseBo.error(e.getMessage());
+        } finally{
             decrement();
         }
         return bo;
