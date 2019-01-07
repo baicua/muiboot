@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 		,org.springframework.boot.autoconfigure.security.SecurityAutoConfiguration.class
 		,org.activiti.spring.boot.SecurityAutoConfiguration.class
 })
+@MapperScan("com.muiboot.**.dao")
 public class ActivitiApplication {
 	protected static  Logger logger = LoggerFactory.getLogger(ActivitiApplication.class);
 	public static void main(String[] args) {

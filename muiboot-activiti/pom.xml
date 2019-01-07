@@ -260,7 +260,7 @@
 			</plugin>
 
 		</plugins>
-		<resources>
+		<!--<resources>
 			<resource>
 				<directory>src/main/resources</directory>
 				<filtering>true</filtering>
@@ -270,14 +270,14 @@
 					<exclude>*.yml</exclude>
 				</excludes>
 			</resource>
-	<!--		<resource>
+			<resource>
 				<directory>src/main/resources</directory>
 				<filtering>false</filtering>
 				<excludes>
 					<exclude>mapper/**/*.xml</exclude>
 				</excludes>
-			</resource>-->
-		</resources>
+			</resource>
+		</resources>-->
 	</build>
 
 

@@ -121,4 +121,4 @@ pagehelper:
   params: count=countSql
 
 logging:
-  level: debug
+  level: info

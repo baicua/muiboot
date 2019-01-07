@@ -31,16 +31,16 @@ public class TaskShipListener implements TaskListener {
         delegateTask.removeVariable("VARIABLE_USER_CLASS");
         logger.info("监听任务事件，事件类型:{},任务ID:{}",delegateTask.getEventName(),delegateTask.getId());
         try {
-/*            switch (delegateTask.getEventName()){
+            switch (delegateTask.getEventName()){
                 case EVENTNAME_CREATE:
                     ruShipMapper.insert(new RuShip(delegateTask,user));break;
                 case EVENTNAME_COMPLETE:
-                    ruShipMapper.deleteByPrimaryKey(delegateTask.getId());;break;
+                    ruShipMapper.deleteByPrimaryKey(delegateTask.getId());break;
                 case EVENTNAME_DELETE:
-                    ruShipMapper.deleteByPrimaryKey(delegateTask.getId());;break;
+                    ruShipMapper.deleteByPrimaryKey(delegateTask.getId());break;
                 case EVENTNAME_ASSIGNMENT:
                     ruShipMapper.insert(new RuShip(delegateTask,user));break;
-            }*/
+            }
         }catch (Exception e){
             logger.error("监听任务处理失败");
             throw new ActivitiException("监听任务处理失败");
