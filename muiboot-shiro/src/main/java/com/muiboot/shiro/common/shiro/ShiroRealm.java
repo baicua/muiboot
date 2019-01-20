@@ -1,5 +1,6 @@
 package com.muiboot.shiro.common.shiro;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -80,7 +81,7 @@ public class ShiroRealm extends AuthorizingRealm {
 	 */
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
-
+		//clearAuthorizationInfoCache();
 		// 获取用户输入的用户名和密码
 		String userName = (String) token.getPrincipal();
 		String password = new String((char[]) token.getCredentials());
@@ -97,6 +98,7 @@ public class ShiroRealm extends AuthorizingRealm {
 		if (User.STATUS_LOCK.equals(user.getStatus())) {
 			throw new LockedAccountException("账号已被锁定,请联系管理员！");
 		}
+		menuService.clearCache(userName);
 		return new SimpleAuthenticationInfo(user, password, getName());
 	}
 

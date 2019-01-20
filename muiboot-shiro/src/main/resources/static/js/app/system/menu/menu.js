@@ -136,8 +136,6 @@
                         ,nodes:nodes
                         ,click: function(node){
                             menuMethod.refresh(node.id);
-                            if($MB.isMobile())
-                                $("body .layui-body").animate({scrollTop: $("#menuInfoPanle").parents(".site-tips").offset().top }, {duration: 500,easing: "swing"});
                         }
                     });
                 });

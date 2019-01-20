@@ -3,7 +3,7 @@ package com.muiboot.shiro.system.controller;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.muiboot.core.annotation.Log;
-import com.muiboot.shiro.common.controller.BaseController;
+import com.muiboot.shiro.common.controller.ShiroBaseController;
 import com.muiboot.core.entity.QueryRequest;
 import com.muiboot.core.entity.ResponseBo;
 import com.muiboot.shiro.system.common.PropertiesUtil;
@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-public class PropController extends BaseController {
+public class PropControllerShiro extends ShiroBaseController {
 	@Autowired
 	private PropertiesService propertiesService;
 	@RequestMapping("prop/getProp")

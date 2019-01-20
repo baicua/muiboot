@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.muiboot.core.annotation.Log;
-import com.muiboot.shiro.common.controller.BaseController;
+import com.muiboot.shiro.common.controller.ShiroBaseController;
 import com.muiboot.core.entity.ResponseBo;
 import com.muiboot.core.entity.LayerTree;
 import com.muiboot.core.util.FileUtils;
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-public class GroupController extends BaseController{
+public class GroupControllerShiro extends ShiroBaseController {
 
 	@Autowired
 	private GroupService groupService;

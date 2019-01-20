@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
-import com.muiboot.shiro.common.controller.BaseController;
+import com.muiboot.shiro.common.controller.ShiroBaseController;
 import com.muiboot.shiro.system.entity.SysLog;
 import com.muiboot.shiro.system.service.LogService;
 /**
@@ -26,7 +26,7 @@ import com.muiboot.shiro.system.service.LogService;
  * @version 1.0 2018/9/18
  */
 @Controller
-public class LogController extends BaseController {
+public class LogControllerShiro extends ShiroBaseController {
 
 	@Autowired
 	private LogService logService;

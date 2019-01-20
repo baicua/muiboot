@@ -154,8 +154,6 @@
                         ,nodes:nodes
                         ,click: function(node){
                             method.refresh(node.id);
-                            if($MB.isMobile())
-                                $("body .layui-body").animate({scrollTop: $("#dicInfoPanle").parents(".site-tips").offset().top }, {duration: 500,easing: "swing"});
                         }
                     });
                 });

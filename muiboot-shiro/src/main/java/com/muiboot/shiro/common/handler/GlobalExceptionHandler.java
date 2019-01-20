@@ -2,6 +2,7 @@ package com.muiboot.shiro.common.handler;
 
 import com.muiboot.core.entity.ResponseBo;
 import com.muiboot.core.exception.BusinessException;
+import com.muiboot.rpc.ResponseDTO;
 import com.muiboot.rpc.RpcException;
 import com.muiboot.shiro.common.util.LogUtil;
 import org.apache.shiro.authz.AuthorizationException;
@@ -45,10 +46,10 @@ public class GlobalExceptionHandler {
 	}
 	@ExceptionHandler(value = RpcException.class)
 	@ResponseBody
-	public com.muiboot.rpc.ResponseBo handleRpcException(RpcException ex, HttpServletRequest req) {
+	public ResponseDTO handleRpcException(RpcException ex, HttpServletRequest req) {
 		String url=req.getRequestURL().toString();
 		log.error("操作异常",ex,url);
-		return com.muiboot.rpc.ResponseBo.error(ex.getMessage());
+		return ResponseDTO.error(ex.getMessage());
 	}
 	@ExceptionHandler(value = AuthorizationException.class)
 	@ResponseBody

@@ -7,52 +7,52 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 
 @XmlRootElement(name = "ResponseBo")
-public class ResponseBo<T> extends ResponseEntity<T> implements Serializable {
+public class ResponseDTO<T> extends ResponseEntity<T> implements Serializable {
     private String msg;
     private int threads;
-    public ResponseBo() {
+    public ResponseDTO() {
         this( HttpStatus.OK);
     }
 
-    public ResponseBo(T t) {
+    public ResponseDTO(T t) {
         this(t, HttpStatus.OK);
     }
-    public ResponseBo(HttpStatus status) {
+    public ResponseDTO(HttpStatus status) {
         this(null,status);
     }
-    public ResponseBo(T t,HttpStatus status) {
+    public ResponseDTO(T t, HttpStatus status) {
         this(t,status,null);
     }
-    public ResponseBo(HttpStatus status,String msg) {
+    public ResponseDTO(HttpStatus status, String msg) {
         this(null,status,msg);
     }
-    public ResponseBo(T t,HttpStatus status,String msg) {
+    public ResponseDTO(T t, HttpStatus status, String msg) {
         super(t,status);
         this.msg=msg;
     }
 
-    public static ResponseBo error(String msg) {
-        ResponseBo bo = new ResponseBo(HttpStatus.INTERNAL_SERVER_ERROR,msg);
+    public static ResponseDTO error(String msg) {
+        ResponseDTO bo = new ResponseDTO(HttpStatus.INTERNAL_SERVER_ERROR,msg);
         return bo;
     }
 
-    public static ResponseBo limit(String msg) {
-        ResponseBo bo = new ResponseBo(HttpStatus.TOO_MANY_REQUESTS,msg);
+    public static ResponseDTO limit(String msg) {
+        ResponseDTO bo = new ResponseDTO(HttpStatus.TOO_MANY_REQUESTS,msg);
         return bo;
     }
 
-    public static ResponseBo warn(String msg) {
-        ResponseBo bo = new ResponseBo(HttpStatus.NO_CONTENT,msg);
+    public static ResponseDTO warn(String msg) {
+        ResponseDTO bo = new ResponseDTO(HttpStatus.NO_CONTENT,msg);
         return bo;
     }
 
-    public static ResponseBo ok(Object t) {
-        ResponseBo ResponseBo = new ResponseBo(t);
+    public static ResponseDTO ok(Object t) {
+        ResponseDTO ResponseBo = new ResponseDTO(t);
         ResponseBo.msg="操作成功";
         return ResponseBo;
     }
-    public static ResponseBo error() {
-        return ResponseBo.error("");
+    public static ResponseDTO error() {
+        return ResponseDTO.error("");
     }
 
     @XmlElement

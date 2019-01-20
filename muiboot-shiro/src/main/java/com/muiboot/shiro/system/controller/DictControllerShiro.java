@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 
 import com.muiboot.core.annotation.Log;
-import com.muiboot.shiro.common.controller.BaseController;
+import com.muiboot.shiro.common.controller.ShiroBaseController;
 import com.muiboot.shiro.system.service.DictService;
 
 import javax.servlet.http.HttpServletResponse;
@@ -27,7 +27,7 @@ import java.util.Date;
  * @version 1.0 2018/9/18
  */
 @Controller
-public class DictController extends BaseController {
+public class DictControllerShiro extends ShiroBaseController {
 
 	@Autowired
 	private DictService dictService;

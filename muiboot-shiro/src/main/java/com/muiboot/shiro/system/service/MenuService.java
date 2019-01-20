@@ -39,4 +39,6 @@ public interface MenuService extends IService<Menu> {
 	Map findMenuDetail(Long menuId);
 
 	LayerTree<Menu> getAuthList(Long roleId);
+
+	void clearCache(String userName);
 }

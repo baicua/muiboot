@@ -5,7 +5,7 @@ import java.util.Map;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.muiboot.shiro.common.controller.BaseController;
+import com.muiboot.shiro.common.controller.ShiroBaseController;
 import com.muiboot.core.entity.QueryRequest;
 import com.muiboot.core.entity.ResponseBo;
 import com.muiboot.shiro.system.service.MenuService;
@@ -20,7 +20,7 @@ import com.muiboot.shiro.system.entity.UserOnline;
 
 
 @Controller
-public class SessionController extends BaseController {
+public class SessionControllerShiro extends ShiroBaseController {
 	
 	@Autowired
     SessionService sessionService;

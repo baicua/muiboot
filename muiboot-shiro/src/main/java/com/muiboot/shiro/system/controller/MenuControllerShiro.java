@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.muiboot.core.annotation.Log;
-import com.muiboot.shiro.common.controller.BaseController;
+import com.muiboot.shiro.common.controller.ShiroBaseController;
 import com.muiboot.shiro.system.entity.Menu;
 import com.muiboot.shiro.system.service.MenuService;
 
@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @Controller
 @RequiresPermissions("menu:list")
-public class MenuController extends BaseController {
+public class MenuControllerShiro extends ShiroBaseController {
 	@Autowired
 	private MenuService menuService;
 

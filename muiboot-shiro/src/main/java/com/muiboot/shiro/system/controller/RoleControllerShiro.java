@@ -19,10 +19,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
-import com.muiboot.shiro.common.controller.BaseController;
+import com.muiboot.shiro.common.controller.ShiroBaseController;
 
 @Controller
-public class RoleController extends BaseController {
+public class RoleControllerShiro extends ShiroBaseController {
 
 	@Autowired
 	private RoleService roleService;

@@ -1,7 +1,7 @@
 package com.muiboot.shiro.system.controller;
 
 import com.muiboot.core.annotation.Log;
-import com.muiboot.shiro.common.controller.BaseController;
+import com.muiboot.shiro.common.controller.ShiroBaseController;
 import com.muiboot.core.entity.ResponseBo;
 import com.muiboot.core.util.MD5Utils;
 import com.muiboot.core.util.exec.ExecutorsUtil;
@@ -32,7 +32,7 @@ import java.util.concurrent.ExecutorService;
  * @version 1.0 2018/9/18
  */
 @Controller
-public class LoginController extends BaseController {
+public class LoginControllerShiro extends ShiroBaseController {
 
     @Autowired
     private UserService userService;

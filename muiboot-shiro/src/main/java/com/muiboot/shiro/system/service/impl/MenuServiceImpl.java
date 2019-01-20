@@ -18,6 +18,7 @@ import com.muiboot.shiro.system.service.RoleService;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -153,6 +154,8 @@ public class MenuServiceImpl extends BaseService<Menu> implements MenuService {
 		return TreeUtils.build(trees);
 	}
 
+
+
 	@Override
 	public Menu findByNameAndType(String menuName, String type) {
 		Example example = new Example(Menu.class);
@@ -277,5 +280,10 @@ public class MenuServiceImpl extends BaseService<Menu> implements MenuService {
 			trees.add(tree);
 		}
 		return TreeUtils.build(trees);
+	}
+
+	@Override
+	@CacheEvict(value="SESSION_CACHE",key="#userName")
+	public void clearCache(String userName) {
 	}
 }

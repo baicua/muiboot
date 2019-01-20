@@ -100,13 +100,16 @@ spring:
     multipart:
       maxFileSize: 100Mb
       maxRequestSize: 1000Mb
+  activiti:
+    check-process-definitions: false
+    jpa-enabled: false
 
 mybatis:
   config-location: classpath:config/mybatis-config.xml
   # type-aliases扫描路径
-  type-aliases-package: com.muiboot.shiro
+  type-aliases-package: com.muiboot
   # mapper xml实现扫描路径
-  mapper-locations: classpath:mapper/**/*.xml
+  mapper-locations: classpath*:mapper/**/*.xml
   property:
     order: BEFORE
 

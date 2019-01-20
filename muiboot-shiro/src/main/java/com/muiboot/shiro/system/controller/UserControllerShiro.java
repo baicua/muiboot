@@ -17,7 +17,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
 import com.muiboot.core.annotation.Log;
-import com.muiboot.shiro.common.controller.BaseController;
+import com.muiboot.shiro.common.controller.ShiroBaseController;
 import com.muiboot.core.entity.QueryRequest;
 import com.muiboot.core.entity.ResponseBo;
 import com.muiboot.core.util.FileUtils;
@@ -26,7 +26,7 @@ import com.muiboot.shiro.system.entity.User;
 import com.muiboot.shiro.system.service.UserService;
 
 @Controller
-public class UserController extends BaseController {
+public class UserControllerShiro extends ShiroBaseController {
 
 	@Autowired
 	private UserService userService;

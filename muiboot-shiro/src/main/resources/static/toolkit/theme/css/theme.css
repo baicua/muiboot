@@ -284,7 +284,7 @@ html {
 .mb-layout-admin .mb-side-menu ul.layui-nav{
     background-color: #fff;
 }
-.layui-container.ajax-content{
+.ajax-content{
     padding-top: 5px;
 }
 /*.mb-layout-admin .mb-side-menu ul.layui-nav-tree>li{
@@ -325,10 +325,13 @@ html {
     border-style: solid;
     border-color: #eeeeee;
 }
-.mb-side-menu .layui-nav-tree .layui-nav-child dd.layui-this, .mb-side-menu .layui-nav-tree .layui-nav-child dd.layui-this a,.mb-side-menu .layui-nav-tree .layui-this,.mb-side-menu .layui-nav-tree .layui-this>a,.mb-side-menu .layui-nav-tree .layui-this>a:hover ,.mb-side-menu .layui-nav-tree a:hover{
-    /*background: url(../images/libg.png) repeat-x;*/
+.mb-side-menu .layui-nav-tree .layui-nav-child dd.layui-this, .mb-side-menu .layui-nav-tree .layui-nav-child dd.layui-this a,.mb-side-menu .layui-nav-tree .layui-this,.mb-side-menu .layui-nav-tree .layui-this>a{
     background-color: #f8f8f8;
     color: #3e8ef7;
+}
+.mb-side-menu .layui-nav-tree .layui-this>a:hover ,.mb-side-menu .layui-nav-tree a:hover,.mb-side-menu .layui-nav-tree .layui-nav-itemed a:hover{
+    background-color: #3e8ef7;
+    color: #ffffff;
 }
 .mb-side-menu .layui-nav-tree .layui-nav-child dd.layui-this a{
     border: solid #3e8ef7;
