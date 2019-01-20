@@ -140,11 +140,14 @@ public class MenuServiceImpl extends BaseService<Menu> implements MenuService {
 		List<Menu> menus = this.findUserMenus(userName);
 		for (Menu menu : menus) {
 			LayerTree<Menu> tree = new LayerTree<>();
+			Map attributes=new HashMap();
+			attributes.put("loadType",menu.getLoadType());
 			tree.setId(menu.getMenuId().toString());
 			tree.setParentId(menu.getParentId().toString());
 			tree.setName(menu.getMenuName());
 			tree.setIcon(menu.getIcon());
 			tree.setHref(menu.getUrl());
+			tree.setAttributes(attributes);
 			trees.add(tree);
 		}
 		return TreeUtils.build(trees);

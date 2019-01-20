@@ -52,6 +52,10 @@ public class Menu extends BaseModel implements Serializable {
 	@Column(name = "ORDER_NUM")
 	private String orderNum;
 
+	@Column(name = "LOAD_TYPE")
+	@ExportConfig(value = "加载方式", convert = "s:frame=嵌入,ajax=异步")
+	private String loadType;
+
 	@Column(name = "CREATE_TIME")
 	@ExportConfig(value = "创建时间", convert = "c:com.muiboot.shiro.common.util.poi.convert.TimeConvert")
 	private Date createTime;
@@ -170,6 +174,18 @@ public class Menu extends BaseModel implements Serializable {
 	 */
 	public void setOrderNum(String orderNum) {
 		this.orderNum = orderNum;
+	}
+
+	public static String getTypeMenu() {
+		return TYPE_MENU;
+	}
+
+	public String getLoadType() {
+		return loadType;
+	}
+
+	public void setLoadType(String loadType) {
+		this.loadType = loadType;
 	}
 
 	/**
