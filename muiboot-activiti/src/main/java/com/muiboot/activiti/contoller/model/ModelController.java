@@ -21,6 +21,7 @@ import org.activiti.engine.RepositoryService;
 import org.activiti.engine.repository.Model;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.apache.commons.io.IOUtils;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -38,6 +39,7 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping(value = "/workflow/model")
+@RequiresPermissions("flow:model")
 public class ModelController extends BaseController {
 
   @Autowired
@@ -47,11 +49,6 @@ public class ModelController extends BaseController {
 
   @Autowired
   private RuntimeService runtimeService;
-
-  @Autowired
-  private HistoryService historyService;
-  @Autowired
-  private BusinessTaskMapper mapper;
   @RequestMapping(value = "complete", method = RequestMethod.GET)
   @ResponseBody
   public ResponseBo complete() {
@@ -94,6 +91,7 @@ public class ModelController extends BaseController {
     return ResponseBo.ok(pi);
   }
   @RequestMapping(value = "", method = RequestMethod.GET)
+  @RequiresPermissions("flow:model")
   public String getModels() {
     return "act/model";
   }
