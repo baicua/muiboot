@@ -1,11 +1,12 @@
 /**
  * 路由控制
  */
-;layui.define(['jquery','element','layer'], function (exports) {
+;layui.define(['jquery','element','layer','table'], function (exports) {
     "use strict";
     var $ = layui.jquery;
     var element=layui.element;
     var layer=layui.layer;
+    var table=layui.table;
     var root_url = $MB.getRootPath();
     var routers={};
     var NAV_TOP="mb-pane-top",MENU="sys-menu-tree",BANNER="mb-banner",MAIN_CONTENT="mb-content",BANNER_NEXT="mb-banner-next";
@@ -17,6 +18,8 @@
     var model="sys";
     var $base=null;
     var DOM_CACHE={};
+    var NODE=null;
+    var LOADT="ajax";
     var Menu ={
         _updateWindows:function () {
             if(!this.menuUrl){
@@ -33,23 +36,31 @@
             if(!this.menuId){
                 return;
             }
-            var $length_this=$mbtop.find("li[lay-id='"+this.menuId+"']").length;
+            var $length_this=$ul.find("li[lay-id='"+this.menuId+"']").length;
             if($length_this===0){
-                  var $length_all=$mbtop.find("li[lay-id]").length;
+                  var $length_all=$ul.find("li[lay-id]").length;
                  if($length_all>=10){
-                 layer.msg("最多只能打开10个窗口",{skin: 'mb-warn'});
-                 return;
+                     layer.msg("最多只能打开10个窗口",{skin: 'mb-warn'});
+                     return;
                  }
+                 var heigth=$maincontent.height();
+                var content=LOADT==="frame"?"<iframe class='mb-frame' scrolling='no' style='height: "+heigth+"px'></iframe>":"";
                 element.tabAdd('mb-pane-top', {
                     title: this.menuName
-                    ,content: '' //支持传入html
+                    ,content: content //支持传入html
                     ,id: this.menuId
                 });
                 var url=root_url + this.menuUrl;
-                ajaxload(url,this.menuName,function (content) {
-                    $base=$maincontent.find(">div.layui-show");
-                    $base.empty().html(content);
-                })
+                //$base=$maincontent.find(">div.layui-show");
+                var index=$ul.find("li[lay-id='"+this.menuId+"']").index();
+                $base=$maincontent.find(">div.layui-tab-item").eq(index);
+                if(LOADT==="frame"){
+                    $base.find("iframe").first().attr("src",url);
+                }else {
+                    ajaxload(url,this.menuName,function (content) {
+                        $base.empty().html(content);
+                    })
+                }
             }
             var $thisWindow=$mbtop.find("ul.mb-banner li.layui-this");
             if(!($thisWindow.attr("lay-id")==parseInt(this.menuId))){
@@ -97,19 +108,37 @@
             }
         },
         _detach:function(){
-            var $detach=$maincontent.children(".layui-tab-item:not(.layui-show,.detach)");
-            if(this.pre&&$detach.length!==0){
-                DOM_CACHE[this.pre]=$detach.children().detach();
+            //var $detach=$maincontent.children(".layui-tab-item:not(.layui-show,.detach)");
+            if(this.pre){
+                var pre=routers[this.pre];
+                var preLoadT=pre&&pre["attributes"]["loadType"]||"ajax";
+                var menuId=pre&&pre["id"]||0;
+                var index=$ul.find("li[lay-id='"+menuId+"']").index();
+                var $detach=$maincontent.find(">div.layui-tab-item").eq(index);
+                if($detach.hasClass("detach"))return;
+                if(preLoadT==="ajax"){
+                    DOM_CACHE[this.pre]=$detach.children().detach();
+                }
+                $detach.addClass("detach");
                 var $this=$maincontent.find(".layui-show");
                 if($this.hasClass("detach")){
-                    $this.append(DOM_CACHE[this.cur]);
+                    if(LOADT==="ajax"){
+                        $this.append(DOM_CACHE[this.cur]);
+                        table.resize();
+                    }
                     $this.removeClass("detach");
                 }
+
             }
-            $detach.addClass("detach");
         }
     };
     function router(menuId,menuUrl,menuName) {
+        NODE=routers[menuUrl];
+        LOADT=NODE&&NODE["attributes"]["loadType"]||"ajax";
+        if(menuUrl!=Menu.cur){
+            Menu.pre=Menu.cur;
+            Menu.cur=menuUrl;
+        }
         Menu.menuId=menuId;
         Menu.menuUrl=menuUrl;
         Menu.menuName=menuName;
@@ -156,41 +185,39 @@
             }
         });
     };
-    function hash(hash) {
-        if(!$MB.hasHistoryApi()){
-            hash="#"+hash;
-        }
-        return hash;
-    }
     element.on('tab(mb-pane-top)', function(data){
-        var $this=$(this);
-        var menuId=$this.attr("lay-id");
+        //var $this=$(this);
+        var menuId=this.getAttribute("lay-id");
         var $menu=$menuNav.find("a[lay-id='"+menuId+"']");
         var menuUrl=$menu.attr("menu-url");
-        var menuName=$menu.attr("menu-name");
         if(menuId==0)menuUrl="home";
-        Menu.pre=Menu.cur;
-        Menu.cur=menuUrl;
+        var menuName=$menu.attr("menu-name");
         router(menuId,menuUrl,menuName);
     });
     element.on('tabDelete(mb-pane-top)', function(data){
         var menuId=$(this).parent().attr("lay-id");
         var _thisMenu=$menuNav.find("a[lay-id='"+menuId+"']");
-        DOM_CACHE[_thisMenu.attr("menu-url")].remove();
+        var _CAHCE=DOM_CACHE[_thisMenu.attr("menu-url")];
+        if(_CAHCE){
+            _CAHCE.remove();
+        }
         delete DOM_CACHE[_thisMenu.attr("menu-url")];
     });
     var obj = {
         router: function (menuId,menuUrl,menuName) {
             router(menuId,menuUrl,menuName);
         },
-        register:function (menuUrl) {
-            if(menuUrl)routers[menuUrl]=true;
+        register:function (menuUrl,node) {
+            if(menuUrl)routers[menuUrl]=node;
         },
         jump:function (hash) {
-            var $menu=$menuNav.find("a[menu-url='"+hash+"']");
-            var menuId=$menu.attr("lay-id");
-            var menuUrl=$menu.attr("menu-url");
-            var menuName=$menu.attr("menu-name");
+            NODE=routers[hash];
+            var menuId,menuName;
+            if(NODE){
+                menuId=NODE["id"];
+                menuName=NODE["name"];
+                LOADT=NODE["attributes"]["loadType"]||"ajax";
+            }
             router(menuId,hash,menuName);
         },
         bindMenu:function (_menu) {

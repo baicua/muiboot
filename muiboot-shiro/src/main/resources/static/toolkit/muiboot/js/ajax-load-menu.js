@@ -61,7 +61,7 @@
                     urlstr+=forChildrenTree(o[i]["children"]);
                     urlstr+='</dl>';
                 }
-                router.register(o[i]["href"]);
+                router.register(o[i]["href"],o[i]);
             } catch (e) {
                 console.log(e);
             }
@@ -87,7 +87,7 @@
                     urlstr+='</dl>';
                 }
                 urlstr += '</dd>';
-                router.register(o[i]["href"]);
+                router.register(o[i]["href"],o[i]);
             } catch (e) {
                 console.log(e);
             }
