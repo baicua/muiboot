@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-public class PropControllerShiro extends ShiroBaseController {
+public class PropController extends ShiroBaseController {
 	@Autowired
 	private PropertiesService propertiesService;
 	@RequestMapping("prop/getProp")

@@ -22,7 +22,7 @@ import com.github.pagehelper.PageInfo;
 import com.muiboot.shiro.common.controller.ShiroBaseController;
 
 @Controller
-public class RoleControllerShiro extends ShiroBaseController {
+public class RoleController extends ShiroBaseController {
 
 	@Autowired
 	private RoleService roleService;

@@ -27,7 +27,7 @@ import java.util.Date;
  * @version 1.0 2018/9/18
  */
 @Controller
-public class DictControllerShiro extends ShiroBaseController {
+public class DictController extends ShiroBaseController {
 
 	@Autowired
 	private DictService dictService;

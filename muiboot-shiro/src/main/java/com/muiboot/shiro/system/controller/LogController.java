@@ -26,7 +26,7 @@ import com.muiboot.shiro.system.service.LogService;
  * @version 1.0 2018/9/18
  */
 @Controller
-public class LogControllerShiro extends ShiroBaseController {
+public class LogController extends ShiroBaseController {
 
 	@Autowired
 	private LogService logService;

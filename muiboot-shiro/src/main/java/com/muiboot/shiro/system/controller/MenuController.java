@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @Controller
 @RequiresPermissions("menu:list")
-public class MenuControllerShiro extends ShiroBaseController {
+public class MenuController extends ShiroBaseController {
 	@Autowired
 	private MenuService menuService;
 

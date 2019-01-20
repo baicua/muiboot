@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-public class GroupControllerShiro extends ShiroBaseController {
+public class GroupController extends ShiroBaseController {
 
 	@Autowired
 	private GroupService groupService;

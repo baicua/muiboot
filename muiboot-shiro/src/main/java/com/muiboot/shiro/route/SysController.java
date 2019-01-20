@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 * @author jin
 */
 @Controller
-public class SysControllerShiro extends ShiroBaseController {
+public class SysController extends ShiroBaseController {
     //预处理信息，设置页面缓存时间
     @ModelAttribute
     public void initBinder(Model model, HttpServletRequest request, HttpServletResponse response){

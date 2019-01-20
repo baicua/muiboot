@@ -32,7 +32,7 @@ import java.util.concurrent.ExecutorService;
  * @version 1.0 2018/9/18
  */
 @Controller
-public class LoginControllerShiro extends ShiroBaseController {
+public class LoginController extends ShiroBaseController {
 
     @Autowired
     private UserService userService;

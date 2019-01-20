@@ -20,7 +20,7 @@ import com.muiboot.shiro.system.entity.UserOnline;
 
 
 @Controller
-public class SessionControllerShiro extends ShiroBaseController {
+public class SessionController extends ShiroBaseController {
 	
 	@Autowired
     SessionService sessionService;

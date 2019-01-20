@@ -105,7 +105,8 @@ public class RoleServiceImpl extends BaseService<Role> implements RoleService {
 	@Override
 	@Transactional
 	public void deleteRoles(String roleIds) {
-		List<String> list = Arrays.asList(roleIds.split(","));
+		List<String> list = new ArrayList<>();
+		list.addAll(Arrays.asList(roleIds.split(",")));
 		Example example = new Example(Role.class);
 		Example.Criteria criteria=example.createCriteria();
 		criteria.andIn("roleId", list);

@@ -54,7 +54,7 @@ public class GlobalExceptionHandler {
 	@ExceptionHandler(value = AuthorizationException.class)
 	@ResponseBody
 	public ResponseBo handleAuthorizationException(AuthorizationException ex, HttpServletResponse res) throws IOException {
-		res.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,"暂无权限，请联系管理员！");
+		res.sendError(HttpServletResponse.SC_FORBIDDEN,"暂无权限，请联系管理员！");
 		return ResponseBo.error("暂无权限，请联系管理员！");
 	}
 

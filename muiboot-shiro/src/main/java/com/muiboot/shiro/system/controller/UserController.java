@@ -26,7 +26,7 @@ import com.muiboot.shiro.system.entity.User;
 import com.muiboot.shiro.system.service.UserService;
 
 @Controller
-public class UserControllerShiro extends ShiroBaseController {
+public class UserController extends ShiroBaseController {
 
 	@Autowired
 	private UserService userService;
