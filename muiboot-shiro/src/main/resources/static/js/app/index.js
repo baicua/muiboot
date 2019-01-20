@@ -1,5 +1,7 @@
-layui.use(['menu','layer','laytpl','dict','form'], function(args) {
+layui.use(['menu','layer','laytpl','dict','form','element',"mrouter"], function(args) {
     "use strict";
+    layui.element.init();
+    var router=layui.mrouter;
     //1.如果是移动端，添加触屏关闭菜单事件
     if ($MB.isMobile() || $MB.isXsScreen()) {
         $(".layui-layout.mb-layout-admin").addClass("shrink");
@@ -9,26 +11,18 @@ layui.use(['menu','layer','laytpl','dict','form'], function(args) {
     }
     //2.hash监听事件
     if (!$MB.hasHistoryApi()) {
-        $(".mb-header .topleft>a").attr("href","#home");
+        //$(".mb-header .topleft>a").attr("href","#home");
         window.onhashchange = function (e) {
             var hash = window.location.hash;
+            hash= hash.replace(/^(\#\!)?\#/, '');
             if (!hash)return;
-            $("#main-content").ajax_load("loading", hash);
+            router.jump(hash);
         }
     } else {
-        $("body").on("click", "a[menu-id]", function () {
-            var $this = $(this);
-            var id = $this.attr("menu-id");
-            var $thisa = $("#navigation").find("a[menu-id='" + id + "']");
-            var url = $thisa.attr("menu-url");
-            if (!!url) {
-                $("#main-content").ajax_load("loading", url);
-            }
-        });
         $(window).on("popstate", function () {
             var href = window.location.href;
             var url = href && href.substring(href.indexOf("sys") + 4);
-            $("#main-content").ajax_load("popstate", url);
+            router.jump(url);
         });
     }
     //3.菜单栏打开关闭点击监听
@@ -47,18 +41,8 @@ layui.use(['menu','layer','laytpl','dict','form'], function(args) {
     });
     //4.加载菜单
     layui.menu.loadmenu(userName);
-
-    //5.绑定个人资料修改事件
-    var tipsIndex=0;
-    $('.topright .user').hover(function () {
-        tipsIndex=layer.tips('点击修改个人资料和密码', '.topright .user', {
-                tips: [3, '#3595CC']
-            });
-        }, function () {
-            layer.close(tipsIndex);
-        });
     });
-    $('.topright').on('click',".user",function () {
+    $('.layui-layout-right').on('click',".user",function () {
         $MB.layerGet({url: ctx + "user/getUser", data: {"userId": userId}}, function (data) {
             if (!data || !data.msg || data.code != 0) {
                 layer.msg('请求数据失败,您选择的用户不存在',{skin: 'mb-warn'});

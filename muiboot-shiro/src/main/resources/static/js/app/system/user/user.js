@@ -43,7 +43,7 @@
     form.on('submit(search)', function ($data) {
         var data = $data.field;
         table.reload('lay-user-list', {
-            where: $.extend({}, data)//设定异步数据接口的额外参数，任意设
+            where: jQuery.extend({}, data)//设定异步数据接口的额外参数，任意设
             , page: {
                 curr: 1 //重新从第 1 页开始
             }

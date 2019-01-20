@@ -61,9 +61,6 @@ input.layui-form-danger[type=radio] + div.layui-form-radio>i{
 .layui-layout-admin .layui-header .layui-nav {
   padding: 0 0px;
 }
-.mb-banner .breadcrumb>a,.mb-banner .breadcrumb>a>i{
-  font-size: 14px;
-}
 .mb-banner.layui-card-header{
   height: 25px;
   line-height: 25px;

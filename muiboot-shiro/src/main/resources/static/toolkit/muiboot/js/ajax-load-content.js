@@ -37,22 +37,8 @@
                 },
                 success: function (r) {
                     try {
-                        //r.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, "")
-                        //var content=$("<div>").append(r).find("div[lay-filter='ajax-content']");
                         var content=$(r).siblings("div[lay-filter='ajax-content']");//包装数据
                         $contentArea.empty().html(content.html());
-                       // var scripts = $r.find("div.ajax-content script");
-                        //$r.find("script").remove();
-                        //var content=$r.find("div.ajax-content");
-/*                        if(!!scripts&&scripts.length>0){
-                            scripts.each(function(index,script){
-                                if($MB.isMobile()&&script.attributes[1]){
-                                    $MB.getScript(script.attributes[1].value,true);
-                                }else {
-                                    $MB.getScript(script.src,true);
-                                }
-                            });
-                        }*/
                         content=null;
                     }catch (e) {
                         console.error("error:"+e.message+";url:"+url);

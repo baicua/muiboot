@@ -1,18 +1,50 @@
-<!-- 头部区域（可配合layui已有的水平导航） -->
-<div class="topleft">
-    <a href="home" title="系统首页"><i></i>MUIBOOT权限管理系统</a>
+<div class="mb-header-logo">
+    <a href="javascript:;" class="mb-header-logo-spread">MUIBOOT权限管理系统</a>
+    <a href="javascript:;" class="mb-header-logo-shrink">MUIBOOT</a>
 </div>
-<div class="topright">
-    <ul>
-        <li><a href="/doc/help/index.html" target="_blank">帮助</a></li>
-        <li><a href="/doc/about/index.html" target="_blank">关于</a></li>
-        <li><a href="javascript:void(0)" id="header-set">设置</a></li>
-        <li><a data-th-href="@{/logout}">退出</a></li>
+<div class="mb-header-bar">
+    <ul class="layui-nav layui-layout-left">
+        <li class="layui-nav-item mb-flexible">
+            <a href="javascript:void(0)">
+                <i class="layui-icon layui-icon-spread-left"></i>
+                <i class="layui-icon layui-icon-shrink-right"></i>
+            </a>
+        </li>
+        <li class="layui-nav-item"><a href="">控制台</a></li>
+        <li class="layui-nav-item"><a href="">商品管理</a></li>
+        <li class="layui-nav-item"><a href="">用户</a></li>
+        <li class="layui-nav-item">
+            <a href="javascript:;">其它系统<span class="layui-nav-more"></span></a>
+            <dl class="layui-nav-child layui-anim layui-anim-upbit">
+                <dd><a href="">邮件管理</a></dd>
+                <dd><a href="">消息管理</a></dd>
+                <dd><a href="">授权管理</a></dd>
+            </dl>
+        </li>
     </ul>
-    <div class="user">
-        <span>[[${user.realName}]]</span>
-        <i>[[${user.groupName}]]</i>
-<!--        <i>消息</i>
-        <b>5</b>-->
-    </div>
+    <ul class="layui-nav layui-layout-right">
+        <li class="layui-nav-item mb-theme-model">
+            <a href="javascript:;">单页面模式</a>
+            <dl class="layui-nav-child">
+                <dd class="mb-s-page"><a href="">单页面模式</a></dd>
+                <dd class="mb-m-page"><a href="">多窗口模式</a></dd>
+            </dl>
+        </li>
+        <li class="layui-nav-item">
+            <a href="javascript:;" class="user_nav">
+                        <span class="mb-icon micon-avatar3 user-avatar">
+                        </span>
+                <ul>
+                    <li class="user-name">[[${user.realName}]]</li>
+                    <li class="group-name">[[${user.groupName}]]</li>
+                </ul>
+                <span class="layui-nav-more"></span></a>
+            <dl class="layui-nav-child layui-anim layui-anim-upbit">
+                <dd class="user"><a href="javascript:;" class="mb-icon micon-profile">基本资料</a></dd>
+                <dd><a href="/doc/help/index.html" target="_blank" class="mb-icon micon-help">使用帮助</a></dd>
+                <dd><a href="" class="mb-icon micon-setting">安全设置</a></dd>
+            </dl>
+        </li>
+        <li class="layui-nav-item"><a data-th-href="@{/logout}" class="mb-icon micon-logout warning">退出</a></li>
+    </ul>
 </div>

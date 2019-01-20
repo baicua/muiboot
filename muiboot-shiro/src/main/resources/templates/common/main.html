@@ -1,16 +1,23 @@
-<div class="mb-card">
-    <div class="layui-card-header mb-banner">
-        <span>
-            <a href="javascript:void(0)" class="flexible">
-                <i class="layui-icon layui-icon-spread-left"></i>
-                <i class="layui-icon layui-icon-shrink-right"></i>
-            </a>
-        </span>
-        <span class="layui-breadcrumb breadcrumb">
-          <a href="">首页</a>
-        </span>
+<div class="layui-tab layui-tab-brief" lay-filter="mb-pane-top" id="mb-pane-top" lay-allowClose="true" lay-unauto>
+    <ul class="layui-tab-title mb-banner" id="mb-banner">
+        <li class="layui-icon layui-icon-home layui-this" lay-id="0">首页</li>
+    </ul>
+    <div class="layui-tab-content mb-content" id="mb-content">
+        <div class="layui-tab-item layui-show"></div>
     </div>
-    <div id="main-content" class="mb-card-body" th:attr="forward=${forward}">
+    <div class="layui-icon admin-tabs-control layui-icon-prev"  id="mb-banner-pre"></div>
+    <div class="layui-icon admin-tabs-control layui-icon-next"  id="mb-banner-next"></div>
+    <div class="layui-icon admin-tabs-control layui-icon-down">
+        <ul class="layui-nav admin-tabs-select" lay-filter="admin-pagetabs-nav">
+            <li class="layui-nav-item" lay-unselect="">
+                <a href="javascript:;"></a>
+                <dl class="layui-nav-child layui-anim-fadein">
+                    <dd ew-event="closeThisTabs" lay-unselect=""><a href="javascript:;">关闭当前标签页</a></dd>
+                    <dd ew-event="closeOtherTabs" lay-unselect=""><a href="javascript:;">关闭其它标签页</a></dd>
+                    <dd ew-event="closeAllTabs" lay-unselect=""><a href="javascript:;">关闭全部标签页</a></dd>
+                </dl>
+            </li>
+        </ul>
     </div>
 </div>
 
