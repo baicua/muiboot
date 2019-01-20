@@ -13,7 +13,6 @@ import java.util.Map;
 * @version 1.0 2018/10/12
 * @author jin
 */
-@Controller
 public  abstract class BaseController {
 	protected  final Logger logger = LoggerFactory.getLogger(this.getClass());
 	protected Map<String, Object> getDataTable(PageInfo<?> pageInfo) {

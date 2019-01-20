@@ -1,4 +1,4 @@
-package com.muiboot.activiti.config;
+package com.muiboot.core.xss;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
