@@ -409,13 +409,7 @@ html {
     line-height: 20px;
     font-size: 12px;
 }
-/*菜单栏收缩*/
-.shrink .mb-footer,.shrink .mb-body{
-    left: 0px;
-}
-.shrink .mb-side-menu{
-    width: 0px;
-}
+
 @media screen and (max-width:992px) {
     .mb-layout-admin .mb-body, .mb-layout-admin .mb-footer{
         left: 0;
@@ -457,10 +451,7 @@ html {
     line-height: 35px;
     color: #717678;
 }
-/*left.html*/
-.lefttop{background:url(../images/lefttop.gif) repeat-x #3d96c9;height:40px;color:#fff;font-size:14px;line-height:40px;    float: left;
-    width: 186px;}
-.lefttop span{margin-left:8px; margin-top:10px;margin-right:8px; background:url(../images/leftico.png) no-repeat; width:20px; height:21px;float:left;}
+
 /*提示层*/
 .layui-layer-msg.mb-warn[type='dialog']{
     min-width: 100px;
