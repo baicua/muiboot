@@ -250,6 +250,7 @@ html {
 .mb-body .layui-tab>.layui-tab-title{
     background-color:#fff;
     padding: 0 80px 0 40px;
+    box-shadow: 0 1px 4px rgba(0,21,41,.08);
 }
 .mb-body .layui-tab.layui-tab-brief>.layui-tab-more li.layui-this:after,.mb-body .layui-tab.layui-tab-brief>.layui-tab-title .layui-this:after {
     border-bottom: 2px solid #3e8ef7;
@@ -259,14 +260,14 @@ html {
     overflow-y: auto;
     position: absolute;
     bottom: 0;
-    top: 30px;
+    top: 33px;
     right: 0;
     left: 0;
     padding: 5px;
 }
 .mb-body .layui-tab-content.mb-content>.layui-tab-item{
     min-height: 450px;
-    background-color:#fff ;
+    background-color:#ffffff ;
 }
 .mb-layout-admin .mb-side-menu {
     position: fixed;
@@ -506,4 +507,10 @@ iframe.mb-frame{
 }
 .layui-table-box{
     min-height: 200px;
+}
+
+.layui-layout-admin .layui-footer{
+    height:24px;
+    line-height:24px;
+    text-align: center;
 }

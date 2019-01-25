@@ -88,12 +88,7 @@
             if(!this.menuUrl||_thisHash===this.menuUrl){
                 return;
             }
-            if($MB.hasHistoryApi()){
-                var push=root_url+model+"/"+this.menuUrl;
-                history.pushState(null,this.menuName||"default",push);
-            }else {
-                window.location.hash="#"+this.menuUrl;
-            }
+            window.location.hash="#"+this.menuUrl;
         },
         _updateMenu:function () {
             if(!this.menuId){
@@ -152,7 +147,7 @@
         Menu._detach();
     }
     function ajaxload(menuUrl,menuName,callback) {
-        var content="页面加载失败";
+        var content='<div style="text-align: center;"><i class="layui-icon layui-icon-404" style="font-size: 23em"></i></div>';
         var loadindex="";
         $.ajax({
             url: menuUrl,
@@ -221,8 +216,7 @@
             router(menuId,hash,menuName);
         },
         bindMenu:function (_menu) {
-            $menuNav=_menu;
-            model=_menu.data("model")||model;
+            model=_menu||model;
         }
     };
     exports('mrouter', obj);

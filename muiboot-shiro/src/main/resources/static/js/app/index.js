@@ -10,20 +10,11 @@ layui.use(['menu','layer','laytpl','dict','form','element',"mrouter"], function(
         });
     }
     //2.hash监听事件
-    if (!$MB.hasHistoryApi()) {
-        //$(".mb-header .topleft>a").attr("href","#home");
-        window.onhashchange = function (e) {
-            var hash = window.location.hash;
-            hash= hash.replace(/^(\#\!)?\#/, '');
-            if (!hash)return;
-            router.jump(hash);
-        }
-    } else {
-        $(window).on("popstate", function () {
-            var href = window.location.href;
-            var url = href && href.substring(href.indexOf("sys") + 4);
-            router.jump(url);
-        });
+    window.onhashchange = function (e) {
+        var hash = window.location.hash;
+        hash= hash.replace(/^(\#\!)?\#/, '');
+        if (!hash)return;
+        router.jump(hash);
     }
     //3.菜单栏打开关闭点击监听
     $(".mb-banner").on("click", 'a.flexible', function () {
