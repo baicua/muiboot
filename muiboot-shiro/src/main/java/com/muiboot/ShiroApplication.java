@@ -15,11 +15,11 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @SpringBootApplication
 @EnableTransactionManagement
 @MapperScan("com.muiboot.**.dao")
-@EnableAutoConfiguration(exclude={
-		JpaRepositoriesAutoConfiguration.class//禁止springboot自动加载持久化bean
-		,org.springframework.boot.autoconfigure.security.SecurityAutoConfiguration.class
-		,org.activiti.spring.boot.SecurityAutoConfiguration.class
-})
+//@EnableAutoConfiguration(exclude={
+//		JpaRepositoriesAutoConfiguration.class//禁止springboot自动加载持久化bean
+//		,org.springframework.boot.autoconfigure.security.SecurityAutoConfiguration.class
+//		,org.activiti.spring.boot.SecurityAutoConfiguration.class
+//})
 public class ShiroApplication {
 	protected static  Logger logger = LoggerFactory.getLogger(ShiroApplication.class);
 	public static void main(String[] args) {

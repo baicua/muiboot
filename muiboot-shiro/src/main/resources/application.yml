@@ -103,7 +103,20 @@ spring:
   activiti:
     check-process-definitions: false
     jpa-enabled: false
-
+  mail:
+    host: smtp.exmail.qq.com
+    port: 465
+    username: manager@baicua.com
+    password: xsVqUP5Vh9vgvYKK
+    properties:
+      mail:
+        smtp:
+          starttls:
+            enable: true
+            required: true
+          auth: true
+          ssl:
+            enable: true
 mybatis:
   config-location: classpath:config/mybatis-config.xml
   # type-aliases扫描路径
