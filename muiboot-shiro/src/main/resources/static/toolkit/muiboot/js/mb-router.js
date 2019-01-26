@@ -20,56 +20,68 @@
     var DOM_CACHE={};
     var NODE=null;
     var LOADT="ajax";
+    var $THIS_LI=null;
+    var $THIS_URL=null;
+    var $THIS_SHOW=null;
+    var $THIS_MENU=null;
+    var ALL_COUNT=1;
+    var HOME=$maincontent.children("div.layui-tab-item").eq(0);
+    var CONTENT_HEIGTH=$maincontent.height();
     var Menu ={
+        _addWindows:function (menuId,menuUrl,menuName) {
+            if(menuId&&!!routers[menuUrl]){
+                //var $length_this=$ul.find("li[lay-id='"+menuId+"']").length;
+                if($THIS_LI.length===0){
+                    //var $length_all=$ul.find("li[lay-id]").length;
+                    if(ALL_COUNT>=10){
+                        layer.msg("最多只能打开10个窗口",{skin: 'mb-warn'});
+                        return false;
+                    }
+                    var content=LOADT==="frame"?"<iframe class='mb-frame' scrolling='no' style='height: "+CONTENT_HEIGTH+"px'></iframe>":"";
+                    element.tabAdd('mb-pane-top', {
+                        title: menuName
+                        ,content: content //支持传入html
+                        ,id: menuId
+                    });
+                    ALL_COUNT=$ul.children("li[lay-id]").length;
+                    //var url=root_url + menuUrl;
+                    //$base=$maincontent.find(">div.layui-show");
+                    $THIS_LI=$ul.children("li[lay-id='"+menuId+"']");
+                    var index=$THIS_LI.index();
+                    $base=$maincontent.children("div.layui-tab-item").eq(index);
+                    if(LOADT==="frame"){
+                        $base.find("iframe").first().attr("src",$THIS_URL);
+                    }else {
+                        ajaxload($THIS_URL,function (content) {
+                            $base.empty().append(content);
+                        })
+                    }
+                }
+            }
+            $THIS_SHOW=$ul.children("li.layui-this");
+            return true;
+        },
         _updateWindows:function () {
             if(!this.menuUrl){
                 return;
             }
             if(!routers[this.menuUrl]){
-                var url=root_url + this.menuUrl;
-                ajaxload(url,this.menuUrl,function (content) {
-                    $base=$maincontent.find(">div.layui-show");
-                    $base.empty().html(content);
+                ajaxload($THIS_URL,function (content) {
+                    HOME.empty().append(content);
                 });
                 return;
             }
             if(!this.menuId){
                 return;
             }
-            var $length_this=$ul.find("li[lay-id='"+this.menuId+"']").length;
-            if($length_this===0){
-                  var $length_all=$ul.find("li[lay-id]").length;
-                 if($length_all>=10){
-                     layer.msg("最多只能打开10个窗口",{skin: 'mb-warn'});
-                     return;
-                 }
-                 var heigth=$maincontent.height();
-                var content=LOADT==="frame"?"<iframe class='mb-frame' scrolling='no' style='height: "+heigth+"px'></iframe>":"";
-                element.tabAdd('mb-pane-top', {
-                    title: this.menuName
-                    ,content: content //支持传入html
-                    ,id: this.menuId
-                });
-                var url=root_url + this.menuUrl;
-                //$base=$maincontent.find(">div.layui-show");
-                var index=$ul.find("li[lay-id='"+this.menuId+"']").index();
-                $base=$maincontent.find(">div.layui-tab-item").eq(index);
-                if(LOADT==="frame"){
-                    $base.find("iframe").first().attr("src",url);
-                }else {
-                    ajaxload(url,this.menuName,function (content) {
-                        $base.empty().html(content);
-                    })
-                }
-            }
-            var $thisWindow=$mbtop.find("ul.mb-banner li.layui-this");
-            if(!($thisWindow.attr("lay-id")==parseInt(this.menuId))){
+            //var $thisWindow=$mbtop.find("ul.mb-banner li.layui-this");
+            if($THIS_SHOW&&!($THIS_SHOW.attr("lay-id")==parseInt(this.menuId))){
                 element.tabChange('mb-pane-top', this.menuId);
-                var $add=$mbtop.find("li[lay-id='"+this.menuId+"']");
+                //var $add=$mbtop.find("li[lay-id='"+this.menuId+"']");
                 var pane_l=$mbtop.offset().left;
                 var next_l=$next.offset().left;
-                var add_w=$add.outerWidth();
-                var add_l=$add.offset().left;
+                var add_w=$THIS_LI.outerWidth();
+                var add_l=$THIS_LI.offset().left;
                 var ul_offset=$ul.offset();
                 if(next_l<add_l+add_w){
                     ul_offset.left+=next_l-(add_l+add_w);
@@ -100,7 +112,9 @@
                 $menuNav.find(".layui-this").removeClass("layui-this");
                 _thisMenu.parent().addClass("layui-this");
                 _thisMenu.parents("li").addClass("layui-nav-itemed");
+                _thisMenu=null;
             }
+            $menu=null;
         },
         _detach:function(){
             //var $detach=$maincontent.children(".layui-tab-item:not(.layui-show,.detach)");
@@ -108,26 +122,42 @@
                 var pre=routers[this.pre];
                 var preLoadT=pre&&pre["attributes"]["loadType"]||"ajax";
                 var menuId=pre&&pre["id"]||0;
-                var index=$ul.find("li[lay-id='"+menuId+"']").index();
-                var $detach=$maincontent.find(">div.layui-tab-item").eq(index);
+                var index=$ul.children("li[lay-id='"+menuId+"']").index();
+                var $detach=$maincontent.children("div.layui-tab-item").eq(index);
                 if($detach.hasClass("detach"))return;
                 if(preLoadT==="ajax"){
                     DOM_CACHE[this.pre]=$detach.children().detach();
                 }
                 $detach.addClass("detach");
-                var $this=$maincontent.find(".layui-show");
+                var $this=$maincontent.children("div.layui-tab-item.layui-show");
                 if($this.hasClass("detach")){
                     if(LOADT==="ajax"){
                         $this.append(DOM_CACHE[this.cur]);
                         table.resize();
+                    }else {
+                        var iframe=$this.children("iframe").first();
+                        if (iframe.attr("src")!=$THIS_URL){
+                            $this.children("iframe").first().attr("src",$THIS_URL);
+                        }
                     }
                     $this.removeClass("detach");
                 }
-
+                $this=null;
+                $detach=null;
             }
         }
     };
     function router(menuId,menuUrl,menuName) {
+        $THIS_LI=$ul.find("li[lay-id='"+menuId+"']");
+        $THIS_MENU=$menuNav.find("a[lay-id='"+menuId+"']");
+        $THIS_URL=root_url + menuUrl;
+        var hash = window.location.hash.replace(/^(\#\!)?\#/, '');
+        if($THIS_LI.hasClass("layui-this")&&$THIS_MENU.parent().hasClass("layui-this")&&hash==menuUrl){
+            return;
+        }
+        if(!Menu._addWindows(menuId,menuUrl,menuName)){
+            return;
+        };
         NODE=routers[menuUrl];
         LOADT=NODE&&NODE["attributes"]["loadType"]||"ajax";
         if(menuUrl!=Menu.cur){
@@ -137,7 +167,7 @@
         Menu.menuId=menuId;
         Menu.menuUrl=menuUrl;
         Menu.menuName=menuName;
-        //修改（添加）窗口状态
+        //修改窗口状态
         Menu._updateWindows();
         //修改浏览器hash
         Menu._updateLocalHash();
@@ -146,18 +176,18 @@
         //缓存DOM
         Menu._detach();
     }
-    function ajaxload(menuUrl,menuName,callback) {
+    function ajaxload(menuUrl,callback) {
         var content='<div style="text-align: center;"><i class="layui-icon layui-icon-404" style="font-size: 23em"></i></div>';
         var loadindex="";
         $.ajax({
             url: menuUrl,
             dataType: "html",
             beforeSend:function (r) {
-                loadindex=layer.load(4,{shade: [0.01,'#fff']})
+                loadindex=layer.load(4,{shade: [0.6,'#e6f7ff']})
             },
             success: function (r) {
                 try {
-                    content = $(r).siblings("div[lay-filter='ajax-content']");//包装数据
+                    content = r.match(/<body(([\s\S])*?)<\/body>/g);//包装数据
                 } catch (e) {
                     console.error("error:" + e.message + ";url:" + menuUrl);
                     return true;
@@ -176,7 +206,11 @@
             },
             complete:function (r) {
                 layer.close(loadindex);
-                callback(content);
+                //fragment.innerHTML = content;
+                //content=null;
+                setTimeout(function () {
+                    callback(content);
+                },300);
             }
         });
     };
@@ -192,11 +226,20 @@
     element.on('tabDelete(mb-pane-top)', function(data){
         var menuId=$(this).parent().attr("lay-id");
         var _thisMenu=$menuNav.find("a[lay-id='"+menuId+"']");
-        var _CAHCE=DOM_CACHE[_thisMenu.attr("menu-url")];
+        var url=_thisMenu.attr("menu-url");
+        var _CAHCE=DOM_CACHE[url];
         if(_CAHCE){
             _CAHCE.remove();
+            delete (_CAHCE[0]);
+            $THIS_LI=null;
+            $THIS_URL=null;
+            $THIS_SHOW=null;
         }
-        delete DOM_CACHE[_thisMenu.attr("menu-url")];
+        _CAHCE=null;
+        this.parentNode.removeChild(this);
+        delete(this);
+        ALL_COUNT=$ul.find("li[lay-id]").length;
+        delete DOM_CACHE[url];
     });
     var obj = {
         router: function (menuId,menuUrl,menuName) {

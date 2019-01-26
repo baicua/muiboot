@@ -1,24 +1,13 @@
 ﻿@charset "utf-8";
 /*滚动条设置*/
 html {
-    -ms-overflow-style: scrollbar;
+    -ms-overflow-style: auto;
     -webkit-tap-highlight-color: transparent;
 }
-::-webkit-scrollbar
-{
-    width: 10px;
-    height: 10px;
-}
-::-webkit-scrollbar-track
-{
-    /*border-radius: 1px;*/
-}
-::-webkit-scrollbar-thumb
-{
-    /*border-radius: 1px;*/
-    background: rgba(0,0,0,.1);
-}
-::-webkit-scrollbar{width:2px;background:#f5f5f5;/*border-radius:4px*/}::-webkit-scrollbar-track,::-webkit-scrollbar-thumb{border-radius:4px}::-webkit-scrollbar-thumb{min-height:20px;background-clip:content-box;box-shadow:0 0 0 5px #e0e0e0 inset}::-webkit-scrollbar-corner{background:transparent}.hotelInfoBox::-webkit-scrollbar{width:8px;background:#eee;border-radius:5px}::-webkit-scrollbar-track,::-webkit-scrollbar-thumb{border-radius:5px}::-webkit-scrollbar-thumb{min-height:20px;background-clip:content-box;box-shadow:0 0 0 5px rgba(0, 0, 0, .1) inset}::-webkit-scrollbar-corner{background:transparent}.city_mdd_depa,.city_mdd_dest,.city_mdd_hotel{display:none}.scenic_list::-webkit-scrollbar{width:8px;background-color:rgba(155,155,155,0.1);border-radius:5px}.scenic_list::-webkit-scrollbar-track,::-webkit-scrollbar-thumb{border-radius:5px}.scenic_list::-webkit-scrollbar-thumb{min-height:20px;background-clip:content-box;box-shadow:0 0 0 5px rgba(0,0,0,.1) inset}.scenic_list::-webkit-scrollbar-corner{background:transparent}
+::-webkit-scrollbar{width:2px;background:#f5f5f5;/*border-radius:4px*/}
+::-webkit-scrollbar-track,::-webkit-scrollbar-thumb{border-radius:4px}
+::-webkit-scrollbar-thumb{min-height:20px;background-clip:content-box;box-shadow:0 0 0 5px #e0e0e0 inset}
+::-webkit-scrollbar-corner{background:transparent}
 
 .mb-header{
     position: absolute;
@@ -31,7 +20,10 @@ html {
     display: flex;
     height: 50px;
     padding-left: 186px;
-    background-color:#3e8ef7;
+    color: rgb(255, 255, 255);
+    padding-right: 5px;
+    background: url(../images/header.jpeg) 0% 0% / cover no-repeat rgb(11, 18, 45) !important;
+    background: url(../images/header.jpeg) 0% 0% no-repeat;
     -webkit-transition: padding-left .3s;
     transition: padding-left .3s;
     -webkit-box-shadow: 0 0 8px #000;
@@ -44,7 +36,6 @@ html {
     left: 0;
     width: 186px;
     height: 50px;
-    background-color: #3e8ef7;
     -webkit-transition: width .3s;
     transition: width .3s;
 }
@@ -95,7 +86,7 @@ html {
 }
 .mb-header .mb-header-bar .layui-nav{
     border-radius:0px;
-    background-color:#3e8ef7;
+    background-color:transparent;
     padding: 0px;
 }
 .mb-header .mb-header-bar .layui-nav.layui-layout-left{
@@ -185,7 +176,10 @@ html {
 .mb-body .admin-tabs-control:hover{
     background-color: #eaecee;
 }
-
+.mb-banner{
+    border-bottom: 1px #3e8ef7;
+    border-bottom-style: solid;
+}
 .mb-theme-model>a{
      line-height: 26px;
      border: 1px solid;
@@ -264,10 +258,13 @@ html {
     right: 0;
     left: 0;
     padding: 5px;
+    border: none;
+    background: url(../images/container.png) no-repeat;
+    background-size: 100% 1149px;
 }
 .mb-body .layui-tab-content.mb-content>.layui-tab-item{
     min-height: 450px;
-    background-color:#ffffff ;
+    /*background-color:#ffffff ;*/
 }
 .mb-layout-admin .mb-side-menu {
     position: fixed;
@@ -326,10 +323,10 @@ html {
     border-style: solid;
     border-color: #eeeeee;
 }
-.mb-side-menu .layui-nav-tree .layui-nav-child dd.layui-this, .mb-side-menu .layui-nav-tree .layui-nav-child dd.layui-this a,.mb-side-menu .layui-nav-tree .layui-this,.mb-side-menu .layui-nav-tree .layui-this>a{
-    background-color: #f8f8f8;
+/*.mb-side-menu .layui-nav-tree .layui-nav-child dd.layui-this, .mb-side-menu .layui-nav-tree .layui-nav-child dd.layui-this a,.mb-side-menu .layui-nav-tree .layui-this,.mb-side-menu .layui-nav-tree .layui-this>a{
+    background-color: #e6f7ff;
     color: #3e8ef7;
-}
+}*/
 .mb-side-menu .layui-nav-tree .layui-this>a:hover ,.mb-side-menu .layui-nav-tree a:hover,.mb-side-menu .layui-nav-tree .layui-nav-itemed a:hover{
     background-color: #3e8ef7;
     color: #ffffff;
@@ -337,10 +334,8 @@ html {
 .mb-side-menu .layui-nav-tree .layui-nav-child dd.layui-this a{
     border: solid #3e8ef7;
     border-width:0 2px 0 0;
-    background-color: #fff;
-    font-weight: bold;
-    webkit-box-shadow: -1px 0px 3px 0px #3e8ef7 inset ;
-    box-shadow:  -1px 0px 3px 0px #3e8ef7 inset ;
+    background-color: #e6f7ff;
+    color: #3e8ef7;
 }
 .mb-side-menu .layui-nav-tree .layui-nav-bar{
     background-color: #3e8ef7;

@@ -34,9 +34,9 @@
                     }
                 });
                 router.bindMenu(data.model);
-                $(".loading-shade").addClass("loaded");
                 var home = window.location.hash.replace(/^(\#\!)?\#/, '');
                 router.jump(home||"home");
+                $(".loading-shade").addClass("loaded");
 
             } else {
                 layer.msg('获取菜单失败！',{skin: 'mb-warn'});
