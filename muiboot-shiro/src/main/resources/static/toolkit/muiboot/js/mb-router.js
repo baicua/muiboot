@@ -29,6 +29,9 @@
     var CONTENT_HEIGTH=$maincontent.height();
     var Menu ={
         _addWindows:function (menuId,menuUrl,menuName) {
+            if(!Menu._changes.windows){
+                return true;
+            }
             if(menuId&&!!routers[menuUrl]){
                 //var $length_this=$ul.find("li[lay-id='"+menuId+"']").length;
                 if($THIS_LI.length===0){
@@ -62,6 +65,9 @@
             return true;
         },
         _updateWindows:function () {
+            if(!Menu._changes.windows){
+                return;
+            }
             if(!this.menuUrl){
                 return;
             }
@@ -95,25 +101,26 @@
 
         },
         _updateLocalHash:function () {
-            var _thisHash=window.location.hash;
-            _thisHash= _thisHash.replace(/^(\#\!)?\#/, '');
-            if(!this.menuUrl||_thisHash===this.menuUrl){
+            if(!Menu._changes.hash){
                 return;
             }
+            var _thisHash=window.location.hash;
+            _thisHash= _thisHash.replace(/^(\#\!)?\#/, '');
             window.location.hash="#"+this.menuUrl;
         },
         _updateMenu:function () {
+            if(!Menu._changes.menu){
+                return;
+            }
             if(!this.menuId){
                 return;
             }
             var $menu=$menuNav.find(".layui-this");
-            if(!($menu.next("a").attr("lay-id")==parseInt(this.menuId))){
-                var _thisMenu=$menuNav.find("a[lay-id='"+this.menuId+"']");
-                $menuNav.find(".layui-this").removeClass("layui-this");
-                _thisMenu.parent().addClass("layui-this");
-                _thisMenu.parents("li").addClass("layui-nav-itemed");
-                _thisMenu=null;
-            }
+            var _thisMenu=$menuNav.find("a[lay-id='"+this.menuId+"']");
+            $menuNav.find(".layui-this").removeClass("layui-this");
+            _thisMenu.parent().addClass("layui-this");
+            _thisMenu.parents("li").addClass("layui-nav-itemed");
+            _thisMenu=null;
             $menu=null;
         },
         _detach:function(){
@@ -145,14 +152,18 @@
                 $this=null;
                 $detach=null;
             }
-        }
+        },
+        _changes:{windows:true,hash:true,menu:true}
     };
     function router(menuId,menuUrl,menuName) {
         $THIS_LI=$ul.find("li[lay-id='"+menuId+"']");
         $THIS_MENU=$menuNav.find("a[lay-id='"+menuId+"']");
         $THIS_URL=root_url + menuUrl;
         var hash = window.location.hash.replace(/^(\#\!)?\#/, '');
-        if($THIS_LI.hasClass("layui-this")&&$THIS_MENU.parent().hasClass("layui-this")&&hash==menuUrl){
+        Menu._changes.windows=(!$THIS_LI)||!$THIS_LI.hasClass("layui-this");
+        Menu._changes.menu=!$THIS_MENU.parent().hasClass("layui-this");
+        Menu._changes.hash=!(hash==menuUrl);
+        if(!Menu._changes.windows&&!Menu._changes.menu&&!Menu._changes.hash){
             return;
         }
         if(!Menu._addWindows(menuId,menuUrl,menuName)){
