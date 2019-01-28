@@ -1,18 +1,19 @@
 /**
  * 菜单工具
  */
-;layui.define(['jquery','element',"mrouter"], function (exports) {
+;layui.define(['jquery','element',"mrouter",'layer'], function (exports) {
     "use strict";
     var $ = layui.jquery;
     var element=layui.element;
     var router=layui.mrouter;
+    var layer=layui.layer;
     var url="/session/getUserMenu",has=$MB.hasHistoryApi();
     function loadmenu(usename) {
         var $menu=$("#sys-menu-tree");
         $MB.layerGet({url:url,data:{ "userName": usename},cache:true,noloading:true},function (r) {
             if (r.code == 0) {
                 var data = r.msg;
-                $menu.data("model",data.model);
+                //$menu.data("model",data.model);
                 $menu.empty();
                 if(!data||!data.children||data.children.length<1){//没有任何权限
                     element.tabAdd('mb-pane-top', {
@@ -32,12 +33,11 @@
                         //router.router(menuId,menuUrl,menuName);
                     }
                 });
-                router.bindMenu($menu);
+                router.bindMenu(data.model);
+                var home = window.location.hash.replace(/^(\#\!)?\#/, '');
+                router.jump(home||"home");
                 $(".loading-shade").addClass("loaded");
-                if(routerUrl){
-                    router.jump(routerUrl);
-                    //router.jump(routerUrl);
-                }
+
             } else {
                 layer.msg('获取菜单失败！',{skin: 'mb-warn'});
             }

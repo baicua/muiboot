@@ -8,7 +8,9 @@
 <link rel="stylesheet" data-th-href="@{/toolkit/layui/css/layui.css}">
 <link rel="stylesheet" data-th-href="@{/css/mb.css}">
 <link rel="stylesheet" data-th-href="@{/css/dic.css}">
-<link rel="stylesheet" data-th-href="@{/css/app.css}">
+<link rel="stylesheet" data-th-href="@{/css/mb.layui.css}" media="all"/>
+<link rel="stylesheet" data-th-href="@{/css/mb.font.css}" media="all"/>
+<link rel="stylesheet" data-th-href="@{/css/mb.button.css}" media="all"/>
 <link rel="stylesheet" data-th-href="@{/toolkit/theme/css/theme.css}">
 <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
 <!--[if lt IE 9]>
@@ -22,3 +24,13 @@
 <script data-th-src="@{/js/jquery.min.js}"></script>
 <!-- <![endif]-->
 <script data-th-inline="javascript">var ctx = [[@{/}]];</script>
+<script data-th-src="@{/toolkit/layui/layui.js}"></script>
+<script data-th-src="@{/toolkit/muiboot/js/common.js}"></script>
+<script data-th-inline="javascript">
+    layui.extend({
+        dict: '/toolkit/muiboot/js/ajax-load-dict' // {/}的意思即代表采用自有路径，即不跟随 base 路径
+        ,treeTable: '/toolkit/muiboot/js/ajax-load-treetable'
+        ,menu: '/toolkit/muiboot/js/ajax-load-menu'
+        ,mrouter: '/toolkit/muiboot/js/mb-router'
+    });
+</script>
