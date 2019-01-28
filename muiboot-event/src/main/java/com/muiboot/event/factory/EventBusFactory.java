@@ -1,8 +1,7 @@
 package com.muiboot.event.factory;
 
 import com.google.common.eventbus.EventBus;
-import org.springframework.stereotype.Component;
-
+import com.muiboot.event.bus.NullBus;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,7 +13,11 @@ import java.util.Map;
 public class EventBusFactory {
     private static Map<Class, EventBus> eventBusMap = new HashMap();
 
+    static {
+        eventBusMap.put(NullBus.class,new NullBus());
+    }
     public EventBusFactory() {
+
     }
 
     public static void register(Class clazz,EventBus bus) {
@@ -30,7 +33,7 @@ public class EventBusFactory {
     public static EventBus get(Class clazz) {
         EventBus eventBus = eventBusMap.get(clazz);
         if(eventBus == null) {
-            throw new NullPointerException("eventBus is null");
+            return eventBusMap.get(NullBus.class);
         }
         return eventBus;
     }

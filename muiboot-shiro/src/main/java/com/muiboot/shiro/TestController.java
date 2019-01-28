@@ -21,7 +21,7 @@ public class TestController extends ShiroBaseController {
     public void sendEmail(){
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom("manager@baicua.com");
-        message.setTo("756310824@qq.com");
+        message.setTo("511637001@qq.com");
         message.setSubject("主题：徐通傻逼");
         message.setText("徐通傻逼");
 
