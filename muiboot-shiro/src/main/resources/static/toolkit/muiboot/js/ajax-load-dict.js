@@ -94,8 +94,9 @@
             }else if ($this.hasClass('dic-map-url')){
                 renderDicUrl($this);
             }
-
-        })
+            $this=null;
+        });
+        $select=null;
     };
 
     function renderDicMap($this) {
@@ -135,10 +136,13 @@
                     ,'readonly',
                     disabled?"disabled":""
                     ,(!placeholder?"":"placeholder="+placeholder)
-                    ,' class="mb-input dic-tree-input">'].join(" ");
-                _ul =$('<ul id="'+id+'" class="layui-box layui-tree dic-tree-ul"></ul>');
-                _cancel = $('<i class="layui-icon layui-icon-close-fill  mb-close dic-tree-close"></i>');
-                $this.after(_ul).after(_cancel).after(_input),$this.hide();
+                    ,' class="layui-input dic-tree-input">'].join(" ");
+                _ul ='<ul id="'+id+'" class="layui-box layui-tree dic-tree-ul layui-anim layui-anim-upbit"></ul>';
+                _cancel = '<i class="layui-icon layui-icon-close-fill  mb-close dic-tree-close"></i>';
+                var thisTree=[_input,_cancel,_ul].join(" ");
+                $this.hide();
+                $this.after(thisTree);
+                //$this.after(_ul).after(_cancel).after(_input),$this.hide();
                 $input=$this.siblings(".dic-tree-input");
                 $ul=$this.siblings(".dic-tree-ul");
                 $cancel=$this.siblings(".dic-tree-close");

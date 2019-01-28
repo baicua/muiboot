@@ -1,0 +1,101 @@
+/*
+layui样式重写
+*/
+/*表格*/
+.layui-table-body .layui-none{
+    line-height: 26px;
+    padding: 15px;
+    text-align: center;
+    color: #999;
+}
+.layui-table-body .layui-none:before{
+    font-family: "mb-icon" !important;
+    font-size: 50px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    display: block;
+    padding: 10px;
+    color: #c1c1c1;
+    content: "\e692";
+}
+
+
+
+/*输入框样式美化*/
+.layui-input,.layui-input.layui-unselect{
+    font-variant: tabular-nums;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0;
+    padding-left: 10px;
+    list-style: none;
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    height: 25px;
+    line-height: 25px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: rgba(0,0,0,0.65);
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #d9d9d9;
+    border-radius: 2px;
+    -webkit-transition: all .3s;
+    transition: all .3s;
+}
+.layui-input:hover,.layui-input.layui-unselect:hover{
+    border-color: #40a9ff !important;
+    border-right-width: 1px !important;
+}
+.layui-input:focus,.layui-input.layui-unselect:focus{
+    border-color: #40a9ff !important;
+    outline: 0;
+    -webkit-box-shadow: 0 0 0 2px rgba(24,144,255,0.2);
+    box-shadow: 0 0 0 2px rgba(24,144,255,0.2);
+    border-right-width: 1px !important;
+}
+.layui-form-label[lable-verify="required"]:before{
+    color: red;
+    content: "*";
+}
+input.layui-form-danger[type=radio] + div.layui-form-radio{
+    color: #FF5722!important
+}
+input.layui-form-danger[type=radio] + div.layui-form-radio>i{
+    color: #FF5722!important
+}
+/*下拉*/
+.layui-form-selectup dl{
+    bottom: 28px;
+}
+.layui-form-select dl{
+    top: 28px;
+    border:0;
+    -webkit-box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    white-space: nowrap;
+}
+.layui-form-select dl dd, .layui-form-select dl dt{
+    line-height: 26px;
+}
+/* 表单验证失败红色边框效果，阴影效果 */
+.layui-form-danger, .layui-form-danger:focus, .layui-form-danger:hover{
+    border-color: rgba(255,87,34, .8) !important;
+    -webkit-box-shadow: 0 0 5px rgba(255,87,34, .5);
+    -moz-box-shadow: 0 0 5px rgba(255,87,34, .5);
+    box-shadow: 0 0 5px rgba(255,87,34, .5);
+}
+
+.layui-form-switch{
+    margin-top: 0px;
+}
+.layui-form-select dl dd.layui-this{
+
+}
+
+/*弹窗*/
+.layui-layer-page .layui-layer-content{
+    overflow: visible !important;
+}

@@ -12,6 +12,9 @@ body{
 .hidden{
     display: none;
 }
+input::-webkit-input-placeholder{
+    color: #bfbfbf;
+}
 /*文本框修改*/
 .layui-input, .layui-select, .layui-textarea {
     height: 25px;
@@ -178,4 +181,15 @@ body{
 /*多选按钮样式*/
 .mb-card-select .layui-form-checkbox>span{
     width: 75px;
+}
+
+/*弹窗样式*/
+.mb-layer-rim{
+    border: 6px solid #8D8D8D;
+    border: 6px solid rgba(0,0,0,.3);
+    border-radius: 5px;
+    box-shadow: none;
+}
+.mb-layer-rim .layui-layer-content>form{
+    padding: 10px;
 }
