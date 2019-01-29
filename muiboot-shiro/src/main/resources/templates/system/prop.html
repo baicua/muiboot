@@ -2,8 +2,6 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.w3.org/1999/xhtml">
 <head data-th-include="common/head"></head>
 <body class="layui-layout-body layui-table-body">
-
-<hr>
 <div class="ajax-content" lay-filter="ajax-content">
     <div class="layui-row">
         <div class="layui-col-md3 layui-col-xs3">
@@ -21,36 +19,33 @@
     </div>
     <!--模板-->
     <script id="propAdd" type="text/html">
-        <fieldset class="layui-elem-field layui-anim layui-anim-up">
-            <legend>-----</legend>
-            <form class="layui-form" action="">
-                <div class="layui-row">
-                    <div class="layui-col-md12 layui-col-xs12">
-                        <label class="layui-form-label" lable-verify="required"><span>键:</span></label>
-                        <div class="layui-input-block">
-                            <input type="text" lay-verify="required" name="propKey" value="{{d.propKey||''}}"placeholder="请输入配置键名" class="layui-input">
-                            <input type="text" name="propId"value="{{d.propId||''}}" hidden>
-                        </div>
+        <form class="layui-form" action="">
+            <div class="layui-row">
+                <div class="layui-col-md12 layui-col-xs12">
+                    <label class="layui-form-label" lable-verify="required"><span>键:</span></label>
+                    <div class="layui-input-block">
+                        <input type="text" lay-verify="required" name="propKey" value="{{d.propKey||''}}"placeholder="请输入配置键名" class="layui-input">
+                        <input type="text" name="propId"value="{{d.propId||''}}" hidden>
                     </div>
                 </div>
-                <div class="layui-row">
-                    <div class="layui-col-md12 layui-col-xs12">
-                        <label class="layui-form-label" lable-verify="required"><span>值:</span></label>
-                        <div class="layui-input-block">
-                            <input type="text" lay-verify="required" name="propValue" value="{{d.propValue||''}}"placeholder="请输入配置键值" class="layui-input">
-                        </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col-md12 layui-col-xs12">
+                    <label class="layui-form-label" lable-verify="required"><span>值:</span></label>
+                    <div class="layui-input-block">
+                        <input type="text" lay-verify="required" name="propValue" value="{{d.propValue||''}}"placeholder="请输入配置键值" class="layui-input">
                     </div>
                 </div>
-                <div class="layui-row">
-                    <div class="layui-col-md12 layui-col-xs12">
-                        <label class="layui-form-label">备注:</label>
-                        <div class="layui-input-block">
-                            <textarea  name="propMemo" value="{{d.propMemo||''}}"placeholder="请输入备注" class="layui-textarea">{{d.propMemo||''}}</textarea>
-                        </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col-md12 layui-col-xs12">
+                    <label class="layui-form-label">备注:</label>
+                    <div class="layui-input-block">
+                        <textarea  name="propMemo" value="{{d.propMemo||''}}"placeholder="请输入备注" class="layui-textarea">{{d.propMemo||''}}</textarea>
                     </div>
                 </div>
-            </form>
-        </fieldset>
+            </div>
+        </form>
     </script>
     <script data-th-src="@{/js/app/system/prop/prop.js}" ></script>
 </div>
