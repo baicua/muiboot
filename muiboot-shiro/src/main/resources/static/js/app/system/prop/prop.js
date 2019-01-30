@@ -34,7 +34,7 @@
                     openIndex = layer.open({
                         title: '<i class="layui-icon layui-icon-app"></i>&nbsp; '+title,
                         type: 1,
-                        skin: 'layui-layer-rim', //加上边框
+                        skin: 'mb-layer-rim', //加上边框
                         area: ['480px', '350px'], //宽高
                         content: html,
                         btn: ['保存', '关闭'],

@@ -591,7 +591,7 @@ layui.define('layer', function(exports){
         layui.each(verifyElem, function(_, item){
             var othis = $(this)
                 ,vers = othis.attr('lay-verify').split('|')
-                ,verType = othis.attr('lay-verType') //提示方式
+                ,verType = othis.attr('lay-verType')||"tips" //提示方式
                 ,value = othis.val();
 
             othis.removeClass(DANGER);

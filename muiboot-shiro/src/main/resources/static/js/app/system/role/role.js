@@ -100,7 +100,7 @@
                     openIndex = layer.open({
                         title: '<i class="layui-icon layui-icon-app"></i>&nbsp; '+title,
                         type: 1,
-                        skin: 'layui-layer-rim', //加上边框
+                        skin: 'mb-layer-rim', //加上边框
                         area: ['640px', '480px'], //宽高
                         content: html,
                         btn: ['保存', '关闭'],
@@ -156,7 +156,7 @@
                     openIndex = layer.open({
                         title: '<i class="layui-icon layui-icon-app"></i>&nbsp; '+"用户授权("+roleNames.join("、")+")",
                         type: 1,
-                        skin: 'layui-layer-rim', //加上边框
+                        skin: 'mb-layer-rim', //加上边框
                         area: ['640px', '480px'], //宽高
                         content: html,
                         btn: ['保存', '关闭'],
@@ -189,7 +189,7 @@
             layer.open({
                 title: '<i class="layui-icon layui-icon-app"></i>&nbsp; '+"用户列表",
                 type: 1,
-                skin: 'layui-layer-rim', //加上边框
+                skin: 'mb-layer-rim', //加上边框
                 area: ['640px', '400px'], //宽高
                 content: '<div class="layui-row"><table class="layui-hide" id="role-user-list"></table> </div>',
                 success: function (layero, index) {
