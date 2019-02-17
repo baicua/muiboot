@@ -56,6 +56,9 @@ layui样式重写
     box-shadow: 0 0 0 2px rgba(24,144,255,0.2);
     border-right-width: 1px !important;
 }
+.layui-input[disabled]{
+    border-width: 0px !important;
+}
 .layui-form-label[lable-verify="required"]:before{
     color: red;
     content: "*";
