@@ -236,6 +236,9 @@
     });
     element.on('tabDelete(mb-pane-top)', function(data){
         var menuId=$(this).parent().attr("lay-id");
+        if(!menuId){
+            return;
+        }
         var _thisMenu=$menuNav.find("a[lay-id='"+menuId+"']");
         var url=_thisMenu.attr("menu-url");
         var _CAHCE=DOM_CACHE[url];
@@ -251,6 +254,29 @@
         delete(this);
         ALL_COUNT=$ul.find("li[lay-id]").length;
         delete DOM_CACHE[url];
+    });
+    element.on('nav(admin-pagetabs-nav)', function(elem){
+        if(!$THIS_LI)return;
+        var layId= $THIS_LI.attr("lay-id");
+        if (layId==0)return;
+        var event=elem.parent().attr("ew-event");
+        if('closeThisTabs'===event){
+            element.tabDelete("mb-pane-top", layId);
+        }else if('closeOtherTabs'===event){
+            layui.each($ul.children("li"), function(i, item){
+                var itemlayId= item.getAttribute("lay-id");
+                if(itemlayId!=0&&itemlayId!=layId){
+                    element.tabDelete("mb-pane-top", itemlayId);
+                }
+            });
+        }else if('closeAllTabs'===event){
+            layui.each($ul.children("li"), function(i, item){
+                var itemlayId= item.getAttribute("lay-id");
+                if(itemlayId!=0){
+                    element.tabDelete("mb-pane-top", itemlayId);
+                }
+            });
+        }
     });
     var obj = {
         router: function (menuId,menuUrl,menuName) {
