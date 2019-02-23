@@ -124,6 +124,7 @@
         var id="dic-tree"+loadedCount,key = $this.attr("dic-map"),value=$this.val(),map =key&&get(key)||"";
         var verify=$this.attr("lay-verify"),placeholder=$this.attr("placeholder"),disabled=$this.attr("disabled");
         var isInit = $this.hasClass("dic-finish");
+        $this.removeAttr("lay-verify");
         if(!!map&&map.children){
             var $input,$ul,$cancel,_input,_ul,_cancel;
             if(isInit){

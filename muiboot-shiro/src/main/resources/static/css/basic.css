@@ -185,6 +185,28 @@ a.btn-Login, a.btn-register {
  }
 a.btn-Login.loading {
 	box-shadow: 0px 0px 10px 5px #caddc7;
+	cursor: default;
+	-ms-pointer-events: none;
+	pointer-events: none;
+	color: transparent!important;
+	position: relative;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+a.btn-Login.loading::before {
+	content: "";
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	margin: auto;
+	background: url(../img/loading-white.png),linear-gradient(transparent,transparent);
+	background-size: 100%;
+	-webkit-animation: spin .8s linear infinite;
+	animation: spin .8s linear infinite;
 }
 a.btn-Login {
 	color: #3598db;
@@ -384,5 +406,24 @@ a.btn-register:hover,a.btn-Login:hover {
 @media screen and (max-width: 992px) {
 	.login-topBg {
 		background-position: right;
+	}
+}
+@-webkit-keyframes spin {
+	from {
+		-webkit-transform: rotate(0)
+	}
+
+	to {
+		-webkit-transform: rotate(-360deg)
+	}
+}
+
+@keyframes spin {
+	from {
+		transform: rotate(0)
+	}
+
+	to {
+		transform: rotate(-360deg)
 	}
 }
