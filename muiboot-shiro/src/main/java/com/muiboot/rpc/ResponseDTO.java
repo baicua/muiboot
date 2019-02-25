@@ -12,6 +12,7 @@ public class ResponseDTO<T> extends ResponseEntity<T> implements Serializable {
     private int threads;
     public ResponseDTO() {
         this( HttpStatus.OK);
+        threads=AbstractService.threads_size.get();
     }
 
     public ResponseDTO(T t) {
@@ -65,7 +66,7 @@ public class ResponseDTO<T> extends ResponseEntity<T> implements Serializable {
     }
     @XmlElement
     public int getThreads() {
-        return AbstractService.threads_size.get();
+        return threads;
     }
     @XmlElement
     public T getData() {

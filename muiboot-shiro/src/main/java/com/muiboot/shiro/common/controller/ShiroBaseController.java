@@ -21,8 +21,6 @@ import org.slf4j.LoggerFactory;
 * @author jin
 */
 public  abstract class ShiroBaseController extends BaseController {
-	protected  final Logger logger = LoggerFactory.getLogger(this.getClass());
-
 	public static Subject getSubject() {
 		return SecurityUtils.getSubject();
 	}

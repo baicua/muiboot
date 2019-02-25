@@ -69,7 +69,7 @@ spring:
         # 添加过滤规则
         url-pattern: /*
         # 忽略过滤的格式
-        exclusions: '*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*'
+        exclusions: '*.js,*.gif,*.jpg,*.jpeg,*.png,*.css,*.ico,/druid/*'
         session-stat-enable: true
 
       # StatViewServlet配置
@@ -143,9 +143,3 @@ pagehelper:
 logging:
   level: error
   config: classpath:logback-spring.xml
-#监控
-management:
-  security:
-    enabled: false
-  context-path: /admin
-#management.port=8081
