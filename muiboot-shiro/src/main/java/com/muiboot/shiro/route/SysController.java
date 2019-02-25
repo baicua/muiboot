@@ -26,13 +26,6 @@ public class SysController extends ShiroBaseController {
         //项目启动后5天后过期
         //response.setDateHeader("Expires",SysConstant.START_TIME + TimeUnit.DAYS.toMillis(NumberUtils.toInt(PropertiesUtil.get(SysConstant.EXPIRES_DAY),5)));
     }
-    @RequestMapping("sys/{forward}")
-    public String sys(@PathVariable(name = "forward") String forward,Model model) {
-        model.addAttribute("forward", forward);
-        User user = super.getCurrentUser();
-        model.addAttribute("user", user);
-        return "index";
-    }
     @RequestMapping("menu")
     @RequiresPermissions("menu:list")
     public String menu() {

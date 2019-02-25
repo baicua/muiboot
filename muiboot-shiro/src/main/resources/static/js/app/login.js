@@ -48,14 +48,14 @@ function login() {
                 loginError.innerHTML=r.msg;
                 addClass(loginForm,"invalid");
                 $loginButton.innerHTML="立即登录";
-                addClass(loginForm,"loading");
+                removeClass($loginButton,"loading");
             }
         },
         error:function(status){
             loginError.innerHTML="登录失败，服务器繁忙，请稍后再试！";
             addClass(loginForm,"invalid");
             $loginButton.innerHTML="立即登录";
-            addClass(loginForm,"loading");
+            removeClass($loginButton,"loading");
         }
     });
 }

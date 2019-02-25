@@ -27,7 +27,7 @@ public class LogUtil{
         error(message,ex,url,threadId);
     }
     public void error(String message, Exception ex,String url,long threadId){
-        String userId="nouser";
+        String userId="SYSTEM";
         Long user=ShiroUtil.getCurrentUserId();
         if (user!=null){
             userId=user.toString();
@@ -37,12 +37,16 @@ public class LogUtil{
         //StackTraceUtils.printSanitizedStackTrace(ex);
         ex.printStackTrace();
     }
+    public void info(String message){
+        long threadId=Thread.currentThread().getId();
+        info(message,"",threadId);
+    }
     public void info(String message,String url){
         long threadId=Thread.currentThread().getId();
         info(message,url,threadId);
     }
     public void info(String message,String url,long threadId){
-        String userId="nouser";
+        String userId="SYSTEM";
         Long user=ShiroUtil.getCurrentUserId();
         if (user!=null){
             userId=user.toString();

@@ -41,7 +41,7 @@ public class LogAspect {
 	@Autowired
 	ObjectMapper mapper;
 
-	private static final LogUtil log = LogUtil.getLoger(LogAspect.class);
+	private static final LogUtil LOG = LogUtil.getLoger(LogAspect.class);
 
 	ExecutorService exeService= ExecutorsUtil.getInstance().getMultilThreadExecutor();
 	@Pointcut("@annotation(com.muiboot.core.annotation.Log)")
@@ -72,7 +72,7 @@ public class LogAspect {
 				try {
 					saveLog(point, time,request,user);
 				} catch (JsonProcessingException e) {
-					log.error("记录保存失败",e,"");
+					LOG.error("记录保存失败",e,"");
 				}
 			}
 		});
@@ -109,6 +109,7 @@ public class LogAspect {
 				if (params.length()>500){
 					params.delete(500,params.length());
 					params.append("...");
+					LOG.info(params.toString());
 					continue;
 				}
 			}
