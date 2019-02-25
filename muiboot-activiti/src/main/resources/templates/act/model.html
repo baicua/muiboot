@@ -23,35 +23,32 @@
     </div>
     <!--模板-->
     <script id="addModel" type="text/html">
-        <fieldset class="layui-elem-field layui-anim layui-anim-up">
-            <legend>-----</legend>
-            <form class="layui-form" action="">
-                <div class="layui-row">
-                    <div class="layui-col-md12 layui-col-xs12">
-                        <label class="layui-form-label" lable-verify="required"><span>名称:</span></label>
-                        <div class="layui-input-block">
-                            <input type="text" lay-verify="required" name="name" placeholder="请输入模型名称" class="layui-input">
-                        </div>
+        <form class="layui-form" action="">
+            <div class="layui-row">
+                <div class="layui-col-md12 layui-col-xs12">
+                    <label class="layui-form-label" lable-verify="required"><span>名称:</span></label>
+                    <div class="layui-input-block">
+                        <input type="text" lay-verify="required" name="name" placeholder="请输入模型名称" class="layui-input">
                     </div>
                 </div>
-                <div class="layui-row">
-                    <div class="layui-col-md12 layui-col-xs12">
-                        <label class="layui-form-label" lable-verify="required"><span>编号:</span></label>
-                        <div class="layui-input-block">
-                            <input type="text" lay-verify="required" name="key" placeholder="请输入模型编号" class="layui-input">
-                        </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col-md12 layui-col-xs12">
+                    <label class="layui-form-label" lable-verify="required"><span>编号:</span></label>
+                    <div class="layui-input-block">
+                        <input type="text" lay-verify="required" name="key" placeholder="请输入模型编号" class="layui-input">
                     </div>
                 </div>
-                <div class="layui-row">
-                    <div class="layui-col-md12 layui-col-xs12">
-                        <label class="layui-form-label">描述:</label>
-                        <div class="layui-input-block">
-                            <textarea  name="description" placeholder="请输入描述信息" class="layui-textarea"></textarea>
-                        </div>
+            </div>
+            <div class="layui-row">
+                <div class="layui-col-md12 layui-col-xs12">
+                    <label class="layui-form-label">描述:</label>
+                    <div class="layui-input-block">
+                        <textarea  name="description" placeholder="请输入描述信息" class="layui-textarea"></textarea>
                     </div>
                 </div>
-            </form>
-        </fieldset>
+            </div>
+        </form>
     </script>
     <script data-th-src="@{/js/act/models.js}" ></script>
 </div>
