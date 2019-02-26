@@ -6,11 +6,11 @@
 
     <property name="log.path" value="/muiboot/log" />
     <property name="log.maxHistory" value="15" />
-    <property name="log.pattern" value="%d{HH:mm:ss.SSS} %contextName [%thread] %-5level %logger{36} - %msg%n" />
+    <property name="log.pattern" value="%d{HH:mm:ss.SSS} %contextName [%thread] %-5level %logger{36} -> %msg%n" />
 
     <!--输出到控制台-->
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder>
+        <encoder class="com.muiboot.core.log.MuPatternLayoutEncoder">
             <pattern>${log.pattern}</pattern>
         </encoder>
     </appender>
@@ -21,7 +21,7 @@
             <fileNamePattern>${log.path}/info/info.%d{yyyy-MM-dd}.log</fileNamePattern>
             <MaxHistory>${log.maxHistory}</MaxHistory>
         </rollingPolicy>
-        <encoder>
+        <encoder class="com.muiboot.core.log.MuPatternLayoutEncoder">
             <pattern>${log.pattern}</pattern>
         </encoder>
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
@@ -35,7 +35,7 @@
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>${log.path}/error/error.%d{yyyy-MM-dd}.log</fileNamePattern>
         </rollingPolicy>
-        <encoder>
+        <encoder class="com.muiboot.core.log.MuPatternLayoutEncoder">
             <pattern>${log.pattern}</pattern>
         </encoder>
         <filter class="ch.qos.logback.classic.filter.LevelFilter">

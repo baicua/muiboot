@@ -21,6 +21,8 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.LocalVariableTableParameterNameDiscoverer;
 import org.springframework.scheduling.annotation.Async;
@@ -41,8 +43,7 @@ public class LogAspect {
 	@Autowired
 	ObjectMapper mapper;
 
-	private static final LogUtil LOG = LogUtil.getLoger(LogAspect.class);
-
+	private static final Logger LOG = LoggerFactory.getLogger(LogAspect.class);
 	ExecutorService exeService= ExecutorsUtil.getInstance().getMultilThreadExecutor();
 	@Pointcut("@annotation(com.muiboot.core.annotation.Log)")
 	public void pointcut() {
@@ -72,7 +73,7 @@ public class LogAspect {
 				try {
 					saveLog(point, time,request,user);
 				} catch (JsonProcessingException e) {
-					LOG.error("记录保存失败",e,"");
+					LOG.error("记录保存失败",e);
 				}
 			}
 		});
