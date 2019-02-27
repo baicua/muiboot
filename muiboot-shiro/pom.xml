@@ -59,6 +59,11 @@
 			<artifactId>spring-hateoas</artifactId>
 			<!--<version>0.24.0.RELEASE</version>-->
 		</dependency>
+		<dependency>
+			<groupId>com.muiboot.log</groupId>
+			<artifactId>muiboot-log</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 	
 	<repositories>
