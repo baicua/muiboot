@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.muiboot.shiro.system.dao.EntityLogMapper">
+  <resultMap id="BaseResultMap" type="com.muiboot.log.entity.EntityLog">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="LOG_ID" jdbcType="INTEGER" property="logId" />
+    <result column="TABLE_NAME" jdbcType="VARCHAR" property="tableName" />
+    <result column="TABLE_COMMENT" jdbcType="VARCHAR" property="tableComment" />
+    <result column="COL_NAME" jdbcType="VARCHAR" property="colName" />
+    <result column="COL_COMMENT" jdbcType="VARCHAR" property="colComment" />
+    <result column="ORIGIN_VAL" jdbcType="VARCHAR" property="originVal" />
+    <result column="TAGET_VAL" jdbcType="VARCHAR" property="tagetVal" />
+    <result column="LOG_NUMBER" jdbcType="BIGINT" property="logNumber" />
+    <result column="LOG_ORIGIN_ID" jdbcType="VARCHAR" property="logOriginId" />
+  </resultMap>
+</mapper>
