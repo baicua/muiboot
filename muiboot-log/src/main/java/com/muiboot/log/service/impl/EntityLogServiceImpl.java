@@ -91,6 +91,12 @@ public class EntityLogServiceImpl extends BaseService<EntityLog> implements IEnt
                     originInStr=ObjectUtils.toString(originInvo);
                     targetInStr=ObjectUtils.toString(targetInvo);
                 }
+                if (originInStr!=null&&originInStr.length()>1000){
+                    originInStr.substring(0,1000);
+                }
+                if (targetInStr!=null&&targetInStr.length()>1000){
+                    targetInStr.substring(0,1000);
+                }
             } catch (IllegalAccessException e) {
                 logger.error("参数错误",e);
             } catch (InvocationTargetException e) {
