@@ -92,9 +92,11 @@ public class EntityLogServiceImpl extends BaseService<EntityLog> implements IEnt
                     targetInStr=ObjectUtils.toString(targetInvo);
                 }
                 if (originInStr!=null&&originInStr.length()>1000){
+                    logger.warn("修改批次:{},原数据:{}",logNumber,originInStr);
                     originInStr.substring(0,1000);
                 }
                 if (targetInStr!=null&&targetInStr.length()>1000){
+                    logger.warn("修改批次:{},修改数据:{}",logNumber,targetInStr);
                     targetInStr.substring(0,1000);
                 }
             } catch (IllegalAccessException e) {
