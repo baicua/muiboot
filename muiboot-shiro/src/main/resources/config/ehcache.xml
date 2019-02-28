@@ -12,8 +12,9 @@
     <cache
         name="DIC_CACHE"
         maxEntriesLocalHeap="2000"
-        eternal="false"
+        eternal="true"
         overflowToDisk="true"
+        diskPersistent="true"
         statistics="true"/>
      <!-- 登录记录缓存缓存永不过期或者自动清除 -->
     <cache 
@@ -22,6 +23,7 @@
         maxEntriesLocalHeap="2000"
         eternal="true"
         overflowToDisk="true"
+        diskPersistent="true"
         statistics="true" />
 </ehcache>
 
