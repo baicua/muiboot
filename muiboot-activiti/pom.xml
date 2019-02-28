@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.muiboot.activiti</groupId>
 	<artifactId>muiboot-activiti</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0</version>
 	<packaging>jar</packaging>
 
 	<name>muiboot-activiti</name>
@@ -104,7 +104,7 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 			</plugin>
-			<plugin>
+			<!--<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
@@ -118,7 +118,7 @@
 					</execution>
 				</executions>
 
-			</plugin>
+			</plugin>-->
 
 			<!--css/js压缩-->
 			<plugin>
@@ -178,14 +178,14 @@
 			</plugin>-->
 
 		</plugins>
-<!--		<resources>
+		<resources>
 			<resource>
 				<directory>src/main/resources</directory>
 				<filtering>true</filtering>
 				<excludes>
-					<exclude>config/*.xml</exclude>
-					<exclude>*.xml</exclude>
-					<exclude>*.yml</exclude>
+					<exclude>**</exclude>
+<!--					<exclude>*.xml</exclude>
+					<exclude>*.yml</exclude>-->
 				</excludes>
 			</resource>
 			<resource>
@@ -193,9 +193,16 @@
 				<filtering>false</filtering>
 				<includes>
 					<include>mapper/**/*.xml</include>
+					<include>static/modeler.html</include>
+					<include>static/diagram-viewer/**</include>
+					<include>static/editor-app/**</include>
+					<include>static/js/act/*.js</include>
+					<include>static/js/act/*.js</include>
+					<include>templates/act/*.html</include>
+					<include>stencilset-zh.json</include>
 				</includes>
 			</resource>
-		</resources>-->
+		</resources>
 	</build>
 
 
