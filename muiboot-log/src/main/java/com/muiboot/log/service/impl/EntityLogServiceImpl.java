@@ -37,7 +37,7 @@ import java.util.Set;
  * @version 1.0 2019/2/26
  */
 @Service("entityLogService")
-@Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
+@Transactional(propagation = Propagation.NEVER, readOnly = true)
 public class EntityLogServiceImpl extends BaseService<EntityLog> implements IEntityLogService {
     @Autowired
     ObjectMapper jsonMapper;

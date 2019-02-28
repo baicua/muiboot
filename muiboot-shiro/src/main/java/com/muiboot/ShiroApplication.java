@@ -24,7 +24,7 @@ public class ShiroApplication {
 	protected static  Logger logger = LoggerFactory.getLogger(ShiroApplication.class);
 	public static void main(String[] args) {
 		SpringApplication.run(ShiroApplication.class, args);
-		logger.info("muiboot-SHIRO启动完毕#########################");
+		logger.info("MUIBOOT-SHIRO启动完毕#########################");
 	}
 
 /*	@Bean
