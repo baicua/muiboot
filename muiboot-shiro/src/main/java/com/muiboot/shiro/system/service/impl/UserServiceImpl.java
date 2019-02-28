@@ -8,6 +8,7 @@ import java.util.List;
 import com.muiboot.core.exception.BusinessException;
 import com.muiboot.core.service.impl.BaseService;
 import com.muiboot.core.util.MD5Utils;
+import com.muiboot.log.service.IEntityLogService;
 import com.muiboot.shiro.system.common.PropertiesUtil;
 import com.muiboot.shiro.system.common.SysConstant;
 import com.muiboot.shiro.system.dao.UserMapper;
@@ -44,6 +45,9 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
 
 	@Autowired
 	private GroupService groupService;
+
+	@Autowired
+	private IEntityLogService entityLogService;
 
 	@Override
 	public User findByName(String userName) {
@@ -141,7 +145,12 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
 		user.setPassword(null);
 		user.setUsername(null);
 		user.setModifyTime(new Date());
+		User origin=this.selectByKey(user.getUserId());
 		this.updateNotNull(user);
+		User target=this.selectByKey(user.getUserId());
+		target.setModifyTime(origin.getModifyTime());
+		this.entityLogService.pushLog(origin,target);
+
 		//Example example = new Example(UserRole.class);
 		//example.createCriteria().andCondition("user_id=", user.getUserId());
 		//this.userRoleMapper.deleteByExample(example);

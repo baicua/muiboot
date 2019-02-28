@@ -16,5 +16,6 @@ public abstract class AbstractService {
     }
     protected final static void decrement(){
         threads.decrementAndGet();
+        threads_size.remove();
     }
 }

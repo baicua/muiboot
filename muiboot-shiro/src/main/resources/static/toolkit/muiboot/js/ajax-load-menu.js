@@ -16,11 +16,9 @@
                 //$menu.data("model",data.model);
                 $menu.empty();
                 if(!data||!data.children||data.children.length<1){//没有任何权限
-                    element.tabAdd('mb-pane-top', {
-                        title: '提示'
-                        ,content: '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"> <html> <head> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="edge"/> <title>MUIBOOT 权限管理系统</title> <link href="../toolkit/theme/css/theme.css" rel="stylesheet" type="text/css"/> </head> <body style="background:#edf6fa;"> <div class="error404"> <h2>非常遗憾，您暂时没有授予该系统任何权限！</h2> <p>请联系管理员，给您授予相应的业务权限。</p> <p>联系电话：15111111111</p> <p>微信：15111111111</p> <p>邮箱：15111111111@baicua.com</p> <p>我们会尽快处理您的申请！</p> </div> </body> </html>' //支持传入html
-                        ,id: 'error'
-                    });
+                    var content='<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"> <html> <head> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="edge"/> <title>MUIBOOT 权限管理系统</title> <link href="../toolkit/theme/css/theme.css" rel="stylesheet" type="text/css"/> </head> <body style="background:#edf6fa;"> <div class="error404"> <h2>非常遗憾，您暂时没有授予该系统任何权限！</h2> <p>请联系管理员，给您授予相应的业务权限。</p> <p>联系电话：15111111111</p> <p>微信：15111111111</p> <p>邮箱：15111111111@baicua.com</p> <p>我们会尽快处理您的申请！</p> </div> </body> </html>' //支持传入html
+                    $(".mb-body").empty().html(content);
+                    $(".loading-shade").addClass("loaded");
                     return false;
                 }
                 $menu.append(forTree(data.children));

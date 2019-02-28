@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.muiboot.shiro.common.menum.DicType;
 import com.muiboot.core.entity.LayerTree;
 import com.muiboot.core.service.impl.BaseService;
-import com.muiboot.shiro.common.util.LogUtil;
 import com.muiboot.core.util.TreeUtils;
 import com.muiboot.shiro.system.dao.SysDicMapper;
 import com.muiboot.shiro.system.entity.SysDic;
@@ -14,6 +13,8 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang.BooleanUtils;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
@@ -29,8 +30,9 @@ import java.util.*;
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
 public class DictServiceImpl extends BaseService<SysDic> implements DictService {
 
-	private static final LogUtil logger = LogUtil.getLoger(DictServiceImpl.class);
-	@Autowired
+    private static final Logger logger = LoggerFactory.getLogger(DictServiceImpl.class);
+
+    @Autowired
 	private SysDicMapper dicMapper;
 	@Autowired
 	ObjectMapper jsonMapper;
@@ -203,7 +205,7 @@ public class DictServiceImpl extends BaseService<SysDic> implements DictService 
 			try {
 				m = jsonMapper.readValue(dic.getContent(), LinkedHashMap.class); //json转换成map;
 			} catch (IOException e) {
-				logger.error("key="+dic.getDicKey()+"字典参数错误，字典转换失败。",e,"获取简单字典");
+				logger.error("key="+dic.getDicKey()+"字典参数错误，字典转换失败。",e);
 				return null;
 			}
 		}else if (DicType.SQLDIC.name().equals(dic.getDicType())){
@@ -211,7 +213,7 @@ public class DictServiceImpl extends BaseService<SysDic> implements DictService 
 				try {
 					m=this.nativeSelectBySQL(dic.getSqlContent());
 				}catch (Exception e){
-					logger.error("key="+dic.getDicKey()+"SQL执行失败。",e,"获取SQL字典");
+					logger.error("key="+dic.getDicKey()+"SQL执行失败。",e);
 					return null;
 				}
 			}
@@ -223,7 +225,7 @@ public class DictServiceImpl extends BaseService<SysDic> implements DictService 
 					buildMapTrees(trees, maps,dic);
 					m=TreeUtils.build(trees);
 				}catch (Exception e){
-					logger.error("key="+dic.getDicKey()+"SQL执行失败。",e,"获取树形字典");
+					logger.error("key="+dic.getDicKey()+"SQL执行失败。",e);
 					return null;
 				}
 			}
@@ -231,7 +233,7 @@ public class DictServiceImpl extends BaseService<SysDic> implements DictService 
 			try {
 				m = jsonMapper.readValue(dic.getContent(), LinkedHashMap.class); //json转换成map;
 			} catch (IOException e) {
-				logger.error("key="+dic.getDicKey()+"字典参数错误，字典转换失败。",e,"获取简单字典");
+				logger.error("key="+dic.getDicKey()+"字典参数错误，字典转换失败。",e);
 				return null;
 			}
 		}

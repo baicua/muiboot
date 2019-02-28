@@ -1,5 +1,7 @@
 package com.muiboot.shiro.common.shiro;;
+import com.muiboot.core.log.LogTrackContext;
 import com.muiboot.core.util.ServletUtil;
+import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.authc.UserFilter;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -11,6 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 * @author jin
 */
 public class ShiroUserFilter extends UserFilter {
+    @Override
+    public boolean onPreHandle(ServletRequest request, ServletResponse response, Object mappedValue) throws Exception {
+        LogTrackContext.initTrackNumber();
+        return this.isAccessAllowed(request, response, mappedValue) || this.onAccessDenied(request, response, mappedValue);
+    }
     @Override
     protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
         if(ServletUtil.isAjax(request)){
