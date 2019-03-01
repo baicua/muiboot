@@ -39,8 +39,8 @@
     <modules>
         <module>muiboot-pom</module>
         <module>muiboot-core</module>
-        <module>muiboot-log</module>
         <module>muiboot-event</module>
+        <module>muiboot-log</module>
         <module>muiboot-activiti</module>
         <module>muiboot-shiro</module>
     </modules>
